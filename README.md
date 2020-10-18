@@ -2,7 +2,7 @@
 
 <div align="center">
     <img src="readme-header.png" width="546" alt="Guilded-js"/>
-    <p><b>A Node.js API wrapper for <a href="https://www.guilded.gg/">Guilded.gg</a> written in TS</b></p>
+    <p><b>A Node.js wrapper for the <a href="https://www.guilded.gg/">Guilded.gg</a> API. <br>Written in TS</b></p>
     <br />
     <p>
         <img src="https://github.com/zaida04/guilded-js/workflows/Linting/badge.svg" alt="Linting">
