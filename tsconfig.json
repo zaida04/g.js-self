@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "lib": ["ESNext", "DOM"],      
+    "outDir": "./dist",
+    "rootDir": "./src",                     
+    "declaration": true,                  
+    "declarationMap": true,               
+    "composite": true,
+    "strict": true,
+    "alwaysStrict": true,                           
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+  },
+  "exclude": ["tests/**", "node_modules/**", "dist/**", "docs/**", "release.config.js"]
+}
