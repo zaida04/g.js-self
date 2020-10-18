@@ -1,8 +1,11 @@
 {
-  "name": "guilded-js",
-  "version": "1.0.0",
-  "description": "A Node.js API wrapper for Guilded.gg written in TS",
+  "name": "@zaida04/guilded-js",
+  "version": "0.0.1",
+  "description": "A Node.js API wrapper for the Guilded.gg API written in TS",
   "main": "dist/index.js",
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "build": "tsc --project tsconfig.json",
     "lint": "npx eslint src/ --ext .ts --fix",
@@ -11,11 +14,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zaida04/guilded-js.git"
+    "url": "git+https://github.com/zaida04/guildedjs.git"
   },
   "keywords": [
     "guilded",
-    "guilded-js",
+    "guildedjs",
     "guilded.js",
     "guilded-api",
     "wrapper"
@@ -41,7 +44,7 @@
     "node-fetch": "^2.6.1"
   },
   "bugs": {
-    "url": "https://github.com/zaida04/guilded-js/issues"
+    "url": "https://github.com/zaida04/guildedjs/issues"
   },
-  "homepage": "https://github.com/zaida04/guilded-js#readme"
+  "homepage": "https://github.com/zaida04/guildedjs#readme"
 }
