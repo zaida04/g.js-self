@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc --project tsconfig.json",
     "lint": "npx eslint src/ --ext .ts --fix",
-    "lint::fix": "npx eslint lib/ --ext .ts --fix",
+    "lint::fix": "npx eslint src/ --ext .ts --fix",
     "docs": "typedoc --options typedoc.json"
   },
   "repository": {
