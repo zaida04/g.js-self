@@ -28,7 +28,7 @@
 ```ts
 import { Client } from "guildedjs";
 // Or const { Client } = require("guildedjs");
-const GuildedClient = Client();
+const GuildedClient = new Client();
 
 GuildedClient.on('ready', () => {
   console.log(`Bot is successfully logged in`);
