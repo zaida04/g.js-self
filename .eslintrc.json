@@ -1,35 +1,18 @@
 {
+    "root": true,
+    "parser": "@typescript-eslint/parser",
     "extends": [
-        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier/@typescript-eslint",
         "plugin:prettier/recommended"
-    ],
-    "plugins": [
-        "import"
     ],
     "parserOptions": {
         "ecmaVersion": 2020
     },
     "env": {
-        "es6": true,
         "node": true
     },
     "rules": {
-        "import/order": [
-            "warn",
-            {
-                "groups": [
-                    "builtin",
-                    "external",
-                    "internal",
-                    "index",
-                    "sibling",
-                    "parent"
-                ],
-                "alphabetize": {
-                    "order": "asc"
-                }
-            }
-        ],
         "prettier/prettier": [
             2,
             {
@@ -109,7 +92,6 @@
         "no-useless-return": "warn",
         "no-void": "warn",
         "no-warning-comments": "warn",
-        "prefer-promise-reject-warns": "warn",
         "require-await": "warn",
         "wrap-iife": "warn",
         "yoda": "warn",
