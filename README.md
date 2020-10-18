@@ -25,7 +25,7 @@
 
 ## Example usage
 
-```
+```ts
 import { Client } from "guildedjs";
 // Or const { Client } = require("guildedjs");
 const GuildedClient = Client();
