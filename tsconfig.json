@@ -4,8 +4,7 @@
     "module": "CommonJS",
     "moduleResolution": "node",
     "lib": ["ESNext", "DOM"],      
-    "outDir": "./dist",
-    "rootDir": "./src",                     
+    "outDir": "./dist",                    
     "declaration": true,                  
     "declarationMap": true,               
     "composite": true,
@@ -14,5 +13,6 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
   },
+  "include": ["src/"],
   "exclude": ["tests/**", "node_modules/**", "dist/**", "docs/**", "release.config.js"]
 }
