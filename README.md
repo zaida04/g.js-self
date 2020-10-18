@@ -47,7 +47,7 @@ GuildedClient.login('token');
 
 We welcome contributions from people of all skill levels. Please refer to our [contributing guide](https://github.com/zaida04/guilded-js/blob/master/.github/CONTRIBUTING.md) for more info.
 
-### LICENSING  
+## LICENSING  
 
 Created ~10/18/2020  
 **Guilded-js** © [zaida04](https://github.com/zaida04), Released under the [MIT](https://github.com/zaida04/guilded-js/blob/master/LICENSE) License.  
