@@ -1,0 +1,29 @@
+name: Publish
+on:
+  push:
+    tags:        
+      - v*
+
+jobs:
+  publish:
+    name: Publish-Package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Node v12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run TypeScript compiler
+        run: npm run build
+
+      - name: Upload To NPM
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
