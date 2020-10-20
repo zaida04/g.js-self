@@ -1,4 +1,6 @@
 import Client from './structures/Client';
-import RestManager from './rest/RestManager';
+import GuildedAPIError from "./structures/GuildedAPIError";
+import GUildedJSError from "./structures/GuildedJSError";
 
-export { Client, RestManager };
+
+export { Client, GuildedAPIError, GuildedJSError };
