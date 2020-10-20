@@ -73,8 +73,21 @@ export default class Client {
         if (data.length < 3) return;
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const [event_name, event_data] = JSON.parse(data);
+        console.log(event_data);
 
         switch (event_name) {
+          case "ChatMessageCreated": {
+
+          }
+          case "ChatMessageUpdated": {
+
+          }
+          case "ChatMessageReactionAdded": {
+
+          }
+          case "TemporalChannelCreated": {
+
+          }
         }
     }
 }
