@@ -13,7 +13,7 @@ export default class Client {
     public emitter = new EventEmitter();
     public rest = new RestManager();
     public ws: WebSocket | null;
-    public pingTimeout: (() => any) | null;
+    public pingTimeout: (() => unknown) | null;
 
     constructor() {
         this.ws = null;
@@ -41,10 +41,12 @@ export default class Client {
             this.sendHB();
         });
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         this.ws.on('message', (incomingData: any) => {
             this.dataRecieved(incomingData);
         });
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         this.ws.on('close', (closeData: any) => {
             this.emitter.emit('disconnected', closeData);
         });
@@ -52,6 +54,7 @@ export default class Client {
         return undefined;
     }
 
+    // eslint-disable-next-line no-warning-comments
     // TODO: Separate actions in switch case statement
     /*
         Action Types:
@@ -68,12 +71,10 @@ export default class Client {
             data = data.substr(1);
         }
         if (data.length < 3) return;
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const [event_name, event_data] = JSON.parse(data);
-    
+
         switch (event_name) {
-            case "USER_PINGED": {
-                this.emitter.emit("")
-            }
         }
     }
 }
