@@ -40,7 +40,10 @@ GuildedClient.on("messageCreate", message => {
     }
 })
 
-GuildedClient.login('token');
+GuildedClient.login({
+    email: "email",
+    password: "password"
+});
 ```
 
 ## Contributing
