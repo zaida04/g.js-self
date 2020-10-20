@@ -41,8 +41,7 @@ export default class Client {
             this.sendHB();
         });
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        this.ws.on('message', (incomingData: any) => {
+        this.ws.on('message', (incomingData: string) => {
             this.dataRecieved(incomingData);
         });
 
@@ -71,23 +70,18 @@ export default class Client {
             data = data.substr(1);
         }
         if (data.length < 3) return;
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const [event_name, event_data] = JSON.parse(data);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const [event_name, event_data]: [string, Record<string, any>] = JSON.parse(data);
         console.log(event_data);
-
         switch (event_name) {
-          case "ChatMessageCreated": {
-
-          }
-          case "ChatMessageUpdated": {
-
-          }
-          case "ChatMessageReactionAdded": {
-
-          }
-          case "TemporalChannelCreated": {
-
-          }
+            case 'ChatMessageCreated': {
+            }
+            case 'ChatMessageUpdated': {
+            }
+            case 'ChatMessageReactionAdded': {
+            }
+            case 'TemporalChannelCreated': {
+            }
         }
     }
 }
