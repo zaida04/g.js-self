@@ -1,10 +1,11 @@
-import { MakeOptions } from '../typings/MakeOptions';
-import { RestManagerOptions } from '../typings/RestManagerOptions';
+import { MakeOptions } from './typings/MakeOptions';
+import { RestManagerOptions } from './typings/RestManagerOptions';
 
 import fetch, { Response } from 'node-fetch';
-import { LoginData } from '../typings/LoginData';
-import GuildedJSError from '../structures/GuildedJSError';
-import { LoginResponse } from '../typings/gateway-responses/LoginResponse';
+import { LoginData } from './typings/LoginData';
+import GuildedJSError from '../guildedjs/structures/GuildedJSError';
+import { LoginResponse } from '../ws/payloads/LoginResponse';
+import GuildedAPIError from './GuildedAPIError';
 
 export default class RestManager {
     public apiURL: string;
@@ -19,14 +20,14 @@ export default class RestManager {
                     self.cookies += element.split(" ")[0];
                 });
     */
-    make(data: MakeOptions, authenticated = true): Promise<Response> {
+    async make(data: MakeOptions, authenticated = true): Promise<Response> {
         let headers = {};
         if (authenticated) {
             headers = {
                 hmac_signed_session: this.token,
             };
         }
-        return fetch(this.apiURL + data.path, {
+        const request = await fetch(this.apiURL + data.path, {
             method: data.method,
             body: data.body ? JSON.stringify(data.body) : undefined,
             headers: {
@@ -34,6 +35,66 @@ export default class RestManager {
                 ...headers,
             },
         });
+        if (request.status < 200 || request.status > 299) {
+            const parsedRequest = await request.json();
+            throw new GuildedAPIError(parsedRequest.message, data.method, data.path, request.status);
+        }
+
+        return request;
+    }
+
+    get(path: string, authenticated = true): Promise<Record<string, any>> {
+        return this.make(
+            {
+                method: 'GET',
+                path: path,
+            },
+            authenticated,
+        ).then(x => x.json());
+    }
+
+    post(path: string, body: Record<string, any>, authenticated = true): Promise<Record<string, any>> {
+        return this.make(
+            {
+                method: 'POST',
+                body: body,
+                path: path,
+            },
+            authenticated,
+        ).then(x => x.json());
+    }
+
+    delete(path: string, body?: Record<string, any>, authenticated = true): Promise<Record<string, any>> {
+        return this.make(
+            {
+                method: 'DELETE',
+                body: body,
+                path: path,
+            },
+            authenticated,
+        ).then(x => x.json());
+    }
+
+    patch(path: string, body: Record<string, any>, authenticated = true): Promise<Record<string, any>> {
+        return this.make(
+            {
+                method: 'PATCH',
+                body: body,
+                path: path,
+            },
+            authenticated,
+        ).then(x => x.json());
+    }
+
+    put(path: string, body?: Record<string, any>, authenticated = true): Promise<Record<string, any>> {
+        return this.make(
+            {
+                method: 'PUT',
+                body: body,
+                path: path,
+            },
+            authenticated,
+        ).then(x => x.json());
     }
 
     async init(data: LoginData): Promise<LoginResponse> {
