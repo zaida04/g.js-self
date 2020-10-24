@@ -51,9 +51,8 @@ GuildedClient.login({
 We welcome contributions from people of all skill levels. Please refer to our [contributing guide](https://github.com/zaida04/guildedjs/blob/master/.github/CONTRIBUTING.md) for more info.
 
 ## LICENSING  
-
-Created ~10/18/2020  
+  
 **guildedjs** © [zaida04](https://github.com/zaida04), Released under the [MIT](https://github.com/zaida04/guildedjs/blob/master/LICENSE) License.  
-Authored by zaida04.
 
-> GitHub [@zaida04](https://github.com/zaida04) 
+
+*Created ~10/18/2020*
