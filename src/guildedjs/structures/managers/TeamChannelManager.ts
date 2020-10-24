@@ -3,7 +3,7 @@ import Channel from '../Channel';
 import BaseManager from './BaseManager';
 import Team from '../Team';
 
-export default class GuildChannelManager extends BaseManager<Channel> {
+export default class TeamChannelManager extends BaseManager<Channel> {
     constructor(client: Client, public team: Team) {
         super(client, Channel);
     }
@@ -11,7 +11,7 @@ export default class GuildChannelManager extends BaseManager<Channel> {
     fetchChannels(): Promise<Team> {
         return this.client.rest.get(`/teams/${this.team.id}/channels`).then(x => {
             for (const channel_data of x.channels) {
-                const channel = new Channel(this.client, channel_data, this.team)._patch(channel_data);
+                const channel = new Channel(this.client, channel_data, this.team);
                 this.client.channels.add(channel);
                 this.team.channels.add(channel);
             }

@@ -8,7 +8,7 @@ export default abstract class BaseManager<T extends Base> {
 
     // eslint-disable-next-line no-useless-constructor
     public constructor(public readonly client: Client, public holds: Constructable<T>) {}
-    public add(data: T | any, patch = false): T {
+    public add(data: T | any): T {
         if (data instanceof this.holds) {
             this.cache.set(data.id, data);
             return data;
@@ -16,7 +16,6 @@ export default abstract class BaseManager<T extends Base> {
             const existing = this.cache.get(data.id);
             if (existing) return existing._patch(data);
             const structure = new this.holds(this.client, data);
-            if (patch) structure._patch(data);
             this.cache.set(structure.id, structure);
             return structure;
         }
