@@ -14,20 +14,14 @@ export default class Channel extends Base {
     constructor(client: Client, data: any, public team: Team) {
         super(client, data);
         this.type = data.type;
+
+        this._patch(data);
     }
 
     _patch(data: any): this {
-        if ('name' in data) {
-            this.name = data.name ?? null;
-        }
-
-        if ('archivedAt' in data) {
-            this.archivedAt = data.archivedAt ? new Date(data.archivedAt) : null;
-        }
-
-        if ('groupId' in data) {
-            this.groupId = data.groupId ?? null;
-        }
+        if ('name' in data) this.name = data.name;
+        if ('archivedAt' in data) this.archivedAt = new Date(data.archivedAt);
+        if ('groupId' in data) this.groupId = data.groupId;
 
         return this;
     }

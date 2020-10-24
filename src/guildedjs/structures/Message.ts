@@ -3,6 +3,7 @@ import Base from './Base';
 import Channel from './Channel';
 import Client from './Client';
 import Team from './Team';
+import User from './User';
 
 export default class Message extends Base {
     public createdBy: string | null = null;
@@ -12,29 +13,17 @@ export default class Message extends Base {
 
     constructor(client: Client, data: MessageData, public channel: Channel, public team: Team) {
         super(client, data);
+        this._patch(data);
     }
-    _patch(data: any, channel: Channel, team: Team): this {
+    _patch(data: any): this {
         if ('createdBy' in data) {
-            this.createdBy = data.createdBy;
+            this.createdBy = this.client.users.cache.has(data.createdBy)
+                ? this.client.users.cache.get(data.createdBy)
+                : data.createdBy;
         }
-
         if ('content' in data) this.content = data.content.document.nodes[0].nodes[0].leaves[0].text;
-
-        if ('createdAt' in data) {
-            this.createdAt = new Date(data.createdAt);
-        }
-
-        if ('type' in data) {
-            this.type = data.type;
-        }
-
-        if (channel) {
-            this.channel = channel;
-        }
-
-        if (team) {
-            this.team = team;
-        }
+        if ('createdAt' in data) this.createdAt = new Date(data.createdAt);
+        if ('type' in data) this.type = data.type;
 
         return this;
     }

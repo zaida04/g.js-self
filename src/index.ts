@@ -11,8 +11,8 @@ import User from './guildedjs/structures/User';
 
 import ChannelManager from './guildedjs/structures/managers/ChannelManager';
 import ChannelMessageManager from './guildedjs/structures/managers/ChannelMessageManager';
-import GuildChannelManager from './guildedjs/structures/managers/GuildChannelManager';
-import GuildRoleManager from './guildedjs/structures/managers/GuildRoleManager';
+import TeamChannelManager from './guildedjs/structures/managers/TeamChannelManager';
+import TeamRoleManager from './guildedjs/structures/managers/TeamRoleManager';
 import TeamManager from './guildedjs/structures/managers/TeamManager';
 import UserManager from './guildedjs/structures/managers/UserManager';
 
@@ -29,8 +29,8 @@ export {
     User,
     ChannelManager,
     ChannelMessageManager,
-    GuildChannelManager,
-    GuildRoleManager,
+    TeamChannelManager,
+    TeamRoleManager,
     TeamManager,
     UserManager,
 };

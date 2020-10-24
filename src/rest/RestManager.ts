@@ -4,7 +4,7 @@ import { RestManagerOptions } from './typings/RestManagerOptions';
 import fetch, { Response } from 'node-fetch';
 import { LoginData } from './typings/LoginData';
 import GuildedJSError from '../guildedjs/structures/GuildedJSError';
-import { LoginResponse } from '../ws/payloads/LoginResponse';
+import { LoginResponse } from './typings/LoginResponse';
 import GuildedAPIError from './GuildedAPIError';
 
 export default class RestManager {
@@ -27,6 +27,7 @@ export default class RestManager {
                 hmac_signed_session: this.token,
             };
         }
+
         const request = await fetch(this.apiURL + data.path, {
             method: data.method,
             body: data.body ? JSON.stringify(data.body) : undefined,

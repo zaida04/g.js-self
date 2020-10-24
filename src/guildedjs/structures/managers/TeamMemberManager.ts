@@ -1,10 +1,10 @@
 import Client from '../Client';
-import Role from '../Role';
+import Member from '../Member';
 import Team from '../Team';
 import BaseManager from './BaseManager';
 
-export default class GuildRoleManager extends BaseManager<Role> {
+export default class TeamMemberManager extends BaseManager<Member> {
     constructor(client: Client, public team: Team) {
-        super(client, Role);
+        super(client, Member);
     }
 }

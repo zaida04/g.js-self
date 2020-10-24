@@ -14,23 +14,17 @@ export default class User extends Base {
 
     constructor(client: Client, data: BaseData) {
         super(client, data);
+        this._patch(data);
     }
     _patch(data: any): this {
-        if ('name' in data) this.name = data.name ?? null;
-
-        if ('subdomain' in data) this.subdomain = data.subdomain ?? null;
-
-        if ('aliases' in data) this.aliases = data.aliases ?? null;
-
-        if ('avatarURL' in data) this.avatarURL = data.avatarURL ?? null;
-
-        if ('bannerURL' in data) this.bannerURL = data.bannerURL ?? null;
-
-        if ('steamID' in data) this.steamID = data.steamID ?? null;
-
-        if ('createdAt' in data) this.createdAt = new Date(data.createdAt) ?? null;
-
-        if ('lastOnline' in data) this.lastOnline = new Date(data.lastOnline) ?? null;
+        if ('name' in data) this.name = data.name;
+        if ('subdomain' in data) this.subdomain = data.subdomain;
+        if ('aliases' in data) this.aliases = data.aliases;
+        if ('avatarURL' in data) this.avatarURL = data.avatarURL;
+        if ('bannerURL' in data) this.bannerURL = data.bannerURL;
+        if ('steamID' in data) this.steamID = data.steamID;
+        if ('createdAt' in data) this.createdAt = new Date(data.createdAt);
+        if ('lastOnline' in data) this.lastOnline = new Date(data.lastOnline);
 
         return this;
     }

@@ -1,6 +1,6 @@
 import Client from "../src";
 const gg = new Client();
-gg.login({ email: "", password: ""})
+gg.login({ email: "nico.03727@gmail.com", password: "Potatolife101"})
 
 gg.emitter.on("ready", async () => {
     console.log("Ready!");

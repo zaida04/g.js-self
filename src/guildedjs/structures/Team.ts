@@ -1,8 +1,8 @@
 import { BaseData } from '../typings/BaseData';
 import Base from './Base';
 import Client from './Client';
-import GuildChannelManager from './managers/GuildChannelManager';
-import GuildRoleManager from './managers/GuildRoleManager';
+import GuildChannelManager from './managers/TeamChannelManager';
+import GuildRoleManager from './managers/TeamRoleManager';
 import UserManager from './managers/UserManager';
 import Role from './Role';
 import User from './User';
@@ -27,9 +27,23 @@ export default class Team extends Base {
 
     constructor(client: Client, data: BaseData) {
         super(client, data);
+        this._patch(data);
     }
 
     _patch(data: any): this {
+        if ('ownerId' in data) this.ownerId = data.ownerId;
+        if ('name' in data) this.name = data.name;
+        if ('subdomain' in data) this.subdomain = data.subdomain;
+        if ('socialInfo' in data) this.socialInfo = data.socialInfo;
+        if ('timezone' in data) this.timezone = data.timezone;
+        if ('description' in data) this.description = data.description;
+        if ('type' in data) this.type = data.type;
+        if ('measurements' in data) this.measurements = data.measurements;
+        if ('verified' in data) this.verified = data.verified;
+        if ('public' in data) this.public = data.public;
+        if ('recruiting' in data) this.recruiting = data.recruiting;
+        if ('pro' in data) this.pro = data.pro;
+
         if ('rolesById' in data) {
             for (const role_data of data.rolesById) {
                 const role = new Role(this.client, role_data, this)._patch(role_data);
@@ -44,8 +58,9 @@ export default class Team extends Base {
             }
         }
 
-        this.channels.fetchChannels();
-
+        if (!('channels' in data)) {
+            this.channels.fetchChannels();
+        }
         return this;
     }
 
