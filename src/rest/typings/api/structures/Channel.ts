@@ -1,16 +1,15 @@
-import { APIUser } from './User';
-import { PartialMessage } from './Message';
-import { ChannelRolesByID } from '../responses/FetchTeamChannels';
-import { TeamChannelRoleOverwrite } from './TeamChannelRoleOverwrite';
+import { Message } from './Message';
+import { RoleOverwriteById } from './RolesById';
+import { PartialUser } from './User';
 
 export interface DMChannel {
     id: string;
     type: string;
     name: string | null;
     description: string | null;
-    users: APIUser[];
+    users: PartialUser[];
     DMType: string;
-    lastMessage: PartialMessage;
+    lastMessage: Message;
     createdAt: Date;
     createdBy: string;
     updatedAt: Date;
@@ -28,51 +27,49 @@ export interface DMChannel {
 }
 
 export interface TeamChannel {
-    priority: number | null;
-    id: string;
-    type: string;
-    name: string;
-    description: string | null;
-    settings: string | null;
-    roles: string | null;
-    rolesById: ChannelRolesByID;
-    tournamentRolesById: TeamChannelRoleOverwrite;
-    teamId: string;
-    channelCategoryId: number;
     addedAt: string;
+    archivedAt: string | null;
+    archivedBy: string | null;
+    archivedByWebhookId: string | null;
+    autoArchiveAt: string | null;
+    channelCategoryId: number;
     channelId: string;
-    isRoleSynced: boolean;
-    isPublic: boolean;
-    groupId: string;
+    contentType: string;
     createdAt: string;
     createdBy: string;
-    updatedAt: string;
-    contentType: string;
-    archivedAt: string | null;
-    parentChannelId: string | null;
-    autoArchiveAt: string | null;
-    deletedAt: string | null;
-    archivedBy: string | null;
     createdByWebhookId: string | null;
-    archivedByWebhookId: string | null;
-    userPermissions: string | null;
+    deletedAt: string | null;
+    description: string | null;
+    groupId: string;
+    id: string;
+    isPublic: boolean;
+    isRoleSynced: boolean;
+    name: string;
+    parentChannelId: string | null;
+    priority: number | null;
+    roles: string | null;
+    rolesById: RoleOverwriteById;
+    settings: string | null;
+    teamId: string;
     tournamentRoles: string | null;
-    voiceParticipants?: any[];
+    tournamentRolesById: RoleOverwriteById;
+    type: string;
+    updatedAt: string;
+    userPermissions: string | null;
     userStreams?: any[];
+    voiceParticipants?: any[];
 }
 
 export interface Category {
+    channelCategoryId: string | null;
+    createdAt: string;
+    groupId: string;
     id: number;
     name: string;
     priority: number;
-    roles: null;
-    rolesById: {
-        [key: string]: TeamChannelRoleOverwrite;
-    };
+    roles: string[] | null;
+    rolesById: RoleOverwriteById;
     teamId: string;
-    createdAt: string;
-    updatedAt: null;
-    groupId: string;
-    channelCategoryId: null;
-    userPermissions: null;
+    updatedAt: string | null;
+    userPermissions: string | null;
 }

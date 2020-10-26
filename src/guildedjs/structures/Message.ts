@@ -1,4 +1,4 @@
-import { MessageData } from '../../ws/payloads/MessageData';
+import { MessageData } from '../typings/MessageData';
 import Base from './Base';
 import Channel from './Channel';
 import Client from './Client';
@@ -10,9 +10,13 @@ export default class Message extends Base {
     public content: string | null = null;
     public createdAt: Date | null = null;
     public type: string | null = null;
+    public channel: Channel;
+    public team: Team | null;
 
-    constructor(client: Client, data: MessageData, public channel: Channel, public team: Team) {
+    constructor(client: Client, data: MessageData) {
         super(client, data);
+        this.channel = this.client.channels.add(data.id);
+        this.team = this.client.teams.add(data.teamId);
         this._patch(data);
     }
     _patch(data: any): this {

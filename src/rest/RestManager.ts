@@ -1,11 +1,11 @@
+import fetch, { Response } from 'node-fetch';
+
+import GuildedJSError from '../guildedjs/structures/GuildedJSError';
+import GuildedAPIError from './GuildedAPIError';
+import { LoginResponse } from './typings/api/responses/LoginResponse';
+import { LoginData } from './typings/LoginData';
 import { MakeOptions } from './typings/MakeOptions';
 import { RestManagerOptions } from './typings/RestManagerOptions';
-
-import fetch, { Response } from 'node-fetch';
-import { LoginData } from './typings/LoginData';
-import GuildedJSError from '../guildedjs/structures/GuildedJSError';
-import { LoginResponse } from './typings/LoginResponse';
-import GuildedAPIError from './GuildedAPIError';
 
 export default class RestManager {
     public apiURL: string;

@@ -1,6 +1,6 @@
-import { BaseData } from '../typings/BaseData';
 import Base from './Base';
 import Client from './Client';
+import GuildedJSError from './GuildedJSError';
 import ChannelMessageManager from './managers/ChannelMessageManager';
 import Team from './Team';
 
@@ -10,11 +10,12 @@ export default class Channel extends Base {
     public type: 'Team';
     public archivedAt: Date | null = null;
     public groupId: string | null = null;
+    public team: Team | null = null;
 
-    constructor(client: Client, data: any, public team: Team) {
+    constructor(client: Client, data: any) {
         super(client, data);
         this.type = data.type;
-
+        this.team = data.teamId ? this.client.teams.add(data.teamId) : null;
         this._patch(data);
     }
 
@@ -27,6 +28,7 @@ export default class Channel extends Base {
     }
 
     setName(value: string): Promise<this> {
+        if (!this.team) throw new GuildedJSError('This channel does not belong to a guild.');
         return this.client.rest
             .put(`/teams/${this.team.id}/groups/${this.groupId}/channels/${this.id}/info`, { name: value })
             .then(() => {
@@ -36,6 +38,7 @@ export default class Channel extends Base {
     }
 
     archive(): Promise<this> {
+        if (!this.team) throw new GuildedJSError('This channel does not belong to a guild.');
         return this.client.rest
             .put(`/teams/${this.team.id}/groups/${this.groupId}/channels/${this.id}/archive`)
             .then(() => {

@@ -1,4 +1,4 @@
-import { BaseData } from '../typings/BaseData';
+import { Team as TeamData } from '../../rest';
 import Base from './Base';
 import Client from './Client';
 import GuildChannelManager from './managers/TeamChannelManager';
@@ -25,7 +25,7 @@ export default class Team extends Base {
     public roles = new GuildRoleManager(this.client, this);
     public members = new UserManager(this.client);
 
-    constructor(client: Client, data: BaseData) {
+    constructor(client: Client, data: TeamData) {
         super(client, data);
         this._patch(data);
     }

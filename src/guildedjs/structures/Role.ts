@@ -1,32 +1,36 @@
-import { BaseData } from '../typings/BaseData';
+import { TeamRole as RoleData } from '../../rest';
 import Base from './Base';
 import Client from './Client';
 import Team from './Team';
 
 export default class Role extends Base {
-    public name: string | null = null;
-    public color: string | null = null;
-    public priority: string | null = null;
-    public createdAt: Date | null = null;
-    public updatedAt: Date | null = null;
-    public permissions: string | null = null;
-    public mentionable: boolean | null = null;
-    public selfAssignable: boolean | null = null;
+    public name!: string;
+    public color!: string;
+    public priority!: number;
+    public createdAt!: Date;
+    public updatedAt!: Date | null;
+    public permissions!: { [key: string]: number };
+    public mentionable!: boolean;
+    public selfAssignable!: boolean;
+    public hoisted!: boolean;
+    public team: Team;
 
-    constructor(client: Client, data: BaseData, public team: Team) {
+    constructor(client: Client, data: RoleData) {
         super(client, data);
+        this.team = this.client.teams.add(data.teamId);
         this._patch(data);
     }
 
-    _patch(data: any): this {
+    _patch(data: RoleData): this {
         if ('name' in data) this.name = data.name;
         if ('color' in data) this.color = data.color;
         if ('priority' in data) this.priority = data.priority;
         if ('createdAt' in data) this.createdAt = new Date(data.createdAt);
-        if ('updatedAt' in data) this.updatedAt = new Date(data.updatedAt);
+        if ('updatedAt' in data) this.updatedAt = data.updatedAt ? new Date(data.updatedAt) : null;
         if ('permissions' in data) this.permissions = data.permissions;
-        if ('mentionable' in data) this.mentionable = data.mentionable;
-        if ('selfAssignable' in data) this.selfAssignable = data.selfAssignable;
+        if ('isMentionable' in data) this.mentionable = data.isMentionable;
+        if ('isDisplayedSeparately' in data) this.hoisted = data.isDisplayedSeparately;
+        if ('isSelfAssignable' in data) this.selfAssignable = data.isSelfAssignable;
 
         return this;
     }
