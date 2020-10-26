@@ -1,8 +1,8 @@
 // Response from /channels/:id/message?limit=:amt
 
-import { PartialMessage } from '../structures/Message';
+import { Message } from '../structures/Message';
 
 export interface FetchMessage {
-    messages: PartialMessage[];
+    messages: Message[];
     hasPastMessages: boolean;
 }

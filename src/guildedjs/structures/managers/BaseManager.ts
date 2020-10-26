@@ -1,4 +1,5 @@
 import Collection from '@discordjs/collection';
+
 import { Constructable } from '../../typings/Constructable';
 import Base from '../Base';
 import Client from '../Client';

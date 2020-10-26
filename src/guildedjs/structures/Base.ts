@@ -1,11 +1,13 @@
-import { BaseData } from '../typings/BaseData';
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import Client from './Client';
 
 export default abstract class Base {
     public id: string;
     public raw: any;
 
-    constructor(public client: Client, data: BaseData) {
+    constructor(public client: Client, data: any) {
         this.id = data.id;
         this.raw = data;
     }
@@ -17,5 +19,6 @@ export default abstract class Base {
         return false;
     }
 
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     abstract _patch(data: any, ...args: any[]): this;
 }

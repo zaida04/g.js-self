@@ -1,7 +1,7 @@
-import Client from '../Client';
 import Channel from '../Channel';
-import BaseManager from './BaseManager';
+import Client from '../Client';
 import Team from '../Team';
+import BaseManager from './BaseManager';
 
 export default class TeamChannelManager extends BaseManager<Channel> {
     constructor(client: Client, public team: Team) {

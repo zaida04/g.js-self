@@ -1,8 +1,8 @@
-import { DMChannel } from './Channel';
-
 // Response from /users/:id/channels
 
-export interface UserChannels {
+import { DMChannel } from '../structures/Channel';
+
+export interface FetchDMChannels {
     channels: DMChannel[];
     unreadInfoByChannelId: unknown;
     users: any[];

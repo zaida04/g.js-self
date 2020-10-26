@@ -1,6 +1,6 @@
 import { APIContent } from '../Content';
 
-export interface PartialMessage {
+export interface Message {
     id: string;
     content: APIContent;
     type: string;

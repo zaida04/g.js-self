@@ -1,30 +1,29 @@
-import { BaseData } from '../typings/BaseData';
+import { ClientUser, PartialUser as UserData } from '../../rest';
 import Base from './Base';
 import Client from './Client';
 
 export default class User extends Base {
-    public name: string | null = null;
+    public name!: string;
     public subdomain: string | null = null;
     public aliases: unknown[] | null = null;
     public avatarURL: string | null = null;
     public bannerURL: string | null = null;
     public steamID: string | null = null;
-    public createdAt: Date | null = null;
-    public lastOnline: Date | null = null;
+    public createdAt!: Date;
+    public lastOnline!: Date | null;
 
-    constructor(client: Client, data: BaseData) {
+    constructor(client: Client, data: UserData | ClientUser) {
         super(client, data);
         this._patch(data);
     }
-    _patch(data: any): this {
+    _patch(data: UserData | ClientUser): this {
         if ('name' in data) this.name = data.name;
         if ('subdomain' in data) this.subdomain = data.subdomain;
-        if ('aliases' in data) this.aliases = data.aliases;
-        if ('avatarURL' in data) this.avatarURL = data.avatarURL;
-        if ('bannerURL' in data) this.bannerURL = data.bannerURL;
-        if ('steamID' in data) this.steamID = data.steamID;
-        if ('createdAt' in data) this.createdAt = new Date(data.createdAt);
-        if ('lastOnline' in data) this.lastOnline = new Date(data.lastOnline);
+        if ('profilePicture' in data) this.avatarURL = data.profilePicture;
+        if ('profileBannerBlur' in data) this.bannerURL = data.profileBannerBlur;
+        if ('steamId' in data) this.steamID = data.steamId;
+        if ('addedAt' in data) this.createdAt = new Date(data.addedAt);
+        if ('lastOnline' in data) this.lastOnline = data.lastOnline ? new Date(data.lastOnline) : null;
 
         return this;
     }

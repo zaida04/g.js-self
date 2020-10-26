@@ -1,4 +1,4 @@
-import { AllowPermissions, DenyPermissions } from './PermissionGrant';
+import { AllowPermissions, DenyPermissions } from './OverwritePermissions';
 
 export interface TeamChannelRoleOverwrite {
     teamId: string;

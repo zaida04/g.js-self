@@ -4,17 +4,15 @@ Adapted from: https://github.com/Chixel/guilded.js/blob/master/src/Guilded.js#L5
 Guilded.js - ChixelRT <https://github.com/Chixel>
 */
 
-import RestManager from '../../rest/RestManager';
-import { LoginData } from '../../rest/typings/LoginData';
-
-import WebSocket from 'ws';
 import { EventEmitter } from 'events';
+import WebSocket from 'ws';
 
+import RestManager, { LoginData } from '../../rest';
+import GatewayHandler from '../../ws/ClientGatewayHandler';
 import ChannelManager from './managers/ChannelManager';
 import TeamManager from './managers/TeamManager';
-import GatewayHandler from '../../ws/ClientGatewayHandler';
-import User from './User';
 import UserManager from './managers/UserManager';
+import User from './User';
 
 export default class Client {
     public emitter = new EventEmitter();
