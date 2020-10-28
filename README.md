@@ -14,6 +14,29 @@
     </p>
 </div>
 
+## Example usage
+
+```ts
+import { Client } from "guildedjs";
+// Or const { Client } = require("guildedjs");
+const client = new Client();
+
+client.on('ready', () => {
+  console.log(`Bot is successfully logged in`);
+});
+
+client.on("messageCreate", message => {
+    if(message.content === "pogger") {
+        return message.channel.send("poggers indeed");
+    }
+})
+
+client.login({
+    email: "email",
+    password: "password"
+});
+```
+
 ## About
 
 `guildedjs` is an API wrapper for Guilded.gg, a discord alternative. This was created due to the lack of an api wrapper written in TS for the guilded api. This library is heavily influenced by [discord.js](https://github.com/discordjs/discord.js). Thank you to the amazing team over there.
@@ -23,28 +46,8 @@
 > `guildedjs` is tested on nodejs >12.0.0  
 - `npm install @zaida04/guildedjs`  
 
-## Example usage
-
-```ts
-import { Client } from "guildedjs";
-// Or const { Client } = require("guildedjs");
-const GuildedClient = new Client();
-
-GuildedClient.on('ready', () => {
-  console.log(`Bot is successfully logged in`);
-});
-
-GuildedClient.on("messageCreate", message => {
-    if(message.content === "pogger") {
-        return message.channel.send("poggers indeed");
-    }
-})
-
-GuildedClient.login({
-    email: "email",
-    password: "password"
-});
-```
+## Documentation
+`Documentation will be coming once the project is at a usable state.`
 
 ## Contributing
 
