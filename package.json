@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "build": "tsc --project tsconfig.json",
-    "lint": "npx eslint src/ --ext .ts --fix",
+    "lint": "npx eslint src/ --ext .ts",
     "lint::fix": "npx eslint src/ --ext .ts --fix",
     "docs": "typedoc --options typedoc.json"
   },

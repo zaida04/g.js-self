@@ -1,10 +1,14 @@
 import { SocialLinkSource } from './Member';
 
 export interface Alias {
+    alias?: string;
     discriminator: null | string;
     name: string;
+    createdAt?: string;
+    userId?: string;
     gameId: number;
     socialLinkSource: SocialLinkSource | null;
     additionalInfo: unknown;
-    playerInfo: null;
+    editedAt?: string;
+    playerInfo: unknown;
 }

@@ -3,12 +3,13 @@
 Adapted from: https://github.com/Chixel/guilded.js/blob/master/src/Guilded.js#L54
 Guilded.js - ChixelRT <https://github.com/Chixel>
 */
-
 import { EventEmitter } from 'events';
 import WebSocket from 'ws';
 
-import RestManager, { LoginData } from '../../rest';
+import { Channel, Team } from '../..';
+import RestManager, { FetchDMChannels, LoginData, Me } from '../../rest';
 import GatewayHandler from '../../ws/ClientGatewayHandler';
+import { ClientOptions } from '../typings/ClientOptions';
 import ChannelManager from './managers/ChannelManager';
 import TeamManager from './managers/TeamManager';
 import UserManager from './managers/UserManager';
@@ -26,16 +27,9 @@ export default class Client {
     public channels = new ChannelManager(this);
     public users = new UserManager(this);
 
-    constructor() {
+    constructor(options?: ClientOptions) {
         this.ws = null;
         this.pingTimeout = null;
-    }
-
-    public sendHB(): unknown {
-        if (!this.ws) return;
-        if (this.ws.readyState !== 1) return;
-        this.ws.send('2');
-        setTimeout(this.sendHB, 5000);
     }
 
     async login(data: LoginData): Promise<undefined> {
@@ -48,27 +42,24 @@ export default class Client {
                 cookie: `hmac_signed_session=${this.rest.token}`,
             },
         });
+        this.emitter.emit('debug', 'WebSocket connection established');
 
-        const { teams } = await this.rest.get('/me');
+        const fetch_me: Me = (await this.rest.get('/me')) as Me;
+        this.emitter.emit('debug', 'Initial ME data recieved');
 
-        // Debugging
-        console.log(`TEAMS: ${JSON.stringify(teams)}`);
-
-        for (const team in teams) {
+        for (const team_data of fetch_me.teams) {
+            const team = new Team(this, team_data);
             this.teams.add(team);
         }
-        // https://api.guilded.gg/users/pmbOB8VA/channels:
-        const { channels } = await this.rest.get(`/users/${this.user.id}/channels`, false);
-
-        // Debugging
-        console.log(`DMS: ${JSON.stringify(channels)}`);
-
-        for (const dm in channels) {
+        const fetch_dms: FetchDMChannels = (await this.rest.get(`/users/${this.user.id}/channels`)) as FetchDMChannels;
+        for (const dm_data of fetch_dms.channels) {
+            const dm = new Channel(this, null, dm_data);
             this.channels.add(dm);
         }
+        this.emitter.emit('debug', 'Initial DM Channel data recieved');
 
         await this.gateway.init();
-        this.emitter.emit('debug', this.rest._token);
+        this.emitter.emit('debug', 'Gateway initialized');
         return undefined;
     }
 }

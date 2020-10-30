@@ -12,10 +12,10 @@ export default class Channel extends Base {
     public groupId: string | null = null;
     public team: Team | null = null;
 
-    constructor(client: Client, data: any) {
+    constructor(client: Client, team: Team | null, data: any) {
         super(client, data);
         this.type = data.type;
-        this.team = data.teamId ? this.client.teams.add(data.teamId) : null;
+        this.team = team;
         this._patch(data);
     }
 
