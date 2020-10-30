@@ -46,7 +46,7 @@ export default class Team extends Base {
 
         if ('rolesById' in data) {
             for (const role_data of data.rolesById) {
-                const role = new Role(this.client, role_data, this)._patch(role_data);
+                const role = new Role(this.client, role_data)._patch(role_data);
                 this.roles.add(role);
             }
         }

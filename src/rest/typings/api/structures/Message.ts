@@ -9,7 +9,8 @@ export interface Message {
     createdAt: Date;
     editedAt: string | null;
     deletedAt: string | null;
-    channelId?: string | string;
+    channelId?: string | null;
+    teamId?: string | null;
     webhookId: string | null;
     botId: string | null;
     isPinned?: boolean;

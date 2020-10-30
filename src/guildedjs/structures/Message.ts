@@ -1,9 +1,8 @@
-import { MessageData } from '../typings/MessageData';
+import { Message as MessageData } from '../../rest';
 import Base from './Base';
 import Channel from './Channel';
 import Client from './Client';
 import Team from './Team';
-import User from './User';
 
 export default class Message extends Base {
     public createdBy: string | null = null;
@@ -15,8 +14,8 @@ export default class Message extends Base {
 
     constructor(client: Client, data: MessageData) {
         super(client, data);
-        this.channel = this.client.channels.add(data.id);
-        this.team = this.client.teams.add(data.teamId);
+        this.channel = this.client.channels.add(data.channelId);
+        this.team = data.teamId ? this.client.teams.add(data.id) : null;
         this._patch(data);
     }
     _patch(data: any): this {

@@ -1,7 +1,6 @@
 import Collection from '@discordjs/collection';
 
 import { FetchMessage } from '../../../rest';
-import { MessageData } from '../../typings/MessageData';
 import Channel from '../Channel';
 import Client from '../Client';
 import Message from '../Message';
@@ -20,7 +19,7 @@ export default class ChannelMessageManager extends BaseManager<Message> {
         )) as FetchMessage;
 
         for (const api_message of api_messages.messages) {
-            messages.set(api_message.id, new Message(this.client, api_message as MessageData));
+            messages.set(api_message.id, new Message(this.client, api_message));
         }
 
         return messages;
