@@ -11,7 +11,7 @@ export default class TeamChannelManager extends BaseManager<Channel> {
     fetchChannels(): Promise<Team> {
         return this.client.rest.get(`/teams/${this.team.id}/channels`).then(x => {
             for (const channel_data of x.channels) {
-                const channel = new Channel(this.client, channel_data, this.team);
+                const channel = new Channel(this.client, channel_data);
                 this.client.channels.add(channel);
                 this.team.channels.add(channel);
             }

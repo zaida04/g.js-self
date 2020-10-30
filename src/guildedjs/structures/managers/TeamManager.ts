@@ -12,7 +12,7 @@ export default class TeamManager extends BaseManager<Team> {
         if (existing) return Promise.resolve(existing);
 
         const data: FetchTeam = (await this.client.rest.get(`/teams/${id}`)).team as FetchTeam;
-        const team = new Team(this.client, data as FetchTeam);
+        const team = new Team(this.client, data.team);
         this.client.teams.add(team);
         return team;
     }
