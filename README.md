@@ -21,11 +21,11 @@ import { Client } from "guildedjs";
 // Or const { Client } = require("guildedjs");
 const client = new Client();
 
-client.on('ready', () => {
+client.emitter.on('ready', () => {
   console.log(`Bot is successfully logged in`);
 });
 
-client.on("messageCreate", message => {
+client.emitter.on("messageCreate", message => {
     if(message.content === "pogger") {
         return message.channel.send("poggers indeed");
     }
@@ -45,6 +45,10 @@ client.login({
 
 > `guildedjs` is tested on nodejs >12.0.0  
 - `npm install @zaida04/guildedjs`  
+
+## Aditional Packages  
+
+[eventemitter3](https://www.npmjs.com/package/eventemitter3) - `npm i eventemitter3`
 
 ## Documentation
 `Documentation will be coming once the project is at a usable state.`

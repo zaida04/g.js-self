@@ -1,9 +1,10 @@
-import { Team as TeamData } from '../../rest';
+import { Measurements, Team as TeamData } from '../../rest';
 import Base from './Base';
 import Client from './Client';
 import GuildChannelManager from './managers/TeamChannelManager';
 import GuildRoleManager from './managers/TeamRoleManager';
 import UserManager from './managers/UserManager';
+import Member from './Member';
 import Role from './Role';
 import User from './User';
 
@@ -16,7 +17,7 @@ export default class Team extends Base {
     public timezone: string | null = null;
     public description: string | null = null;
     public type: string | null = null;
-    public measurements: string | null = null;
+    public measurements: Measurements | null = null;
     public verified: boolean | null = null;
     public public: boolean | null = null;
     public recruiting: boolean | null = null;
@@ -30,30 +31,30 @@ export default class Team extends Base {
         this._patch(data);
     }
 
-    _patch(data: any): this {
+    _patch(data: TeamData): this {
         if ('ownerId' in data) this.ownerId = data.ownerId;
         if ('name' in data) this.name = data.name;
         if ('subdomain' in data) this.subdomain = data.subdomain;
-        if ('socialInfo' in data) this.socialInfo = data.socialInfo;
+        if ('socialInfo' in data) this.socialInfo = data.socialInfo as string | null;
         if ('timezone' in data) this.timezone = data.timezone;
         if ('description' in data) this.description = data.description;
         if ('type' in data) this.type = data.type;
         if ('measurements' in data) this.measurements = data.measurements;
-        if ('verified' in data) this.verified = data.verified;
-        if ('public' in data) this.public = data.public;
-        if ('recruiting' in data) this.recruiting = data.recruiting;
-        if ('pro' in data) this.pro = data.pro;
+        if ('isVerified' in data) this.verified = data.isVerified;
+        if ('isPublic' in data) this.public = data.isPublic;
+        if ('isRecruiting' in data) this.recruiting = data.isRecruiting;
+        if ('isPro' in data) this.pro = data.isPro;
 
         if ('rolesById' in data) {
-            for (const role_data of data.rolesById) {
-                const role = new Role(this.client, role_data)._patch(role_data);
+            for (const role_key in data.rolesById) {
+                const role = new Role(this.client, this, data.rolesById[role_key]);
                 this.roles.add(role);
             }
         }
 
         if ('members' in data) {
             for (const member_data of data.members) {
-                const member = new User(this.client, member_data)._patch(member_data);
+                const member = new Member(this.client, member_data);
                 this.members.add(member);
             }
         }

@@ -11,6 +11,7 @@ export default class RestManager {
     public apiURL: string;
     public baseDomain = 'api.guilded.gg';
     public _token: string | undefined;
+    public cookieJar: string | undefined;
 
     constructor(config?: RestManagerOptions) {
         this.apiURL = config?.apiURL ?? `https://${this.baseDomain}`;
@@ -25,6 +26,7 @@ export default class RestManager {
         if (authenticated) {
             headers = {
                 hmac_signed_session: this.token,
+                cookie: this.cookieJar,
             };
         }
 
@@ -114,6 +116,7 @@ export default class RestManager {
             const setCookies = loginData.headers.get('Set-Cookie')?.split(' ');
             if (!setCookies) throw new GuildedJSError('Incorrect Email/Pasword');
             this._token = setCookies[0].split('=')[1];
+            this.cookieJar = loginData.headers.has('Set-Cookie') ? loginData.headers.get('Set-Cookie')! : undefined;
             return loginData.json();
         }
         throw new Error('You must provide an email/password');

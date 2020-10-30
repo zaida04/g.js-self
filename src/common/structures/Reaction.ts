@@ -5,3 +5,8 @@ export interface CustomReaction {
     webp: string;
     apng: string | null;
 }
+
+export interface ReactionUsage {
+    id: number;
+    total: number;
+}

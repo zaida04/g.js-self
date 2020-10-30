@@ -1,4 +1,4 @@
-import { MessageData } from './MessageData';
+import { APIContent } from '../../common/Content';
 
 export interface ChatMessageCreated {
     type: 'ChatMessageCreated';
@@ -6,9 +6,9 @@ export interface ChatMessageCreated {
     channelId: string;
     channelCategoryId: number;
     channelType: string;
-    teamId: string;
+    teamId?: string | null;
     contentType: string;
-    message: MessageData;
+    message: APIContent;
     createdAt: string;
     contentId: string;
     createdBy: string;

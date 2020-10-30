@@ -15,9 +15,9 @@ export default class Role extends Base {
     public hoisted!: boolean;
     public team: Team;
 
-    constructor(client: Client, data: RoleData) {
+    constructor(client: Client, team: Team, data: RoleData) {
         super(client, data);
-        this.team = this.client.teams.add(data.teamId);
+        this.team = team;
         this._patch(data);
     }
 

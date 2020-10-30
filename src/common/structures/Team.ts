@@ -14,10 +14,13 @@ export interface Team {
     baseGroup: BaseGroup;
     bio: string | null;
     bots: any[];
+    canInviteMembers?: boolean;
+    canManageTournaments?: boolean;
+    canUpdateTeam?: boolean;
     characteristics: string | null;
     createdAt: string;
     customizationInfo: unknown;
-    deafenedMembers: any[];
+    deafenedMembers?: any[];
     description: string;
     discordGuildId: string | null;
     discordServerName: string | null;
@@ -30,6 +33,8 @@ export interface Team {
     homeBannerImageSm: string | null;
     id: string;
     insightsInfo: unknown;
+    isAdmin?: boolean;
+    isFavorite?: boolean;
     isPro: boolean;
     isPublic: boolean;
     isRecruiting: boolean;
@@ -41,11 +46,14 @@ export interface Team {
     measurements: Measurements;
     members: Member[];
     mutedMembers: any[];
+    memberCount?: string;
+    membershipRole: string;
     name: string;
     notificationPreference: string | null;
     ownerId: string;
     profilePicture: string;
     rankNames: string | null;
+    roleIds?: number[] | null;
     rolesById: {
         [key: string]: TeamRole;
     };

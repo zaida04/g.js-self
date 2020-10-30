@@ -1,5 +1,5 @@
 import { APIContent } from '../Content';
-import { CustomReaction } from './CustomReaction';
+import { CustomReaction } from './Reaction';
 
 export interface UserStatus {
     content: APIContent | null;
