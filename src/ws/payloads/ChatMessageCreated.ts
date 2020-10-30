@@ -2,15 +2,16 @@ import { APIContent } from '../../common/Content';
 
 export interface ChatMessageCreated {
     type: 'ChatMessageCreated';
-    guildedClientId: string;
-    channelId: string;
+    id: string;
     channelCategoryId: number;
+    channelId: string;
     channelType: string;
-    teamId?: string | null;
-    contentType: string;
-    message: APIContent;
-    createdAt: string;
     contentId: string;
+    contentType: string;
+    createdAt: string;
     createdBy: string;
+    guildedClientId: string;
+    content: APIContent;
     silenceNotification: boolean;
+    teamId?: string | null;
 }

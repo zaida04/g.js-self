@@ -1,6 +1,6 @@
 // Response from /users/:id/channels
 
-import { DMChannel } from '../structures/Channel';
+import { DMChannel } from '../../../common';
 
 export interface FetchDMChannels {
     channels: DMChannel[];

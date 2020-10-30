@@ -1,4 +1,4 @@
-import { ClientUser, User as UserData } from '../../rest';
+import { ClientUser, User as UserData } from '../../common';
 import Base from './Base';
 import Client from './Client';
 

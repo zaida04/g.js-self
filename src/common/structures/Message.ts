@@ -6,13 +6,13 @@ export interface Message {
     type: string;
     reactions?: any[];
     createdBy: string;
-    createdAt: Date;
-    editedAt: string | null;
-    deletedAt: string | null;
-    channelId?: string | null;
+    createdAt: string;
+    editedAt?: string | null;
+    deletedAt?: string | null;
+    channelId: string;
     teamId?: string | null;
-    webhookId: string | null;
-    botId: string | null;
+    webhookId?: string | null;
+    botId?: string | null;
     isPinned?: boolean;
     pinnedBy?: string | null;
 }

@@ -1,13 +1,13 @@
 import { Message } from './Message';
 import { RoleOverwriteById } from './RolesById';
-import { PartialUser } from './User';
+import { User } from './User';
 
 export interface DMChannel {
     id: string;
     type: string;
     name: string | null;
     description: string | null;
-    users: PartialUser[];
+    users: User[];
     DMType: string;
     lastMessage: Message;
     createdAt: Date;
