@@ -1,4 +1,4 @@
-import { ClientUser } from '../structures/User';
+import { ClientUser } from '../../../common';
 
 export interface LoginResponse {
     user: ClientUser;

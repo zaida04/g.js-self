@@ -1,6 +1,6 @@
 // Response from /teams/:id/channels
 
-import { Category, TeamChannel } from '../structures/Channel';
+import { Category, TeamChannel } from '../../../common';
 
 export interface FetchTeamChannels {
     channels: TeamChannel[];

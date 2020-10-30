@@ -1,4 +1,4 @@
-import { Measurements, Team as TeamData } from '../../rest';
+import { Measurements, Team as TeamData } from '../../common';
 import Base from './Base';
 import Client from './Client';
 import GuildChannelManager from './managers/TeamChannelManager';

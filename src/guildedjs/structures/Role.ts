@@ -1,4 +1,4 @@
-import { TeamRole as RoleData } from '../../rest';
+import { TeamRole as RoleData } from '../../common';
 import Base from './Base';
 import Client from './Client';
 import Team from './Team';

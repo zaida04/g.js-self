@@ -1,6 +1,6 @@
 // Response from /teams/:id
 
-import { Team } from '../structures/Team';
+import { Team } from '../../../common';
 
 export interface FetchTeam {
     team: Team;

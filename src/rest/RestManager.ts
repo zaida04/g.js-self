@@ -2,7 +2,7 @@ import fetch, { Response } from 'node-fetch';
 
 import GuildedJSError from '../guildedjs/structures/GuildedJSError';
 import GuildedAPIError from './GuildedAPIError';
-import { LoginResponse } from './typings/api/responses/LoginResponse';
+import { LoginResponse } from './typings/api/LoginResponse';
 import { LoginData } from './typings/LoginData';
 import { MakeOptions } from './typings/MakeOptions';
 import { RestManagerOptions } from './typings/RestManagerOptions';
