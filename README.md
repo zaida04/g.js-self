@@ -2,7 +2,8 @@
 
 <div align="center">
     <img src="readme-header.png" width="546" alt="guildedjs"/>
-    <p><b>A Node.js wrapper for the <a href="https://www.guilded.gg/">Guilded.gg</a> API. <br>Written in TS</b></p>
+    <p><b>A Node.js wrapper for the <a href="https://www.guilded.gg/">Guilded.gg</a> API. <br>Written in TS</b></p><br>
+    <p><a href="https://discord.gg/jf66UUN"><b>Join our Discord Server!</b></a></p>
     <br />
     <p>
         <img src="https://github.com/zaida04/guildedjs/workflows/Linting/badge.svg" alt="Linting">
