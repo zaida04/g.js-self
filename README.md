@@ -14,18 +14,31 @@
     </p>
 </div>
 
-## Example usage
+## Table of Contents
+* [Example Usage](#usage)
+* [About the Project](#about)
+  * [Built With](#built-with)
+* [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
+  * [Installation](#installation)
+  * [Documentation](#documentation)
+* [Contributing](#contributing)
+* [License](#LICENSING)
+* [Acknowledgements](#acknowledgements)
+
+
+## Usage
 
 ```ts
-import { Client } from "guildedjs";
+import Client from "guildedjs";
 // Or const { Client } = require("guildedjs");
 const client = new Client();
 
-client.emitter.on('ready', () => {
+client.on('ready', () => {
   console.log(`Bot is successfully logged in`);
 });
 
-client.emitter.on("messageCreate", message => {
+client.on("messageCreate", message => {
     if(message.content === "pogger") {
         return message.channel.send("poggers indeed");
     }
@@ -36,30 +49,57 @@ client.login({
     password: "password"
 });
 ```
+<!--ABOUT THE PROJECT-->
 
 ## About
 
 `guildedjs` is an API wrapper for Guilded.gg, a discord alternative. This was created due to the lack of an api wrapper written in TS for the guilded api. This library is heavily influenced by [discord.js](https://github.com/discordjs/discord.js). Thank you to the amazing team over there.
 
-## Installation
+### Built With
+* `node-fetch` - make HTTP requests
+* `@discordjs/collection` - Extension of ES6 Maps with utility functions
+* `ws` - make WS connections
 
-> `guildedjs` is tested on nodejs >12.0.0  
+<!--EMD OF ABOUT THE PROJECT>
+
+<!--GETTING STARTED-->
+
+## Getting Started
+
+### Prerequisites
+You are expected to have an updated version of node.js. Guildedjs is tested on node.js >12.0.0 and we make no guarantees that it will work on earlier versions
+
+### Installation
+1. Clone the repo and build
+- `git clone https://github.com/zaida04/guildedjs`
+- `cd guildedjs`
+- `npm i`
+- `npm run build`
+
+2. Install through NPM
 - `npm install @zaida04/guildedjs`  
 
-## Aditional Packages  
-
-[eventemitter3](https://www.npmjs.com/package/eventemitter3) - `npm i eventemitter3`
-
-## Documentation
+### Documentation
 `Documentation will be coming once the project is at a usable state.`
+
+<!--END GETTING STARTED-->
+
 
 ## Contributing
 
-We welcome contributions from people of all skill levels. Please refer to our [contributing guide](https://github.com/zaida04/guildedjs/blob/master/.github/CONTRIBUTING.md) for more info.
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+**Please ensure your commits pass the tests, lints, and builds. This means you should test it locally before pushing.**
 
 ## LICENSING  
   
-**guildedjs** © [zaida04](https://github.com/zaida04), Released under the [MIT](https://github.com/zaida04/guildedjs/blob/master/LICENSE) License.  
+> **guildedjs** © [zaida04](https://github.com/zaida04), Released under the [MIT](https://github.com/zaida04/guildedjs/blob/master/LICENSE) License.  
 
-
-*Created ~10/18/2020*
+## Acknowledgements
+This project was inspired by [Chixel's guilded api wrapper](https://github.com/Chixel/guilded.js). Through their project, I was able to deduce how the WS gateway works, and how to structure my project. A big thank you to them, without them this project wouldn't exist.
