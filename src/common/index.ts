@@ -1,6 +1,6 @@
 import { APIContent } from './Content';
 import { Document } from './Document';
-import { DocumentNode } from './DocumentNode';
+import { DocumentNode, MessageNodeContentType, MessageNodeInlineMention, MessageNodeInlineType } from './DocumentNode';
 import { Leaf } from './Leaf';
 import { NestedNode } from './NestedNode';
 import { Alias } from './structures/Alias';
@@ -37,6 +37,9 @@ export {
     Measurements,
     Member,
     Message,
+    MessageNodeInlineType,
+    MessageNodeContentType,
+    MessageNodeInlineMention,
     NestedNode,
     RoleOverwriteById,
     ReactionUsage,

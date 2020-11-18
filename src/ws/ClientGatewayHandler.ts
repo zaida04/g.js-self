@@ -14,19 +14,19 @@ export default class GatewayHandler {
         if (!this.client.ws) return;
 
         this.client.ws.on('open', () => {
-            this.client.emitter.emit('debug', 'Gateway connection established');
-            this.client.emitter.emit('ready', '');
+            this.client.emit('debug', 'Gateway connection established');
+            this.client.emit('ready');
             this.sendHB();
         });
         this.client.ws.on('message', (incomingData: string) => {
-            this.client.emitter.emit('debug', 'Gateway message recieved');
+            this.client.emit('debug', 'Gateway message recieved');
             this.dataRecieved(incomingData);
         });
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         this.client.ws.on('close', (closeData: any) => {
-            this.client.emitter.emit('debug', 'Gateway connection terminated');
-            this.client.emitter.emit('disconnected', closeData);
+            this.client.emit('debug', 'Gateway connection terminated');
+            this.client.emit('disconnected', closeData);
         });
     }
 
@@ -49,7 +49,7 @@ export default class GatewayHandler {
         if (data.length < 3) return;
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const [event_name, event_data]: [string, Record<string, any>] = JSON.parse(data);
-        this.client.emitter.emit('raw', event_data);
+        this.client.emit('raw', event_data);
         switch (event_name) {
             case 'ChatMessageCreated': {
             }

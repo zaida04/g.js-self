@@ -10,6 +10,7 @@
     "build": "tsc --project tsconfig.json",
     "lint": "npx eslint src/ --ext .ts",
     "lint::fix": "npx eslint src/ --ext .ts --fix",
+    "test": "ts-node tests/index.ts",
     "docs": "typedoc --options typedoc.json"
   },
   "repository": {

@@ -2,9 +2,11 @@ import { NestedNode } from './NestedNode';
 
 export interface DocumentNode {
     data: unknown;
-    type: DocumentNodeType;
+    type: MessageNodeContentType | MessageNodeInlineType | string;
     nodes: NestedNode[];
     object: string;
 }
 
-export type DocumentNodeType = 'paragraph';
+export type MessageNodeContentType = 'paragraph' | 'markdown-plain-text' | 'webhookMessage' | 'block-quote-container';
+export type MessageNodeInlineType = 'mention' | 'channel' | 'reaction';
+export type MessageNodeInlineMention = 'mention' | 'channel';

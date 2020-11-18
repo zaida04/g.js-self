@@ -15,8 +15,7 @@ import TeamManager from './managers/TeamManager';
 import UserManager from './managers/UserManager';
 import User from './User';
 
-export default class Client {
-    public emitter = new EventEmitter();
+export default class Client extends EventEmitter {
     public rest = new RestManager();
     public user: User | null = null;
     private gateway = new GatewayHandler(this);
@@ -28,6 +27,7 @@ export default class Client {
     public users = new UserManager(this);
 
     constructor(options?: ClientOptions) {
+        super();
         this.ws = null;
         this.pingTimeout = null;
     }
@@ -42,10 +42,10 @@ export default class Client {
                 cookie: `hmac_signed_session=${this.rest.token}`,
             },
         });
-        this.emitter.emit('debug', 'WebSocket connection established');
+        this.emit('debug', 'WebSocket connection established');
 
         const fetch_me: Me = (await this.rest.get('/me')) as Me;
-        this.emitter.emit('debug', 'Initial ME data recieved');
+        this.emit('debug', 'Initial ME data recieved');
 
         for (const team_data of fetch_me.teams) {
             const team = new Team(this, team_data);
@@ -56,10 +56,10 @@ export default class Client {
             const dm = new Channel(this, null, dm_data);
             this.channels.add(dm);
         }
-        this.emitter.emit('debug', 'Initial DM Channel data recieved');
+        this.emit('debug', 'Initial DM Channel data recieved');
 
         await this.gateway.init();
-        this.emitter.emit('debug', 'Gateway initialized');
+        this.emit('debug', 'Gateway initialized');
         return undefined;
     }
 }
