@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "alwaysStrict": true,
+    "moduleResolution": "node",
+    "removeComments": true,
+    "declaration": true,
+    "declarationMap": true,
+    "pretty": true,
+    "module": "CommonJS",
+    "target": "ES5",
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "types": [
+      "node"
+    ],
+    "sourceMap": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "noEmitHelpers": true,
+    "resolveJsonModule": true
+  },
+  "exclude": [
+    "dist/**"
+  ]
+}

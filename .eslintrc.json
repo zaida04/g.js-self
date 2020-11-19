@@ -77,6 +77,8 @@
         "no-new-func": "warn",
         "no-new-wrappers": "warn",
         "no-new": "warn",
+        "@typescript-eslint/no-empty-interface": "warn",
+        "@typescript-eslint/no-empty-function": "off",
         "no-octal-escape": "warn",
         "no-return-assign": "warn",
         "no-return-await": "warn",
