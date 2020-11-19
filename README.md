@@ -24,6 +24,7 @@
   * [Installation](#installation)
   * [Documentation](#documentation)
 * [Contributing](#contributing)
+* [TODO](#todo)
 * [License](#LICENSING)
 * [Acknowledgements](#acknowledgements)
 
@@ -100,6 +101,20 @@ Contributions are what make the open source community such an amazing place to b
 5. Open a Pull Request
 
 **Please ensure your commits pass the tests, lints, and builds. This means you should test it locally before pushing.**
+
+## TODO
+* Finish Typings for the Guilded API/WS 🚧
+* Rest Util ✅
+* Main Package:
+  * Structures 🚧
+  * GET Request Coverage ❌
+  * POST Request Coverage ❌
+  * PATCH Request Coverage ❌
+  * DELETE Request Coverage ❌
+  * Caching System
+    * Built-In Collection Caching System ✅
+    * Allow custom caches ❌
+  
 
 ## LICENSING  
   
