@@ -74,8 +74,11 @@ You are expected to have an updated version of node.js. Guildedjs is tested on n
 1. Clone the repo and build
 - `git clone https://github.com/guildedjs/guildedjs`
 - `cd guildedjs`
-- `npm i`
-- `npm run build`
+- `npm i`  
+- `npm run bootstrap`  
+- `npm run build`  
+
+Then proceed to move the related dirs to your `node_modules`
 
 2. Install through NPM
 - `npm install @guildedjs/guildedjs`  
