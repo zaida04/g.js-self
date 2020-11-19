@@ -6,12 +6,12 @@
     <p><a href="https://discord.gg/jf66UUN"><b>Join our Discord Server!</b></a></p>
     <br />
     <p>
-        <img src="https://github.com/zaida04/guildedjs/workflows/Linting/badge.svg" alt="Linting">
-        <img src="https://github.com/zaida04/guildedjs/workflows/TypeScript/badge.svg" alt="TypeScript">
+        <img src="https://github.com/guildedjs/guildedjs/workflows/Linting/badge.svg" alt="Linting">
+        <img src="https://github.com/guildedjs/guildedjs/workflows/TypeScript/badge.svg" alt="TypeScript">
         <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
-        <a href="https://github.com/zaida04/guildedjs/issues"><img src="https://img.shields.io/github/issues-raw/zaida04/guildedjs.svg?maxAge=25000" alt="Issues"></a>
-        <a href="https://github.com/zaida04/guildedjs/pulls"><img src="https://img.shields.io/github/issues-pr/zaida04/guildedjs.svg?style=flat" alt="GitHub pull requests"></a><br>
-        <a href="https://npmjs.org/package/@zaida04/guildedjs"><img src="https://nodei.co/npm/@zaida04/guildedjs.png" alt="NPM"></a>
+        <a href="https://github.com/guildedjs/guildedjs/issues"><img src="https://img.shields.io/github/issues-raw/guildedjs/guildedjs.svg?maxAge=25000" alt="Issues"></a>
+        <a href="https://github.com/guildedjs/guildedjs/pulls"><img src="https://img.shields.io/github/issues-pr/guildedjs/guildedjs.svg?style=flat" alt="GitHub pull requests"></a><br>
+        <a href="https://npmjs.org/package/@guildedjs/guildedjs"><img src="https://nodei.co/npm/@guildedjs/guildedjs.png" alt="NPM"></a>
     </p>
 </div>
 
@@ -72,7 +72,7 @@ You are expected to have an updated version of node.js. Guildedjs is tested on n
 
 ### Installation
 1. Clone the repo and build
-- `git clone https://github.com/zaida04/guildedjs`
+- `git clone https://github.com/guildedjs/guildedjs`
 - `cd guildedjs`
 - `npm i`
 - `npm run build`
@@ -100,7 +100,7 @@ Contributions are what make the open source community such an amazing place to b
 
 ## LICENSING  
   
-> **guildedjs** © [zaida04](https://github.com/zaida04), Released under the [MIT](https://github.com/zaida04/guildedjs/blob/master/LICENSE) License.  
+> **guildedjs** © [zaida04](https://github.com/zaida04), Released under the [MIT](https://github.com/guildedjs/guildedjs/blob/master/LICENSE) License.  
 
 ## Acknowledgements
 This project was inspired by [Chixel's guilded api wrapper](https://github.com/Chixel/guilded.js). Through their project, I was able to deduce how the WS gateway works, and how to structure my project. A big thank you to them, without them this project wouldn't exist.
