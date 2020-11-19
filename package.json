@@ -1,16 +1,13 @@
 {
-  "name": "@zaida04/guilded-js",
+  "name": "@guildedjs/guilded-js",
   "version": "0.0.1",
   "description": "A Node.js API wrapper for the Guilded.gg API written in TS",
   "main": "dist/index.js",
-  "files": [
-    "dist/"
-  ],
   "scripts": {
-    "build": "tsc --project tsconfig.json",
-    "lint": "npx eslint src/ --ext .ts",
-    "lint::fix": "npx eslint src/ --ext .ts --fix",
-    "test": "ts-node tests/index.ts",
+    "build": "npx lerna run build",
+    "bootstrap": "npx lerna bootstrap",
+    "lint": "npx eslint packages/ --ext .ts",
+    "lint:fix": "npx eslint packages/ --ext .ts --fix",
     "docs": "typedoc --options typedoc.json"
   },
   "repository": {
@@ -27,25 +24,16 @@
   "author": "Zaid \"Nico\" Arshad <me@zaid-arshad.tech>",
   "license": "MIT",
   "devDependencies": {
-    "@semantic-release/changelog": "^5.0.1",
-    "@semantic-release/git": "^9.0.0",
-    "@types/node": "^14.11.10",
-    "@types/node-fetch": "^2.5.7",
-    "@types/ws": "^7.2.7",
     "@typescript-eslint/eslint-plugin": "^3.9.0",
     "@typescript-eslint/parser": "^3.9.0",
     "eslint": "^7.6.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-simple-import-sort": "^5.0.3",
+    "lerna": "^3.22.1",
     "prettier": "^2.0.5",
-    "semantic-release": "^17.1.1",
-    "typescript": "^3.9.7"
-  },
-  "dependencies": {
-    "@discordjs/collection": "^0.1.6",
-    "node-fetch": "^2.6.1",
-    "ws": "^7.3.1"
+    "rimraf": "^3.0.2",
+    "typescript": "^4.0.5"
   },
   "bugs": {
     "url": "https://github.com/zaida04/guildedjs/issues"

@@ -1,7 +1,7 @@
 # This project is currently in a Work In Progress stage and is not ready for usage yet.
 
 <div align="center">
-    <img src="readme-header.png" width="546" alt="guildedjs"/>
+    <img src="static/readme-header.png" width="546" alt="guildedjs"/>
     <p><b>A Node.js wrapper for the <a href="https://www.guilded.gg/">Guilded.gg</a> API. <br>Written in TS</b></p><br>
     <p><a href="https://discord.gg/jf66UUN"><b>Join our Discord Server!</b></a></p>
     <br />
@@ -78,7 +78,7 @@ You are expected to have an updated version of node.js. Guildedjs is tested on n
 - `npm run build`
 
 2. Install through NPM
-- `npm install @zaida04/guildedjs`  
+- `npm install @guildedjs/guildedjs`  
 
 ### Documentation
 `Documentation will be coming once the project is at a usable state.`
