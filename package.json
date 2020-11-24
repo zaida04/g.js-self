@@ -10,7 +10,7 @@
     "lint": "npx eslint packages/ --ext .ts",
     "lint:fix": "npx eslint packages/ --ext .ts --fix",
     "docs": "typedoc --options typedoc.json",
-    "postinstall": "npx husky install",
+    "_postinstall": "npx husky install",
     "prepublish": "npx pinst --disable",
     "postpublish": "npx pinst --enable"
   },
@@ -28,6 +28,8 @@
   "author": "Zaid \"Nico\" Arshad <me@zaid-arshad.tech>",
   "license": "MIT",
   "devDependencies": {
+    "@types/node-fetch": "^2.5.7",
+    "@types/ws": "^7.4.0",
     "@typescript-eslint/eslint-plugin": "^3.9.0",
     "@typescript-eslint/parser": "^3.9.0",
     "eslint": "^7.6.0",
