@@ -26,6 +26,7 @@ export class Connection {
 
         // @todo make the REST manager handle this
         const response = await fetch('https://api.guilded.gg/login', {
+            method: 'POST',
             headers: {
                 Authorization: JSON.stringify({ email: this.client.email, password: this.client.password }),
             },
