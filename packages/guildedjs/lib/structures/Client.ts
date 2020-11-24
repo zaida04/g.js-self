@@ -28,13 +28,14 @@ export default class Client extends EventEmitter {
     public channels = new ChannelManager(this);
     public users = new UserManager(this);
 
-    constructor(options?: ClientOptions) {
+    public constructor(options?: ClientOptions) {
         super();
         this.ws = null;
         this.pingTimeout = null;
     }
 
-    async login(data: LoginOptions): Promise<undefined> {
+
+    public async login(data: LoginOptions): Promise<undefined> {
         const ClientUser = await this.rest.init(data);
         this.user = new User(this, ClientUser.user as APIClientUser);
 
@@ -65,6 +66,9 @@ export default class Client extends EventEmitter {
         return undefined;
     }
 }
+
+// add all client events here
+export type ClientEvent = "messageCreate" | "ready" | "messageDelete" | "messageUpdate";
 
 export interface LoginOptions {
     email: string;
