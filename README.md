@@ -112,7 +112,7 @@ Contributions are what make the open source community such an amazing place to b
   * PATCH Request Coverage ❌
   * DELETE Request Coverage ❌
   * Caching System
-    * Built-In Collection Caching System ✅
+    * Built-In Caching System ✅
     * Allow custom caches ❌
   
 
