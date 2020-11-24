@@ -89,7 +89,6 @@ Then proceed to move the related dirs to your `node_modules`
 
 <!--END GETTING STARTED-->
 
-
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
