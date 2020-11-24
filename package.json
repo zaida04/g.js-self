@@ -3,12 +3,16 @@
   "version": "0.0.1",
   "description": "A Node.js API wrapper for the Guilded.gg API written in TS",
   "main": "dist/index.js",
+  "private": false,
   "scripts": {
     "build": "npx lerna run build",
     "bootstrap": "npx lerna bootstrap",
     "lint": "npx eslint packages/ --ext .ts",
     "lint:fix": "npx eslint packages/ --ext .ts --fix",
-    "docs": "typedoc --options typedoc.json"
+    "docs": "typedoc --options typedoc.json",
+    "postinstall": "npx husky install",
+    "prepublish": "npx pinst --disable",
+    "postpublish": "npx pinst --enable"
   },
   "repository": {
     "type": "git",
@@ -32,6 +36,7 @@
     "eslint-plugin-simple-import-sort": "^5.0.3",
     "husky": "^5.0.4",
     "lerna": "^3.22.1",
+    "pinst": "^2.1.1",
     "prettier": "^2.0.5",
     "rimraf": "^3.0.2",
     "typescript": "^4.0.5"
