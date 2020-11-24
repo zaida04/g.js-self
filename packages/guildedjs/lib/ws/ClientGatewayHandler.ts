@@ -42,22 +42,31 @@ export default class GatewayHandler {
     */
     dataRecieved(incomingData: string): void {
         let data: string = incomingData;
+        let opCode = "";
         for (const char of data) {
-            if (!(char >= '0' && char <= '9')) break;
+            if (!Number.isInteger(Number(char))) break;
             data = data.substr(1);
+            opCode += char;
         }
         if (data.length < 3) return;
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const [event_name, event_data]: [string, Record<string, any>] = JSON.parse(data);
         this.client.emit('raw', event_data);
-        switch (event_name) {
-            case 'ChatMessageCreated': {
-            }
-            case 'ChatMessageUpdated': {
-            }
-            case 'ChatMessageReactionAdded': {
-            }
-            case 'TemporalChannelCreated': {
+        switch (Number(opCode)) {
+            case 0:
+
+            case 42: {
+                switch (event_name) {
+                    case 'ChatMessageCreated': {
+                    }
+                    case 'ChatMessageUpdated': {
+                    }
+                    case 'ChatMessageReactionAdded': {
+                    }
+                    case 'TemporalChannelCreated': {
+                    }
+                }
+                break;
             }
         }
     }
