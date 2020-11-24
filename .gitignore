@@ -6,3 +6,5 @@ dist/
 *.log
 
 *.config.json
+.vscode/
+.idea/
