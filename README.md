@@ -55,11 +55,10 @@ client.login({
 
 ## About
 
-`guildedjs` is an API wrapper for Guilded.gg, a discord alternative. This was created due to the lack of an api wrapper written in TS for the guilded api. This library is heavily influenced by [discord.js](https://github.com/discordjs/discord.js). Thank you to the amazing team over there.
+`guildedjs` is an API wrapper for Guilded.gg, a discord alternative. This was created due to the lack of an api wrapper written in TS for the guilded api. 
 
 ### Built With
 * `node-fetch` - make HTTP requests
-* `@discordjs/collection` - Extension of ES6 Maps with utility functions
 * `ws` - make WS connections
 
 <!--EMD OF ABOUT THE PROJECT>
@@ -72,7 +71,10 @@ client.login({
 You are expected to have an updated version of node.js. Guildedjs is tested on node.js >12.0.0 and we make no guarantees that it will work on earlier versions
 
 ### Installation
-1. Clone the repo and build
+1. Install through NPM `(recommended)`
+- `npm install @guildedjs/guildedjs`  
+
+2. Clone the repo and build
 - `git clone https://github.com/guildedjs/guildedjs`
 - `cd guildedjs`
 - `npm i`  
@@ -81,8 +83,6 @@ You are expected to have an updated version of node.js. Guildedjs is tested on n
 
 Then proceed to move the related dirs to your `node_modules`
 
-2. Install through NPM
-- `npm install @guildedjs/guildedjs`  
 
 ### Documentation
 `Documentation will be coming once the project is at a usable state.`
@@ -102,7 +102,7 @@ Contributions are what make the open source community such an amazing place to b
 **Please ensure your commits pass the tests, lints, and builds. This means you should test it locally before pushing.**
 
 **We make use of [lerna](https://lerna.js.org/) to manage our monorepo. The main commands used are below**
-* `lerna add <module> [package]` - add npm module dependency to all/specific package(s)
+* `lerna add <module> [--scope=package-name]` - add npm module dependency to all/specific package(s)
 * `lerna create <package>` - create a new package
 * `lerna bootstrap` - recursively install dependencies in all packages and symlink local packages
 * `lerna run <npm-script>` - recursively execute command in all packages (must exist in each packages package.json)
