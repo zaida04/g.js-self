@@ -124,6 +124,3 @@ Contributions are what make the open source community such an amazing place to b
 ## LICENSING  
   
 > **guildedjs** © [zaida04](https://github.com/zaida04), [aesthetical](https://github.com/Sxmurai), Released under the [MIT](https://github.com/guildedjs/guildedjs/blob/master/LICENSE) License.  
-
-## Acknowledgements
-This project was inspired by [Chixel's guilded api wrapper](https://github.com/Chixel/guilded.js). Through their project, I was able to deduce how the WS gateway works, and how to structure my project. A big thank you to them, without them this project wouldn't exist.
