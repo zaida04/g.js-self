@@ -9,7 +9,7 @@ To get ready to work on the codebase, please do the following:
 Fork & clone the repository, and make sure you're on the master branch
 Run npm install
 Code your heart out!
-Run npm test to run ESLint and ensure any JSDoc changes are valid
+Run npm run test to run ESLint and ensure any JSDoc changes are valid
 Submit a pull request (Make sure you follow the conventional commit format)
 
 > Adapted from https://github.com/discordjs/discord.js/blob/master/.github/CONTRIBUTING.md
