@@ -104,7 +104,7 @@ Contributions are what make the open source community such an amazing place to b
 **We make use of [lerna](https://lerna.js.org/) to manage our monorepo. The main commands used are below**
 * `lerna add <module> [--scope=package-name]` - add npm module dependency to all/specific package(s)
 * `lerna create <package>` - create a new package
-* `lerna bootstrap` - recursively install dependencies in all packages and symlink local packages
+* `npm run bootstrap` = `lerna bootstrap` - recursively install dependencies in all packages and symlink local packages
 * `lerna run <npm-script>` - recursively execute command in all packages (must exist in each packages package.json)
 
 ## TODO
