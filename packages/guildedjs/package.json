@@ -1,18 +1,17 @@
 {
-  "name": "@guildedjs/guilded-api-typings",
-  "version": "0.0.1",
-  "description": "Typings for the guilded API",
+  "name": "@guildedjs/guildedjs",
+  "version": "1.0.0",
+  "description": "Main package for guildedjs",
   "keywords": [
     "guilded",
     "guildedjs",
     "guilded.js",
     "guilded-api",
     "guilded-api-wrapper",
-    "guilded-wrapper",
-    "guilded-api-typings"
+    "guilded-wrapper"
   ],
-  "author": "zaid450 <me@zaid-arshad.tech>",
-  "homepage": "https://github.com/guildedjs/guildedjs/tree/master/packages/guilded-api-typings#readme",
+  "author": "Nico - Zaid <me@zaid-arshad.tech>, Sxmurai <https://github.com/Sxmurai>",
+  "homepage": "https://github.com/guildedjs/guildedjs/tree/master/packages/guildedjs#readme",
   "license": "MIT",
   "main": "dist/index.js",
   "directories": {
@@ -20,15 +19,12 @@
     "test": "__tests__"
   },
   "files": [
-    "lib"
+    "dist/"
   ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/guildedjs/guildedjs.git"
-  },
-  "devDependencies": {
-    "typescript": "^3.9.7"
-  },
+  }, 
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "npx rimraf dist/ && npm run build"
@@ -36,7 +32,10 @@
   "bugs": {
     "url": "https://github.com/guildedjs/guildedjs/issues"
   },
-  "dependencies": {
-    "@types/node": "^14.14.9"
+  "devDependencies": {
+    "@types/node": "^14.14.9",
+    "@types/node-fetch": "^2.5.7",
+    "@types/ws": "^7.4.0"
   }
+
 }
