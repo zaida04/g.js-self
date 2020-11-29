@@ -1,11 +1,3 @@
-# `guildedjs`
+# `@guildedjs/guilded.js`
+- Core of Guilded.js and the main library that connects everything together with structures
 
-> TODO: description
-
-## Usage
-
-```
-const guildedjs = require('guildedjs');
-
-// TODO: DEMONSTRATE API
-```

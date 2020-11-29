@@ -6,12 +6,12 @@
     <p><a href="https://discord.gg/jf66UUN"><b>Join our Discord Server!</b></a></p>
     <br />
     <p>
-        <img src="https://github.com/guildedjs/guildedjs/workflows/Linting/badge.svg" alt="Linting">
-        <img src="https://github.com/guildedjs/guildedjs/workflows/TypeScript/badge.svg" alt="TypeScript">
+        <img src="https://github.com/guildedjs/guilded.js/workflows/Linting/badge.svg" alt="Linting">
+        <img src="https://github.com/guildedjs/guilded.js/workflows/TypeScript/badge.svg" alt="TypeScript">
         <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
-        <a href="https://github.com/guildedjs/guildedjs/issues"><img src="https://img.shields.io/github/issues-raw/guildedjs/guildedjs.svg?maxAge=25000" alt="Issues"></a>
-        <a href="https://github.com/guildedjs/guildedjs/pulls"><img src="https://img.shields.io/github/issues-pr/guildedjs/guildedjs.svg?style=flat" alt="GitHub pull requests"></a><br>
-        <a href="https://npmjs.org/package/@guildedjs/guildedjs"><img src="https://nodei.co/npm/@guildedjs/guildedjs.png" alt="NPM"></a>
+        <a href="https://github.com/guildedjs/guilded.js/issues"><img src="https://img.shields.io/github/issues-raw/guildedjs/guilded.js.svg?maxAge=25000" alt="Issues"></a>
+        <a href="https://github.com/guildedjs/guilded.js/pulls"><img src="https://img.shields.io/github/issues-pr/guildedjs/guilded.js.svg?style=flat" alt="GitHub pull requests"></a><br>
+        <a href="https://npmjs.org/package/@guildedjs/guilded.js"><img src="https://nodei.co/npm/@guildedjs/guilded.js.png" alt="NPM"></a>
     </p>
 </div>
 
@@ -26,14 +26,13 @@
 * [Contributing](#contributing)
 * [TODO](#todo)
 * [License](#LICENSING)
-* [Acknowledgements](#acknowledgements)
 
 
 ## Usage
 
 ```ts
-import Client from "guildedjs";
-// Or const { Client } = require("guildedjs");
+import Client from "guilded.js";
+// Or const { Client } = require("guilded.js");
 const client = new Client();
 
 client.on('ready', () => {
@@ -72,11 +71,11 @@ You are expected to have an updated version of node.js. Guildedjs is tested on n
 
 ### Installation
 1. Install through NPM `(recommended)`
-- `npm install @guildedjs/guildedjs`  
+- `npm install @guildedjs/guilded.js`  
 
 2. Clone the repo and build
-- `git clone https://github.com/guildedjs/guildedjs`
-- `cd guildedjs`
+- `git clone https://github.com/guildedjs/guilded.js`
+- `cd guilded.js`
 - `npm i`  
 - `npm run bootstrap`  
 - `npm run build`  
@@ -123,4 +122,4 @@ Contributions are what make the open source community such an amazing place to b
 
 ## LICENSING  
   
-> **guildedjs** © [zaida04](https://github.com/zaida04), [aesthetical](https://github.com/Sxmurai), Released under the [MIT](https://github.com/guildedjs/guildedjs/blob/master/LICENSE) License.  
+> **guildedjs** © [zaida04](https://github.com/zaida04), Released under the [MIT](https://github.com/guildedjs/guildedjs/blob/master/LICENSE) License.  
