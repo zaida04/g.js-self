@@ -59,6 +59,7 @@ client.login({
 ### Built With
 * `node-fetch` - make HTTP requests
 * `ws` - make WS connections
+* `@discordjs/collection` - Map extension utility
 
 <!--EMD OF ABOUT THE PROJECT>
 
