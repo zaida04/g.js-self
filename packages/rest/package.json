@@ -1,12 +1,9 @@
 {
-  "name": "@guildedjs/guilded.js",
+  "name": "@guildedjs/guildedjs-rest",
   "version": "0.0.1",
-  "description": "Main package for guilded.js",
-  "keywords": [
-    "guildedjs"
-  ],
+  "description": "Rest utility for Guilded.js",
   "author": "zaid450 <me@zaid-arshad.tech>",
-  "homepage": "https://github.com/zaida04/guildedjs/tree/master/packages/guildedjs#readme",
+  "homepage": "https://github.com/zaida04/guildedjs/tree/master/packages/rest#readme",
   "license": "MIT",
   "main": "dist/index.js",
   "directories": {
@@ -24,18 +21,15 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "build": "tsc"
   },
-  "devDependencies": {
-    "@types/ws": "^7.4.0",
-    "typescript": "^3.9.7"
-  },
   "bugs": {
     "url": "https://github.com/zaida04/guilded-js/issues"
   },
   "dependencies": {
-    "@discordjs/collection": "^0.1.6",
-    "@guildedjs/guilded-api-typings": "^0.0.1",
-    "@guildedjs/guildedjs-rest": "^0.0.1",
     "@types/node": "^14.14.9",
-    "ws": "^7.4.0"
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^2.5.7",
+    "typescript": "^3.9.7"
   }
 }
