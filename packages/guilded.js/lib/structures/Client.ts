@@ -34,7 +34,6 @@ export default class Client extends EventEmitter {
         this.pingTimeout = null;
     }
 
-
     public async login(data: LoginOptions): Promise<undefined> {
         const ClientUser = await this.rest.init(data);
         this.user = new User(this, ClientUser.user as APIClientUser);
@@ -67,8 +66,8 @@ export default class Client extends EventEmitter {
     }
 }
 
-// add all client events here
-export type ClientEvent = "messageCreate" | "ready" | "messageDelete" | "messageUpdate";
+// Add all client events here
+export type ClientEvent = 'messageCreate' | 'ready' | 'messageDelete' | 'messageUpdate';
 
 export interface LoginOptions {
     email: string;
