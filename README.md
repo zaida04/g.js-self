@@ -2,7 +2,7 @@
 
 <div align="center">
     <img src="static/readme-header.png" width="546" alt="guildedjs"/>
-    <p><b>A Node.js wrapper for the <a href="https://www.guilded.gg/">Guilded.gg</a> API. <br>Written in TS</b></p><br>
+    <p><b>A Node.js wrapper for the <a href="https://www.guilded.gg/">Guilded.gg</a> API. <br>Written in TS</b></p>  
     <p><a href="https://discord.gg/jf66UUN"><b>Join our Discord Server!</b></a></p>
     <br />
     <p>
