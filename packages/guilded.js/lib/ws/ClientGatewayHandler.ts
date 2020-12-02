@@ -42,7 +42,7 @@ export default class GatewayHandler {
     */
     dataRecieved(incomingData: string): void {
         let data: string = incomingData;
-        let opCode = "";
+        let opCode = '';
         for (const char of data) {
             if (!Number.isInteger(Number(char))) break;
             data = data.substr(1);
