@@ -11,7 +11,7 @@
     "lint:fix": "npx eslint packages/ --ext .ts --fix",
     "docs": "typedoc --options typedoc.json",
     "_postinstall": "npx husky install",
-    "prepublish": "npx pinst --disable",
+    "prepublishOnly": "npx pinst --disable",
     "postpublish": "npx pinst --enable"
   },
   "repository": {
