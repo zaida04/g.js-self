@@ -1,3 +1,4 @@
+import { ChatMessageCreated, ChatMessageUpdated } from '@guildedjs/guilded-api-typings';
 import WebSocket from 'ws';
 
 import Client from '../structures/Client';
@@ -24,7 +25,7 @@ export default class ClientGatewayHandler extends GatewayHandler {
             this.client.emit('debug', 'Gateway connection established');
         });
         this.ws.on('message', (incomingData: string) => {
-            this.client.emit('debug', 'Gateway message recieved');
+            this.client.emit('debug', 'Gateway message recieved', incomingData);
             this.dataRecieved(incomingData);
         });
 
@@ -64,21 +65,50 @@ export default class ClientGatewayHandler extends GatewayHandler {
                 break;
             }
 
-            case 40: {
-                this.ping = Date.now() - 4;
+            case 3: {
+                this.ping = Date.now() - this.heartbeater.pingSentAt;
                 this.client.emit('debug', 'Ping returned. ');
+                break;
+            }
+
+            case 40: {
+                this.client.emit('debug', 'Ready event recieved.');
+                this.client.emit('ready');
                 break;
             }
 
             case 42: {
                 switch (event_name) {
                     case 'ChatMessageCreated': {
+                        /* Const messageCreated = event_data as ChatMessageCreated;
+                        const newMessage = this.client.channels
+                            .add({
+                                channelId: messageCreated.channelId,
+                                channelCategoryId: messageCreated.channelCategoryId,
+                                channelType: messageCreated.channelType,
+                            })
+                            .messages.add(messageCreated.message);
+
+                        this.client.emit('messageCreate', newMessage);*/
+                        break;
                     }
                     case 'ChatMessageUpdated': {
+                        /* Const messageUpdated = event_data as ChatMessageUpdated;
+                        const oldMessage = this.client.channels.cache
+                            .get(messageUpdated.channelId)
+                            ?.messages.cache.get(messageUpdated.message.id);
+                        if (!oldMessage) return;
+                        const updatedMessage = oldMessage?._patch(event_data);
+                        this.client.emit('messageUpdate', oldMessage, updatedMessage); */
+                        break;
                     }
                     case 'ChatMessageReactionAdded': {
-                    }
-                    case 'TemporalChannelCreated': {
+                        /* Const chatMessageReaction = event_data as ChatMessageReactionAdded;
+                        const message = this.client.channels.cache
+                            .get(chatMessageReaction.channelId)
+                            ?.messages.cache.get(chatMessageReaction.messageId)
+                            ?.reactions.set(event_data.reactionId, event_data);*/
+                        break;
                     }
                 }
                 break;
