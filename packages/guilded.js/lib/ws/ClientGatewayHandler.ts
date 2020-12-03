@@ -19,7 +19,7 @@ export default class ClientGatewayHandler extends GatewayHandler {
         });
         this.client.emit('debug', 'WebSocket connection established');
 
-        if (!this.client.ws) return;
+        if (!this.client.gateway) return;
 
         this.ws.on('open', () => {
             this.client.emit('debug', 'Gateway connection established');
@@ -32,7 +32,7 @@ export default class ClientGatewayHandler extends GatewayHandler {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         this.ws.on('close', (closeData: any) => {
             this.client.emit('debug', 'Gateway connection terminated');
-            this.client.emit('disconnected', closeData);
+            this.client.destroy();
         });
     }
 
