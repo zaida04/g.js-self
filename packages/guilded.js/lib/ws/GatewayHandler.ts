@@ -10,4 +10,8 @@ export default abstract class GatewayHandler {
 
     constructor(public readonly client: Client) {}
     public abstract init(): void;
+    public destroy(): void {
+        this.ws?.terminate();
+        this.heartbeater.destroy();
+    }
 }

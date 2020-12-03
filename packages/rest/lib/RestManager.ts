@@ -16,7 +16,7 @@ export default class RestManager {
                     self.cookies += element.split(" ")[0];
                 });
     */
-    async make(data: MakeOptions, authenticated = true): Promise<Response> {
+    private async make(data: MakeOptions, authenticated = true): Promise<Response> {
         let headers = {};
         if (authenticated) {
             headers = {
@@ -41,7 +41,7 @@ export default class RestManager {
         return request;
     }
 
-    get(path: string, authenticated = true): Promise<Record<string, any>> {
+    public get(path: string, authenticated = true): Promise<Record<string, any>> {
         return this.make(
             {
                 method: 'GET',
@@ -51,7 +51,7 @@ export default class RestManager {
         ).then(x => x.json());
     }
 
-    post(path: string, body: Record<string, any>, authenticated = true): Promise<Record<string, any>> {
+    public post(path: string, body: Record<string, any>, authenticated = true): Promise<Record<string, any>> {
         return this.make(
             {
                 method: 'POST',
@@ -62,7 +62,7 @@ export default class RestManager {
         ).then(x => x.json());
     }
 
-    delete(path: string, body?: Record<string, any>, authenticated = true): Promise<Record<string, any>> {
+    public delete(path: string, body?: Record<string, any>, authenticated = true): Promise<Record<string, any>> {
         return this.make(
             {
                 method: 'DELETE',
@@ -73,7 +73,7 @@ export default class RestManager {
         ).then(x => x.json());
     }
 
-    patch(path: string, body: Record<string, any>, authenticated = true): Promise<Record<string, any>> {
+    public patch(path: string, body: Record<string, any>, authenticated = true): Promise<Record<string, any>> {
         return this.make(
             {
                 method: 'PATCH',
@@ -84,7 +84,7 @@ export default class RestManager {
         ).then(x => x.json());
     }
 
-    put(path: string, body?: Record<string, any>, authenticated = true): Promise<Record<string, any>> {
+    public put(path: string, body?: Record<string, any>, authenticated = true): Promise<Record<string, any>> {
         return this.make(
             {
                 method: 'PUT',
@@ -115,6 +115,11 @@ export default class RestManager {
             return loginData.json();
         }
         throw new Error('You must provide an email/password');
+    }
+
+    public destroy() {
+        this.cookieJar = undefined;
+        this._token = undefined;
     }
 
     get token(): string | undefined {
