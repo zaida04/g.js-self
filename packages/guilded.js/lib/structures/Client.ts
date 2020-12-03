@@ -6,10 +6,8 @@ Guilded.js - ChixelRT <https://github.com/Chixel>
 import { APIClientUser } from '@guildedjs/guilded-api-typings';
 import { RestManager } from '@guildedjs/guildedjs-rest';
 import { EventEmitter } from 'events';
-import WebSocket from 'ws';
 
-import { ClientOptions } from '../typings/ClientOptions';
-import GatewayHandler from '../ws/ClientGatewayHandler';
+import ClientGatewayHandler from '../ws/ClientGatewayHandler';
 import Channel from './Channel';
 import ChannelManager from './managers/ChannelManager';
 import TeamManager from './managers/TeamManager';
@@ -18,34 +16,27 @@ import Team from './Team';
 import User from './User';
 
 export default class Client extends EventEmitter {
-    public rest = new RestManager();
+    public rest: RestManager;
     public user: User | null = null;
-    private gateway = new GatewayHandler(this);
-    public ws: WebSocket | null;
+    public ws: GatewayHandler | null = new GatewayHandler(this);
     public pingTimeout: (() => unknown) | null;
 
     public teams = new TeamManager(this);
     public channels = new ChannelManager(this);
     public users = new UserManager(this);
 
-    public constructor(options?: ClientOptions) {
+    public constructor(public options?: Partial<ClientOptions>) {
         super();
+        this.rest = new RestManager({
+            apiURL: this.options?.rest?.apiURL,
+        });
         this.ws = null;
         this.pingTimeout = null;
     }
 
-
-    public async login(data: LoginOptions): Promise<undefined> {
-        const ClientUser = await this.rest.init(data);
+    public async login(options: LoginOptions): Promise<undefined> {
+        const ClientUser = await this.rest.init(options);
         this.user = new User(this, ClientUser.user as APIClientUser);
-
-        const socketURL = `wss://${this.rest.baseDomain}/socket.io/?jwt=undefined&EIO=3&transport=websocket`;
-        this.ws = new WebSocket(socketURL, {
-            headers: {
-                cookie: `hmac_signed_session=${this.rest.token}`,
-            },
-        });
-        this.emit('debug', 'WebSocket connection established');
 
         const fetch_me = await this.rest.get('/me');
         this.emit('debug', 'Initial ME data recieved');
@@ -61,14 +52,23 @@ export default class Client extends EventEmitter {
         }
         this.emit('debug', 'Initial DM Channel data recieved');
 
-        await this.gateway.init();
+        this.ws = new ClientGatewayHandler(this);
         this.emit('debug', 'Gateway initialized');
         return undefined;
     }
 }
 
-// add all client events here
-export type ClientEvent = "messageCreate" | "ready" | "messageDelete" | "messageUpdate";
+// Add all client events here
+export type ClientEvent = 'messageCreate' | 'ready' | 'messageDelete' | 'messageUpdate';
+
+export interface ClientOptions {
+    ws: {
+        heartbeatInterval: number;
+    };
+    rest: {
+        apiURL: string;
+    };
+}
 
 export interface LoginOptions {
     email: string;
