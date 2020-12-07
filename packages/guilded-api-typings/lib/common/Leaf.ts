@@ -1,5 +1,7 @@
+import { APIMark } from './Mark';
+
 export interface APILeaf {
     text: string;
-    marks: any[];
-    object: string;
+    marks: APIMark[];
+    object: 'leaf' | string;
 }

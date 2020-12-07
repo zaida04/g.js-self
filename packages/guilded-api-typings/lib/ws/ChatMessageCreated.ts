@@ -1,16 +1,16 @@
 import { APIMessage } from '../common';
 export interface ChatMessageCreated {
-    type: 'ChatMessageCreated';
-    teamId?: string | null;
-    silenceNotification: boolean;
-    id: string;
-    guildedClientId: string;
-    createdBy: string;
-    createdAt: string;
-    contentType: string;
-    contentId: string;
-    message: Pick<APIMessage, 'id' | 'createdBy' | 'content' | 'type' | 'createdAt'>;
-    channelType: string;
+    channelCategoryId?: string | null;
     channelId: string;
-    channelCategoryId: number;
+    channelType: string;
+    contentId: string;
+    contentType: string;
+    createdAt: string;
+    createdBy: string;
+    guildedClientId: string;
+    id: string;
+    message: Pick<APIMessage, 'id' | 'createdBy' | 'content' | 'type' | 'createdAt' | 'webhookId' | 'botId'>;
+    silenceNotification: boolean;
+    teamId?: string;
+    type: 'ChatMessageCreated';
 }

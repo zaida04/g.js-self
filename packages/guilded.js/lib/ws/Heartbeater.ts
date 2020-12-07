@@ -6,8 +6,11 @@ export default class Heartbeater {
 
     constructor(public gateway: GatewayHandler) {}
     public start(): void {
-        this.gateway.client.emit('debug', 'Heartbeating...');
-        this.interval = setInterval(this.sendHB, this.gateway.client.options?.ws?.heartbeatInterval ?? 10000);
+        this.gateway.client.debug('Heartbeating...');
+        this.interval = setInterval(
+            this.sendHB.bind(this),
+            this.gateway.client.options?.ws?.heartbeatInterval ?? 10000,
+        );
     }
 
     public destroy(): void {
@@ -20,5 +23,6 @@ export default class Heartbeater {
         this.pingSentAt = Date.now();
         this.gateway.ws.send('2');
         this.gateway.client.rest.put('/users/me/ping');
+        this.gateway.client.debug('heartbeat sent');
     }
 }

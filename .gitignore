@@ -1,5 +1,6 @@
 node_modules/
 dist/
+types/
 
 .npmrc
 *.tsbuildinfo
@@ -8,3 +9,4 @@ dist/
 *.config.json
 .vscode/
 .idea/
+*.env

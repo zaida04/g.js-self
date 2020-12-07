@@ -2,15 +2,18 @@
 Adapted from: https://github.com/Chixel/guilded.js/blob/master/src/Guilded.js#L54
 Guilded.js - ChixelRT <https://github.com/Chixel>
 */
-import { APIClientUser } from '@guildedjs/guilded-api-typings';
+import { APIClientUser, LoginResponse } from '@guildedjs/guilded-api-typings';
 import { RestManager } from '@guildedjs/guildedjs-rest';
 import { EventEmitter } from 'events';
 
+import { ClientEventParams } from '../typings/ClientEventParams';
+import { WebSocketEvents } from '../typings/WebSocketEvents';
 import ClientGatewayHandler from '../ws/ClientGatewayHandler';
+import User from './User';
 
 export default class Client extends EventEmitter {
     public rest: RestManager;
-    // Public user: User | null = null;
+    public user: User | null = null;
     public gateway: ClientGatewayHandler | null;
     public pingTimeout: (() => unknown) | null;
 
@@ -27,12 +30,12 @@ export default class Client extends EventEmitter {
         this.pingTimeout = null;
     }
 
-    public async login(options: LoginOptions): Promise<undefined> {
-        const ClientUser = await this.rest.init(options);
-        // This.user = new User(this, ClientUser.user as APIClientUser);
+    public async login(options: LoginOptions): Promise<this> {
+        const loginRes: LoginResponse = (await this.rest.init(options)) as LoginResponse;
+        // This.user = new User(this, loginRes.user);
 
         /*
-        const fetch_me = await this.rest.get('/me');
+        Const fetch_me = await this.rest.get('/me');
         this.emit('debug', 'Initial ME data recieved');
 
         for (const team_data of fetch_me.teams) {
@@ -47,24 +50,37 @@ export default class Client extends EventEmitter {
         this.emit('debug', 'Initial DM Channel data recieved');
         */
 
-        this.gateway = new ClientGatewayHandler(this);
-        this.emit('debug', 'Gateway initialized');
-        return undefined;
+        this.gateway = new ClientGatewayHandler(this).init();
+        return this;
     }
     public destroy(): void {
         this.rest.destroy();
         this.gateway?.destroy();
-        this.emit('debug', 'Client destroyed!');
+        this.debug('Client destroyed!');
         this.emit('disconnected');
+    }
+
+    public on<E extends keyof ClientEventParams>(event: E, cb: (...args: ClientEventParams[E]) => void): this;
+    public on<S extends string | symbol>(
+        event: Exclude<S, keyof ClientEventParams>,
+        cb: (...args: any[]) => void,
+    ): this;
+    public on(event: string, cb: (...args: any[]) => void): this {
+        return super.on(event, cb);
+    }
+
+    public debug(str: string, ...args: any[]): undefined {
+        // eslint-disable-next-line no-void
+        return void this.emit('debug', `[DEBUG]: ${str}`, args);
     }
 }
 
-// Add all client events here
-export type ClientEvent = 'messageCreate' | 'ready' | 'messageDelete' | 'messageUpdate';
-
+export type ClientPartial = 'MEMBER' | 'MESSAGE' | 'USER';
 export interface ClientOptions {
+    partials: ClientPartial[];
     ws: {
         heartbeatInterval: number;
+        disabledEvents: WebSocketEvents[];
     };
     rest: {
         apiURL: string;
