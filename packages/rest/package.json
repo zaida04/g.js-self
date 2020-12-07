@@ -25,10 +25,10 @@
     "url": "https://github.com/zaida04/guilded-js/issues"
   },
   "dependencies": {
-    "@types/node": "^14.14.9",
     "node-fetch": "^2.6.1"
   },
   "devDependencies": {
+    "@types/node": "^14.14.9",
     "@types/node-fetch": "^2.5.7",
     "typescript": "^3.9.7"
   }

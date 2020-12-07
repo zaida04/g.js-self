@@ -27,7 +27,8 @@
     "url": "git+https://github.com/guildedjs/guildedjs.git"
   },
   "devDependencies": {
-    "typescript": "^3.9.7"
+    "typescript": "^3.9.7",
+    "@types/node": "^14.14.9"
   },
   "scripts": {
     "build": "tsc",
@@ -35,8 +36,5 @@
   },
   "bugs": {
     "url": "https://github.com/guildedjs/guildedjs/issues"
-  },
-  "dependencies": {
-    "@types/node": "^14.14.9"
   }
 }

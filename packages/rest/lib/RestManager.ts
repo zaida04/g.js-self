@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import fetch, { Response } from 'node-fetch';
 
 import GuildedAPIError from './GuildedAPIError';
@@ -5,7 +6,7 @@ import GuildedAPIError from './GuildedAPIError';
 export default class RestManager {
     public apiURL: string;
     public baseDomain = 'api.guilded.gg';
-    public _token: string | undefined;
+    public token: string | undefined;
     public cookieJar: string | undefined;
 
     constructor(config?: RestManagerOptions) {
@@ -108,22 +109,18 @@ export default class RestManager {
                 },
                 false,
             );
-            const setCookies = loginData.headers.get('Set-Cookie')?.split(' ');
-            if (!setCookies) throw new Error('Incorrect Email/Pasword');
-            this._token = setCookies[0].split('=')[1];
-            this.cookieJar = loginData.headers.has('Set-Cookie') ? loginData.headers.get('Set-Cookie')! : undefined;
+            this.cookieJar = loginData.headers.get('Set-Cookie')!;
+            if (!this.cookieJar) throw new Error('Incorrect Email/Pasword');
+            const setCookies = this.cookieJar.split(' ');
+            this.token = setCookies[0].split('=')[1].split(';')[0];
             return loginData.json();
         }
         throw new Error('You must provide an email/password');
     }
 
-    public destroy() {
+    public destroy(): void {
         this.cookieJar = undefined;
-        this._token = undefined;
-    }
-
-    get token(): string | undefined {
-        return this._token;
+        this.token = undefined;
     }
 }
 

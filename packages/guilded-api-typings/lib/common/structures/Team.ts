@@ -6,7 +6,9 @@ import { APIWebhook } from './Webhook';
 
 export interface APITeam {
     additionalGameInfo: unknown;
-    additionalInfo: TeamAdditionalInfo;
+    additionalInfo: {
+        platform: string;
+    };
     alphaInfo: unknown;
     alwaysShowTeamHome: boolean;
     autoSyncDiscordRoles: boolean;
@@ -71,6 +73,18 @@ export interface APITeam {
     webhooks: APIWebhook[];
 }
 
-export interface TeamAdditionalInfo {
-    platform: string;
+export interface APIPartialTeam {
+    id: string;
+    name: string;
+    subdomain: string;
+    activity: any[];
+    games: string[] | null[];
+    profilePicture: string;
+    teamDashImage: string;
+    homeBannerImageSm: string;
+    homeBannerImageMd: string;
+    homeBannerImageLg: string;
+    gameIds: string[] | null;
+    bannerImages: string[] | null[];
+    memberCount: number;
 }

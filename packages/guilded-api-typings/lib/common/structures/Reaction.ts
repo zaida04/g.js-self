@@ -1,8 +1,8 @@
 export interface APICustomReaction {
     id: number;
     name: string;
-    png: string;
-    webp: string;
+    png: string | null;
+    webp: string | null;
     apng: string | null;
 }
 

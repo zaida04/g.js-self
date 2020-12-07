@@ -7,6 +7,7 @@ export default abstract class GatewayHandler {
     public ws!: WebSocket | null;
     public heartbeater = new Heartbeater(this);
     public ping = 0;
+    public connectedAt: Date | null = null;
 
     constructor(public readonly client: Client) {}
     public abstract init(): void;
