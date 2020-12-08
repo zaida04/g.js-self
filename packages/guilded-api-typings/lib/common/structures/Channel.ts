@@ -1,75 +1,65 @@
 import { APIMessage } from './Message';
+import { APICategoryChannelRoleOverwrite, APITeamChannelRoleOverwrite } from './Overwrite';
 import { RoleOverwriteById } from './Role';
 import { APIUser } from './User';
 
-export interface APIDMChannel {
-    id: string;
-    type: string;
+// Base data that ALL channels will have.
+export interface APIChannel {
+    id: string | number;
     name: string | null;
-    description: string | null;
-    users: APIUser[];
-    DMType: string;
-    lastMessage: APIMessage;
-    createdAt: Date;
-    createdBy: string;
-    updatedAt: Date;
-    contentType: string;
+    createdAt: string;
+    updatedAt: string | null;
+}
+
+// Base data that channels that you can send TEXT to will have
+export interface APITextBasedChannel extends APIChannel {
     archivedAt: string | null;
+    archivedBy: string | null;
+    archivedByWebhookId: string | null;
+    contentType: string;
+    createdByWebhookId: string | null;
+    deletedAt: string | null;
+    description: string | null;
     parentChannelId: string | null;
     autoArchiveAt: string | null;
-    deletedAt: string | null;
-    archivedBy: string | null;
-    createdByWebhookId: string | null;
-    archivedByWebhookId: string | null;
-    dmType: string;
-    ownerId: string;
+    type: string;
     voiceParticipants: any[];
 }
 
-export interface APITeamChannel {
-    addedAt: string;
-    archivedAt: string | null;
-    archivedBy: string | null;
-    archivedByWebhookId: string | null;
-    autoArchiveAt: string | null;
-    channelCategoryId: number;
-    channelId: string;
-    contentType: string;
-    createdAt: string;
-    createdBy: string;
-    createdByWebhookId: string | null;
-    deletedAt: string | null;
-    description: string | null;
-    groupId: string;
-    id: string;
-    isPublic: boolean;
-    isRoleSynced: boolean;
-    name: string;
-    parentChannelId: string | null;
-    priority: number | null;
-    roles: string | null;
-    rolesById: RoleOverwriteById;
-    settings: string | null;
+// Base data that channels in a TEAM will have
+export interface APITeamBasedChannel {
+    channelCategoryId: number | null;
     teamId: string;
-    tournamentRoles: string | null;
-    tournamentRolesById: RoleOverwriteById;
-    type: string;
-    updatedAt: string;
-    userPermissions: string | null;
-    userStreams?: any[];
-    voiceParticipants?: any[];
+    groupId: string;
+    roles: string[] | null;
+    priority: number | null;
+    userPermissions: string[] | null;
+    createdBy: string;
 }
 
-export interface APICategory {
-    channelCategoryId: string | null;
-    createdAt: string;
-    groupId: string;
-    id: number;
+export interface APIDMChannel extends APITextBasedChannel {
+    dmType: string;
+    lastMessage: APIMessage;
+    ownerId: string;
+    parentChannelId: string | null;
+    users: APIUser[];
+}
+
+export interface APITeamChannel extends APITeamBasedChannel, APITextBasedChannel {
     name: string;
-    priority: number;
-    roles: string[] | null;
-    rolesById: RoleOverwriteById;
-    teamId: string;
-    updatedAt: string | null;
-    userPermissions: string | null;
+    addedAt: string;
+    channelId: string;
+    isPublic: boolean;
+    isRoleSynced: boolean;
+    rolesById: { [key: string]: APITeamChannelRoleOverwrite };
+    settings: string | null;
+    tournamentRoles: string | null;
+    tournamentRolesById: RoleOverwriteById;
+    userStreams?: any[];
+}
+
+export interface APICategory extends APITeamBasedChannel, APIChannel {
+    channelCategoryId: number;
+    name: string;
+    rolesById: { [key: string]: APICategoryChannelRoleOverwrite };
 }
