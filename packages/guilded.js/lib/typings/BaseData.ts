@@ -1,3 +1,3 @@
 export interface BaseData {
-    id: string;
+    readonly id: string | number;
 }

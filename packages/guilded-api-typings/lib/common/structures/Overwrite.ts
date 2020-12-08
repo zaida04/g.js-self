@@ -6,22 +6,19 @@ export interface AllowPermissions {
     [key: string]: number;
 }
 
-export interface APITeamChannelUserOverwrite {
+export interface APIRoleOverwrite {
     teamId: string;
-    channelId: string;
     createdAt: string;
     updatedAt: string | null;
     teamRoleId: number;
     denyPermissions: DenyPermissions;
     allowPermissions: AllowPermissions;
+    channelId?: string;
+    channelCategoryId?: number;
 }
 
-export interface APITeamChannelRoleOverwrite {
-    teamId: string;
-    createdAt: string;
-    updatedAt: string;
-    teamRoleId: number;
-    denyPermissions: DenyPermissions;
-    allowPermissions: AllowPermissions;
-    channelCategoryId: number;
-}
+export type APIUserOverwrite = APIRoleOverwrite;
+
+export type APICategoryChannelRoleOverwrite = APIRoleOverwrite;
+
+export type APITeamChannelRoleOverwrite = APIRoleOverwrite;

@@ -1,7 +1,0 @@
-{
-    "inputFiles": ["./src"],
-    "mode": "modules",
-    "out": "docs",
-    "includeDeclarations": true,
-    "excludeExternals": true
-}

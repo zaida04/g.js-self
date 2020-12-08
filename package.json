@@ -28,6 +28,13 @@
   ],
   "author": "Zaid \"Nico\" Arshad <me@zaid-arshad.tech>",
   "license": "MIT",
+  "prettier": {
+    "semi": true,
+    "trailingComma": "all",
+    "printWidth": 120,
+    "tabWidth": 4,
+    "endOfLine": "auto"
+  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^3.9.0",
     "@typescript-eslint/parser": "^3.9.0",
@@ -35,6 +42,7 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-simple-import-sort": "^5.0.3",
+    "discord.js-docgen": "git+https://github.com/zaida04/docgen.git",
     "husky": "^5.0.4",
     "lerna": "^3.22.1",
     "pinst": "^2.1.1",

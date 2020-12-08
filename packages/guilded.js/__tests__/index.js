@@ -9,6 +9,7 @@ const client = new Guilded.Client();
 
 client.on('ready', () => {
     console.log(`ready!`);
+    console.log(client.teams);
 })
 client.on('raw', str => {
     console.log(`raw: ${JSON.stringify(str)}`);
