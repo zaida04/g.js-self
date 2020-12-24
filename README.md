@@ -1,4 +1,4 @@
-# This project is currently in a Work In Progress stage and is not ready for usage yet.
+# This project is in an Alpha stage, be weary of bug fixes coming out.
 
 <div align="center">
     <img src="static/readme-header.png" width="546" alt="guildedjs"/>
@@ -18,13 +18,11 @@
 ## Table of Contents
 * [Example Usage](#usage)
 * [About the Project](#about)
-  * [Built With](#built-with)
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
   * [Documentation](#documentation)
 * [Contributing](#contributing)
-* [TODO](#todo)
 * [License](#LICENSING)
 
 
@@ -55,11 +53,6 @@ client.login({
 ## About
 
 `guildedjs` is an API wrapper for Guilded.gg, a discord alternative. This was created due to the lack of an api wrapper written in TS for the guilded api. 
-
-### Built With
-* `node-fetch` - make HTTP requests
-* `ws` - make WS connections
-* `@discordjs/collection` - Map extension utility
 
 <!--EMD OF ABOUT THE PROJECT>
 
@@ -106,20 +99,6 @@ Contributions are what make the open source community such an amazing place to b
 * `lerna create <package>` - create a new package
 * `npm run bootstrap` = `lerna bootstrap` - recursively install dependencies in all packages and symlink local packages
 * `lerna run <npm-script>` - recursively execute command in all packages (must exist in each packages package.json)
-
-## TODO
-* Finish Typings for the Guilded API/WS 🚧
-* Rest Util ✅
-* Main Package:
-  * Structures 🚧
-  * GET Request Coverage ❌
-  * POST Request Coverage ❌
-  * PATCH Request Coverage ❌
-  * DELETE Request Coverage ❌
-  * Caching System
-    * Built-In Caching System ✅
-    * Allow custom caches ❌
-  
 
 ## LICENSING  
   

@@ -1,6 +1,6 @@
 {
     "root": true,
-    "ignorePatterns": ["__tests__/**", "node_modules/**", "dist/**", "types/**"],
+    "ignorePatterns": ["__tests__/**", "node_modules/**", "dist/**", "types/**", "*.js"],
     "parser": "@typescript-eslint/parser",
     "extends": [
         "plugin:@typescript-eslint/recommended",

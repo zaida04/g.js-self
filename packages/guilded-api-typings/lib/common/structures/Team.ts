@@ -1,4 +1,4 @@
-import { APIBaseGroup } from './Group';
+import { APIGroup } from './Group';
 import { APIMeasurements } from './Measurements';
 import { APIMember } from './Member';
 import { APITeamRole } from './Role';
@@ -13,7 +13,7 @@ export interface APITeam {
     alwaysShowTeamHome: boolean;
     autoSyncDiscordRoles: boolean;
     bannerImages: unknown;
-    baseGroup: APIBaseGroup;
+    baseGroup: APIGroup;
     bio: string | null;
     bots: any[];
     canInviteMembers?: boolean;
@@ -66,8 +66,8 @@ export interface APITeam {
     subscriptionInfo: string | null;
     teamDashImage: string | null;
     teamPreferences: string | null;
-    timezone: string;
-    type: string;
+    timezone: string | null;
+    type: string | null;
     upsell: null;
     userFollowsTeam: boolean;
     webhooks: APIWebhook[];

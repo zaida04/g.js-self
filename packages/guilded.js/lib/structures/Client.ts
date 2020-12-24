@@ -10,8 +10,12 @@ import { ClientEventParams } from '../typings/ClientEventParams';
 import { WebSocketEvents } from '../typings/WebSocketEvents';
 import Util from '../util';
 import ClientGatewayHandler from '../ws/ClientGatewayHandler';
+import DMChannel from './channels/DMChannel';
+// import DMChannel from './channels/DMChannel';
 import ClientUser from './ClientUser';
+import ChannelManager from './managers/ChannelManager';
 import TeamManager from './managers/TeamManager';
+import UserManager from './managers/UserManager';
 import Team from './Team';
 import User from './User';
 
@@ -23,8 +27,8 @@ export default class Client extends EventEmitter {
     public readonly util = Util;
 
     public teams = new TeamManager(this);
-    // Public channels = new ChannelManager(this);
-    // public users = new UserManager(this);
+    public channels = new ChannelManager(this);
+    public users = new UserManager(this);
 
     public constructor(public options?: Partial<ClientOptions>) {
         super();
@@ -42,18 +46,23 @@ export default class Client extends EventEmitter {
         this.debug('Initial ME data recieved');
 
         this.user = new ClientUser(this, fetch_me.user);
-        for (const team_data of fetch_me.teams) {
-            const team = new Team(this, team_data);
-            this.teams.add(team);
+        if (!this.options?.cache?.startupRestrictions.teams) {
+            for (const team_data of fetch_me.teams) {
+                const team = new Team(this, team_data);
+                if (!this.options?.cache?.startupRestrictions.channels) await team.fetchChannels();
+                this.teams.add(team);
+            }
+            this.debug('Initial Team data recieved.');
         }
 
-        /* Const fetch_dms = await this.rest.get(`/users/${this.user.id}/channels`);
-        for (const dm_data of fetch_dms.channels) {
-            const dm = new Channel(this, null, dm_data);
-            this.channels.add(dm);
+        if (!this.options?.cache?.startupRestrictions.dms) {
+            const fetch_dms = await this.rest.get(`/users/${this.user.id}/channels`);
+            for (const dm_data of fetch_dms.channels) {
+                const dm = new DMChannel(this, dm_data);
+                this.channels.add(dm);
+            }
+            this.debug('Initial DM Channel data recieved.');
         }
-        this.emit('debug', 'Initial DM Channel data recieved');
-        */
 
         this.gateway = new ClientGatewayHandler(this).init();
         return this;
@@ -83,6 +92,17 @@ export default class Client extends EventEmitter {
 export type ClientPartial = 'MEMBER' | 'MESSAGE' | 'USER';
 export interface ClientOptions {
     partials: ClientPartial[];
+    cache: {
+        startupRestrictions: {
+            dms: boolean;
+            teams: boolean;
+            channels: boolean;
+        }
+        teams: boolean;
+        channels: boolean;
+        users: boolean;
+        members: boolean;
+    }
     ws: {
         heartbeatInterval: number;
         disabledEvents: WebSocketEvents[];

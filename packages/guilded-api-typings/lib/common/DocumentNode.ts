@@ -1,9 +1,7 @@
 import { APINestedNode } from './NestedNode';
 
 export interface APIDocumentNode {
-    data: {
-        language?: string;
-    };
+    data: unknown;
     type: string;
     nodes: APINestedNode[];
     object: string;

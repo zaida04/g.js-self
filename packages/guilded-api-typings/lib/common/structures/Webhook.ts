@@ -6,5 +6,5 @@ export interface APIWebhook {
     iconUrl: string | null;
     createdBy: string;
     createdAt: string;
-    deletedAt: string;
+    deletedAt: string | null;
 }
