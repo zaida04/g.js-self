@@ -42,7 +42,7 @@ export default class RestManager {
         return request;
     }
 
-    public get(path: string, authenticated = true): Promise<Record<string, any>> {
+    public get<T extends Record<string, any>>(path: string, authenticated = true): Promise<Record<string, any> | T> {
         return this.make(
             {
                 method: 'GET',
@@ -52,7 +52,11 @@ export default class RestManager {
         ).then(x => x.json());
     }
 
-    public post(path: string, body: Record<string, any>, authenticated = true): Promise<Record<string, any>> {
+    public post<T extends Record<string, any>>(
+        path: string,
+        body: Record<string, any>,
+        authenticated = true,
+    ): Promise<Record<string, any> | T> {
         return this.make(
             {
                 method: 'POST',
@@ -60,10 +64,18 @@ export default class RestManager {
                 path: path,
             },
             authenticated,
-        ).then(x => x.json());
+        ).then(async x => {
+            const temp = await x.json();
+            console.log(temp);
+            return temp;
+        });
     }
 
-    public delete(path: string, body?: Record<string, any>, authenticated = true): Promise<Record<string, any>> {
+    public delete<T extends Record<string, any>>(
+        path: string,
+        body?: Record<string, any>,
+        authenticated = true,
+    ): Promise<Record<string, any> | T> {
         return this.make(
             {
                 method: 'DELETE',
@@ -74,7 +86,11 @@ export default class RestManager {
         ).then(x => x.json());
     }
 
-    public patch(path: string, body: Record<string, any>, authenticated = true): Promise<Record<string, any>> {
+    public patch<T extends Record<string, any>>(
+        path: string,
+        body: Record<string, any>,
+        authenticated = true,
+    ): Promise<Record<string, any> | T> {
         return this.make(
             {
                 method: 'PATCH',
@@ -85,7 +101,11 @@ export default class RestManager {
         ).then(x => x.json());
     }
 
-    public put(path: string, body?: Record<string, any>, authenticated = true): Promise<Record<string, any>> {
+    public put<T extends Record<string, any>>(
+        path: string,
+        body?: Record<string, any>,
+        authenticated = true,
+    ): Promise<Record<string, any> | T> {
         return this.make(
             {
                 method: 'PUT',

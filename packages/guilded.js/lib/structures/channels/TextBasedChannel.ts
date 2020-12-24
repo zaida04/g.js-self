@@ -1,9 +1,11 @@
-import { APITextBasedChannel } from '@guildedjs/guilded-api-typings';
+import { APITextBasedChannel } from "@guildedjs/guilded-api-typings";
+import { ConvertToMessageFormat } from "../../util/MessageUtil";
+import Channel from "./Channel";
+import MessageManager from "../managers/MessageManager";
+import Message from "../Message";
 
-import Channel from './Channel';
+export default abstract class TextBasedChannel extends Channel<APITextBasedChannel>{
+    public abstract messages: MessageManager;
 
-export default class TextBasedChannel extends Channel {
-    patch(data: APITextBasedChannel | Partial<APITextBasedChannel>): this {
-        return this;
-    }
+    abstract send(content: string): Promise<Message>
 }

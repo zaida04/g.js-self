@@ -3,14 +3,14 @@ import { APIClientUser, APICustomReaction, APIReactionUsage, APITeam, APIUser } 
 /**
  * @destination /users/:id
  */
-export interface FetchUser {
+export interface FetchUser extends Record<string, any> {
     user: APIUser;
 }
 
 /**
  * @destination /me
  */
-export interface FetchMe {
+export interface FetchMe extends Record<string, any> {
     updateMessage: string | null;
     user: APIClientUser;
     teams: APITeam[];
@@ -22,6 +22,6 @@ export interface FetchMe {
 /**
  * @destination /login
  */
-export interface LoginResponse {
+export interface LoginResponse extends Record<string, any> {
     user: Omit<APIUser, 'userStatus' | 'email' | 'profileBannerSm'>;
 }

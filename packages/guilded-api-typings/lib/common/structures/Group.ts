@@ -1,4 +1,4 @@
-export interface APIBaseGroup {
+export interface APIGroup {
     id: string;
     name: string;
     description: string | null;

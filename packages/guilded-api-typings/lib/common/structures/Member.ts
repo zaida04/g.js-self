@@ -9,16 +9,16 @@ export interface APIMember {
     badges: string[] | null;
     joinDate: string;
     membershipRole: MembershipRole;
-    lastOnline: string;
+    lastOnline: string | null;
     profilePicture: null | string;
     profileBannerBlur: null | string;
     aboutInfo: AboutInfo | null;
     userStatus: APIUserStatus;
     socialLinks: SocialLink[] | null;
     roleIds: number[] | null;
-    subscriptionType: null;
+    subscriptionType: string | null;
     aliases: APIAlias[];
-    userPresenceStatus: number | string;
+    userPresenceStatus: number;
     teamXp: number;
 }
 

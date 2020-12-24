@@ -1,9 +1,9 @@
-import { APICategory, APIDMChannel, APITeamChannel } from '../common';
+import { APICategory, APIDMChannel, APITeamChannel, APITextChannel } from '../common';
 
 /**
  * @destination /users/:id/channels
  */
-export interface FetchDMChannels {
+export interface FetchDMChannels extends Record<string, any> {
     channels: APIDMChannel[];
     unreadInfoByChannelId: unknown;
     users: any[];
@@ -12,8 +12,8 @@ export interface FetchDMChannels {
 /**
  * @destination /teams/:id/channels
  */
-export interface FetchTeamChannels {
-    channels: APITeamChannel[];
+export interface FetchTeamChannels extends Record<string, any> {
+    channels: APITeamChannel[] | APITextChannel[];
     badgedChannelContentByChannelId: unknown;
     temporalChannels: any[];
     categories: APICategory[];

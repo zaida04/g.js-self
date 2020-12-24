@@ -1,20 +1,31 @@
 import { APIContent } from '../Content';
+import { APIMessageReaction } from './Reaction';
 
 export interface APIMessage {
-    botId?: string | null;
-    channelId: string;
-    content: APIContent;
-    createdAt: string;
-    createdBy: string;
-    deletedAt?: string | null;
-    editedAt?: string | null;
     id: string;
+    content: APIContent;
+    type: APIContentMessageType;
+    reactions?: APIMessageReaction[];
+    createdBy: string;
+    createdAt: string;
+    editedAt?: string | null;
+    deletedAt?: string | null;
+    channelId: string;
+    webhookId?: string | null;
+    botId?: string | null;
     isPinned?: boolean;
     pinnedBy?: string | null;
-    reactions?: any[];
-    teamId?: string | null;
+}
+
+export interface APIMessageMention {
+    id: string;
+    name: string;
     type: string;
-    webhookId?: string | null;
+    color: string;
+    avatar: string;
+    matcher: string;
+    nickname: boolean;
+    description: string;
 }
 
 export type APIContentMessageType = 'block' | 'text';
