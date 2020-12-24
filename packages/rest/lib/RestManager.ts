@@ -64,11 +64,7 @@ export default class RestManager {
                 path: path,
             },
             authenticated,
-        ).then(async x => {
-            const temp = await x.json();
-            console.log(temp);
-            return temp;
-        });
+        ).then(x => x.json());
     }
 
     public delete<T extends Record<string, any>>(
