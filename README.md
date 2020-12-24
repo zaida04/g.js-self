@@ -29,7 +29,7 @@
 ## Usage
 
 ```ts
-import Client from "guilded.js";
+import { Client } from "guilded.js";
 // Or const { Client } = require("guilded.js");
 const client = new Client();
 
@@ -52,7 +52,7 @@ client.login({
 
 ## About
 
-`guildedjs` is an API wrapper for Guilded.gg, a discord alternative. This was created due to the lack of an api wrapper written in TS for the guilded api. Inspired heavily by [discord.js](https://github.com/discordjs/discord.js)
+`guildedjs` is a library for Guilded.gg. This was created due to the lack of a library written in TS for the guilded api. Inspired heavily by [discord.js](https://github.com/discordjs/discord.js)
 
 <!--EMD OF ABOUT THE PROJECT>
 
@@ -61,7 +61,7 @@ client.login({
 ## Getting Started
 
 ### Prerequisites
-You are expected to have an updated version of node.js. Guildedjs is tested on node.js >12.0.0 and we make no guarantees that it will work on earlier versions
+You are expected to have a reasonably supported version of node.js. Guildedjs is tested on node.js >12.0.0 and we make no guarantees that it will work on earlier versions
 
 ### Installation
 1. Install through NPM `(recommended)`
@@ -73,8 +73,7 @@ You are expected to have an updated version of node.js. Guildedjs is tested on n
 - `npm i`  
 - `npm run bootstrap`  
 - `npm run build`  
-
-Then proceed to move the related dirs to your `node_modules`
+Then proceed to move the dist dirs from each package dir to your `node_modules`
 
 
 ### Documentation
@@ -101,7 +100,7 @@ Contributions are what make the open source community such an amazing place to b
 * `lerna run <npm-script>` - recursively execute command in all packages (must exist in each packages package.json)
 
 ## Acknowledgements
-[Discord.js](https://github.com/discordjs/discord.js)
+[Discord.js](https://github.com/discordjs/discord.js) - Caching strategy and overall layout
 
 ## LICENSING  
 
