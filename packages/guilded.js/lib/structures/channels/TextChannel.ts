@@ -15,10 +15,9 @@ export default class TextChannel extends TeamChannel implements TextBasedChannel
     constructor(client: Client, data: APITeamChannel, team: Team | null, group: Group | null) {
         super(client, data, team, group);
     }
-    
+
     public send(content: string): Promise<Message> {
         const messageData = ConvertToMessageFormat(content);
-        console.log(JSON.stringify({ message: messageData }));
         return this.client.rest.post(`/channels/${this.id}/messages`, messageData!).then((newMessage) => {
             const tempMessage = this.messages.add(newMessage)!;
             return tempMessage;

@@ -15,7 +15,6 @@ export default class DMChannel extends Channel<APIDMChannel> implements TextBase
 
     public send(content: string): Promise<Message> {
         const messageData = ConvertToMessageFormat(content);
-        console.log(JSON.stringify({ message: messageData }));
         return this.client.rest.post(`/channels/${this.id}/messages`, messageData!).then((newMessage) => {
             const tempMessage = this.messages.add(newMessage)!;
             return tempMessage;
