@@ -12,6 +12,13 @@ client.on('ready', () => {
     console.log(`ready!`);
 });
 
+/*
+client.on("debug", (data, additional_info) => {
+    console.log(data);
+    console.log(additional_info);
+})
+*/
+
 client.on('messageCreate', async message => {
     console.log("message recieved!")
     if(!message.content.startsWith(client.prefix)) return;
@@ -22,12 +29,12 @@ client.on('messageCreate', async message => {
         case "eval": {
             const code = args.join(" ");
             const evaled = eval(`(async () => {${code}})()`); // eslint-disable-line no-eval
-            console.log(`
+            /* message.channel.send(`
             📥 **Input**
             \`\`\`${code}\`\`\`
             📤 **Output**
             \`\`\`${evaled}\`\`\`
-            `);
+            `); */
             break;
         }
     }

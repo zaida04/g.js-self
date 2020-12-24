@@ -4,34 +4,37 @@ import { APIContent } from '@guildedjs/guilded-api-typings';
 import { v4 as uuidv4 } from 'uuid';
 
 export function ConvertToMessageFormat(input: string | unknown) {
-    const messageData: enforcedMessageStructure[] = [];
-
     if (typeof input === "string") {
-        messageData.push({
+        return {
             "messageId": uuidv4(),
             "content": {
-                object: "block",
-                type: "markdown-plain-text",
-                data: {
-                    isEmbedMessage: true
-                },
-                nodes: [
-                    {
-                        object: 'text',
-                        leaves: [
-                            {
-                                object: "leaf",
-                                text: input,
-                                marks: []
-                            }
-                        ]
-                    }
-                ]
+                object: "value",
+                document: {
+                    object: "document",
+                    data: {},
+                    nodes: [
+                        {
+                            object: 'block',
+                            type: "markdown-plain-text",
+                            data: {},
+                            nodes: [
+                                {
+                                    object: "text",
+                                    leaves: [
+                                        {
+                                            object: "leaf",
+                                            text: input,
+                                            marks: []
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
             }
-        });
+        }
     }
-
-    return messageData;
 }
 
 export function ParseMessage(data: APIContent): parsedMessage {
@@ -207,19 +210,5 @@ export interface parsedTextResponse {
 
 export interface enforcedMessageStructure {
     messageId: string,
-    content: {
-        object: string,
-        type: string,
-        data: {
-            isEmbedMessage?: boolean;
-        };
-        nodes: {
-            object: string,
-            leaves: {
-                object: string;
-                marks: [];
-                text: string;
-            }[];
-        }[];
-    }
+    content: APIContent
 }

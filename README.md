@@ -52,7 +52,7 @@ client.login({
 
 ## About
 
-`guildedjs` is an API wrapper for Guilded.gg, a discord alternative. This was created due to the lack of an api wrapper written in TS for the guilded api. 
+`guildedjs` is an API wrapper for Guilded.gg, a discord alternative. This was created due to the lack of an api wrapper written in TS for the guilded api. Inspired heavily by [discord.js](https://github.com/discordjs/discord.js)
 
 <!--EMD OF ABOUT THE PROJECT>
 
@@ -100,6 +100,9 @@ Contributions are what make the open source community such an amazing place to b
 * `npm run bootstrap` = `lerna bootstrap` - recursively install dependencies in all packages and symlink local packages
 * `lerna run <npm-script>` - recursively execute command in all packages (must exist in each packages package.json)
 
+## Acknowledgements
+[Discord.js](https://github.com/discordjs/discord.js)
+
 ## LICENSING  
-  
+
 > **guildedjs** © [zaida04](https://github.com/zaida04), Released under the [MIT](https://github.com/guildedjs/guildedjs/blob/master/LICENSE) License.  

@@ -1,5 +1,6 @@
 import Collection from '@discordjs/collection';
 import { APIMessage, FetchMessage} from '@guildedjs/guilded-api-typings';
+import PartialChannel from '../channels/PartialChannel';
 import TextBasedChannel from '../channels/TextBasedChannel';
 import Client from '../Client';
 
@@ -7,7 +8,7 @@ import Message from '../Message';
 import BaseManager from './BaseManager';
 
 export default class MessageManager extends BaseManager<APIMessage, Message> {
-    constructor(client: Client, public readonly channel: TextBasedChannel) {
+    constructor(client: Client, public readonly channel: TextBasedChannel | PartialChannel) {
         super(client, Message);
     }
     fetch(amnt: number, cache = true) {

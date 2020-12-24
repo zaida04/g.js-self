@@ -3,6 +3,7 @@ import { APIMessage } from '@guildedjs/guilded-api-typings';
 import * as MessageUtil from '../util/MessageUtil';
 import Base from './Base';
 import DMChannel from './channels/DMChannel';
+import PartialChannel from './channels/PartialChannel';
 import TeamChannel from './channels/TeamChannel';
 import type TextBasedChannel from './channels/TextBasedChannel';
 import TextChannel from './channels/TextChannel';
@@ -14,13 +15,9 @@ export default class Message extends Base<APIMessage> {
     public content!: string;
     public preParsedContent!: MessageUtil.parsedMessage;
     public team!: Team | null;
-    public channel: DMChannel | TextChannel | null;
 
-    constructor(client: Client, data: APIMessage, channel: TextBasedChannel) {
+    constructor(client: Client, data: APIMessage, public readonly channel: DMChannel | TextChannel | PartialChannel) {
         super(client, data, false);
-        this.channel = null;
-
-        if (channel.type === "text") this.channel = channel as TextChannel;
         this.patch(data);
     }
 
