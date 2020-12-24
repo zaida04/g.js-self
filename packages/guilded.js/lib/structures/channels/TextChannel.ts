@@ -10,19 +10,21 @@ import { ConvertToMessageFormat } from "../../util/MessageUtil";
 
 export default class TextChannel extends TeamChannel implements TextBasedChannel {
     public archivedAt: Date | null = null;
-    public messages: MessageManager = new MessageManager(this.client, this);;
+    public messages: MessageManager = new MessageManager(this.client, this);
 
     constructor(client: Client, data: APITeamChannel, team: Team | null, group: Group | null) {
         super(client, data, team, group);
     }
-    send(content: string): Promise<Message> {
+    
+    public send(content: string): Promise<Message> {
         const messageData = ConvertToMessageFormat(content);
-        return this.client.rest.post(`/channels/${this.id}/messages`, { messageData }).then((newMessage) => {
+        console.log(JSON.stringify({ message: messageData }));
+        return this.client.rest.post(`/channels/${this.id}/messages`, messageData!).then((newMessage) => {
             const tempMessage = this.messages.add(newMessage)!;
             return tempMessage;
         })
     }
-    
+
     patch(data: APITeamChannel | Partial<APITeamChannel>): this {
         if("archivedAt" in data && data.archivedAt !== undefined) this.archivedAt = data.archivedAt ? new Date(data.archivedAt) : null
         return this;

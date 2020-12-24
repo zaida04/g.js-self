@@ -1,16 +1,14 @@
-import { APIDMChannel, APITeamChannel } from "@guildedjs/guilded-api-typings";
-import Client from "../Client";
-import TextBasedChannel from "./TextBasedChannel";
+import { BaseData } from "../../typings";
+import { ConvertToMessageFormat } from "../../util/MessageUtil";
+import Base from "../Base";
 import MessageManager from "../managers/MessageManager";
 import Message from "../Message";
-import { ConvertToMessageFormat } from "../../util/MessageUtil";
-import Channel from "./Channel";
+import TextBasedChannel from "./TextBasedChannel";
 
-export default class DMChannel extends Channel<APIDMChannel> implements TextBasedChannel {
+export default class PartialChannel extends Base<BaseData> {
     public messages: MessageManager = new MessageManager(this.client, this);
-
-    constructor(client: Client, data: APIDMChannel) {
-        super(client, data);
+    patch(data: BaseData | Partial<BaseData>) {
+        return this;
     }
 
     public send(content: string): Promise<Message> {
@@ -20,9 +18,5 @@ export default class DMChannel extends Channel<APIDMChannel> implements TextBase
             const tempMessage = this.messages.add(newMessage)!;
             return tempMessage;
         })
-    }
-
-    patch(data: APIDMChannel | Partial<APIDMChannel>): this {
-        return this;
     }
 }

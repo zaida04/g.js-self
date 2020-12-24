@@ -7,5 +7,5 @@ import Message from "../Message";
 export default abstract class TextBasedChannel extends Channel<APITextBasedChannel>{
     public abstract messages: MessageManager;
 
-    abstract send(content: string): Promise<Message>
+    public abstract send(content: string): Promise<Message>;
 }
