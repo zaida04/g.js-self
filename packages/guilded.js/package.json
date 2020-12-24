@@ -24,7 +24,8 @@
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
-    "build": "tsc"
+    "build": "tsc",
+    "prepublishOnly": "npx rimraf dist/ && npm run build"
   },
   "devDependencies": {
     "@types/node": "^14.14.9",
@@ -42,5 +43,6 @@
     "@guildedjs/guildedjs-rest": "^0.0.1",
     "uuid": "^8.3.2",
     "ws": "^7.4.0"
-  }
+  },
+  "gitHead": "e891e9a8b1857d84fa4ce7a77fef315cb93e4161"
 }

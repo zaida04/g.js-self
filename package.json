@@ -11,7 +11,7 @@
     "lint:fix": "npx eslint packages/ --ext .ts --fix",
     "test": "npm run build && node packages/guilded.js/__tests__/index.js",
     "docs": "typedoc --options typedoc.json",
-    "postinstall": "npx husky install",
+    "_postinstall": "npx husky install",
     "prepublishOnly": "npx pinst --disable",
     "postpublish": "npx pinst --enable"
   },
