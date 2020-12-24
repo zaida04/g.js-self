@@ -1,6 +1,6 @@
 {
   "name": "@guildedjs/guilded-api-typings",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Typings for the guilded API",
   "keywords": [
     "guilded",
@@ -28,8 +28,8 @@
     "url": "git+https://github.com/guildedjs/guildedjs.git"
   },
   "devDependencies": {
-    "typescript": "^3.9.7",
-    "@types/node": "^14.14.9"
+    "@types/node": "^14.14.9",
+    "typescript": "^3.9.7"
   },
   "scripts": {
     "build": "tsc",
