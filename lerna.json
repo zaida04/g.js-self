@@ -5,6 +5,9 @@
             "message": "chore(release): publish"
         }
     },
+    "publishConfig": {
+        "access": "public"
+    },
     "packages": [
         "packages/*"
     ],
