@@ -29,7 +29,7 @@
 ## Usage
 
 ```ts
-import { Client } from "guilded.js";
+import { Client } from "@guildedjs/guilded.js";
 // Or const { Client } = require("guilded.js");
 const client = new Client();
 
