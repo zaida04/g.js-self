@@ -9,6 +9,9 @@ export default class UserManager extends BaseManager<APIUser, User> {
         super(client, User);
     }
 
+    /**
+     * Fetch a user, retrieves from the cache if exists
+     */
     fetch(id: string, cache = true) {
         const existing = this.cache.get(id);
         if (existing) return existing;

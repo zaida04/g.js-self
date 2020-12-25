@@ -11,6 +11,10 @@ export default class MessageManager extends BaseManager<APIMessage, Message> {
     constructor(client: Client, public readonly channel: TextBasedChannel | PartialChannel) {
         super(client, Message);
     }
+
+    /**
+     * Fetch a message from the channel this manager belongs to
+     */
     fetch(amnt: number, cache = true) {
         if (amnt > 100) amnt = 100;
         if (amnt < 0) amnt = 1;

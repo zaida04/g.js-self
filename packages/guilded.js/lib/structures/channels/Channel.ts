@@ -1,8 +1,11 @@
 import { APIChannel } from "@guildedjs/guilded-api-typings";
 import Base from "../Base";
 
+/**
+ * A channel
+ * @param T The minimum amount of data this channel will contain in order to be constructed
+ */
 export default class Channel<T extends APIChannel> extends Base<T> {
-    public id!: string;
     public createdAt!: Date;
     public updatedAt!: Date | null;
     public type!: string;

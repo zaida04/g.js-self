@@ -11,9 +11,24 @@ import type Client from './Client';
 import type Team from './Team';
 
 export default class Message extends Base<APIMessage> {
+    /**
+     * The channelID in which this message was sent. Will always be present, even if the channel isn't cached
+     */
     public channelID!: string;
+
+    /**
+     * The plain text content that this message has
+     */
     public content!: string;
-    public preParsedContent!: MessageUtil.parsedMessage;
+
+    /**
+     * The parsed but unjoined content that this message has
+     */
+    public parsedContent!: MessageUtil.parsedMessage;
+
+    /**
+     * The team in which this message was sent in, if any
+     */
     public team!: Team | null;
 
     constructor(client: Client, data: APIMessage, public readonly channel: DMChannel | TextChannel | PartialChannel) {
@@ -21,24 +36,36 @@ export default class Message extends Base<APIMessage> {
         this.patch(data);
     }
 
+    /**
+     * Update the data in this structure
+     * @internal
+     */
     patch(data: APIMessage | Partial<APIMessage>): this {
         if ("channelId" in data && data.channelId !== undefined) this.channelID = data.channelId;
 
         if(this.channel instanceof TextChannel && this.channel?.team) this.team = this.channel.team
 
         if ('content' in data && data.content !== undefined) {
-            this.preParsedContent = MessageUtil.ParseMessage(data.content);
-            this.content = this.preParsedContent.parsedText;
+            this.parsedContent = MessageUtil.ParseMessage(data.content);
+            this.content = this.parsedContent.parsedText;
         }
         return this;
     }
 
+    /**
+     * Add a reaction to this message (UNFINISHED)
+     * @hidden
+     */
     react(emoji: string) {
         return this.client.rest.post(`/channels/${this.channel?.id ?? this.channelID}/messages/${this.id}/reactions/${emoji}`, {}).then((x) => {
             // add reaction to message object
         })
     }
 
+    /**
+     * Edit the content of this message (UNFINISHED)
+     * @hidden
+     */
     edit(content: string) {
 
     }
