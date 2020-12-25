@@ -52,7 +52,7 @@ client.login({
 
 ## About
 
-`guildedjs` is a library for Guilded.gg. This was created due to the lack of a library written in TS for the guilded api. Inspired heavily by [discord.js](https://github.com/discordjs/discord.js)
+This repo serves as a monorepo that houses several packages, mainly the `@guildedjs/guilded.js` package, which is a library for the Guilded API. Inspired heavily by [discord.js](https://github.com/discordjs/discord.js)
 
 <!--EMD OF ABOUT THE PROJECT>
 

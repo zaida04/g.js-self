@@ -9,6 +9,9 @@ export default class TeamManager extends BaseManager<APITeam | APIPartialTeam, T
         super(client, Team);
     }
 
+    /**
+     * Fetch a team, will retrieve from cache if exists
+     */
     fetch(id: string, cache = true) {
         const existing = this.cache.get(id);
         if (existing) return existing;

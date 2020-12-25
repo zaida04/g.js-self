@@ -5,11 +5,19 @@ import { BaseData, Constructable } from '../../typings';
 import Base from '../Base';
 import Client from '../Client';
 
-// K being the data used to construct T and T being the object being held
+/**
+ * The manager in charge of cached objects and potential api endpoints
+ * @param K The base amount of data required to construct object T
+ * @param T The object that will be held in this manager
+ */
 export default class BaseManager<K extends BaseData, T extends Base<K>> {
     public cache: Collection<string, T> = new Collection();
     constructor(public readonly client: Client, public readonly holds: Constructable<T>) {}
 
+    /**
+     * Add an object, potential data, or constructor params into this managers cache
+     * @private
+     */
     public add(data: T | K | Partial<K> | ConstructorParameters<Constructable<T>>): T | null {
         if (this.isConstructorParamsOfHolds(data)) {
             const addition = new this.holds(this.client, ...data);

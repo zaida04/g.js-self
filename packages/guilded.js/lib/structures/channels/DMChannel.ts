@@ -6,6 +6,9 @@ import Message from "../Message";
 import { ConvertToMessageFormat } from "../../util/MessageUtil";
 import Channel from "./Channel";
 
+/**
+ * A channel between the client user and an other user(s) in DMs
+ */
 export default class DMChannel extends Channel<APIDMChannel> implements TextBasedChannel {
     public messages: MessageManager = new MessageManager(this.client, this);
 

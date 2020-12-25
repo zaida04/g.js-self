@@ -3,6 +3,10 @@
 import { APIContent } from '@guildedjs/guilded-api-typings';
 import { v4 as uuidv4 } from 'uuid';
 
+/**
+ * Convert a string or other content to a message suitable to be sent to guilded
+ * @internal
+ */
 export function ConvertToMessageFormat(input: string | unknown) {
     if (typeof input === "string") {
         return {
@@ -37,6 +41,10 @@ export function ConvertToMessageFormat(input: string | unknown) {
     }
 }
 
+/**
+ * Parse a message recieved from Guilded into a more digestable structure
+ * @internal
+ */
 export function ParseMessage(data: APIContent): parsedMessage {
     const parsedMessageArray: parsedTextResponse[] = [];
     const mentions: {
@@ -177,6 +185,10 @@ export function ParseMessage(data: APIContent): parsedMessage {
     };
 }
 
+/**
+ * A parsed message
+ * @internal
+ */
 export interface parsedMessage {
     parsedText: string;
     parsedArr: parsedTextResponse[];
@@ -188,6 +200,10 @@ export interface parsedMessage {
     embeds?: unknown[];
 }
 
+/**
+ * The mentions this message might contain
+ * @internal
+ */
 export interface MessageDataNode {
     reaction?: {
         id: string;
@@ -200,6 +216,10 @@ export interface MessageDataNode {
     };
 }
 
+/**
+ * The parsed text of each leaf in the message
+ * @internal
+ */
 export interface parsedTextResponse {
     type: string;
     content: any;
@@ -208,6 +228,9 @@ export interface parsedTextResponse {
     channel?: unknown;
 }
 
+/**
+ * The message structure of a string -> message object suitable to send to guilded
+ */
 export interface enforcedMessageStructure {
     messageId: string,
     content: APIContent

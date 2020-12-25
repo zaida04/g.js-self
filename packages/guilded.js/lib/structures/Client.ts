@@ -1,7 +1,3 @@
-/*
-Adapted from: https://github.com/Chixel/guilded.js/blob/master/src/Guilded.js#L54
-Guilded.js - ChixelRT <https://github.com/Chixel>
-*/
 import { FetchMe } from '@guildedjs/guilded-api-typings';
 import { RestManager } from '@guildedjs/guildedjs-rest';
 import { EventEmitter } from 'events';
@@ -19,16 +15,65 @@ import UserManager from './managers/UserManager';
 import Team from './Team';
 import User from './User';
 
+
+/**
+ * The main class used to interact with the Guilded API
+ * 
+ * ```javascript
+ * const { Client } = require("@guildedjs/guilded.js");
+ * const client = new Client();
+ * 
+ * client.login({
+ *  email: "email",
+ *  password: "password"
+ * })
+ * ```
+ */
 export default class Client extends EventEmitter {
+    /**
+     * Manager in charge of managing REST requests to the guilded API
+     * @private
+     */
     public readonly rest: RestManager;
-    public user: User | null = null;
+
+    /**
+     * The User belonging to this Client
+     */
+    public user: ClientUser | null = null;
+
+    /**
+     * Handler in charge of handling gateway events and keeping the ws connection alive
+     * @private
+     */
     public gateway: ClientGatewayHandler | null;
-    public pingTimeout: (() => unknown) | null;
+
+    /**
+     * Function in charge of sending the heartbeat to Guilded
+     * @private
+     */
+    private pingTimeout: (() => unknown) | null;
+
+    /**
+     * Utilities used throughout the project, such as converting a plain text string to a message
+     * @internal
+     */
     public readonly util = Util;
 
+    /**
+     * The teams that this client is in
+     */
     public teams = new TeamManager(this);
+
+    /**
+     * The channels that this client can access
+     */
     public channels = new ChannelManager(this);
+
+    /**
+     * The users belonging to anything handled by this client
+     */
     public users = new UserManager(this);
+
 
     public constructor(public options?: Partial<ClientOptions>) {
         super();
@@ -39,6 +84,15 @@ export default class Client extends EventEmitter {
         this.pingTimeout = null;
     }
 
+    /**
+     * Login the client and establish a connection with the Guilded API
+     * ```
+     * <client>.login({
+     *  "email": "email@domain.com",
+     *  "password": "securepassword"
+     * })
+     * ```
+     */
     public async login(options: LoginOptions): Promise<this> {
         await this.rest.init(options);
 
@@ -67,6 +121,10 @@ export default class Client extends EventEmitter {
         this.gateway = new ClientGatewayHandler(this).init();
         return this;
     }
+
+    /**
+     * Destroy the current connection to the API
+     */
     public destroy(): void {
         this.rest.destroy();
         this.gateway?.destroy();
@@ -74,6 +132,10 @@ export default class Client extends EventEmitter {
         this.emit('disconnected');
     }
 
+    /**
+     *
+     * @hidden
+    */
     public on<E extends keyof ClientEventParams>(event: E, cb: (...args: ClientEventParams[E]) => void): this;
     public on<S extends string | symbol>(
         event: Exclude<S, keyof ClientEventParams>,
@@ -83,6 +145,10 @@ export default class Client extends EventEmitter {
         return super.on(event, cb);
     }
 
+    /**
+     * Used to emit debug statements
+     * @hidden 
+     */
     public debug(str: string, ...args: any[]): undefined {
         // eslint-disable-next-line no-void
         return void this.emit('debug', `[DEBUG]: ${str}`, args);
@@ -90,6 +156,10 @@ export default class Client extends EventEmitter {
 }
 
 export type ClientPartial = 'MEMBER' | 'MESSAGE' | 'USER';
+
+/**
+ * Options you can instantiate the client with.
+ */
 export interface ClientOptions {
     partials: ClientPartial[];
     cache: {
@@ -112,6 +182,9 @@ export interface ClientOptions {
     };
 }
 
+/**
+ * Options to log the client in with
+ */
 export interface LoginOptions {
     email: string;
     password: string;

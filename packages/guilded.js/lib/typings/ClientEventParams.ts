@@ -1,5 +1,8 @@
 import Message from '../structures/Message';
 
+/**
+ * @internal
+ */
 export interface ClientEventParams {
     messageCreate: [Message];
     messageDelete: [Message];

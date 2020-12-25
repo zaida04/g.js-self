@@ -1,5 +1,5 @@
-import { isInData } from './isInData';
+import * as MessageUtil from "./MessageUtil"
 
 export default {
-    isInData,
-};
+    MessageUtil
+}
