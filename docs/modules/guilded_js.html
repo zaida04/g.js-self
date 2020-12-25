@@ -1,0 +1,841 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>guilded.js | guildedjs</title>
+	<meta name="description" content="Documentation for guildedjs">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">guildedjs</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="guilded_js.html">guilded.js</a>
+				</li>
+			</ul>
+			<h1>Package guilded.js</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<a href="#this-project-is-in-an-alpha-stage-be-weary-of-bug-fixes-coming-out" id="this-project-is-in-an-alpha-stage-be-weary-of-bug-fixes-coming-out" style="color: inherit; text-decoration: none;">
+						<h1>This project is in an Alpha stage, be weary of bug fixes coming out.</h1>
+					</a>
+					<div align="center">
+						<img src="static/readme-header.png" width="546" alt="guildedjs"/>
+						<p><b>A Node.js wrapper for the <a href="https://www.guilded.gg/">Guilded.gg</a> API. <br>Written in TS</b></p>
+						<p><a href="https://discord.gg/jf66UUN"><b>Join our Discord Server!</b></a></p>
+						<br />
+						<p>
+							<img src="https://github.com/guildedjs/guilded.js/workflows/Linting/badge.svg" alt="Linting">
+							<img src="https://github.com/guildedjs/guilded.js/workflows/TypeScript/badge.svg" alt="TypeScript">
+							<a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+							<a href="https://github.com/guildedjs/guilded.js/issues"><img src="https://img.shields.io/github/issues-raw/guildedjs/guilded.js.svg?maxAge=25000" alt="Issues"></a>
+							<a href="https://github.com/guildedjs/guilded.js/pulls"><img src="https://img.shields.io/github/issues-pr/guildedjs/guilded.js.svg?style=flat" alt="GitHub pull requests"></a><br>
+							<a href="https://npmjs.org/package/@guildedjs/guilded.js"><img src="https://nodei.co/npm/@guildedjs/guilded.js.png" alt="NPM"></a>
+						</p>
+					</div>
+					<a href="#table-of-contents" id="table-of-contents" style="color: inherit; text-decoration: none;">
+						<h2>Table of Contents</h2>
+					</a>
+					<ul>
+						<li><a href="#usage">Example Usage</a></li>
+						<li><a href="#about">About the Project</a></li>
+						<li><a href="#getting-started">Getting Started</a><ul>
+								<li><a href="#prerequisites">Prerequisites</a></li>
+								<li><a href="#installation">Installation</a></li>
+								<li><a href="#documentation">Documentation</a></li>
+							</ul>
+						</li>
+						<li><a href="#contributing">Contributing</a></li>
+						<li><a href="#LICENSING">License</a></li>
+					</ul>
+					<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+						<h2>Usage</h2>
+					</a>
+					<pre><code class="language-ts"><span class="hljs-keyword">import</span> { Client } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@guildedjs/guilded.js&quot;</span>;
+<span class="hljs-comment">// Or const { Client } = require(&quot;guilded.js&quot;);</span>
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> Client();
+
+client.on(<span class="hljs-string">&#x27;ready&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Bot is successfully logged in`</span>);
+});
+
+client.on(<span class="hljs-string">&quot;messageCreate&quot;</span>, <span class="hljs-function"><span class="hljs-params">message</span> =&gt;</span> {
+    <span class="hljs-keyword">if</span>(message.content === <span class="hljs-string">&quot;pogger&quot;</span>) {
+        <span class="hljs-keyword">return</span> message.channel.send(<span class="hljs-string">&quot;poggers indeed&quot;</span>);
+    }
+})
+
+client.login({
+    <span class="hljs-attr">email</span>: <span class="hljs-string">&quot;email&quot;</span>,
+    <span class="hljs-attr">password</span>: <span class="hljs-string">&quot;password&quot;</span>
+});</code></pre>
+					<!--ABOUT THE PROJECT-->
+					<a href="#about" id="about" style="color: inherit; text-decoration: none;">
+						<h2>About</h2>
+					</a>
+					<p>This repo serves as a monorepo that houses several packages, mainly the <code>@guildedjs/guilded.js</code> package, which is a library for the Guilded API. Inspired heavily by <a href="https://github.com/discordjs/discord.js">discord.js</a></p>
+					<!--EMD OF ABOUT THE PROJECT>
+
+<!--GETTING STARTED-->
+					<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
+						<h2>Getting Started</h2>
+					</a>
+					<a href="#prerequisites" id="prerequisites" style="color: inherit; text-decoration: none;">
+						<h3>Prerequisites</h3>
+					</a>
+					<p>You are expected to have a reasonably supported version of node.js. Guildedjs is tested on node.js &gt;12.0.0 and we make no guarantees that it will work on earlier versions</p>
+					<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+						<h3>Installation</h3>
+					</a>
+					<ol>
+						<li>Install through NPM <code>(recommended)</code></li>
+					</ol>
+					<ul>
+						<li><code>npm install @guildedjs/guilded.js</code>  </li>
+					</ul>
+					<ol start="2">
+						<li>Clone the repo and build</li>
+					</ol>
+					<ul>
+						<li><code>git clone https://github.com/guildedjs/guilded.js</code></li>
+						<li><code>cd guilded.js</code></li>
+						<li><code>npm i</code>  </li>
+						<li><code>npm run bootstrap</code>  </li>
+						<li><code>npm run build</code><br>Then proceed to move the dist dirs from each package dir to your <code>node_modules</code></li>
+					</ul>
+					<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
+						<h3>Documentation</h3>
+					</a>
+					<p><code>Documentation will be coming once the project is at a usable state.</code></p>
+					<!--END GETTING STARTED-->
+					<a href="#contributing" id="contributing" style="color: inherit; text-decoration: none;">
+						<h2>Contributing</h2>
+					</a>
+					<p>Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are <strong>greatly appreciated</strong>.</p>
+					<ol>
+						<li>Fork the Project</li>
+						<li>Create your Feature Branch (<code>git checkout -b feature/AmazingFeature</code>)</li>
+						<li>Commit your Changes (<code>git commit -m &#39;Add some AmazingFeature&#39;</code>)</li>
+						<li>Push to the Branch (<code>git push origin feature/AmazingFeature</code>)</li>
+						<li>Open a Pull Request</li>
+					</ol>
+					<p><strong>Please ensure your commits pass the tests, lints, and builds. This means you should test it locally before pushing.</strong></p>
+					<p><strong>We make use of <a href="https://lerna.js.org/">lerna</a> to manage our monorepo. The main commands used are below</strong></p>
+					<ul>
+						<li><code>lerna add &lt;module&gt; [--scope=package-name]</code> - add npm module dependency to all/specific package(s)</li>
+						<li><code>lerna create &lt;package&gt;</code> - create a new package</li>
+						<li><code>npm run bootstrap</code> = <code>lerna bootstrap</code> - recursively install dependencies in all packages and symlink local packages</li>
+						<li><code>lerna run &lt;npm-script&gt;</code> - recursively execute command in all packages (must exist in each packages package.json)</li>
+					</ul>
+					<a href="#acknowledgements" id="acknowledgements" style="color: inherit; text-decoration: none;">
+						<h2>Acknowledgements</h2>
+					</a>
+					<p><a href="https://github.com/discordjs/discord.js">Discord.js</a> - Caching strategy and overall layout</p>
+					<a href="#licensing" id="licensing" style="color: inherit; text-decoration: none;">
+						<h2>LICENSING</h2>
+					</a>
+					<blockquote>
+						<p><strong>guildedjs</strong> © <a href="https://github.com/zaida04">zaida04</a>, Released under the <a href="https://github.com/guildedjs/guildedjs/blob/master/LICENSE">MIT</a> License.  </p>
+					</blockquote>
+				</div>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Classes</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-class tsd-parent-kind-module tsd-has-type-parameter"><a href="../classes/guilded_js.base.html" class="tsd-kind-icon">Base</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module tsd-has-type-parameter"><a href="../classes/guilded_js.basemanager.html" class="tsd-kind-icon">Base<wbr>Manager</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module tsd-has-type-parameter"><a href="../classes/guilded_js.channel.html" class="tsd-kind-icon">Channel</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.channelmanager.html" class="tsd-kind-icon">Channel<wbr>Manager</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.chatmessagecreatedevent.html" class="tsd-kind-icon">Chat<wbr>Message<wbr>Created<wbr>Event</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.chatmessagereactionaddedevent.html" class="tsd-kind-icon">Chat<wbr>Message<wbr>Reaction<wbr>Added<wbr>Event</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.chatmessageupdatedevent.html" class="tsd-kind-icon">Chat<wbr>Message<wbr>Updated<wbr>Event</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.client.html" class="tsd-kind-icon">Client</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.clientgatewayhandler.html" class="tsd-kind-icon">Client<wbr>Gateway<wbr>Handler</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.clientuser.html" class="tsd-kind-icon">Client<wbr>User</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.dmchannel.html" class="tsd-kind-icon">DMChannel</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.event.html" class="tsd-kind-icon">Event</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.gatewayhandler.html" class="tsd-kind-icon">Gateway<wbr>Handler</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.group.html" class="tsd-kind-icon">Group</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.guildedapierror.html" class="tsd-kind-icon">GuildedAPIError</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.heartbeater.html" class="tsd-kind-icon">Heartbeater</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.member.html" class="tsd-kind-icon">Member</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.message.html" class="tsd-kind-icon">Message</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.messagemanager.html" class="tsd-kind-icon">Message<wbr>Manager</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.messagementions.html" class="tsd-kind-icon">Message<wbr>Mentions</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.partialchannel.html" class="tsd-kind-icon">Partial<wbr>Channel</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.restmanager.html" class="tsd-kind-icon">Rest<wbr>Manager</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.role.html" class="tsd-kind-icon">Role</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.team.html" class="tsd-kind-icon">Team</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.teamchannel.html" class="tsd-kind-icon">Team<wbr>Channel</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.teamgroupchannelmanager.html" class="tsd-kind-icon">Team<wbr>Group<wbr>Channel<wbr>Manager</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.teamgroupmanager.html" class="tsd-kind-icon">Team<wbr>Group<wbr>Manager</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.teammanager.html" class="tsd-kind-icon">Team<wbr>Manager</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.teammembermanager.html" class="tsd-kind-icon">Team<wbr>Member<wbr>Manager</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.teammemberrolemanager.html" class="tsd-kind-icon">Team<wbr>Member<wbr>Role<wbr>Manager</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.teamwebhookmanager.html" class="tsd-kind-icon">Team<wbr>Webhook<wbr>Manager</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.textbasedchannel.html" class="tsd-kind-icon">Text<wbr>Based<wbr>Channel</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.textchannel.html" class="tsd-kind-icon">Text<wbr>Channel</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.user.html" class="tsd-kind-icon">User</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.usermanager.html" class="tsd-kind-icon">User<wbr>Manager</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/guilded_js.webhook.html" class="tsd-kind-icon">Webhook</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Interfaces</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apialias.html" class="tsd-kind-icon">APIAlias</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apicategory.html" class="tsd-kind-icon">APICategory</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apichannel.html" class="tsd-kind-icon">APIChannel</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apiclientuser.html" class="tsd-kind-icon">APIClient<wbr>User</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apicontent.html" class="tsd-kind-icon">APIContent</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apicustomreaction.html" class="tsd-kind-icon">APICustom<wbr>Reaction</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apidmchannel.html" class="tsd-kind-icon">APIDMChannel</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apidocument.html" class="tsd-kind-icon">APIDocument</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apidocumentnode.html" class="tsd-kind-icon">APIDocument<wbr>Node</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apigroup.html" class="tsd-kind-icon">APIGroup</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apileaf.html" class="tsd-kind-icon">APILeaf</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apimark.html" class="tsd-kind-icon">APIMark</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apimeasurements.html" class="tsd-kind-icon">APIMeasurements</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apimember.html" class="tsd-kind-icon">APIMember</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apimessage.html" class="tsd-kind-icon">APIMessage</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apimessagemention.html" class="tsd-kind-icon">APIMessage<wbr>Mention</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apimessagereaction.html" class="tsd-kind-icon">APIMessage<wbr>Reaction</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apinestednode.html" class="tsd-kind-icon">APINested<wbr>Node</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apipartialteam.html" class="tsd-kind-icon">APIPartial<wbr>Team</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apireactionusage.html" class="tsd-kind-icon">APIReaction<wbr>Usage</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apiroleoverwrite.html" class="tsd-kind-icon">APIRole<wbr>Overwrite</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apiteam.html" class="tsd-kind-icon">APITeam</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apiteamchannel.html" class="tsd-kind-icon">APITeam<wbr>Channel</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apiteamrole.html" class="tsd-kind-icon">APITeam<wbr>Role</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apitextbasedchannel.html" class="tsd-kind-icon">APIText<wbr>Based<wbr>Channel</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apitextchannel.html" class="tsd-kind-icon">APIText<wbr>Channel</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apiuser.html" class="tsd-kind-icon">APIUser</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apiuserstatus.html" class="tsd-kind-icon">APIUser<wbr>Status</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.apiwebhook.html" class="tsd-kind-icon">APIWebhook</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.aboutinfo.html" class="tsd-kind-icon">About<wbr>Info</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.allowpermissions.html" class="tsd-kind-icon">Allow<wbr>Permissions</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.chatmessagecreated.html" class="tsd-kind-icon">Chat<wbr>Message<wbr>Created</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.chatmessagereactionadd.html" class="tsd-kind-icon">Chat<wbr>Message<wbr>Reaction<wbr>Add</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.chatmessageupdated.html" class="tsd-kind-icon">Chat<wbr>Message<wbr>Updated</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.clientoptions.html" class="tsd-kind-icon">Client<wbr>Options</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.denypermissions.html" class="tsd-kind-icon">Deny<wbr>Permissions</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.device.html" class="tsd-kind-icon">Device</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.fetchdmchannels.html" class="tsd-kind-icon">FetchDMChannels</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.fetchme.html" class="tsd-kind-icon">Fetch<wbr>Me</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.fetchmessage.html" class="tsd-kind-icon">Fetch<wbr>Message</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.fetchteam.html" class="tsd-kind-icon">Fetch<wbr>Team</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.fetchteamchannels.html" class="tsd-kind-icon">Fetch<wbr>Team<wbr>Channels</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.fetchteams.html" class="tsd-kind-icon">Fetch<wbr>Teams</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.fetchuser.html" class="tsd-kind-icon">Fetch<wbr>User</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.logindata.html" class="tsd-kind-icon">Login<wbr>Data</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.loginoptions.html" class="tsd-kind-icon">Login<wbr>Options</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.loginresponse.html" class="tsd-kind-icon">Login<wbr>Response</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.makeoptions.html" class="tsd-kind-icon">Make<wbr>Options</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.restmanageroptions.html" class="tsd-kind-icon">Rest<wbr>Manager<wbr>Options</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.roleoverwritebyid.html" class="tsd-kind-icon">Role<wbr>Overwrite<wbr>ById</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.sociallink.html" class="tsd-kind-icon">Social<wbr>Link</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.sociallinkadditionalinfo.html" class="tsd-kind-icon">Social<wbr>Link<wbr>Additional<wbr>Info</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/guilded_js.enforcedmessagestructure.html" class="tsd-kind-icon">enforced<wbr>Message<wbr>Structure</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Type aliases</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="guilded_js.html#apicategorychannelroleoverwrite" class="tsd-kind-icon">APICategory<wbr>Channel<wbr>Role<wbr>Overwrite</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="guilded_js.html#apicontentmessagetype" class="tsd-kind-icon">APIContent<wbr>Message<wbr>Type</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="guilded_js.html#apiteamchannelroleoverwrite" class="tsd-kind-icon">APITeam<wbr>Channel<wbr>Role<wbr>Overwrite</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="guilded_js.html#apiuseroverwrite" class="tsd-kind-icon">APIUser<wbr>Overwrite</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="guilded_js.html#clientpartial" class="tsd-kind-icon">Client<wbr>Partial</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="guilded_js.html#documentnodemessagetype" class="tsd-kind-icon">Document<wbr>Node<wbr>Message<wbr>Type</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="guilded_js.html#membershiprole" class="tsd-kind-icon">Membership<wbr>Role</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="guilded_js.html#sociallinksource" class="tsd-kind-icon">Social<wbr>Link<wbr>Source</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-not-exported">
+							<h3>Variables</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="guilded_js.html#dbhost" class="tsd-kind-icon">db<wbr>Host</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="guilded_js.html#dburl" class="tsd-kind-icon">db<wbr>Url</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="guilded_js.html#env" class="tsd-kind-icon">env</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="guilded_js.html#justice" class="tsd-kind-icon">justice</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="guilded_js.html#parsed" class="tsd-kind-icon">parsed</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="guilded_js.html#parsedfrombuffer" class="tsd-kind-icon">parsed<wbr>From<wbr>Buffer</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Type aliases</h2>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="apicategorychannelroleoverwrite" class="tsd-anchor"></a>
+					<h3>APICategory<wbr>Channel<wbr>Role<wbr>Overwrite</h3>
+					<div class="tsd-signature tsd-kind-icon">APICategory<wbr>Channel<wbr>Role<wbr>Overwrite<span class="tsd-signature-symbol">:</span> <a href="../interfaces/guilded_js.apiroleoverwrite.html" class="tsd-signature-type">APIRoleOverwrite</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in packages/guilded.js/node_modules/@guildedjs/guilded-api-typings/lib/common/structures/Overwrite.ts:22</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="apicontentmessagetype" class="tsd-anchor"></a>
+					<h3>APIContent<wbr>Message<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">APIContent<wbr>Message<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"block"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"text"</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in packages/guilded.js/node_modules/@guildedjs/guilded-api-typings/lib/common/structures/Message.ts:31</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="apiteamchannelroleoverwrite" class="tsd-anchor"></a>
+					<h3>APITeam<wbr>Channel<wbr>Role<wbr>Overwrite</h3>
+					<div class="tsd-signature tsd-kind-icon">APITeam<wbr>Channel<wbr>Role<wbr>Overwrite<span class="tsd-signature-symbol">:</span> <a href="../interfaces/guilded_js.apiroleoverwrite.html" class="tsd-signature-type">APIRoleOverwrite</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in packages/guilded.js/node_modules/@guildedjs/guilded-api-typings/lib/common/structures/Overwrite.ts:24</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="apiuseroverwrite" class="tsd-anchor"></a>
+					<h3>APIUser<wbr>Overwrite</h3>
+					<div class="tsd-signature tsd-kind-icon">APIUser<wbr>Overwrite<span class="tsd-signature-symbol">:</span> <a href="../interfaces/guilded_js.apiroleoverwrite.html" class="tsd-signature-type">APIRoleOverwrite</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in packages/guilded.js/node_modules/@guildedjs/guilded-api-typings/lib/common/structures/Overwrite.ts:20</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="clientpartial" class="tsd-anchor"></a>
+					<h3>Client<wbr>Partial</h3>
+					<div class="tsd-signature tsd-kind-icon">Client<wbr>Partial<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"MEMBER"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"MESSAGE"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"USER"</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/guildedjs/guilded.js/blob/3f97422/packages/guilded.js/lib/structures/Client.ts#L158">packages/guilded.js/lib/structures/Client.ts:158</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="documentnodemessagetype" class="tsd-anchor"></a>
+					<h3>Document<wbr>Node<wbr>Message<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">Document<wbr>Node<wbr>Message<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"code-container"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"paragraph"</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in packages/guilded.js/node_modules/@guildedjs/guilded-api-typings/lib/common/structures/Message.ts:32</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="membershiprole" class="tsd-anchor"></a>
+					<h3>Membership<wbr>Role</h3>
+					<div class="tsd-signature tsd-kind-icon">Membership<wbr>Role<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"member"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"admin"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"formerMember"</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in packages/guilded.js/node_modules/@guildedjs/guilded-api-typings/lib/common/structures/Role.ts:24</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="sociallinksource" class="tsd-anchor"></a>
+					<h3>Social<wbr>Link<wbr>Source</h3>
+					<div class="tsd-signature tsd-kind-icon">Social<wbr>Link<wbr>Source<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"bnet"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"discord"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"psn"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"steam"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"switch"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"twitch"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"twitter"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"xbox"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"youtube"</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in packages/guilded.js/node_modules/@guildedjs/guilded-api-typings/lib/common/structures/Member.ts:36</li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+					<a name="dbhost" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> db<wbr>Host</h3>
+					<div class="tsd-signature tsd-kind-icon">db<wbr>Host<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = parsed[&quot;DB_HOST&quot;]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in packages/guilded.js/node_modules/dotenv/types/test.ts:14</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+					<a name="dburl" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> db<wbr>Url</h3>
+					<div class="tsd-signature tsd-kind-icon">db<wbr>Url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> = env.error || !env.parsed ? null : env.parsed[&quot;BASIC&quot;]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in packages/guilded.js/node_modules/dotenv/types/test.ts:4</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+					<a name="env" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> env</h3>
+					<div class="tsd-signature tsd-kind-icon">env<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DotenvConfigOutput</span><span class="tsd-signature-symbol"> = config()</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in packages/guilded.js/node_modules/dotenv/types/test.ts:3</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+					<a name="justice" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> justice</h3>
+					<div class="tsd-signature tsd-kind-icon">justice<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = parsedFromBuffer[&quot;JUSTICE&quot;]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in packages/guilded.js/node_modules/dotenv/types/test.ts:19</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+					<a name="parsed" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> parsed</h3>
+					<div class="tsd-signature tsd-kind-icon">parsed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DotenvParseOutput</span><span class="tsd-signature-symbol"> = parse(&quot;NODE_ENV&#x3D;production\nDB_HOST&#x3D;a.b.c&quot;)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in packages/guilded.js/node_modules/dotenv/types/test.ts:13</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+					<a name="parsedfrombuffer" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> parsed<wbr>From<wbr>Buffer</h3>
+					<div class="tsd-signature tsd-kind-icon">parsed<wbr>From<wbr>Buffer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DotenvParseOutput</span><span class="tsd-signature-symbol"> = parse(new Buffer(&quot;JUSTICE&#x3D;league\n&quot;), {debug: true})</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in packages/guilded.js/node_modules/dotenv/types/test.ts:16</li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="guilded_api_typings.html">guilded-<wbr>api-<wbr>typings</a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="guilded_js.html">guilded.js</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="rest.html">rest</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-module">
+						<a href="guilded_api_typings.html" class="tsd-kind-icon">guilded-<wbr>api-<wbr>typings</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-module">
+						<a href="guilded_js.html" class="tsd-kind-icon">guilded.js</a>
+						<ul>
+							<li class=" tsd-kind-class tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="../classes/guilded_js.base.html" class="tsd-kind-icon">Base</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="../classes/guilded_js.basemanager.html" class="tsd-kind-icon">Base<wbr>Manager</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="../classes/guilded_js.channel.html" class="tsd-kind-icon">Channel</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.channelmanager.html" class="tsd-kind-icon">Channel<wbr>Manager</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.chatmessagecreatedevent.html" class="tsd-kind-icon">Chat<wbr>Message<wbr>Created<wbr>Event</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.chatmessagereactionaddedevent.html" class="tsd-kind-icon">Chat<wbr>Message<wbr>Reaction<wbr>Added<wbr>Event</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.chatmessageupdatedevent.html" class="tsd-kind-icon">Chat<wbr>Message<wbr>Updated<wbr>Event</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.client.html" class="tsd-kind-icon">Client</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.clientgatewayhandler.html" class="tsd-kind-icon">Client<wbr>Gateway<wbr>Handler</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.clientuser.html" class="tsd-kind-icon">Client<wbr>User</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.dmchannel.html" class="tsd-kind-icon">DMChannel</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.event.html" class="tsd-kind-icon">Event</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.gatewayhandler.html" class="tsd-kind-icon">Gateway<wbr>Handler</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.group.html" class="tsd-kind-icon">Group</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.guildedapierror.html" class="tsd-kind-icon">GuildedAPIError</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.heartbeater.html" class="tsd-kind-icon">Heartbeater</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.member.html" class="tsd-kind-icon">Member</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.message.html" class="tsd-kind-icon">Message</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.messagemanager.html" class="tsd-kind-icon">Message<wbr>Manager</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.messagementions.html" class="tsd-kind-icon">Message<wbr>Mentions</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.partialchannel.html" class="tsd-kind-icon">Partial<wbr>Channel</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.restmanager.html" class="tsd-kind-icon">Rest<wbr>Manager</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.role.html" class="tsd-kind-icon">Role</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.team.html" class="tsd-kind-icon">Team</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.teamchannel.html" class="tsd-kind-icon">Team<wbr>Channel</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.teamgroupchannelmanager.html" class="tsd-kind-icon">Team<wbr>Group<wbr>Channel<wbr>Manager</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.teamgroupmanager.html" class="tsd-kind-icon">Team<wbr>Group<wbr>Manager</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.teammanager.html" class="tsd-kind-icon">Team<wbr>Manager</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.teammembermanager.html" class="tsd-kind-icon">Team<wbr>Member<wbr>Manager</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.teammemberrolemanager.html" class="tsd-kind-icon">Team<wbr>Member<wbr>Role<wbr>Manager</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.teamwebhookmanager.html" class="tsd-kind-icon">Team<wbr>Webhook<wbr>Manager</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.textbasedchannel.html" class="tsd-kind-icon">Text<wbr>Based<wbr>Channel</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.textchannel.html" class="tsd-kind-icon">Text<wbr>Channel</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.user.html" class="tsd-kind-icon">User</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.usermanager.html" class="tsd-kind-icon">User<wbr>Manager</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/guilded_js.webhook.html" class="tsd-kind-icon">Webhook</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apialias.html" class="tsd-kind-icon">APIAlias</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apicategory.html" class="tsd-kind-icon">APICategory</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apichannel.html" class="tsd-kind-icon">APIChannel</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apiclientuser.html" class="tsd-kind-icon">APIClient<wbr>User</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apicontent.html" class="tsd-kind-icon">APIContent</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apicustomreaction.html" class="tsd-kind-icon">APICustom<wbr>Reaction</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apidmchannel.html" class="tsd-kind-icon">APIDMChannel</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apidocument.html" class="tsd-kind-icon">APIDocument</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apidocumentnode.html" class="tsd-kind-icon">APIDocument<wbr>Node</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apigroup.html" class="tsd-kind-icon">APIGroup</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apileaf.html" class="tsd-kind-icon">APILeaf</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apimark.html" class="tsd-kind-icon">APIMark</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apimeasurements.html" class="tsd-kind-icon">APIMeasurements</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apimember.html" class="tsd-kind-icon">APIMember</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apimessage.html" class="tsd-kind-icon">APIMessage</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apimessagemention.html" class="tsd-kind-icon">APIMessage<wbr>Mention</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apimessagereaction.html" class="tsd-kind-icon">APIMessage<wbr>Reaction</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apinestednode.html" class="tsd-kind-icon">APINested<wbr>Node</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apipartialteam.html" class="tsd-kind-icon">APIPartial<wbr>Team</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apireactionusage.html" class="tsd-kind-icon">APIReaction<wbr>Usage</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apiroleoverwrite.html" class="tsd-kind-icon">APIRole<wbr>Overwrite</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apiteam.html" class="tsd-kind-icon">APITeam</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apiteamchannel.html" class="tsd-kind-icon">APITeam<wbr>Channel</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apiteamrole.html" class="tsd-kind-icon">APITeam<wbr>Role</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apitextbasedchannel.html" class="tsd-kind-icon">APIText<wbr>Based<wbr>Channel</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apitextchannel.html" class="tsd-kind-icon">APIText<wbr>Channel</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apiuser.html" class="tsd-kind-icon">APIUser</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apiuserstatus.html" class="tsd-kind-icon">APIUser<wbr>Status</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.apiwebhook.html" class="tsd-kind-icon">APIWebhook</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.aboutinfo.html" class="tsd-kind-icon">About<wbr>Info</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.allowpermissions.html" class="tsd-kind-icon">Allow<wbr>Permissions</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.chatmessagecreated.html" class="tsd-kind-icon">Chat<wbr>Message<wbr>Created</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.chatmessagereactionadd.html" class="tsd-kind-icon">Chat<wbr>Message<wbr>Reaction<wbr>Add</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.chatmessageupdated.html" class="tsd-kind-icon">Chat<wbr>Message<wbr>Updated</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.clientoptions.html" class="tsd-kind-icon">Client<wbr>Options</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.denypermissions.html" class="tsd-kind-icon">Deny<wbr>Permissions</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.device.html" class="tsd-kind-icon">Device</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.fetchdmchannels.html" class="tsd-kind-icon">FetchDMChannels</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.fetchme.html" class="tsd-kind-icon">Fetch<wbr>Me</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.fetchmessage.html" class="tsd-kind-icon">Fetch<wbr>Message</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.fetchteam.html" class="tsd-kind-icon">Fetch<wbr>Team</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.fetchteamchannels.html" class="tsd-kind-icon">Fetch<wbr>Team<wbr>Channels</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.fetchteams.html" class="tsd-kind-icon">Fetch<wbr>Teams</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.fetchuser.html" class="tsd-kind-icon">Fetch<wbr>User</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.logindata.html" class="tsd-kind-icon">Login<wbr>Data</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.loginoptions.html" class="tsd-kind-icon">Login<wbr>Options</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.loginresponse.html" class="tsd-kind-icon">Login<wbr>Response</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.makeoptions.html" class="tsd-kind-icon">Make<wbr>Options</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.restmanageroptions.html" class="tsd-kind-icon">Rest<wbr>Manager<wbr>Options</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.roleoverwritebyid.html" class="tsd-kind-icon">Role<wbr>Overwrite<wbr>ById</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.sociallink.html" class="tsd-kind-icon">Social<wbr>Link</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.sociallinkadditionalinfo.html" class="tsd-kind-icon">Social<wbr>Link<wbr>Additional<wbr>Info</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/guilded_js.enforcedmessagestructure.html" class="tsd-kind-icon">enforced<wbr>Message<wbr>Structure</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="guilded_js.html#apicategorychannelroleoverwrite" class="tsd-kind-icon">APICategory<wbr>Channel<wbr>Role<wbr>Overwrite</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="guilded_js.html#apicontentmessagetype" class="tsd-kind-icon">APIContent<wbr>Message<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="guilded_js.html#apiteamchannelroleoverwrite" class="tsd-kind-icon">APITeam<wbr>Channel<wbr>Role<wbr>Overwrite</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="guilded_js.html#apiuseroverwrite" class="tsd-kind-icon">APIUser<wbr>Overwrite</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="guilded_js.html#clientpartial" class="tsd-kind-icon">Client<wbr>Partial</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="guilded_js.html#documentnodemessagetype" class="tsd-kind-icon">Document<wbr>Node<wbr>Message<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="guilded_js.html#membershiprole" class="tsd-kind-icon">Membership<wbr>Role</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="guilded_js.html#sociallinksource" class="tsd-kind-icon">Social<wbr>Link<wbr>Source</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+								<a href="guilded_js.html#dbhost" class="tsd-kind-icon">db<wbr>Host</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+								<a href="guilded_js.html#dburl" class="tsd-kind-icon">db<wbr>Url</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+								<a href="guilded_js.html#env" class="tsd-kind-icon">env</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+								<a href="guilded_js.html#justice" class="tsd-kind-icon">justice</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+								<a href="guilded_js.html#parsed" class="tsd-kind-icon">parsed</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+								<a href="guilded_js.html#parsedfrombuffer" class="tsd-kind-icon">parsed<wbr>From<wbr>Buffer</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-module">
+						<a href="rest.html" class="tsd-kind-icon">rest</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
