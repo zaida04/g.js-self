@@ -1,4 +1,4 @@
-# This project is in an Alpha stage, be weary of bug fixes coming out.
+> ### ⚠️ This project is in an Alpha stage, be weary of bug fixes coming out.
 
 <div align="center">
     <img src="static/readme-header.png" width="546" alt="guildedjs"/>
