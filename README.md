@@ -30,7 +30,7 @@
 
 ```ts
 import { Client } from "@guildedjs/guilded.js";
-// Or const { Client } = require("guilded.js");
+// Or const { Client } = require("@guildedjs/guilded.js");
 const client = new Client();
 
 client.on('ready', () => {
