@@ -3,7 +3,7 @@
 <div align="center">
     <img src="static/readme-header.png" width="546" alt="guildedjs"/>
     <p><b>A Node.js wrapper for the <a href="https://www.guilded.gg/">Guilded.gg</a> API. <br>Written in TS</b></p>  
-    <p><a href="https://discord.gg/jf66UUN"><b>Join our Discord Server!</b></a></p>
+    <p><a href="https://discord.gg/jf66UUN"><b>Join our Discord Server!</b></a> > <a href="https://guilded.js.org"><b>Documentation</b></a></p>
     <br />
     <p>
         <img src="https://github.com/guildedjs/guilded.js/workflows/Linting/badge.svg" alt="Linting">
@@ -77,7 +77,7 @@ Then proceed to move the dist dirs from each package dir to your `node_modules`
 
 
 ### Documentation
-`Documentation will be coming once the project is at a usable state.`
+Documentation is viewable here: https://guilded.js.org
 
 <!--END GETTING STARTED-->
 
