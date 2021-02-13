@@ -8,8 +8,11 @@ config({
 const client = new Guilded.Client();
 client.prefix = "!";
 
-client.on('ready', () => {
+client.on('ready', async () => {
     console.log(`ready!`);
+
+    const user = await client.users.fetch("1ArQJWYm");
+    console.log(user);
 });
 
 /*

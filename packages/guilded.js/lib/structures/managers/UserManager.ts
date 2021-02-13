@@ -15,9 +15,8 @@ export default class UserManager extends BaseManager<APIUser, User> {
     fetch(id: string, cache = true) {
         const existing = this.cache.get(id);
         if (existing) return existing;
-
         return this.client.rest.get<FetchUser>(`/users/${id}`).then(x => {
-            const tempUser = this.add(x.user);
+            const tempUser = new User(this.client, x.user);
             return tempUser;
         })
     }

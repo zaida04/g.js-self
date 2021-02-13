@@ -91,6 +91,10 @@ export default class User extends Base<APIUser> {
         if ('steamId' in data && data.steamId !== undefined) this.steamID = data.steamId;
         if ('subdomain' in data && data.subdomain !== undefined) this.subdomain = data.subdomain;
         if ('userStatus' in data && data.userStatus !== undefined) this.userStatus = data.userStatus;
+
+        this.banners = {blur: null, large: null, small: null};
+        this.avatarURLS = {blur: null, large: null, small: null, medium: null};
+
         if ('profileBannerBlur' in data && data.profileBannerBlur) this.banners.blur = data.profileBannerBlur;
         if ('profileBannerLg' in data && data.profileBannerLg) this.banners.large = data.profileBannerLg;
         if ('profileBannerSm' in data && data.profileBannerSm) this.banners.small = data.profileBannerSm;
