@@ -1,4 +1,4 @@
-> ### ⚠️ This project is in an Alpha stage, be weary of bug fixes coming out.
+> ### ⚠️ This project is in an Alpha stage, be weary of bugs.
 
 <div align="center">
     <img src="static/readme-header.png" width="546" alt="guildedjs"/>
@@ -64,17 +64,13 @@ This repo serves as a monorepo that houses several packages, mainly the `@guilde
 You are expected to have a reasonably supported version of node.js. Guildedjs is tested on node.js >12.0.0 and we make no guarantees that it will work on earlier versions
 
 ### Installation
-1. Install through NPM `(recommended)`
+NPM `(stable)`
 - `npm install @guildedjs/guilded.js`  
 
-2. Clone the repo and build
-- `git clone https://github.com/guildedjs/guilded.js`
-- `cd guilded.js`
-- `npm i`  
-- `npm run bootstrap`  
-- `npm run build`  
-Then proceed to move the dist dirs from each package dir to your `node_modules`
+NPM `(master)`
+- `npm install @guildedjs/guilded.js#master`
 
+You might ask "should I install stable or master??", and the answer would be it depends. Installing from stable will give you a tested and not likely to be broken version of g.js. But stable is only updated when I make manual releases of the package, meaning you won't have access to new features immediately. If you install from master, you're installing from the git repo, and will have the latest up-to-date features that are implemented in the package, but this comes at the potential for bugs and broken-ness, as master might not be tested thoroughly. 
 
 ### Documentation
 Documentation is viewable here: https://guilded.js.org
