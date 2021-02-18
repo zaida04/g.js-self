@@ -6,13 +6,13 @@ config({
     path: join(`${__dirname}/../../../testing.env`),
 });
 const client = new Guilded.Client();
-client.prefix = "!";
+client.prefix = "gg!";
 
+/**
+ * Testing login
+ */
 client.on('ready', async () => {
-    console.log(`ready!`);
-
-    const user = await client.users.fetch("1ArQJWYm");
-    console.log(user);
+    console.log(`Successfully logged in as ${client.user.id}. Currently in ${client.teams.cache.size} Teams and serving ${client.users.cache.size} users with ${client.channels.cache.size} channels.`);
 });
 
 /*
@@ -23,7 +23,6 @@ client.on("debug", (data, additional_info) => {
 */
 
 client.on('messageCreate', async message => {
-    console.log("message recieved!")
     if(!message.content.startsWith(client.prefix)) return;
     const args = message.content.split(/ /g);
     const command = args.shift().slice(client.prefix.length);
@@ -31,22 +30,18 @@ client.on('messageCreate', async message => {
     switch(command) {
         case "eval": {
             const code = args.join(" ");
-            const evaled = eval(`(async () => {${code}})()`); // eslint-disable-line no-eval
-            /* message.channel.send(`
+            const evaled = eval(`(async () => {${code}})()`);
+            message.channel.send(`
             📥 **Input**
             \`\`\`${code}\`\`\`
             📤 **Output**
             \`\`\`${evaled}\`\`\`
-            `); */
+            `);
             break;
         }
     }
     return;
 });
-
-/* Client.on('raw', str => {
-    console.log(`raw: ${JSON.stringify(str)}`);
-}); */
 
 if (!process.env.EMAIL) throw new Error('Must supply email for testing');
 if (!process.env.PASSWORD) throw new Error('Must supply password for testing');
