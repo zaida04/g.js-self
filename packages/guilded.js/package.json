@@ -1,6 +1,6 @@
 {
   "name": "@guildedjs/guilded.js",
-  "version": "0.0.3",
+  "version": "0.0.4-alpha.0",
   "description": "Main package for guilded.js",
   "types": "types/index.d.ts",
   "keywords": [
@@ -32,10 +32,10 @@
     "prepublishOnly": "npx rimraf dist/ && npm run build"
   },
   "devDependencies": {
+    "@guildedjs/guilded-api-typings": "^0.0.4-alpha.0",
     "@types/node": "^14.14.9",
     "@types/uuid": "^8.3.0",
     "@types/ws": "^7.4.0",
-    "@guildedjs/guilded-api-typings": "^0.0.3",
     "dotenv": "^8.2.0",
     "typescript": "^3.9.7"
   },
@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@discordjs/collection": "^0.1.6",
-    "@guildedjs/guildedjs-rest": "^0.0.3",
+    "@guildedjs/guildedjs-rest": "^0.0.4-alpha.0",
     "uuid": "^8.3.2",
     "ws": "^7.4.0"
   },
