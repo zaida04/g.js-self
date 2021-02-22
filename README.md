@@ -1,7 +1,7 @@
 > ### ⚠️ This project is in an Alpha stage, be weary of bugs.
 
 <div align="center">
-    <img src="static/readme-header.png" width="546" alt="guildedjs"/>
+    <img src="media/readme-header.png" width="546" alt="guildedjs"/>
     <p><b>Tools for interacting with the <a href="https://www.guilded.gg/">Guilded.gg</a> API. <br>Written in TS</b></p>  
     <p><a href="https://discord.gg/jf66UUN"><b>Join our Discord Server!</b></a> > <a href="https://guilded.js.org"><b>Documentation</b></a></p>
     <br />
