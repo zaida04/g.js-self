@@ -106,7 +106,7 @@
 					<div class="tsd-signature tsd-kind-icon">cache<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>channels<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>members<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>startupRestrictions<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>channels<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>dms<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>teams<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">; </span>teams<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>users<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/guildedjs/guilded.js/blob/3f97422/packages/guilded.js/lib/structures/Client.ts#L165">packages/guilded.js/lib/structures/Client.ts:165</a></li>
+							<li>Defined in <a href="https://github.com/guildedjs/guilded.js/blob/7393095/packages/guilded.js/lib/structures/Client.ts#L175">packages/guilded.js/lib/structures/Client.ts:175</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -147,7 +147,7 @@
 					<div class="tsd-signature tsd-kind-icon">partials<span class="tsd-signature-symbol">:</span> <a href="../modules/guilded_js.html#clientpartial" class="tsd-signature-type">ClientPartial</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/guildedjs/guilded.js/blob/3f97422/packages/guilded.js/lib/structures/Client.ts#L164">packages/guilded.js/lib/structures/Client.ts:164</a></li>
+							<li>Defined in <a href="https://github.com/guildedjs/guilded.js/blob/7393095/packages/guilded.js/lib/structures/Client.ts#L174">packages/guilded.js/lib/structures/Client.ts:174</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -157,7 +157,7 @@
 					<div class="tsd-signature tsd-kind-icon">rest<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>apiURL<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/guildedjs/guilded.js/blob/3f97422/packages/guilded.js/lib/structures/Client.ts#L180">packages/guilded.js/lib/structures/Client.ts:180</a></li>
+							<li>Defined in <a href="https://github.com/guildedjs/guilded.js/blob/7393095/packages/guilded.js/lib/structures/Client.ts#L192">packages/guilded.js/lib/structures/Client.ts:192</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -172,10 +172,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="ws" class="tsd-anchor"></a>
 					<h3>ws</h3>
-					<div class="tsd-signature tsd-kind-icon">ws<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>disabledEvents<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">WebSocketEvents</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>heartbeatInterval<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span></div>
+					<div class="tsd-signature tsd-kind-icon">ws<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>disabledEvents<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">WebSocketEvents</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>disallowReconnect<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>heartbeatInterval<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>reconnectLimit<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/guildedjs/guilded.js/blob/3f97422/packages/guilded.js/lib/structures/Client.ts#L176">packages/guilded.js/lib/structures/Client.ts:176</a></li>
+							<li>Defined in <a href="https://github.com/guildedjs/guilded.js/blob/7393095/packages/guilded.js/lib/structures/Client.ts#L186">packages/guilded.js/lib/structures/Client.ts:186</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -185,7 +185,13 @@
 								<h5>disabled<wbr>Events<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">WebSocketEvents</span><span class="tsd-signature-symbol">[]</span></h5>
 							</li>
 							<li class="tsd-parameter">
+								<h5>disallow<wbr>Reconnect<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></h5>
+							</li>
+							<li class="tsd-parameter">
 								<h5>heartbeat<wbr>Interval<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>reconnect<wbr>Limit<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
 							</li>
 						</ul>
 					</div>
@@ -253,7 +259,9 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
 			</ul>
 			<ul class="tsd-legend">
