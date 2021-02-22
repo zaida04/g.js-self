@@ -1,32 +1,23 @@
 {
-  "name": "@guildedjs/guilded-js",
+  "name": "@guildedjs/main",
   "version": "0.0.0",
-  "description": "A Node.js library for the Guilded.gg API written in TS",
+  "description": "Main overarching package utilizing lerna to manage all the @guildedjs packages",
   "main": "dist/index.js",
-  "private": false,
+  "private": true,
   "scripts": {
     "build": "npx lerna run build",
     "bootstrap": "npx lerna bootstrap",
     "lint": "npx eslint packages/ --ext .ts",
     "lint:fix": "npx eslint packages/ --ext .ts --fix",
-    "test": "npm run build && node packages/guilded.js/__tests__/index.js",
-    "preCommit": "npm run test && npm run lint",
+    "test:run": "npm run build && node packages/guilded.js/__tests__/index.js",
+    "test": "npm run lint && npm run build",
     "docs": "npx typedoc packages",
-    "_postinstall": "npx husky install",
-    "prepublishOnly": "npx pinst --disable",
-    "postpublish": "npx pinst --enable"
+    "prepublishOnly": "npm run test"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/guildedjs/guildedjs.git"
   },
-  "keywords": [
-    "guilded",
-    "guildedjs",
-    "guilded.js",
-    "guilded-api",
-    "wrapper"
-  ],
   "author": "Zaid \"Nico\" Arshad <me@zaid-arshad.tech>",
   "license": "MIT",
   "prettier": {
@@ -37,6 +28,8 @@
     "endOfLine": "auto"
   },
   "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-angular": "^11.0.0",
     "@strictsoftware/typedoc-plugin-monorepo": "^0.3.1",
     "@typescript-eslint/eslint-plugin": "^3.9.0",
     "@typescript-eslint/parser": "^3.9.0",
@@ -44,17 +37,57 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-simple-import-sort": "^5.0.3",
-    "husky": "^5.0.4",
+    "husky": "^4.3.0",
     "lerna": "^3.22.1",
     "pinst": "^2.1.1",
     "prettier": "^2.0.5",
+    "lint-staged": "^10.4.2",
     "rimraf": "^3.0.2",
     "typedoc": "^0.19.2",
     "typedoc-plugin-remove-references": "0.0.5",
     "typescript": "^4.0.5"
   },
+  "husky": {
+    "hooks": {
+      "build": "npm run build",
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
   "bugs": {
     "url": "https://github.com/guildedjs/guildedjs/issues"
   },
-  "homepage": "https://github.com/guildedjs/guildedjs#readme"
+  "homepage": "https://github.com/guildedjs/guildedjs#readme",
+  "lint-staged": {
+    "*.ts": "eslint --fix"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-angular"
+    ],
+    "rules": {
+      "scope-case": [
+        2,
+        "always",
+        "pascal-case"
+      ],
+      "type-enum": [
+        2,
+        "always",
+        [
+          "chore",
+          "build",
+          "ci",
+          "docs",
+          "feat",
+          "fix",
+          "perf",
+          "refactor",
+          "revert",
+          "style",
+          "test"
+        ]
+      ]
+    }
+  }
 }

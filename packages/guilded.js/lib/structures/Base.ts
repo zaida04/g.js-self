@@ -17,7 +17,8 @@ export default abstract class Base<T extends BaseData> {
      * The raw API data of this structure
      */
     public readonly raw: Partial<T>;
-    constructor(public readonly client: Client, data: T, patch = true) {
+    
+    public constructor(public readonly client: Client, data: T, patch = true) {
         this.id = data.id.toString();
         this.raw = data;
         if (patch) this.patch(data);

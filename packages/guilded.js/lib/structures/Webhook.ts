@@ -60,7 +60,7 @@ export default class Webhook extends Base<APIWebhook> {
      * Update the data in this structure
      * @internal
      */  
-    patch(data: APIWebhook | Partial<APIWebhook>): this {
+    public patch(data: APIWebhook | Partial<APIWebhook>): this {
         if ('name' in data && data.name !== undefined) this.name = data.name;
         if ('channelId' in data && data.channelId !== undefined) {
             this.channelID = this.channelID;

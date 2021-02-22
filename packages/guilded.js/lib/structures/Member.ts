@@ -133,4 +133,12 @@ export default class Member extends Base<APIMember> {
  
         return this;
     }
+
+    public kick() {
+        return this.team.members.kick(this);
+    }
+
+    public setNickname(newNickname: string) {
+        return this.team.members.setNickname(this, newNickname);
+    }
 }

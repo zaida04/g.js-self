@@ -14,9 +14,9 @@ export default class Group extends Base<APIGroup> {
      */
     public channels: TeamGroupChannelManager;
 
-    constructor(client: Client, data: APIGroup, team: Team | null) {
+    public constructor(client: Client, data: APIGroup, public team: Team | null) {
         super(client, data, false);
-        this.channels = new TeamGroupChannelManager(this.client);
+        this.channels = new TeamGroupChannelManager(this.client, this);
 
         this.patch(data);
     }
@@ -25,7 +25,7 @@ export default class Group extends Base<APIGroup> {
      * Update the data in this structure
      * @internal
      */
-    patch(data: APIGroup | Partial<APIGroup>) {
+    public patch(data: APIGroup | Partial<APIGroup>) {
         return this;
     }
 }

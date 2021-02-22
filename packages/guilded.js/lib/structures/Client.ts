@@ -123,13 +123,23 @@ export default class Client extends EventEmitter {
     }
 
     /**
+     * Set the password of this client.
+     */
+    public setPassword(newPassword: string) {
+        if(typeof newPassword !== "string") throw new TypeError("Expecting a string password for password change.");
+        return this.rest.post("/users/me/password", { newPassword }).then(() => void 0);
+    }
+
+    /**
      * Destroy the current connection to the API
      */
     public destroy(): void {
-        this.rest.destroy();
-        this.gateway?.destroy();
-        this.debug('Client destroyed!');
-        this.emit('disconnected');
+        this.rest.post("/logout", {}).finally(() => {
+            this.rest.destroy();
+            this.gateway?.destroy();
+            this.debug('Client destroyed!');
+            this.emit('disconnected');
+        });
     }
 
     /**
@@ -176,6 +186,8 @@ export interface ClientOptions {
     ws: {
         heartbeatInterval: number;
         disabledEvents: WebSocketEvents[];
+        disallowReconnect: boolean;
+        reconnectLimit: number;
     };
     rest: {
         apiURL: string;

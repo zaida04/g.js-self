@@ -18,18 +18,14 @@ export default class PartialChannel extends Base<BaseData> {
      * Update the data in this structure
      * @internal
      */
-    patch(data: BaseData | Partial<BaseData>) {
+    public patch(data: BaseData | Partial<BaseData>) {
         return this;
     }
 
     /**
      * Send a message to this channel, hoping that it's a text channel
      */
-    public send(content: string): Promise<Message> {
-        const messageData = ConvertToMessageFormat(content);
-        return this.client.rest.post(`/channels/${this.id}/messages`, messageData!).then((newMessage) => {
-            const tempMessage = this.messages.add(newMessage)!;
-            return tempMessage;
-        })
+    public send(content: string): Promise<string> {
+        return this.client.channels.sendMessage(this.id, content);
     }
 }

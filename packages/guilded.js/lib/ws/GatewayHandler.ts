@@ -12,7 +12,9 @@ export default abstract class GatewayHandler {
     constructor(public readonly client: Client) {}
     public abstract init(): void;
     public destroy(): void {
+        if(!this.ws || !this.heartbeater.active) throw Error("Attempting to destroy WS connection that doesn't exist!");
         this.ws?.terminate();
+        this.ws = null;
         this.heartbeater.destroy();
     }
 }

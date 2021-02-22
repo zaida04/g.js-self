@@ -10,7 +10,7 @@ export default class Role extends Base<APITeamRole> {
      * Update the data in this structure
      * @internal
      */
-    patch(data: APITeamRole | Partial<APITeamRole>): this {
+    public patch(data: APITeamRole | Partial<APITeamRole>): this {
         return this;
     }
 }
