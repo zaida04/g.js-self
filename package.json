@@ -11,7 +11,7 @@
     "lint:fix": "npx eslint packages/ --ext .ts --fix",
     "test:run": "npm run build && node packages/guilded.js/__tests__/index.js",
     "test": "npm run lint && npm run build",
-    "docs": "node scripts/pre-docs.js && npx typedoc packages && node scripts/post-docs.js",
+    "docs": "npx rimraf docs && npx typedoc packages && node scripts/post-docs.js",
     "prepublishOnly": "npm run test"
   },
   "repository": {
@@ -39,9 +39,9 @@
     "eslint-plugin-simple-import-sort": "^5.0.3",
     "husky": "^4.3.0",
     "lerna": "^3.22.1",
+    "lint-staged": "^10.4.2",
     "pinst": "^2.1.1",
     "prettier": "^2.0.5",
-    "lint-staged": "^10.4.2",
     "rimraf": "^3.0.2",
     "typedoc": "^0.19.2",
     "typedoc-plugin-remove-references": "0.0.5",
