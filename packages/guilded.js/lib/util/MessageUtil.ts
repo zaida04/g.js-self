@@ -2,43 +2,56 @@
 /* eslint-disable max-depth */
 import { APIContent } from '@guildedjs/guilded-api-typings';
 import { v4 as uuidv4 } from 'uuid';
+import RichEmbed from '../structures/RichEmbed';
+import { CONSTANTS } from "./Consts";
 
 /**
  * Convert a string or other content to a message suitable to be sent to guilded
  * @internal
  */
-export function ConvertToMessageFormat(input: string | unknown) {
+export function ConvertToMessageFormat(input: string | RichEmbed | { content: string, embed: RichEmbed }): [string, Record<string, any>] {
+    const messageId = uuidv4();
+    let message: { content?: Record<string, any>, embed?: Record<string, any>, messageId: string} = { messageId };
+
     if (typeof input === "string") {
-        return {
-            "messageId": uuidv4(),
-            "content": {
-                object: "value",
-                document: {
-                    object: "document",
+        message["content"] = parseStringToMessage(input);
+    } else if (input instanceof RichEmbed) {
+        message["embed"] = input.toJSON();
+    } else {
+        message["content"] = parseStringToMessage(input.content);
+        message["embed"] = input.embed.toJSON();
+    }
+
+    return [messageId, message];
+}
+
+function parseStringToMessage(str: string) {
+    return {
+        object: "value",
+        document: {
+            object: "document",
+            data: {},
+            nodes: [
+                {
+                    object: 'block',
+                    type: "markdown-plain-text",
                     data: {},
                     nodes: [
                         {
-                            object: 'block',
-                            type: "markdown-plain-text",
-                            data: {},
-                            nodes: [
+                            object: "text",
+                            leaves: [
                                 {
-                                    object: "text",
-                                    leaves: [
-                                        {
-                                            object: "leaf",
-                                            text: input,
-                                            marks: []
-                                        }
-                                    ]
+                                    object: "leaf",
+                                    text: str,
+                                    marks: []
                                 }
                             ]
                         }
                     ]
                 }
-            }
+            ]
         }
-    }
+    };
 }
 
 /**
@@ -234,4 +247,26 @@ export interface parsedTextResponse {
 export interface enforcedMessageStructure {
     messageId: string,
     content: APIContent
+}
+
+/**
+ * Copyright 2015 - 2021 Amish Shah
+ * Copyrights licensed under the Apache License 2.0, https://github.com/discordjs/discord.js/blob/master/LICENSE
+ * Taken from https://github.com/discordjs/discord.js/blob/stable/src/util/Util.js#L436
+ */
+export function resolveColor(color: string | number): number {
+    let resolvedColor;
+
+    if (typeof color === 'string') {
+        if (color === 'RANDOM') return Math.floor(Math.random() * (0xffffff + 1));
+        if (color === 'DEFAULT') return 0;
+        resolvedColor = CONSTANTS.COLORS[color] || parseInt(color.replace('#', ''), 16);
+      } else if (Array.isArray(color)) {
+        resolvedColor = (color[0] << 16) + (color[1] << 8) + color[2];
+      }
+  
+      if (color < 0 || color > 0xffffff) throw new RangeError('COLOR_RANGE');
+      else if (color && isNaN(color as number)) throw new TypeError('COLOR_CONVERT');
+  
+      return resolvedColor;
 }

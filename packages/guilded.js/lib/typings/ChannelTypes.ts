@@ -1,0 +1,1 @@
+export type CHANNEL_TYPES = "chat" | "category";

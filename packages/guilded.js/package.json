@@ -4,7 +4,11 @@
   "description": "Main package for guilded.js",
   "types": "types/index.d.ts",
   "keywords": [
-    "guildedjs"
+    "guildedjs",
+    "guilded.js",
+    "guilded.gg",
+    "guilded-api",
+    "guilded"
   ],
   "author": "zaid450 <me@zaid-arshad.tech>",
   "homepage": "https://github.com/guildedjs/guilded.js/tree/master/packages/guildedjs#readme",
@@ -31,6 +35,7 @@
     "@types/node": "^14.14.9",
     "@types/uuid": "^8.3.0",
     "@types/ws": "^7.4.0",
+    "@guildedjs/guilded-api-typings": "^0.0.3",
     "dotenv": "^8.2.0",
     "typescript": "^3.9.7"
   },
@@ -39,7 +44,6 @@
   },
   "dependencies": {
     "@discordjs/collection": "^0.1.6",
-    "@guildedjs/guilded-api-typings": "^0.0.3",
     "@guildedjs/guildedjs-rest": "^0.0.3",
     "uuid": "^8.3.2",
     "ws": "^7.4.0"

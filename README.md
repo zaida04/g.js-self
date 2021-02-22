@@ -2,7 +2,7 @@
 
 <div align="center">
     <img src="static/readme-header.png" width="546" alt="guildedjs"/>
-    <p><b>A Node.js wrapper for the <a href="https://www.guilded.gg/">Guilded.gg</a> API. <br>Written in TS</b></p>  
+    <p><b>Tools for interacting with the <a href="https://www.guilded.gg/">Guilded.gg</a> API. <br>Written in TS</b></p>  
     <p><a href="https://discord.gg/jf66UUN"><b>Join our Discord Server!</b></a> > <a href="https://guilded.js.org"><b>Documentation</b></a></p>
     <br />
     <p>
@@ -18,6 +18,7 @@
 ## Table of Contents
 * [Example Usage](#usage)
 * [About the Project](#about)
+* [Packages](#packages)
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
@@ -29,16 +30,20 @@
 ## Usage
 
 ```ts
-import { Client } from "@guildedjs/guilded.js";
-// Or const { Client } = require("@guildedjs/guilded.js");
+// commonJS:
+const { Client } = require("@guildedjs/guilded.js");
+
+/*
+ * ES6:
+ * import { Client } from "@guildedjs/guilded.js";
+ */
+
 const client = new Client();
 
-client.on('ready', () => {
-  console.log(`Bot is successfully logged in`);
-});
+client.on('ready', () => console.log(`Bot is successfully logged in`));
 
 client.on("messageCreate", message => {
-    if(message.content === "pogger") {
+    if(message.content === "poggers") {
         return message.channel.send("poggers indeed");
     }
 })
@@ -51,12 +56,17 @@ client.login({
 <!--ABOUT THE PROJECT-->
 
 ## About
-
 This repo serves as a monorepo that houses several packages, mainly the `@guildedjs/guilded.js` package, which is a library for the Guilded API. Inspired heavily by [discord.js](https://github.com/discordjs/discord.js)
 
 <!--EMD OF ABOUT THE PROJECT>
 
 <!--GETTING STARTED-->
+
+## Packages
+* [`@guildedjs/guilded.js`](https://github.com/guildedjs/guildedjs/tree/master/packages/guilded.js#readme) - main package that provides a lib for the guilded.gg api. Comes with built in caching, structures, etc.
+* [`@guildedjs/itami`](https://github.com/guildedjs/guildedjs/tree/master/packages/itami#readme) - official framework for `@guildedjs/guilded.js`, comes with highly customizable commands, listeners, and other abstractions.
+* [`@guildedjs/guilded-api-types`](https://github.com/guildedjs/guildedjs/tree/master/packages/guilded-api-typings#readme) - thinking of making your own guilded lib/wrapper? This package consists of typings for the guilded.gg api compiled together by the community. No need to write your own typings and reinventing the wheel.
+* [`@guildedjs/guilded.js-rest`](https://github.com/guildedjs/guildedjs/tree/master/packages/rest#readme) - Rest utility with (WIP) ratelimit handling. Free to use in your own lib for handling requests to the guilded.gg api
 
 ## Getting Started
 
@@ -69,8 +79,6 @@ NPM `(stable)`
 
 NPM `(master)`
 - `npm install @guildedjs/guilded.js#master`
-
-You might ask "should I install stable or master??", and the answer would be it depends. Installing from stable will give you a tested and not likely to be broken version of g.js. But stable is only updated when I make manual releases of the package, meaning you won't have access to new features immediately. If you install from master, you're installing from the git repo, and will have the latest up-to-date features that are implemented in the package, but this comes at the potential for bugs and broken-ness, as master might not be tested thoroughly. 
 
 ### Documentation
 Documentation is viewable here: https://guilded.js.org

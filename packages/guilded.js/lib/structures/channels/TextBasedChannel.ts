@@ -16,5 +16,5 @@ export default abstract class TextBasedChannel extends Channel<APITextBasedChann
     /**
      * Send a message to this channel
      */
-    public abstract send(content: string): Promise<Message>;
+    public abstract send(content: string): Promise<string>;
 }

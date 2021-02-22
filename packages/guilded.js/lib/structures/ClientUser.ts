@@ -35,7 +35,7 @@ export default class ClientUser extends User {
      * Update the data in this structure
      * @internal
      */
-    patch(data: APIClientUser | Partial<APIClientUser>): this {
+    public patch(data: APIClientUser | Partial<APIClientUser>): this {
         if ('blockedUsers' in data && data.blockedUsers !== undefined) this.blockedUsers = data.blockedUsers;
         if ('socialLinks' in data && data.socialLinks !== undefined) this.socialLinks = data.socialLinks;
         if ('badges' in data && data.badges !== undefined) this.badges = data.badges;
@@ -46,5 +46,22 @@ export default class ClientUser extends User {
         return this;
     }
 
-    // planned methods: setPresence
+    public setPresence(presence: "online" | "idle" | "dnd" | "invisible") {
+        const newPresence = PRECENSES[presence];
+        if(!newPresence) throw new TypeError(`Incorrect status option. Expected online, idle, dnd, or invisible. Recieved ${presence}`);
+
+        return this.client.rest.post("/users/me/presence", {status: newPresence}).then(() => this);
+    }
+
+    public setUsername(newUsername: string) {
+        if(typeof newUsername !== "string") throw new TypeError("Expected a string for username change.");
+        return this.client.rest.put(`/users/${this.id}/profilev2`, {name: newUsername}).then(() => this);
+    }
+}
+
+const PRECENSES = {
+    online: 1,
+    idle: 2,
+    dnd: 3,
+    invisible: 4
 }

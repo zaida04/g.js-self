@@ -16,15 +16,11 @@ export default class DMChannel extends Channel<APIDMChannel> implements TextBase
         super(client, data);
     }
 
-    public send(content: string): Promise<Message> {
-        const messageData = ConvertToMessageFormat(content);
-        return this.client.rest.post(`/channels/${this.id}/messages`, messageData!).then((newMessage) => {
-            const tempMessage = this.messages.add(newMessage)!;
-            return tempMessage;
-        })
+    public send(content: string): Promise<string> {
+        return this.client.channels.sendMessage(this.id, content);
     }
 
-    patch(data: APIDMChannel | Partial<APIDMChannel>): this {
+    public patch(data: APIDMChannel | Partial<APIDMChannel>): this {
         return this;
     }
 }

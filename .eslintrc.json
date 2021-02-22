@@ -1,6 +1,6 @@
 {
     "root": true,
-    "ignorePatterns": ["__tests__/**", "node_modules/**", "dist/**", "types/**", "*.js"],
+    "ignorePatterns": ["__tests__/**", "node_modules/**", "dist/**", "types/**", "*.js", "*.d.ts"],
     "parser": "@typescript-eslint/parser",
     "extends": [
         "plugin:@typescript-eslint/recommended",
@@ -31,6 +31,7 @@
         ],
         "no-await-in-loop": "warn",
         "no-compare-neg-zero": "warn",
+        "@typescript-eslint/explicit-member-accessibility": "warn",
         "no-template-curly-in-string": "warn",
         "no-unsafe-negation": "warn",
         "valid-jsdoc": [

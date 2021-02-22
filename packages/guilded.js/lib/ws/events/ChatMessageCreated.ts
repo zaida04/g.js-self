@@ -1,8 +1,6 @@
 import { ChatMessageCreated } from '@guildedjs/guilded-api-typings';
-import DMChannel from '../../structures/channels/DMChannel';
 import PartialChannel from '../../structures/channels/PartialChannel';
 import TextBasedChannel from '../../structures/channels/TextBasedChannel';
-import TextChannel from '../../structures/channels/TextChannel';
 
 import Client from '../../structures/Client';
 import Message from '../../structures/Message';

@@ -28,5 +28,28 @@ export interface APIMessageMention {
     description: string;
 }
 
+export interface APIEmbed {
+    footer?: {
+        text: string;
+        icon_url?: string;
+    };
+    image?: {
+        url: string;
+    };
+    thumbnail?: {
+        url: string;
+    };
+    author?: {
+        name: string;
+        icon_url?: string;
+    };
+    fields?: { inline?: boolean; name: string; value: string }[];
+    color?: number | string;
+    timestamp?: string;
+    description?: string;
+    url?: string;
+    title?: string;
+}
+
 export type APIContentMessageType = 'block' | 'text';
 export type DocumentNodeMessageType = 'code-container' | 'paragraph';

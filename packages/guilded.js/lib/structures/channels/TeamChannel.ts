@@ -31,7 +31,7 @@ export default class TeamChannel extends Channel<APITeamChannel> {
      * Update the data in this structure
      * @internal
      */
-    patch(data: APITeamChannel | Partial<APITeamChannel>): this {
+    public patch(data: APITeamChannel | Partial<APITeamChannel>): this {
         if ("teamId" in data && data.teamId !== undefined) {
             this.teamID = data.teamId
         } else if (this.team) {
@@ -52,7 +52,7 @@ export default class TeamChannel extends Channel<APITeamChannel> {
     /**
      * Set the name of this channel
      */
-    setName(name: string) {
+    public setName(name: string) {
         return this.client.rest.put(`/teams/${this.team?.id ?? this.teamID}/groups/${this.groupID}/channels/${this.id}/info`, { name: name }).then(x => {
             this.name = x.name;
             return this;

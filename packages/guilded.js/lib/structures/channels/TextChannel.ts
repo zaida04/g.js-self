@@ -29,19 +29,15 @@ export default class TextChannel extends TeamChannel implements TextBasedChannel
     /**
      * Send a message to this channel
      */
-    public send(content: string): Promise<Message> {
-        const messageData = ConvertToMessageFormat(content);
-        return this.client.rest.post(`/channels/${this.id}/messages`, messageData!).then((newMessage) => {
-            const tempMessage = this.messages.add(newMessage)!;
-            return tempMessage;
-        })
+    public send(content: string): Promise<string> {
+        return this.client.channels.sendMessage(this.id, content);
     }
 
     /**
      * Update the data in this structure
      * @internal
      */
-    patch(data: APITeamChannel | Partial<APITeamChannel>): this {
+    public patch(data: APITeamChannel | Partial<APITeamChannel>): this {
         if("archivedAt" in data && data.archivedAt !== undefined) this.archivedAt = data.archivedAt ? new Date(data.archivedAt) : null
         return this;
     }
@@ -49,7 +45,7 @@ export default class TextChannel extends TeamChannel implements TextBasedChannel
     /**
      * Archive this channel
      */
-    archive() {
+    public archive() {
         return this.client.rest.put(`/teams/${this.teamID}/groups/${this.groupID}/channels/${this.id}/archive`).then(x => {
             this.archivedAt = new Date()
             return this;

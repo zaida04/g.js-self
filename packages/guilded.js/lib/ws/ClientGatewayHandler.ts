@@ -2,13 +2,15 @@ import { ChatMessageCreated, ChatMessageReactionAdd, ChatMessageUpdated } from '
 import WebSocket from 'ws';
 
 import Client from '../structures/Client';
-import { WebSocketEvents } from '../typings/WebSocketEvents';
 import ChatMessageCreatedEvent from './events/ChatMessageCreated';
 import ChatMessageReactionAddedEvent from './events/ChatMessageReactionAdded';
 import ChatMessageUpdatedEvent from './events/ChatMessageUpdated';
 import GatewayHandler from './GatewayHandler';
 
 export default class ClientGatewayHandler extends GatewayHandler {
+    public lastPing: number | null = null;
+    private reconnectionAmnt = 0;
+
     public events = {
         ChatMessageCreated: new ChatMessageCreatedEvent(this.client),
         ChatMessageReactionAdded: new ChatMessageReactionAddedEvent(this.client),
@@ -32,9 +34,13 @@ export default class ClientGatewayHandler extends GatewayHandler {
                 this.client.debug('Gateway message recieved', incomingData);
                 this.dataRecieved(incomingData);
             })
-            .on('close', (closeData: any) => {
-                this.client.debug('Gateway connection terminated');
+            .on('close', (...closeData: any) => {
+                this.client.debug(`Gateway connection terminated. Related data: ${closeData}`);
                 this.client.destroy();
+
+                if(this.client.options?.ws?.disallowReconnect || this.reconnectionAmnt >= (this.client.options?.ws?.reconnectLimit ?? Infinity)) return;
+                this.reconnectionAmnt++;
+                return this.client.gateway!.init();
             });
         return this;
     }
@@ -65,7 +71,8 @@ export default class ClientGatewayHandler extends GatewayHandler {
                 }
 
                 case 3: {
-                    this.ping = Date.now() - this.heartbeater.pingSentAt;
+                    this.lastPing = Date.now();
+                    this.ping = this.lastPing - this.heartbeater.lastPingSentAt;
                     this.client.debug('Ping returned. ');
                     break;
                 }
@@ -77,9 +84,16 @@ export default class ClientGatewayHandler extends GatewayHandler {
                 }
 
                 case 42: {
-                    const [event_name, event_data]: [WebSocketEvents, Record<string, any>] = JSON.parse(data);
-                    if (this.client.options?.ws?.disabledEvents.includes(event_name)) return;
-                    this.client.emit('raw', event_data);
+                    let event_name, event_data;
+
+                    try { 
+                        [event_name, event_data] = JSON.parse(data);
+                    } catch(e) {
+                        throw `malformed payload! ${data}`
+                    }
+                    
+                    if (this.client.options?.ws?.disabledEvents?.includes(event_name)) return;
+                    this.client.emit('raw', [event_name, event_data]);
                     switch (event_name) {
                         case 'ChatMessageCreated': {
                             const result = this.events.ChatMessageCreated.ingest(event_data as ChatMessageCreated);

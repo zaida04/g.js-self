@@ -22,6 +22,11 @@ export default class Message extends Base<APIMessage> {
     public content!: string;
 
     /**
+     * Whether this message has been deleted or not.
+     */
+    public deleted = false;
+
+    /**
      * The parsed but unjoined content that this message has
      */
     public parsedContent!: MessageUtil.parsedMessage;
@@ -31,7 +36,7 @@ export default class Message extends Base<APIMessage> {
      */
     public team!: Team | null;
 
-    constructor(client: Client, data: APIMessage, public readonly channel: DMChannel | TextChannel | PartialChannel) {
+    public constructor(client: Client, data: APIMessage, public readonly channel: DMChannel | TextChannel | PartialChannel) {
         super(client, data, false);
         this.patch(data);
     }
@@ -40,7 +45,7 @@ export default class Message extends Base<APIMessage> {
      * Update the data in this structure
      * @internal
      */
-    patch(data: APIMessage | Partial<APIMessage>): this {
+    public patch(data: APIMessage | Partial<APIMessage>): this {
         if ("channelId" in data && data.channelId !== undefined) this.channelID = data.channelId;
 
         if(this.channel instanceof TextChannel && this.channel?.team) this.team = this.channel.team
@@ -56,17 +61,34 @@ export default class Message extends Base<APIMessage> {
      * Add a reaction to this message (UNFINISHED)
      * @hidden
      */
-    react(emoji: string) {
+    public react(emoji: string) {
         return this.client.rest.post(`/channels/${this.channel?.id ?? this.channelID}/messages/${this.id}/reactions/${emoji}`, {}).then((x) => {
             // add reaction to message object
         })
     }
 
     /**
+     * Remove a reaction from this message (UNFINISHED)
+     * @hidden
+     */
+    public unreact(emoji: string) {
+        return this.client.rest.delete(`/channels/${this.channel?.id ?? this.channelID}/messages/${this.id}/reactions/${emoji}`, {}).then((x) => {
+            // add reaction to message object
+        }) 
+    }
+
+    /**
+     * Delete this message
+     */
+    public delete() {
+        return this.channel.messages.delete(this);
+    }
+
+    /**
      * Edit the content of this message (UNFINISHED)
      * @hidden
      */
-    edit(content: string) {
-
+    private edit(content: string) {
+        throw new Error("Method not implemented and not meant to be used.");
     }
 }

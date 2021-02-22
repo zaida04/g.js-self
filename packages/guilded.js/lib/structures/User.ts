@@ -81,7 +81,7 @@ export default class User extends Base<APIUser> {
      * Update the data in this structure
      * @internal
      */
-    patch(data: APIUser | Partial<APIUser>): this {
+    public patch(data: APIUser | Partial<APIUser>): this {
         if ('aboutInfo' in data && data.aboutInfo !== undefined) this.aboutInfo = data.aboutInfo;
         if ('aliases' in data && data.aliases !== undefined) this.aliases = data.aliases;
         if ('email' in data && data.email !== undefined) this.email = data.email ?? null;
@@ -109,7 +109,7 @@ export default class User extends Base<APIUser> {
     /**
      * Retrieve a banner belonging to this team
      */
-    bannerURL(size: 'small' | 'blur' | 'large' = 'large'): string | null {
+    public bannerURL(size: 'small' | 'blur' | 'large' = 'large'): string | null {
         let url;
         switch (size) {
             case 'small': {
@@ -134,7 +134,7 @@ export default class User extends Base<APIUser> {
     /**
      * Retrieve an avatar belonging to this team
      */
-    avatarURL(size: 'small' | 'blur' | 'medium' | 'large' = 'medium'): string | null {
+    public avatarURL(size: 'small' | 'blur' | 'medium' | 'large' = 'medium'): string | null {
         let url;
         switch (size) {
             case 'blur': {

@@ -156,7 +156,8 @@ export default class Team extends Base<APITeam | APIPartialTeam> {
         medium: string | null;
         large: string | null;
     };
-    constructor(client: Client, data: APITeam) {
+    
+    public constructor(client: Client, data: APITeam) {
         super(client, data, false);
         this.members = new TeamMemberManager(this.client, this);
         this.groups = new TeamGroupManager(this.client, this);
@@ -214,14 +215,14 @@ export default class Team extends Base<APITeam | APIPartialTeam> {
     /**
      * Create an invite to this team
      */
-    createInvite() {
+    public createInvite() {
         return this.client.rest.post(`/teams/${this.id}/invites`, { teamId: this.id }).then(x => x.data.invite.id);
     }
 
     /**
      * Retrive the banner belonging to this server depending on size
      */
-    bannerURL(size: 'small' | 'medium' | 'large' = 'small'): string | null {
+    public bannerURL(size: 'small' | 'medium' | 'large' = 'small'): string | null {
         let url;
         switch (size) {
             case 'small': {
@@ -246,7 +247,7 @@ export default class Team extends Base<APITeam | APIPartialTeam> {
     /**
      * Fetch all the channels belonging to this team
      */
-    fetchChannels() {
+    public fetchChannels() {
         return this.client.rest.get<FetchTeamChannels>(`/teams/${this.id}/channels`).then((x) => {
             for (const channel of x.channels) {
                 const group = this.groups.cache.get(channel.groupId);
