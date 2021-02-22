@@ -11,7 +11,7 @@
     "lint:fix": "npx eslint packages/ --ext .ts --fix",
     "test:run": "npm run build && node packages/guilded.js/__tests__/index.js",
     "test": "npm run lint && npm run build",
-    "docs": "npx typedoc packages",
+    "docs": "node scripts/pre-docs.js && npx typedoc packages && node scripts/post-docs.js",
     "prepublishOnly": "npm run test"
   },
   "repository": {

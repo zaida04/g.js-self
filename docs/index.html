@@ -62,13 +62,15 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<a href="#this-project-is-in-an-alpha-stage-be-weary-of-bug-fixes-coming-out" id="this-project-is-in-an-alpha-stage-be-weary-of-bug-fixes-coming-out" style="color: inherit; text-decoration: none;">
-					<h1>This project is in an Alpha stage, be weary of bug fixes coming out.</h1>
-				</a>
+				<blockquote>
+					<a href="#⚠️-this-project-is-in-an-alpha-stage-be-weary-of-bugs" id="⚠️-this-project-is-in-an-alpha-stage-be-weary-of-bugs" style="color: inherit; text-decoration: none;">
+						<h3>⚠️ This project is in an Alpha stage, be weary of bugs.</h3>
+					</a>
+				</blockquote>
 				<div align="center">
 					<img src="static/readme-header.png" width="546" alt="guildedjs"/>
-					<p><b>A Node.js wrapper for the <a href="https://www.guilded.gg/">Guilded.gg</a> API. <br>Written in TS</b></p>
-					<p><a href="https://discord.gg/jf66UUN"><b>Join our Discord Server!</b></a></p>
+					<p><b>Tools for interacting with the <a href="https://www.guilded.gg/">Guilded.gg</a> API. <br>Written in TS</b></p>
+					<p><a href="https://discord.gg/jf66UUN"><b>Join our Discord Server!</b></a> > <a href="https://guilded.js.org"><b>Documentation</b></a></p>
 					<br />
 					<p>
 						<img src="https://github.com/guildedjs/guilded.js/workflows/Linting/badge.svg" alt="Linting">
@@ -85,6 +87,7 @@
 				<ul>
 					<li><a href="#usage">Example Usage</a></li>
 					<li><a href="#about">About the Project</a></li>
+					<li><a href="#packages">Packages</a></li>
 					<li><a href="#getting-started">Getting Started</a><ul>
 							<li><a href="#prerequisites">Prerequisites</a></li>
 							<li><a href="#installation">Installation</a></li>
@@ -97,16 +100,20 @@
 				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
 					<h2>Usage</h2>
 				</a>
-				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { Client } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@guildedjs/guilded.js&quot;</span>;
-<span class="hljs-comment">// Or const { Client } = require(&quot;guilded.js&quot;);</span>
+				<pre><code class="language-ts"><span class="hljs-comment">// commonJS:</span>
+<span class="hljs-keyword">const</span> { Client } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@guildedjs/guilded.js&quot;</span>);
+
+<span class="hljs-comment">/*
+ * ES6:
+ * import { Client } from &quot;@guildedjs/guilded.js&quot;;
+ */</span>
+
 <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> Client();
 
-client.on(<span class="hljs-string">&#x27;ready&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Bot is successfully logged in`</span>);
-});
+client.on(<span class="hljs-string">&#x27;ready&#x27;</span>, <span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Bot is successfully logged in`</span>));
 
 client.on(<span class="hljs-string">&quot;messageCreate&quot;</span>, <span class="hljs-function"><span class="hljs-params">message</span> =&gt;</span> {
-    <span class="hljs-keyword">if</span>(message.content === <span class="hljs-string">&quot;pogger&quot;</span>) {
+    <span class="hljs-keyword">if</span>(message.content === <span class="hljs-string">&quot;poggers&quot;</span>) {
         <span class="hljs-keyword">return</span> message.channel.send(<span class="hljs-string">&quot;poggers indeed&quot;</span>);
     }
 })
@@ -123,6 +130,15 @@ client.login({
 				<!--EMD OF ABOUT THE PROJECT>
 
 <!--GETTING STARTED-->
+				<a href="#packages" id="packages" style="color: inherit; text-decoration: none;">
+					<h2>Packages</h2>
+				</a>
+				<ul>
+					<li><a href="https://github.com/guildedjs/guildedjs/tree/master/packages/guilded.js#readme"><code>@guildedjs/guilded.js</code></a> - main package that provides a lib for the guilded.gg api. Comes with built in caching, structures, etc.</li>
+					<li><a href="https://github.com/guildedjs/guildedjs/tree/master/packages/itami#readme"><code>@guildedjs/itami</code></a> - official framework for <code>@guildedjs/guilded.js</code>, comes with highly customizable commands, listeners, and other abstractions.</li>
+					<li><a href="https://github.com/guildedjs/guildedjs/tree/master/packages/guilded-api-typings#readme"><code>@guildedjs/guilded-api-types</code></a> - thinking of making your own guilded lib/wrapper? This package consists of typings for the guilded.gg api compiled together by the community. No need to write your own typings and reinventing the wheel.</li>
+					<li><a href="https://github.com/guildedjs/guildedjs/tree/master/packages/rest#readme"><code>@guildedjs/guilded.js-rest</code></a> - Rest utility with (WIP) ratelimit handling. Free to use in your own lib for handling requests to the guilded.gg api</li>
+				</ul>
 				<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
 					<h2>Getting Started</h2>
 				</a>
@@ -133,26 +149,18 @@ client.login({
 				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
 					<h3>Installation</h3>
 				</a>
-				<ol>
-					<li>Install through NPM <code>(recommended)</code></li>
-				</ol>
+				<p>NPM <code>(stable)</code></p>
 				<ul>
 					<li><code>npm install @guildedjs/guilded.js</code>  </li>
 				</ul>
-				<ol start="2">
-					<li>Clone the repo and build</li>
-				</ol>
+				<p>NPM <code>(master)</code></p>
 				<ul>
-					<li><code>git clone https://github.com/guildedjs/guilded.js</code></li>
-					<li><code>cd guilded.js</code></li>
-					<li><code>npm i</code>  </li>
-					<li><code>npm run bootstrap</code>  </li>
-					<li><code>npm run build</code><br>Then proceed to move the dist dirs from each package dir to your <code>node_modules</code></li>
+					<li><code>npm install @guildedjs/guilded.js#master</code></li>
 				</ul>
 				<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
 					<h3>Documentation</h3>
 				</a>
-				<p><code>Documentation will be coming once the project is at a usable state.</code></p>
+				<p>Documentation is viewable here: <a href="https://guilded.js.org">https://guilded.js.org</a></p>
 				<!--END GETTING STARTED-->
 				<a href="#contributing" id="contributing" style="color: inherit; text-decoration: none;">
 					<h2>Contributing</h2>
@@ -223,7 +231,9 @@ client.login({
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
 			</ul>
 			<ul class="tsd-legend">
