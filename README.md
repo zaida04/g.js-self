@@ -108,4 +108,4 @@ Contributions are what make the open source community such an amazing place to b
 
 ## LICENSING  
 
-> **guildedjs** © [zaida04](https://github.com/zaida04), Released under the [MIT](https://github.com/guildedjs/guildedjs/blob/master/LICENSE) License.  
+> **Guilded.JS** © [zaida04](https://github.com/zaida04), Released under the [MIT](https://github.com/guildedjs/guildedjs/blob/master/LICENSE) License. All subpackages are also released under the MIT License
