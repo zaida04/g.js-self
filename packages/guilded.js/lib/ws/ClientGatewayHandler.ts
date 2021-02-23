@@ -38,8 +38,9 @@ export default class ClientGatewayHandler extends GatewayHandler {
                 this.client.debug(`Gateway connection terminated. Related data: ${closeData}`);
                 this.client.destroy();
 
-                if(this.client.options?.ws?.disallowReconnect || this.reconnectionAmnt >= (this.client.options?.ws?.reconnectLimit ?? Infinity)) return;
+                if(this.client.options?.ws?.disallowReconnect || this.reconnectionAmnt >= (this.client.options?.ws?.reconnectLimit ?? Infinity)) return this.client.emit("disconnected", closeData);
                 this.reconnectionAmnt++;
+                this.client.emit("reconnecting", closeData);
                 return this.client.gateway!.init();
             });
         return this;
