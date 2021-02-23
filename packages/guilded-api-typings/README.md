@@ -1,7 +1,7 @@
 # `@guildedjs/guilded-api-typings`  
 
-[![GitHub](https://img.shields.io/github/license/guildedjs/guilded.js)](https://github.com/guildedjs/guildedjs/blob/master/LICENSE)
-[![npm](https://img.shields.io/npm/v/@guildedjs/guilded.js?color=crimson&logo=npm)](https://www.npmjs.com/package/@guildedjs/guilded.js)
+[![GitHub](https://img.shields.io/github/license/guildedjs/guilded.js)](https://github.com/guildedjs/guilded.js/blob/master/LICENSE)
+[![npm](https://img.shields.io/npm/v/@guildedjs/guilded-api-typings?color=crimson&logo=npm)](https://www.npmjs.com/package/@guildedjs/guilded-api-typings)
 [![TypeScript](https://github.com/guildedjs/guilded.js/actions/workflows/typescript.yml/badge.svg)](https://github.com/guildedjs/guilded.js/actions/workflows/typescript.yml)
 
 TypeScript Typings for the Guilded.gg API.

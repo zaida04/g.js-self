@@ -1,7 +1,7 @@
 <div align="center">
 <img src="../../media/readme-header.png" width="546" alt="guildedjs"/>
 
-<p><a href="https://github.com/guildedjs/guildedjs/blob/master/LICENSE"><img src="https://img.shields.io/github/license/guildedjs/guilded.js" alt="GitHub"></a>
+<p><a href="https://github.com/guildedjs/guilded.js/blob/master/LICENSE"><img src="https://img.shields.io/github/license/guildedjs/guilded.js" alt="GitHub"></a>
 <a href="https://www.npmjs.com/package/@guildedjs/guilded.js"><img src="https://img.shields.io/npm/v/@guildedjs/guilded.js?color=crimson&amp;logo=npm" alt="npm"></a>
 <a href="https://github.com/guildedjs/guilded.js/actions/workflows/typescript.yml"><img src="https://github.com/guildedjs/guilded.js/actions/workflows/typescript.yml/badge.svg" alt="TypeScript"></a></p>
 
@@ -19,8 +19,34 @@ A Node.js library for the [Guilded.gg](https://www.guilded.gg/) API.
 * [Contributing](#contributing)
 * [License](#LICENSING)
 
+## Usage
+```ts
+// commonJS:
+const { Client } = require("@guildedjs/guilded.js");
+
+/*
+ * ES6:
+ * import { Client } from "@guildedjs/guilded.js";
+ */
+
+const client = new Client();
+
+client.on('ready', () => console.log(`Bot is successfully logged in`));
+
+client.on("messageCreate", message => {
+    if(message.content === "poggers") {
+        return message.channel.send("poggers indeed");
+    }
+})
+
+client.login({
+    email: "email",
+    password: "password"
+});
+```
+
 ## About
-`@guildedjs/guilded.js` is an OOP library written in TypeScript usable in either TypeScript or JavaScript projects. 
+`@guildedjs/guilded.js` is an OOP library written in TypeScript usable in either TypeScript or JavaScript projects. It provides interaction between the Guilded.gg REST API and WS gateway, with a numerous amount of features.
 
 ## Prerequisites
 You are expected to have a reasonably supported version of node.js. Guildedjs is tested on node.js >12.0.0 and we make no guarantees that it will work on earlier versions

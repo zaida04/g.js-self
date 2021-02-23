@@ -74,11 +74,8 @@ This repo serves as a monorepo that houses several packages, mainly the `@guilde
 You are expected to have a reasonably supported version of node.js. Guildedjs is tested on node.js >12.0.0 and we make no guarantees that it will work on earlier versions
 
 ### Installation
-NPM `(stable)`
 - `npm install @guildedjs/guilded.js`  
-
-NPM `(master)`
-- `npm install @guildedjs/guilded.js#master`
+- `yarn add @guildedjs/guilded.js`
 
 ### Documentation
 Documentation is viewable here: https://guilded.js.org
