@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable max-depth */
 import { APIContent } from '@guildedjs/guilded-api-typings';
-import { v4 as uuidv4 } from 'uuid';
+import { GenerateUUID } from "./GenerateID";
 import RichEmbed from '../structures/RichEmbed';
 import { CONSTANTS } from "./Consts";
 
@@ -10,7 +10,7 @@ import { CONSTANTS } from "./Consts";
  * @internal
  */
 export function ConvertToMessageFormat(input: string | RichEmbed | { content: string, embed: RichEmbed }): [string, Record<string, any>] {
-    const messageId = uuidv4();
+    const messageId = GenerateUUID();
     let message: { content?: Record<string, any>, embed?: Record<string, any>, messageId: string} = { messageId };
 
     if (typeof input === "string") {
@@ -270,5 +270,3 @@ export function resolveColor(color: string | number): number {
   
       return resolvedColor;
 }
-
-export const GenerateUUID = (...args: Parameters<typeof uuidv4>): string => uuidv4(...args);

@@ -4,7 +4,7 @@ import { EventEmitter } from 'events';
 
 import { ClientEventParams } from '../typings/ClientEventParams';
 import { WebSocketEvents } from '../typings/WebSocketEvents';
-import Util from '../util';
+import * as Util from '../util';
 import ClientGatewayHandler from '../ws/ClientGatewayHandler';
 import DMChannel from './channels/DMChannel';
 // import DMChannel from './channels/DMChannel';
