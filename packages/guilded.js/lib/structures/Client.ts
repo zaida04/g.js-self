@@ -34,7 +34,9 @@ export default class Client extends EventEmitter {
      * Manager in charge of managing REST requests to the guilded API
      * @private
      */
-    public readonly rest: RestManager;
+    public readonly rest: RestManager = new RestManager({
+        apiURL: this.options?.rest?.apiURL,
+    });;
 
     /**
      * The User belonging to this Client
@@ -45,13 +47,7 @@ export default class Client extends EventEmitter {
      * Handler in charge of handling gateway events and keeping the ws connection alive
      * @private
      */
-    public gateway: ClientGatewayHandler | null;
-
-    /**
-     * Function in charge of sending the heartbeat to Guilded
-     * @private
-     */
-    private pingTimeout: (() => unknown) | null;
+    public gateway: ClientGatewayHandler | null = null;
 
     /**
      * Utilities used throughout the project, such as converting a plain text string to a message
@@ -77,11 +73,6 @@ export default class Client extends EventEmitter {
 
     public constructor(public options?: Partial<ClientOptions>) {
         super();
-        this.rest = new RestManager({
-            apiURL: this.options?.rest?.apiURL,
-        });
-        this.gateway = null;
-        this.pingTimeout = null;
     }
 
     /**
@@ -133,13 +124,17 @@ export default class Client extends EventEmitter {
     /**
      * Destroy the current connection to the API
      */
-    public destroy(): void {
-        this.rest.post("/logout", {}).finally(() => {
-            this.rest.destroy();
-            this.gateway?.destroy();
-            this.debug('Client destroyed!');
-            this.emit('disconnected');
-        });
+    public destroy(intentionToReconnect = false): void {
+        if(intentionToReconnect) {
+            return this.gateway?.destroy(true);
+        } else {
+            this.rest.post("/logout", {}).finally(() => {
+                this.rest.destroy();
+                this.gateway?.destroy(false);
+            });
+        }
+        this.debug('Client destroyed!');
+        this.emit('disconnected');
     }
 
     /**

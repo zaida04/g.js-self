@@ -21,7 +21,7 @@ export default class ClientGatewayHandler extends GatewayHandler {
     }
 
     init(): this | null {
-        if (this.ws) throw new Error('Already established WS Connection');
+        if (this.ws) return this;
         const socketURL = `wss://${this.client.rest.baseDomain}/socket.io/?jwt=undefined&EIO=3&transport=websocket`;
         this.ws = new WebSocket(socketURL, {
             headers: {
@@ -36,12 +36,12 @@ export default class ClientGatewayHandler extends GatewayHandler {
             })
             .on('close', (...closeData: any) => {
                 this.client.debug(`Gateway connection terminated. Related data: ${closeData}`);
-                this.client.destroy();
+                const shouldntReconnect = this.client.options?.ws?.disallowReconnect || this.reconnectionAmnt >= (this.client.options?.ws?.reconnectLimit ?? Infinity);
+                this.client.destroy(!shouldntReconnect);
 
-                if(this.client.options?.ws?.disallowReconnect || this.reconnectionAmnt >= (this.client.options?.ws?.reconnectLimit ?? Infinity)) return this.client.emit("disconnected", closeData);
+                if(shouldntReconnect) return this.client.emit("disconnected", closeData);
                 this.reconnectionAmnt++;
                 this.client.emit("reconnecting", closeData);
-                return this.client.gateway!.init();
             });
         return this;
     }
@@ -67,6 +67,15 @@ export default class ClientGatewayHandler extends GatewayHandler {
             switch (Number(opCode)) {
                 case 0: {
                     this.client.debug('Heartbeat started...');
+
+                    let packet;
+                    try { 
+                        packet = JSON.parse(data);
+                    } catch(e) {
+                        throw `malformed payload! ${data}`
+                    }
+
+                    this.sessionID = packet.sid;
                     this.heartbeater.start();
                     break;
                 }

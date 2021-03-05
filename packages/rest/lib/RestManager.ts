@@ -18,6 +18,7 @@ export default class RestManager {
     private async make(
         data: MakeOptions,
         authenticated = true,
+        retryCount = 0,
     ): Promise<Array<Response | Promise<Record<string, any>>>> {
         let headers = {};
         if (authenticated) {
@@ -27,7 +28,7 @@ export default class RestManager {
             };
         }
 
-        // Glue fix until the rest module supports ratelimit handling
+        // Glue fix until the rest module supports retry-after
         sleep(this.config?.restOffset ?? 3500);
         let request;
 
@@ -42,6 +43,14 @@ export default class RestManager {
             });
 
             if (request.status < 200 || request.status > 299) {
+                if (request.status === 429) {
+                    if (retryCount >= (this.config?.maxRatelimitRetryLimit ?? 3)) {
+                        throw new Error('MAX REQUEST RATELIMIT RETRY LIMIT REACHED.');
+                    }
+
+                    this.make(data, authenticated, retryCount++);
+                }
+
                 const parsedRequest = await request
                     .json()
                     .catch(() => ({ message: 'Cannot parse JSON Error Response.' }));
@@ -157,6 +166,7 @@ export default class RestManager {
 export interface RestManagerOptions {
     apiURL?: string;
     restOffset?: number;
+    maxRatelimitRetryLimit?: number;
 }
 
 export interface MakeOptions {
