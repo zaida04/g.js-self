@@ -1,6 +1,7 @@
 const { config } = require('dotenv');
 const { join } = require('path');
 const { COLORS, tester } = require("./colors.js");
+const WebSocket = require('ws');
 const Guilded = require('..');
 
 config({
@@ -19,7 +20,7 @@ client.prefix = "gg!";
 /**
  * Testing login
  */
-client.on('ready', async () => {
+client.once('ready', async () => {
     let passed = 0;
     let failed = 0;
 
@@ -54,7 +55,20 @@ client.on('ready', async () => {
     /**
      * Test 2
      */
-    tester(COLORS.YELLOW, "\n---Test 2: Message Sending/Editing/Deletion---");
+     tester(COLORS.YELLOW, "\n---Test 2: disconnecting and reconnecting client---");
+     try {
+        client.destroy(true);
+        tester(COLORS.GREEN, "Successfully disconnected!");
+        passed++;
+     } catch(e) {
+         tester(COLORS.RED, "Client disconnected failed! " + e);
+         failed++;
+     }
+
+    /**
+     * Test 3
+     */
+    tester(COLORS.YELLOW, "\n---Test 3: Message Sending/Editing/Deletion---");
 
     let message;
     try {
@@ -76,6 +90,23 @@ client.on('ready', async () => {
         tester(COLORS.RED, "Message deletion failed! " + e);
         failed++;
     }
+
+
+    /**
+     * Test 4
+     */
+     tester(COLORS.YELLOW, "\n---Test 4: Active WS connection---");
+
+     try {
+         console.log("...testing connection");
+         if(client.gateway.ws.readyState !== WebSocket.OPEN) throw new Error("WS NOT OPEN!");
+         client.gateway.ws.send("2");
+         console.log("...ws message sent!");
+         passed++;
+     } catch(e) {
+         tester(COLORS.RED, "WS connection failed! " + e);
+         failed++;
+     }
 
     console.log(`\n\n${COLORS.GREEN} ${passed} tests passed.${COLORS.RED} ${failed} tests failed. ${COLORS.RESET}`)
 });

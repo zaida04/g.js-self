@@ -27,7 +27,7 @@
     "url": "git+https://github.com/guildedjs/guilded.js.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
+    "test": "npm run build && node ./__tests__/index.js",
     "build": "tsc",
     "prepublishOnly": "npx rimraf dist/ && npm run build"
   },

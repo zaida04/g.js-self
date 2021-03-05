@@ -40,7 +40,7 @@ Documentation is located [here](https://guilded.js.org/modules/itami.html)
 Please see the main [README.md](https://github.com/guildedjs/guilded.js) for info on how to contribute to this package or the other `@guildedjs` packages.
 
 ## Acknowledgements
-This package is heavily influenced from [`discord-akairo`](https://github.com/discord-akairo/discord-akairo), a command framework for the popular discord.js library.
+This package is heavily influenced from [`discord-akairo`](https://github.com/discord-akairo/discord-akairo), a command framework for the popular discord.js library. Big thanks to [`1Computer1`](https://github.com/1Computer1)
 
 ## LICENSE
 Licensed under the [MIT License](https://github.com/guildedjs/guildedjs/blob/master/LICENSE)

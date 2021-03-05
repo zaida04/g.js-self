@@ -270,3 +270,5 @@ export function resolveColor(color: string | number): number {
   
       return resolvedColor;
 }
+
+export const GenerateUUID = (...args: Parameters<typeof uuidv4>): string => uuidv4(...args);
