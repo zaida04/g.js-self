@@ -28,9 +28,6 @@ jobs:
       - name: Build the docs
         run: npm run docs
         
-      - name: Place CNAME
-        run: echo "guilded.js.org" >| ./docs/CNAME
-
       - name: Commit the Docs
         uses: cpina/github-action-push-to-another-repository@master
         env:
