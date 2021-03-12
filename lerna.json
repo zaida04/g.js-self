@@ -2,7 +2,7 @@
     "command": {
         "publish": {
             "ignoreChanges": ["*.md"],
-            "message": "chore(release): publish"
+            "message": "chore: release"
         }
     },
     "publishConfig": {
