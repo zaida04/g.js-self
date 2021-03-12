@@ -9,6 +9,8 @@ TypeScript Typings for the Guilded.gg API.
 > ⚠️ If you intend to use `@guildedjs/guilded.js` you won't need to install this, as it's already a dependency of that package.
 
 ## Installation
+You can install this package from [NPM](https://www.npmjs.com/package/@guildedjs/guilded-api-typings)
+
 - `npm install @guildedjs/guilded-api-typings`  
 - `yarn add @guildedjs/guilded-api-typings`
 
