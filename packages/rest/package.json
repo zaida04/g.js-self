@@ -1,6 +1,6 @@
 {
   "name": "@guildedjs/guildedjs-rest",
-  "version": "0.0.4-alpha.0",
+  "version": "0.0.4",
   "description": "Rest utility for Guilded.js",
   "author": "zaid450 <me@zaid-arshad.tech>",
   "homepage": "https://github.com/guildedjs/guilded.js/tree/master/packages/rest#readme",
