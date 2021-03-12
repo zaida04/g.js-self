@@ -1,5 +1,5 @@
 <div align="center">
-<img src="../../media/readme-header.png" width="546" alt="guildedjs"/>
+<h1>Guilded.js</h1>
 
 <p><a href="https://github.com/guildedjs/guilded.js/blob/master/LICENSE"><img src="https://img.shields.io/github/license/guildedjs/guilded.js" alt="GitHub"></a>
 <a href="https://www.npmjs.com/package/@guildedjs/guilded.js"><img src="https://img.shields.io/npm/v/@guildedjs/guilded.js?color=crimson&amp;logo=npm" alt="npm"></a>
@@ -52,6 +52,8 @@ client.login({
 You are expected to have a reasonably supported version of node.js. Guildedjs is tested on node.js >12.0.0 and we make no guarantees that it will work on earlier versions
 
 ## Installation
+You can install this package from [NPM](https://www.npmjs.com/package/@guildedjs/guilded.js)
+
 - `npm install @guildedjs/guilded.js`
 - `yarn add @guildedjs/guilded.js`
 
