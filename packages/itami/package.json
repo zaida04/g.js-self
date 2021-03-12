@@ -1,6 +1,6 @@
 {
   "name": "@guildedjs/itami",
-  "version": "0.0.4-alpha.0",
+  "version": "0.0.5-alpha.0",
   "private": true,
   "description": "A framework for @guildedjs/guilded.js that provides a layer of abstraction. Create bots easier and more reliably!",
   "keywords": [
