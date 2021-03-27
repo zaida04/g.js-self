@@ -1,4 +1,5 @@
-import { ChatMessageCreated } from '@guildedjs/guilded-api-typings';
+import { APIChannel, ChatMessageCreated } from '@guildedjs/guilded-api-typings';
+import Channel from '../../structures/channels/Channel';
 import PartialChannel from '../../structures/channels/PartialChannel';
 import TextBasedChannel from '../../structures/channels/TextBasedChannel';
 
@@ -12,8 +13,16 @@ export default class ChatMessageCreatedEvent extends Event {
     }
     public ingest(data: ChatMessageCreated): (string | boolean)[] {
         if (data) {
-            const cachedChannel = this.client.channels.cache.get(data.channelId);
-            this.client.emit('messageCreate', new Message(this.client, { channelId: data.channelId, ...data.message }, cachedChannel ? cachedChannel as TextBasedChannel : new PartialChannel(this.client, {id: data.channelId}))!)
+            let channel: TextBasedChannel | PartialChannel = this.client.channels.cache.get(data.channelId) as TextBasedChannel;
+
+            if(!channel) {
+                channel = new PartialChannel(this.client, {id: data.channelId});
+                this.client.channels.cache.set(channel.id, channel as unknown as Channel<APIChannel>);
+            }
+
+            const newMessage = new Message(this.client, { channelId: data.channelId, ...data.message }, channel)!;
+            this.client.emit('messageCreate', newMessage);
+            channel.messages.cache.set(newMessage.id, newMessage);
             return [true];
         }
         return [false, 'passthrough'];

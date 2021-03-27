@@ -19,7 +19,7 @@ export function ConvertToMessageFormat(input: string | RichEmbed | { content: st
         message["embed"] = input.toJSON();
     } else {
         message["content"] = parseStringToMessage(input.content);
-        message["embed"] = input.embed.toJSON();
+        message["embed"] = input.embed?.toJSON();
     }
 
     return [messageId, message];
