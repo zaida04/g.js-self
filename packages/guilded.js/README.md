@@ -16,6 +16,7 @@ A Node.js library for the [Guilded.gg](https://www.guilded.gg/) API.
 * [Prerequisites](#prerequisites)
 * [Installation](#installation)
 * [Documentation](#documentation)
+* [TO:DO](#todo)
 * [Contributing](#contributing)
 * [License](#LICENSING)
 
@@ -66,6 +67,25 @@ Documentation is located [here](https://guilded.js.org)
 - `@guildedjs/guilded-api-typings` (DEV DEP ONLY): used for typing the REST and WS payloads
 - `@guildedjs/guildedjs-rest`: Rest Util
 - `uuid` - Generate IDs for structures such as Messages
+
+## TODO
+- [x] Structures (Channels, Messages, Users, Teams, etc...)
+- [x] Managers separating cache from API methods
+- [x] Caching (messages, teams, channels) 
+- [x] Send & Receive messages 
+- [x] Message parsing utils
+- [x] API typings (@guildedjs/guilded-api-typings)
+- [x] Ratelimit retry (@guildedjs/guilded-rest)
+- [ ] Ratelimit delaying/waiting 
+- [X] CI/CD
+- [X] Documentation
+- [X] WS Event handling structures (does NOT mean all events are covered)
+- [ ] Permissions & Role structures
+- [ ] Full API Coverage 
+- [ ] Caching Control
+- [ ] Handles WS reconnections and connection destructions
+- [ ] Framework (@guildedjs/itami)
+- [ ] Guide
 
 ## Contributing
 Please see the main [README.md](https://github.com/guildedjs/guilded.js) for info on how to contribute to this package or the other `@guildedjs` packages.
