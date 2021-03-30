@@ -1,6 +1,6 @@
 import { APITeamChannel, WSChatMessageCreated } from '@guildedjs/guilded-api-typings';
 import type { Client } from '../../structures/Client';
-import Message from '../../structures/Message';
+import {Message} from '../../structures/Message';
 import Event from './Event';
 import { PartialChannel} from '../../structures';
 

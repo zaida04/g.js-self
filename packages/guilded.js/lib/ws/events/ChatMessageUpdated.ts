@@ -1,8 +1,7 @@
 import { WSChatMessageUpdated } from '@guildedjs/guilded-api-typings';
 
 import type { Client } from '../../structures/Client';
-import Message from '../../structures/Message';
-import PartialMessage from '../../structures/PartialMessage';
+import {PartialMessage} from '../../structures/PartialMessage';
 import Event from './Event';
 
 export default class ChatMessageUpdatedEvent extends Event {

@@ -3,10 +3,10 @@ import type { APIMessage, APIGetChannelMessages } from '@guildedjs/guilded-api-t
 import type { PartialChannel, TeamChannel, DMChannel} from '../Channel';
 import type { Client } from '../Client';
 
-import Message from '../Message';
-import BaseManager from './BaseManager';
+import {Message} from '../Message';
+import {BaseManager} from './BaseManager';
 
-export default class MessageManager extends BaseManager<APIMessage, Message> {
+export class MessageManager extends BaseManager<APIMessage, Message> {
     constructor(client: Client, public readonly channel: TeamChannel | DMChannel | PartialChannel) {
         super(client, Message, { maxSize: client.options?.cache?.cacheMaxSize?.messagesCache });
     }

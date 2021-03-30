@@ -1,14 +1,15 @@
-import type { APIGetChannelMessageResult, APIMessage, APIPostChannelMessagesResult, APITeamChannel } from '@guildedjs/guilded-api-typings';
+import type { APIGetChannelMessageResult, APIPostChannelMessagesResult, APITeamChannel } from '@guildedjs/guilded-api-typings';
 import { ConvertToMessageFormat } from '../../util/MessageUtil';
 import type { TeamChannel, DMChannel } from '../Channel';
 import { PartialChannel } from '../Channel';
 
 import type { Client } from '../Client';
-import Message from '../Message';
-import BaseManager from './BaseManager';
-import MessageManager from './MessageManager';
+import { Message } from '../Message';
+import { RichEmbed} from '../RichEmbed';
+import { BaseManager } from './BaseManager';
+import { MessageManager } from './MessageManager';
 
-export default class ChannelManager extends BaseManager<APITeamChannel, TeamChannel | DMChannel | PartialChannel> {
+export class ChannelManager extends BaseManager<APITeamChannel, TeamChannel | DMChannel | PartialChannel> {
     public constructor(client: Client) {
         super(client, PartialChannel, { maxSize: client.options?.cache?.cacheMaxSize?.channelsCache });
     }
@@ -17,13 +18,21 @@ export default class ChannelManager extends BaseManager<APITeamChannel, TeamChan
         return channel instanceof PartialChannel ? channel.id : channel;
     }
 
-    public sendMessage(channel: string | PartialChannel, content: string) {
-        const [id, formattedContent] = ConvertToMessageFormat(content);
-        return this.client.rest.post<APIPostChannelMessagesResult | never>(`/channels/${channel}/messages`, formattedContent).then(x => {
+    /**
+     * Send a message to a channel, using either the object or channel ID.
+     */
+    public sendMessage(channel: string | PartialChannel, ...args: Parameters<typeof ConvertToMessageFormat>) {
+        const channelID = ChannelManager.resolve(channel);
+        const [id, formattedContent] = ConvertToMessageFormat(...args);
+        
+        return this.client.rest.post<APIPostChannelMessagesResult | never>(`/channels/${channelID}/messages`, formattedContent).then(x => {
             return "id" in x ? new Message(this.client, x, channel instanceof PartialChannel ? channel : this.client.channels.add({ id: channel })!) : id;
         });
     }
 
+    /**
+     * Fetch a message from a channel from the API
+     */
     public fetchMessage(channel: string | PartialChannel, message: string | Message, cache = true): Promise<Message> {
         const channelID = ChannelManager.resolve(channel);
         const messageID = MessageManager.resolve(message);

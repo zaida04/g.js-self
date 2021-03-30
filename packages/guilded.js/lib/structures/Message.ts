@@ -2,14 +2,14 @@ import Collection from '@discordjs/collection';
 import type { APIMessage } from '@guildedjs/guilded-api-typings';
 
 import * as MessageUtil from '../util/MessageUtil';
-import Base from './Base';
+import {Base} from './Base';
 import type {DMChannel, PartialChannel} from './Channel';
 import { TeamChannel } from './Channel';
 import type { Client } from "./Client";
-import MessageReaction from './MessageReaction';
-import type Team from './Team';
+import {MessageReaction} from './MessageReaction';
+import type {Team} from './Team';
 
-export default class Message extends Base<APIMessage> {
+export class Message extends Base<APIMessage> {
     /**
      * The channelID in which this message was sent. Will always be present, even if the channel isn't cached
      */

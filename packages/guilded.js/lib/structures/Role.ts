@@ -1,13 +1,13 @@
 import type { APITeamRole, RolePermissions } from '@guildedjs/guilded-api-typings';
 
-import Base from './Base';
+import {Base} from './Base';
 import type { Client } from "./Client";
-import type Team from './Team';
+import type {Team} from './Team';
 
 /**
  * A role belonging to a team
  */
-export default class Role extends Base<APITeamRole> {
+export class Role extends Base<APITeamRole> {
     public mentionable!: boolean;
     public permissions!: RolePermissions;
     public hoisted!: boolean;

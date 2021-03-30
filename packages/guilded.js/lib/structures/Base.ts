@@ -6,7 +6,7 @@ import type { Client } from './Client';
  * 
  * @param T The minimum amount of data required to construct this structure
  */
-export default abstract class Base<T extends BaseData> {
+export abstract class Base<T extends BaseData> {
     /**
      * The ID of this structure
      */

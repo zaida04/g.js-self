@@ -1,15 +1,16 @@
 import Collection from "@discordjs/collection";
-import { APITeamChannel, APIDMChannel, APIUser, CHANNEL_CONTENT_TYPES, APITeamRole } from "@guildedjs/guilded-api-typings";
+import type { APITeamChannel, APIDMChannel, APIUser, CHANNEL_CONTENT_TYPES, APITeamRole } from "@guildedjs/guilded-api-typings";
 import { Client } from "./Client";
-import { BaseData } from "../typings/BaseData";
-import Base from "./Base";
-import Group from "./Group";
-import MessageManager from "./managers/MessageManager";
-import Message from "./Message";
-import Role from "./Role";
-import Team from "./Team";
-import User from "./User";
-import RolePermissionOverwrite from "./PermissionOverwrite";
+import type { BaseData } from "../typings/BaseData";
+import {Base} from "./Base";
+import type {Group} from "./Group";
+import {MessageManager} from "./managers/MessageManager";
+import type {Message} from "./Message";
+import type {Role} from "./Role";
+import type {Team} from "./Team";
+import type {User} from "./User";
+import type {ConvertToMessageFormat} from "../util"
+import {RolePermissionOverwrite} from "./PermissionOverwrite";
 
 /**
  * A partial channel, not enough data received however to construct a full channel type object.
@@ -60,8 +61,8 @@ import RolePermissionOverwrite from "./PermissionOverwrite";
     /**
      * Send a message to this channel, hoping that it's a text channel
      */
-    public send(content: string): Promise<Message | string> {
-        return this.client.channels.sendMessage(this.id, content);
+    public send(...args: Parameters<typeof ConvertToMessageFormat>): Promise<Message | string> {
+        return this.client.channels.sendMessage(this, ...args);
     }
 }
 

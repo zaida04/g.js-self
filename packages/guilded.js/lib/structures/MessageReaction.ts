@@ -1,9 +1,9 @@
 import Collection from "@discordjs/collection";
 import { APIMessageReaction, WSReaction } from "@guildedjs/guilded-api-typings";
 import { Client } from "./Client";
-import User from "./User";
+import {User} from "./User";
 
-export default class MessageReaction {
+export class MessageReaction {
     public readonly users: Collection<string, User | {id: string, webhookId?: string | null; botId?: string | null}>;
     public readonly createdAt: Date;
     public readonly id: string;

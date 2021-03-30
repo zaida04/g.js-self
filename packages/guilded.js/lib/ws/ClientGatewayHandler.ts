@@ -7,7 +7,7 @@ import ChatMessageReactionAddedEvent from './events/ChatMessageReactionAdded';
 import ChatMessageUpdatedEvent from './events/ChatMessageUpdated';
 import GatewayHandler from './GatewayHandler';
 
-export default class ClientGatewayHandler extends GatewayHandler {
+export class ClientGatewayHandler extends GatewayHandler {
     public lastPing: number | null = null;
     private reconnectionAmnt = 0;
 

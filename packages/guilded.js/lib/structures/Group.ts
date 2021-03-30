@@ -1,13 +1,13 @@
 import type { APIGroup } from "@guildedjs/guilded-api-typings";
-import Base from "./Base";
+import {Base} from "./Base";
 import type { Client } from "./Client";
-import TeamGroupChannelManager from "./managers/TeamGroupChannelManager";
-import type Team from "./Team";
+import {TeamGroupChannelManager} from "./managers/TeamGroupChannelManager";
+import type {Team} from "./Team";
 
 /**
  * A group residing within a Team that contains channels
  */
-export default class Group extends Base<APIGroup> {
+export class Group extends Base<APIGroup> {
     
     /**
      * The channels that belong to this group

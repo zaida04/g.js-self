@@ -1,9 +1,9 @@
-import type { APIAboutInfo, APIAlias, APIUser, APIUserStatus } from '@guildedjs/guilded-api-typings';
+import type { APIAlias, APIUser, APIUserStatus } from '@guildedjs/guilded-api-typings';
  
-import Base from './Base';
+import {Base} from './Base';
 import { Client } from './Client';
  
-export default class User extends Base<APIUser> {
+export class User extends Base<APIUser> {
     /**
      * Addition info about this user
      */

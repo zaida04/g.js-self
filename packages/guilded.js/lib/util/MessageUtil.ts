@@ -2,30 +2,28 @@
 /* eslint-disable max-depth */
 import { APIContent } from '@guildedjs/guilded-api-typings';
 import { GenerateUUID } from "./GenerateID";
-import RichEmbed from '../structures/RichEmbed';
+import {RichEmbed} from '../structures/RichEmbed';
 import { CONSTANTS } from "./Consts";
 
 /**
  * Convert a string or other content to a message suitable to be sent to guilded
  * @internal
  */
-export function ConvertToMessageFormat(input: string | RichEmbed | { content: string, embed: RichEmbed }): [string, Record<string, any>] {
+export function ConvertToMessageFormat(i: string | RichEmbed, e?: RichEmbed): [string, Record<string, any>] {
+    let str_input = "";
+    let embed;
+
+    if(i instanceof RichEmbed) embed = i;
+    else str_input = i;
+    if(e) embed = e;
+    
     const messageID = GenerateUUID();
-    let message: { content?: Record<string, any>, embed?: Record<string, any>, messageId: string} = { messageId: messageID };
-
-    if (typeof input === "string") {
-        message["content"] = parseStringToMessage(input);
-    } else if (input instanceof RichEmbed) {
-        message["embed"] = input.toJSON();
-    } else {
-        message["content"] = parseStringToMessage(input.content);
-        message["embed"] = input.embed?.toJSON();
-    }
-
+    let message: { content?: Record<string, any>, messageId: string} = { messageId: messageID };
+    message["content"] = parseToMessage(str_input, embed);
     return [messageID, message];
 }
 
-function parseStringToMessage(str: string) {
+function parseToMessage(input: string | RichEmbed, embed?: RichEmbed) {
     return {
         object: "value",
         document: {
@@ -42,17 +40,25 @@ function parseStringToMessage(str: string) {
                             leaves: [
                                 {
                                     object: "leaf",
-                                    text: str,
+                                    text: typeof input === "string" ? input : "",
                                     marks: []
                                 }
                             ]
                         }
                     ]
+                }, {
+                    object: "block",
+                    type: "webhookMessage",
+                    data: {
+                        embeds: embed ? [embed?.toJSON()] : []
+                    },
+                    nodes: []
                 }
             ]
         }
     };
 }
+
 
 /**
  * Parse a message recieved from Guilded into a more digestable structure

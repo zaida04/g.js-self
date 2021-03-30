@@ -1,6 +1,6 @@
 import Collection from "@discordjs/collection";
 
-export default class CacheCollection<K, V> extends Collection<K,V> {
+export class CacheCollection<K, V> extends Collection<K,V> {
     public maxSize: number;
 
     public constructor({ maxSize = Infinity }: CacheCollectionOptions, entries?: readonly (readonly [K, V])[] | null | undefined) {

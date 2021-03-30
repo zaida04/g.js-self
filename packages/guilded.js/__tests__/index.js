@@ -125,6 +125,7 @@ client.on('messageCreate', async message => {
 
     switch(command) {
         case "eval": {
+            if(message.authorID !== client.user.id) return message.channel.send("**NICE TRY**")
             const code = args.join(" ");
             const evaled = eval(`(async () => {${code}})()`);
             message.channel.send(`

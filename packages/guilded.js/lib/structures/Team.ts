@@ -1,12 +1,12 @@
 import type { APIMeasurements, APIPartialTeam, APITeam, APIGetTeamChannels } from '@guildedjs/guilded-api-typings';
  
-import Base from './Base';
+import {Base} from './Base';
 import { TeamChannel } from './Channel';
 import type { Client } from "./Client";
-import TeamGroupManager from './managers/TeamGroupManager';
-import TeamMemberManager from './managers/TeamMemberManager';
+import {TeamGroupManager} from './managers/TeamGroupManager';
+import {TeamMemberManager} from './managers/TeamMemberManager';
  
-export default class Team extends Base<APITeam | APIPartialTeam> {
+export class Team extends Base<APITeam | APIPartialTeam> {
     /**
      * Whether the current client is an admin of this team.
      */
