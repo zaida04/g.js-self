@@ -1,34 +1,31 @@
-import Collection from '@discordjs/collection';
-import { APIMeasurements, APIPartialTeam, APITeam, APITeamChannel, APITextChannel, FetchTeamChannels } from '@guildedjs/guilded-api-typings';
+import type { APIMeasurements, APIPartialTeam, APITeam, APIGetTeamChannels } from '@guildedjs/guilded-api-typings';
  
 import Base from './Base';
-import TextChannel from './channels/TextChannel';
-import Client from './Client';
-import Group from './Group';
+import { TeamChannel } from './Channel';
+import type { Client } from "./Client";
 import TeamGroupManager from './managers/TeamGroupManager';
 import TeamMemberManager from './managers/TeamMemberManager';
-import Member from './Member';
  
 export default class Team extends Base<APITeam | APIPartialTeam> {
     /**
      * Whether the current client is an admin of this team.
      */
-    public admin!: boolean | null;
+    public admin: boolean | null;
 
     /**
      * Whether the current client is banned from this team
      */
-    public banned!: boolean | null;
+    public banned: boolean | null;
 
     /**
      * The bio of this team
      */
-    public bio!: string | null;
+    public bio: string | null;
 
     /**
      * The date in which this team was created
      */
-    public createdAt!: Date;
+    public readonly createdAt: Date;
 
     /** 
      * The description of this team
@@ -48,12 +45,12 @@ export default class Team extends Base<APITeam | APIPartialTeam> {
     /**
      * Whether people can be invited to this team
      */
-    public invitable!: boolean | null;
+    public invitable: boolean | null;
     
     /**
      * The measurement system that this team goes by
      */
-    public measurements!: APIMeasurements;
+    public measurements: APIMeasurements;
 
     /**
      * The number of members this team has
@@ -71,14 +68,9 @@ export default class Team extends Base<APITeam | APIPartialTeam> {
     public name!: string;
 
     /**
-     * The member object belonging to the owner of this team if cached
-     */
-    public owner!: Member | null;
-
-    /**
      * The ID of the owner of this team
      */
-    public ownerId!: string;
+    public ownerID!: string;
 
     /**
      * Whether this team has pro status
@@ -108,22 +100,17 @@ export default class Team extends Base<APITeam | APIPartialTeam> {
     /**
      * The main timezone of this team
      */
-    public timezone!: string | null;
+    public timezone: string | null;
 
     /**
      * The type of this team
      */
-    public type!: string | null; 
+    public type: string | null; 
     
     /**
      * Whether this team is verified or not
      */
     public verified!: boolean;
-
-    /**
-     * The main group belonging to this team if cached
-     */
-    public baseGroup!: Group | null;
 
     /** 
      * The ID of the main group belonging to this team
@@ -141,12 +128,12 @@ export default class Team extends Base<APITeam | APIPartialTeam> {
     /**
      * The groups belonging to this team
      */
-    public groups: TeamGroupManager;
+    public readonly groups: TeamGroupManager;
 
     /**
      * The games that this team plays
      */
-    public games!: any[];
+    public games: any[];
 
     /**
      * The various banner styles belonging to this server
@@ -158,11 +145,33 @@ export default class Team extends Base<APITeam | APIPartialTeam> {
     };
     
     public constructor(client: Client, data: APITeam) {
-        super(client, data, false);
+        super(client, data);
+        this.createdAt = new Date(data.createdAt);
         this.members = new TeamMemberManager(this.client, this);
         this.groups = new TeamGroupManager(this.client, this);
         this.discord = { guild_id: null, name: null };
         this.banners = { small: null, medium: null, large: null };
+        this.games = [];
+        this.admin = null;
+        this.banned = null;
+        this.bio = null;
+        this.invitable = null;
+        this.measurements = {
+            numMembers: 0,
+            numFollowers: 0,
+            numRecentMatches: 0,
+            numRecentMatchWins: 0,
+            matchmakingGameRanks: [],
+            numFollowersAndMembers: 0,
+            numMembersAddedInLastDay: 0,
+            numMembersAddedInLastWeek: 0,
+            mostRecentMemberLastOnline: 0,
+            numMembersAddedInLastMonth: 0,
+            subscriptionMonthsRemaining: null,
+        };
+        this.timezone = null;
+        this.type = null;
+
         this.patch(data);
     }
 
@@ -172,14 +181,10 @@ export default class Team extends Base<APITeam | APIPartialTeam> {
      */
     public patch(data: Partial<APITeam> | APITeam): this {
         if ('isAdmin' in data && data.isAdmin !== undefined) this.admin = data.isAdmin;
-        if ('baseGroup' in data && data.baseGroup !== undefined) {
-            this.baseGroupID = data.baseGroup.id;
-            this.baseGroup = new Group(this.client, data.baseGroup, this);
-        }
+        if ('baseGroup' in data && data.baseGroup !== undefined) this.baseGroupID = data.baseGroup.id;
         if ('isUserBannedFromTeam' in data && data.isUserBannedFromTeam !== undefined)
             this.banned = data.isUserBannedFromTeam;
         if ('bio' in data && data.bio !== undefined) this.bio = data.bio;
-        if ('createdAt' in data && data.createdAt !== undefined) this.createdAt = new Date(data.createdAt);
         if ('description' in data && data.description !== undefined) this.description = data.description;
         if ('isFavorite' in data && data.isFavorite !== undefined) this.favorited = data.isFavorite;
         if ('userFollowsTeam' in data && data.userFollowsTeam !== undefined) this.followed = data.userFollowsTeam;
@@ -187,10 +192,7 @@ export default class Team extends Base<APITeam | APIPartialTeam> {
         if ('measurements' in data && data.measurements !== undefined) this.measurements = data.measurements;
         if ('memberCount' in data && data.memberCount !== undefined) this.memberCount = parseInt(data.memberCount);
         if ('name' in data && data.name !== undefined) this.name = data.name;
-        if ('ownerId' in data && data.ownerId !== undefined) {
-            this.ownerId = data.ownerId;
-            this.owner = this.members.cache.get(data.ownerId) ?? null;
-        }
+        if ('ownerId' in data && data.ownerId !== undefined) this.ownerID = data.ownerId;
         if ('isPro' in data && data.isPro !== undefined) this.pro = data.isPro;
         if ('isPublic' in data && data.isPublic !== undefined) this.public = data.isPublic;
         if ('isRecruiting' in data && data.isRecruiting !== undefined) this.recruiting = data.isRecruiting;
@@ -209,6 +211,12 @@ export default class Team extends Base<APITeam | APIPartialTeam> {
         if ('homeBannerImageSm' in data && data.homeBannerImageSm !== undefined)
             this.banners.small = data.homeBannerImageSm;
  
+        if (!this.client.options?.cache?.disableMembers && 'members' in data && data.members?.length) {
+            for(const member of data.members) {
+                this.members.add(member);
+            }
+        }
+
         return this;
     }
 
@@ -244,16 +252,20 @@ export default class Team extends Base<APITeam | APIPartialTeam> {
         return url ?? null;
     }
 
+    public fetch() {
+        return this.client.teams.fetch(this.id);
+    }
+
     /**
      * Fetch all the channels belonging to this team
      */
     public fetchChannels() {
-        return this.client.rest.get<FetchTeamChannels>(`/teams/${this.id}/channels`).then((x) => {
+        return this.client.rest.get<APIGetTeamChannels>(`/teams/${this.id}/channels`).then((x) => {
             for (const channel of x.channels) {
-                const group = this.groups.cache.get(channel.groupId);
+                const group = this.groups.cache.get(channel.groupId.toString());
                 switch (channel.contentType) {
                     case "chat": {
-                        const tempChannel = new TextChannel(this.client, channel, this, group ?? null);
+                        const tempChannel = new TeamChannel(this.client, channel, this, group ?? null);
                         group?.channels.add(tempChannel);
                         break;
                     }

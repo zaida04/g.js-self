@@ -1,4 +1,4 @@
-import Message from '../structures/Message';
+import type Message from '../structures/Message';
 
 /**
  * @internal

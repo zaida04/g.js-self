@@ -1,40 +1,33 @@
-import { APIMember, APIPartialTeam, APITeam } from '@guildedjs/guilded-api-typings';
+import type { APIMember, APIPartialTeam, APITeam } from '@guildedjs/guilded-api-typings';
 
-import { Client } from '../..';
+import type { Client } from '../Client';
 import Member from '../Member';
 import Role from '../Role';
-import Team from '../Team';
+import type Team from '../Team';
 import BaseManager from './BaseManager';
 
 export default class TeamMemberManager extends BaseManager<APIMember, Member> {
     public constructor(client: Client, public readonly team: Team) {
-        super(client, Member);
+        super(client, Member, { maxSize: client.options?.cache?.cacheMaxSize?.membersCache });
     }
 
-    private resolve(member: string | Member): string {
+    public static resolve(member: string | Member): string {
         return member instanceof Member ? member.id : member;
     }
 
     public addRoleTo(member: string | Member, role: string | Role): Promise<void> {
-        const roleID = role instanceof Role ? role.id : role;
-        const memberID = this.resolve(member);
-        return this.client.rest.put(`/teams/${this.team.id}/roles/${roleID}/users/${memberID}`).then(() => void 0);
+        return this.client.teams.addRoleToMember(this.team, member, role);
     }
 
     public removeRoleFrom(member: string | Member, role: string | Role): Promise<void> {
-        const roleID = role instanceof Role ? role.id : role;
-        const memberID = this.resolve(member);
-        return this.client.rest.delete(`/teams/${this.team.id}/roles/${roleID}/users/${memberID}`).then(() => void 0);
+        return this.client.teams.removeRoleFromMember(this.team, member, role);
     }
 
     public kick(member: string | Member) {
-        const memberID = this.resolve(member);
-        return this.client.rest.delete(`/teams/${this.team.id}/members/${memberID}`);
+        return this.client.teams.kickMember(this.team, member);
     }
 
     public setNickname(member: string | Member, newNickname: string) {
-        if(typeof newNickname !== "string") throw new TypeError("Nickname must be a string!");
-        const memberID = this.resolve(member);
-        return this.client.rest.put(`/teams/${this.team.id}/members/${memberID}/nickname`, { nickname: newNickname })
+        return this.client.teams.setMemberNickname(this.team, member, newNickname);
     }
 }

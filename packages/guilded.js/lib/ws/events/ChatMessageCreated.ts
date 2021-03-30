@@ -1,28 +1,26 @@
-import { APIChannel, ChatMessageCreated } from '@guildedjs/guilded-api-typings';
-import Channel from '../../structures/channels/Channel';
-import PartialChannel from '../../structures/channels/PartialChannel';
-import TextBasedChannel from '../../structures/channels/TextBasedChannel';
-
-import Client from '../../structures/Client';
+import { APITeamChannel, WSChatMessageCreated } from '@guildedjs/guilded-api-typings';
+import type { Client } from '../../structures/Client';
 import Message from '../../structures/Message';
 import Event from './Event';
+import { PartialChannel} from '../../structures';
 
 export default class ChatMessageCreatedEvent extends Event {
     constructor(client: Client) {
         super(client);
     }
-    public ingest(data: ChatMessageCreated): (string | boolean)[] {
+    public ingest(data: WSChatMessageCreated): (string | boolean)[] {
         if (data) {
-            let channel: TextBasedChannel | PartialChannel = this.client.channels.cache.get(data.channelId) as TextBasedChannel;
+            let channel = this.client.channels.cache.get(data.channelId);
+            let team = (data.teamId ? this.client.teams.cache.get(data.teamId) : null) ?? null;
 
             if(!channel) {
-                channel = new PartialChannel(this.client, {id: data.channelId});
-                this.client.channels.cache.set(channel.id, channel as unknown as Channel<APIChannel>);
+                channel = new PartialChannel(this.client, {id: data.channelId, type: data.channelType, createdAt: data.createdAt, createdBy: data.createdBy, contentType: data.contentType }, team);
+                this.client.channels.cache.set(channel.id, channel);
             }
 
             const newMessage = new Message(this.client, { channelId: data.channelId, ...data.message }, channel)!;
             this.client.emit('messageCreate', newMessage);
-            channel.messages.cache.set(newMessage.id, newMessage);
+            channel.messages!.cache.set(newMessage.id, newMessage);
             return [true];
         }
         return [false, 'passthrough'];

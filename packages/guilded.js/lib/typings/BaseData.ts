@@ -3,5 +3,5 @@
  * @internal
  */
 export interface BaseData {
-    readonly id: string | number;
+    readonly id: string;
 }

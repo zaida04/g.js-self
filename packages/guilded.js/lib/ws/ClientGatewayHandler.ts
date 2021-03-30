@@ -1,7 +1,7 @@
-import { ChatMessageCreated, ChatMessageReactionAdd, ChatMessageUpdated } from '@guildedjs/guilded-api-typings';
+import { WSChatMessageCreated, WSChatMessageReactionAdd, WSChatMessageUpdated, WSGatewayReady } from '@guildedjs/guilded-api-typings';
 import WebSocket from 'ws';
 
-import Client from '../structures/Client';
+import type { Client } from '../structures/Client';
 import ChatMessageCreatedEvent from './events/ChatMessageCreated';
 import ChatMessageReactionAddedEvent from './events/ChatMessageReactionAdded';
 import ChatMessageUpdatedEvent from './events/ChatMessageUpdated';
@@ -70,13 +70,13 @@ export default class ClientGatewayHandler extends GatewayHandler {
 
                     let packet;
                     try { 
-                        packet = JSON.parse(data);
+                        packet = JSON.parse(data) as WSGatewayReady;
                     } catch(e) {
                         throw `malformed payload! ${data}`
                     }
 
                     this.sessionID = packet.sid;
-                    this.heartbeater.start();
+                    this.heartbeater.start(packet.pingInterval);
                     break;
                 }
 
@@ -103,21 +103,21 @@ export default class ClientGatewayHandler extends GatewayHandler {
                     }
                     
                     if (this.client.options?.ws?.disabledEvents?.includes(event_name)) return;
-                    this.client.emit('raw', [event_name, event_data]);
+                    this.client.emit('raw', event_name, event_data);
                     switch (event_name) {
                         case 'ChatMessageCreated': {
-                            const result = this.events.ChatMessageCreated.ingest(event_data as ChatMessageCreated);
+                            const result = this.events.ChatMessageCreated.ingest(event_data as WSChatMessageCreated);
                             if (!result[0]) this.client.debug(`Event dropped because of ${result[1]}`);
                             break;
                         }
                         case 'ChatMessageUpdated': {
-                            const result = this.events.ChatMessageUpdated.ingest(event_data as ChatMessageUpdated);
+                            const result = this.events.ChatMessageUpdated.ingest(event_data as WSChatMessageUpdated);
                             if (!result[0]) this.client.debug(`Event dropped because of ${result[1]}`);
                             break;
                         }
                         case 'ChatMessageReactionAdded': {
                             const result = this.events.ChatMessageReactionAdded.ingest(
-                                event_data as ChatMessageReactionAdd,
+                                event_data as WSChatMessageReactionAdd,
                             );
                             if (!result[0]) this.client.debug(`Event dropped because of ${result[1]}`);
                             break;

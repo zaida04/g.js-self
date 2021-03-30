@@ -12,7 +12,7 @@ export default class RestManager {
     public cookieJar: string | undefined;
 
     public constructor(public config?: RestManagerOptions) {
-        this.apiURL = config?.apiURL ?? `https://${this.baseDomain}`;
+        this.apiURL = `https://${config?.apiURL ?? this.baseDomain}`;
     }
 
     private async make(
@@ -63,21 +63,21 @@ export default class RestManager {
         }
     }
 
-    public get<T extends Record<string, any>>(path: string, authenticated = true): Promise<Record<string, any> | T> {
+    public get<T extends Record<string, any>>(path: string, authenticated = true): Promise<T> {
         return this.make(
             {
                 method: 'GET',
                 path: path,
             },
             authenticated,
-        ).then(x => x[1]);
+        ).then(x => x[1] as Record<string, any> as T);
     }
 
     public post<T extends Record<string, any>>(
         path: string,
         body: Record<string, any>,
         authenticated = true,
-    ): Promise<Record<string, any> | T> {
+    ): Promise<T>  {
         return this.make(
             {
                 method: 'POST',
@@ -85,14 +85,14 @@ export default class RestManager {
                 path: path,
             },
             authenticated,
-        ).then(x => x[1]);
+        ).then(x => x[1] as Record<string, any> as T);
     }
 
     public delete<T extends Record<string, any>>(
         path: string,
         body?: Record<string, any>,
         authenticated = true,
-    ): Promise<Record<string, any> | T> {
+    ): Promise<T>  {
         return this.make(
             {
                 method: 'DELETE',
@@ -100,14 +100,14 @@ export default class RestManager {
                 path: path,
             },
             authenticated,
-        ).then(x => x[1]);
+        ).then(x => x[1] as Record<string, any> as T);
     }
 
     public patch<T extends Record<string, any>>(
         path: string,
         body: Record<string, any>,
         authenticated = true,
-    ): Promise<Record<string, any> | T> {
+    ): Promise<T>  {
         return this.make(
             {
                 method: 'PATCH',
@@ -115,14 +115,14 @@ export default class RestManager {
                 path: path,
             },
             authenticated,
-        ).then(x => x[1]);
+        ).then(x => x[1] as Record<string, any> as T);
     }
 
     public put<T extends Record<string, any>>(
         path: string,
         body?: Record<string, any>,
         authenticated = true,
-    ): Promise<Record<string, any> | T> {
+    ): Promise<T>  {
         return this.make(
             {
                 method: 'PUT',
@@ -130,7 +130,7 @@ export default class RestManager {
                 path: path,
             },
             authenticated,
-        ).then(x => x[1]);
+        ).then(x => x[1] as Record<string, any> as T);
     }
 
     public async init(data: LoginData): Promise<Record<string, any>> {

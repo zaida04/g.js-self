@@ -1,10 +1,10 @@
-import { APIMessage } from '../common';
-export interface ChatMessageCreated {
+import { APIMessage, CHANNEL_CONTENT_TYPES, CHANNEL_TYPES } from '../common';
+export interface WSChatMessageCreated {
     channelCategoryId?: string | null;
     channelId: string;
-    channelType: string;
+    channelType: CHANNEL_TYPES;
     contentId: string;
-    contentType: string;
+    contentType: CHANNEL_CONTENT_TYPES;
     createdAt: string;
     createdBy: string;
     guildedClientId: string;

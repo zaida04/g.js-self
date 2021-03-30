@@ -1,3 +1,5 @@
+import type { Client } from "../structures/Client";
+
 /**
  * Copyright 2015 - 2021 Amish Shah
  * Copyrights licensed under the Apache License 2.0, https://github.com/discordjs/discord.js/blob/master/LICENSE
@@ -35,4 +37,18 @@ const COLORS: {[key: string]: number} = {
     NOT_QUITE_BLACK: 0x23272a
 }
 
-export const CONSTANTS = { COLORS };
+export type IMG_SIZE = "Small" | "Medium" | "Large" | "Hero";
+
+export const CONSTANTS = { 
+    COLORS, 
+    CDN: "https://img.guildedcdn.com/", 
+    AWS_CDN: "https://s3-us-west-2.amazonaws.com/www.guilded.gg/",
+    AVATAR_URL: (hash: string, extension: "PNG" | "GIF", size?: IMG_SIZE) => `${CONSTANTS.CDN}/UserAvatar/${hash}${size ? `-${size}` : ""}.${extension.toLowerCase()}`,
+    PROFILE_BANNER: (hash: string, size?: IMG_SIZE) => `${CONSTANTS.CDN}/UserBanner/${hash}${size ? `-${size}` : ""}.png`,
+    IMAGE_IN_CHAT: (hash: string, size?: IMG_SIZE) => `${CONSTANTS.CDN}/ContentMedia/${hash}${size ? `-${size}` : ""}.png`,
+    TEAM_EMOJI: (hash: string, extension: "WEBP" | "APNG", size?: IMG_SIZE) => `${CONSTANTS.CDN}/CustomReaction/${hash}${size ? `-${size}` : ""}.${extension.toLowerCase()}`,
+    TEAM_ICON: (hash: string, size?: IMG_SIZE) => `${CONSTANTS.CDN}/TeamAvatar/${hash}${size ? `-${size}` : ""}.png`,
+    TEAM_BANNER: (hash: string, size?: IMG_SIZE) => `${CONSTANTS.CDN}/TeamBanner/${hash}${size ? `-${size}` : ""}.png`
+};
+
+export const upload_image = (client: Client, file: FormData) => client.cdn.post<{url: string}>(`/media/upload`, { file: FormData });

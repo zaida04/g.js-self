@@ -1,20 +1,20 @@
-import { APITeamRole } from '@guildedjs/guilded-api-typings';
+import type { APITeamRole } from '@guildedjs/guilded-api-typings';
 
-import { Client } from '../..';
-import Member from '../Member';
+import type { Client } from '../Client';
+import type Member from '../Member';
 import Role from '../Role';
 import BaseManager from './BaseManager';
 
 export default class TeamMemberRoleManager extends BaseManager<APITeamRole, Role> {
     public constructor(client: Client, public readonly member: Member) {
-        super(client, Role);
+        super(client, Role, { maxSize: client.options?.cache?.cacheMaxSize?.memberRolesCache });
     }
 
     public append(role: string | Role): Promise<void> {
-        return this.member.team.members.addRoleTo(this.member, role);
+        return this.client.teams.addRoleToMember(this.member.team!.id, this.member, role);
     }
 
     public remove(role: string | Role): Promise<void> {
-        return this.member.team.members.removeRoleFrom(this.member, role);
+        return this.client.teams.removeRoleFromMember(this.member.team!.id, this.member, role);
     }
 }

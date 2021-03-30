@@ -7,4 +7,5 @@ export interface APIWebhook {
     createdBy: string;
     createdAt: string;
     deletedAt: string | null;
+    token?: string;
 }

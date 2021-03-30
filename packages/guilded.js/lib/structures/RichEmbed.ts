@@ -1,4 +1,4 @@
-import { APIEmbed } from "@guildedjs/guilded-api-typings";
+import type { APIEmbed } from "@guildedjs/guilded-api-typings";
 import { resolveColor } from "../util/MessageUtil";
 
 /**
@@ -9,30 +9,30 @@ import { resolveColor } from "../util/MessageUtil";
  */
 
 export default class RichEmbed {
-    footer?: {
+    public footer?: {
         text: string;
         icon_url?: string;
     };
-    image?: {
+    public image?: {
         url: string;
     };
-    thumbnail?: {
+    public thumbnail?: {
         url: string;
     };
-    author?: {
+    public author?: {
         name: string;
         icon_url?: string;
     };
-    fields?: {
+    public fields?: {
         inline?: boolean;
         name: string;
         value: string;
     }[];
-    color?: number;
-    timestamp?: number;
-    description?: string;
-    url?: string;
-    title?: string;
+    public color?: number;
+    public timestamp?: number;
+    public description?: string;
+    public url?: string;
+    public title?: string;
 
     setFooter(text: string, icon_url?: string) {
         this.footer = { text, icon_url };

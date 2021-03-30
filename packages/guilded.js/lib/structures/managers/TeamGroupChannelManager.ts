@@ -1,14 +1,14 @@
-import { APITeamChannel } from '@guildedjs/guilded-api-typings';
-import { CHANNEL_TYPES } from '../../typings/ChannelTypes';
+import type { APITeamChannel } from '@guildedjs/guilded-api-typings';
+import type { CHANNEL_TYPES } from '../../typings/ChannelTypes';
 
-import TeamChannel from '../channels/TeamChannel';
-import Client from '../Client';
-import Group from '../Group';
+import { TeamChannel } from '../Channel';
+import type { Client } from '../Client';
+import type Group from '../Group';
 import BaseManager from './BaseManager';
 
 export default class TeamGroupChannelManager extends BaseManager<APITeamChannel, TeamChannel> {
     public constructor(client: Client, public group: Group) {
-        super(client, TeamChannel);
+        super(client, TeamChannel, { maxSize: client.options?.cache?.cacheMaxSize?.channelsCache });
     }
 
     public create({name, parent, type, isPublic = true}: { name: string, parent?: string, type: CHANNEL_TYPES, isPublic: boolean }) {

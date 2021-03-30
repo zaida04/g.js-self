@@ -8,7 +8,7 @@
     "declarationMap": true,
     "pretty": true,
     "module": "CommonJS",
-    "target": "ES5",
+    "target": "ES6",
     "lib": [
       "ESNext",
       "DOM"
@@ -17,7 +17,8 @@
       "node_modules/@types"
     ],
     "types": [
-      "node"
+      "node",
+      "jest"
     ],
     "sourceMap": true,
     "incremental": true,
