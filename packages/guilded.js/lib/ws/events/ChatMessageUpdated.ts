@@ -14,7 +14,7 @@ export default class ChatMessageUpdatedEvent extends Event {
             const channel = this.client.channels.cache.get(data.channelId);
             const oldMessage = channel?.messages?.cache.get(data.message.id);
             if(!oldMessage && !this.client.options?.partials?.includes("MESSAGE")) return [false, "Old message not cached!"]; 
-            const newMessage = oldMessage?._clone().patch(data.message) ?? new PartialMessage(this.client, data.message);
+            const newMessage = oldMessage?._clone().patch(data.message) ?? new PartialMessage(this.client, { ...data.message, channelId: data.channelId});
             this.client.emit("messageUpdate", oldMessage, newMessage);
         }
         
