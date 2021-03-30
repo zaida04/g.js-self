@@ -21,6 +21,3 @@ jobs:
 
       - name: Run TypeScript compiler
         run: npm run build
-
-      - name: Run Tests
-        run: npm run test:ci
