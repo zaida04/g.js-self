@@ -74,7 +74,7 @@ Documentation is located [here](https://guilded.js.org)
 - [x] Send & Receive messages 
 - [x] Message parsing utils
 - [x] API typings (@guildedjs/guilded-api-typings)
-- [x] Ratelimit retry (@guildedjs/guilded-rest)
+- [x] Ratelimit retry
 - [ ] Ratelimit delaying/waiting 
 - [X] CI/CD
 - [X] Documentation

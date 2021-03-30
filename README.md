@@ -66,7 +66,6 @@ This repo serves as a monorepo that houses several packages, mainly the `@guilde
 * [`@guildedjs/guilded.js`](https://github.com/guildedjs/guildedjs/tree/master/packages/guilded.js#readme) - main package that provides a lib for the guilded.gg api. Comes with built in caching, structures, etc.
 * [`@guildedjs/itami`](https://github.com/guildedjs/guildedjs/tree/master/packages/itami#readme) - official framework for `@guildedjs/guilded.js`, comes with highly customizable commands, listeners, and other abstractions.
 * [`@guildedjs/guilded-api-types`](https://github.com/guildedjs/guildedjs/tree/master/packages/guilded-api-typings#readme) - thinking of making your own guilded lib/wrapper? This package consists of typings for the guilded.gg api compiled together by the community. No need to write your own typings and reinventing the wheel.
-* [`@guildedjs/guilded.js-rest`](https://github.com/guildedjs/guildedjs/tree/master/packages/rest#readme) - Rest utility with (WIP) ratelimit handling. Free to use in your own lib for handling requests to the guilded.gg api
 
 ## Getting Started
 
