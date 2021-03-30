@@ -2,11 +2,11 @@ import type { APIMessage, APIPartialMessage } from '@guildedjs/guilded-api-typin
 import { PartialMessageData } from '../typings/PartialMessageData';
 
 import * as MessageUtil from '../util/MessageUtil';
-import Base from './Base';
+import {Base} from './Base';
 import type { Client } from "./Client";
-import Message from './Message';
+import {Message} from './Message';
 
-export default class PartialMessage extends Base<PartialMessageData> {
+export class PartialMessage extends Base<PartialMessageData> {
     /**
      * The channelID in which this message was sent. Will always be present, even if the channel isn't cached
      */

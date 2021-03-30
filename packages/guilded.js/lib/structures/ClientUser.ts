@@ -1,11 +1,11 @@
 import type { APIClientUser, APIDevice, APIUser } from '@guildedjs/guilded-api-typings';
 import type { Client } from './Client';
-import User from './User';
+import {User} from './User';
  
 /**
  * The user belonging to this client
  */
-export default class ClientUser extends User {
+export class ClientUser extends User {
     /**
      * List of users that this client has blocked
      */

@@ -1,13 +1,13 @@
 import type { APIPartialTeam, APITeam, APIGetTeam } from '@guildedjs/guilded-api-typings';
 
 import type { Client } from '../Client';
-import Member from '../Member';
-import Role from '../Role';
-import Team from '../Team';
-import BaseManager from './BaseManager';
-import TeamMemberManager from './TeamMemberManager';
+import {Member} from '../Member';
+import {Role} from '../Role';
+import {Team} from '../Team';
+import {BaseManager} from './BaseManager';
+import {TeamMemberManager} from './TeamMemberManager';
 
-export default class TeamManager extends BaseManager<APITeam | APIPartialTeam, Team> {
+export class TeamManager extends BaseManager<APITeam | APIPartialTeam, Team> {
     public constructor(client: Client) {
         super(client, Team, { maxSize: client.options?.cache?.cacheMaxSize?.teamsCache });
     }

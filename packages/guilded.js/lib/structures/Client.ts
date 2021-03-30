@@ -1,17 +1,17 @@
 import type { APIGetCurrentUser } from '@guildedjs/guilded-api-typings';
-import RestManager from '../rest/RestManager';
+import {RestManager} from '../rest/RestManager';
 import { EventEmitter } from 'events';
 
 import type { WebSocketEvents } from '../typings/WebSocketEvents';
 import * as Util from '../util';
-import ClientGatewayHandler from '../ws/ClientGatewayHandler';
+import {ClientGatewayHandler} from '../ws/ClientGatewayHandler';
 import { DMChannel } from './Channel';
-import ClientUser from './ClientUser';
-import ChannelManager from './managers/ChannelManager';
-import TeamManager from './managers/TeamManager';
-import UserManager from './managers/UserManager';
-import type Message from './Message';
-import Team from './Team';
+import {ClientUser} from './ClientUser';
+import {ChannelManager} from './managers/ChannelManager';
+import {TeamManager} from './managers/TeamManager';
+import {UserManager} from './managers/UserManager';
+import type {Message} from './Message';
+import {Team} from './Team';
 
 
 /**

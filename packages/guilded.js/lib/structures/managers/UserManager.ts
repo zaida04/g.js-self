@@ -1,10 +1,10 @@
 import type { APIUser, APIGetUser } from '@guildedjs/guilded-api-typings';
 
 import type { Client } from '../Client';
-import User from '../User';
-import BaseManager from './BaseManager';
+import {User} from '../User';
+import {BaseManager} from './BaseManager';
 
-export default class UserManager extends BaseManager<APIUser, User> {
+export class UserManager extends BaseManager<APIUser, User> {
     public constructor(client: Client) {
         super(client, User, { maxSize: client.options?.cache?.cacheMaxSize?.usersCache });
     }

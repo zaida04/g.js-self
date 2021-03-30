@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import fetch, { Response } from 'node-fetch';
 
-import GuildedAPIError from './GuildedAPIError';
+import { GuildedAPIError } from './GuildedAPIError';
 
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
 
-export default class RestManager {
+export class RestManager {
     public apiURL: string;
     public baseDomain = 'api.guilded.gg';
     public token: string | undefined;

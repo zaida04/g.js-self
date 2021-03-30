@@ -6,15 +6,15 @@ import type {
     MembershipRole,
     APISocialLink,
 } from '@guildedjs/guilded-api-typings';
-import Base from './Base';
+import {Base} from './Base';
 import type { Client } from "./Client";
-import TeamMemberRoleManager from './managers/TeamMemberRoleManager';
-import type Team from './Team';
+import {TeamMemberRoleManager} from './managers/TeamMemberRoleManager';
+import type {Team} from './Team';
  
 /**
  * A member of a team
  */
-export default class Member extends Base<APIMember> {
+export class Member extends Base<APIMember> {
     /**
      * The current username of this member
      */

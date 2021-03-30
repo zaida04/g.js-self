@@ -1,12 +1,12 @@
 import type { APIWebhook } from '@guildedjs/guilded-api-typings';
  
-import Base from './Base';
+import {Base} from './Base';
 import type { TeamChannel } from './Channel';
 import type { Client } from './Client';
-import type Team from './Team';
-import type User from './User';
+import type {Team} from './Team';
+import type {User} from './User';
  
-export default class Webhook extends Base<APIWebhook> {
+export class Webhook extends Base<APIWebhook> {
     /**
      * The username belonging to this webhook
      */

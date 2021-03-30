@@ -1,6 +1,6 @@
 import type { BaseData, Constructable } from '../../typings';
-import CacheCollection, { CacheCollectionOptions } from '../../util/CacheCollection';
-import Base from '../Base';
+import { CacheCollection, CacheCollectionOptions } from '../../util/CacheCollection';
+import { Base } from '../Base';
 import type { Client } from '../Client';
 
 /**
@@ -8,7 +8,7 @@ import type { Client } from '../Client';
  * @param K The base amount of data required to construct object T
  * @param T The object that will be held in this manager
  */
-export default class BaseManager<K extends BaseData, T extends Base<K>> {
+export class BaseManager<K extends BaseData, T extends Base<K>> {
     public cache: CacheCollection<string, T> = new CacheCollection(this.cacheOptions ?? {});
     constructor(public readonly client: Client, public readonly holds: Constructable<T>, public readonly cacheOptions?: CacheCollectionOptions) {}
 

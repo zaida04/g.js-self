@@ -2,7 +2,7 @@ import { APITeamChannelRolePermissionOverwrite, RolePermissions } from "@guilded
 import { TeamChannel } from "./Channel";
 import { Client } from "./Client";
 
-export default class RolePermissionOverwrite {
+export class RolePermissionOverwrite {
     public readonly teamID: string;
     public readonly channelID: string;
     public readonly createdAt: Date;

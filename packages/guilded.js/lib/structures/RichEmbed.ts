@@ -8,96 +8,88 @@ import { resolveColor } from "../util/MessageUtil";
  * Taken from https://github.com/discordjs/discord.js/blob/stable/src/util/Util.js#L436
  */
 
-export default class RichEmbed {
-    public footer?: {
-        text: string;
-        icon_url?: string;
-    };
-    public image?: {
-        url: string;
-    };
-    public thumbnail?: {
-        url: string;
-    };
-    public author?: {
-        name: string;
-        icon_url?: string;
-    };
-    public fields?: {
-        inline?: boolean;
-        name: string;
-        value: string;
-    }[];
-    public color?: number;
-    public timestamp?: number;
-    public description?: string;
-    public url?: string;
-    public title?: string;
+export class RichEmbed {
+    public data: APIEmbed = {}
 
-    setFooter(text: string, icon_url?: string) {
-        this.footer = { text, icon_url };
+    public constructor(data?: APIEmbed) {
+        if(data) this.data = data;
     }
 
-    setImage(url: string) {
-        this.image = { url };
+    public setFooter(text: string, icon_url?: string) {
+        this.data.footer = { text, icon_url };
+        return this;
     }
 
-    setThumbnail(url: string) {
-        this.thumbnail = { url };
+    public setImage(url: string) {
+        this.data.image = { url };
+        return this;
     }
 
-    setAuthor(name: string, icon_url?: string) {
-        this.author = { name, icon_url };
+    public setThumbnail(url: string) {
+        this.data.thumbnail = { url };
+        return this;
     }
 
-    addField(name: string, value: string, inline?: boolean) {
+    public setAuthor(name: string, icon_url?: string) {
+        this.data.author = { name, icon_url };
+        return this;
+    }
+
+    public addField(name: string, value: string, inline?: boolean) {
         this.addFields({name, value, inline});
+        return this;
     }
 
-    addFields(...fields: { inline?: boolean, name: string, value: string }[]) {
-        this.fields?.push(...fields);
+    public addFields(...fields: { inline?: boolean, name: string, value: string }[]) {
+        this.data.fields?.push(...fields);
+        return this;
     }
 
-    setColor(color: string | number) {
-        this.color = resolveColor(color);
+    public setColor(color: string | number) {
+        this.data.color = resolveColor(color);
+        return this;
     }
 
-    setTimestamp(date: Date | number = Date.now()) {
-        this.timestamp = date instanceof Date ? date.getTime() : date;
+    public setTimestamp(date: Date | number = Date.now()) {
+        this.data.timestamp = (date instanceof Date ? date.getTime() : date).toString();
+        return this;
     }
 
-    setDescription(description: string) {
-        this.description = description;
+    public setDescription(description: string) {
+        this.data.description = description;
+        return this;
     }
 
-    setURL(url: string) {
-        this.url = url;
+    public setURL(url: string) {
+        this.data.url = url;
+        return this;
     }
 
-    setTitle(title: string) {
-        this.title = title;
+    public setTitle(title: string) {
+        this.data.title = title;
+        return this;
     }
 
-    toJSON(): APIEmbed {
+    public toJSON(): APIEmbed {
         return {
-            title: this.title,
-            description: this.description,
-            url: this.url,
-            timestamp: this.timestamp ? new Date(this.timestamp).toISOString() : undefined,
-            color: this.color,
-            fields: this.fields,
-            thumbnail: this.thumbnail,
-            image: this.image,
-            author: this.author ? 
+            title: this.data.title,
+            description: this.data.description,
+            url: this.data.url,
+            timestamp: this.data.timestamp?.toString(),
+            color: this.data.color,
+            fields: this.data.fields,
+            thumbnail: this.data.thumbnail,
+            image: this.data.image,
+            author: this.data.author ? 
                 {
-                    name: this.author.name,
-                    icon_url: this.author.icon_url
+                    name: this.data.author.name,
+                    icon_url: this.data.author.icon_url
                 } 
                 : undefined,
-            footer: this.footer ? 
+            footer: this.data.footer ? 
                 {
-                    text: this.footer.text,
-                    icon_url: this.footer.icon_url,
+                    text: this.data.footer.text,
+                    icon_url: this.data.footer.icon_url,
                 }
                 : undefined
         };
