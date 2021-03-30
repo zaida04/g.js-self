@@ -10,8 +10,8 @@ import { CONSTANTS } from "./Consts";
  * @internal
  */
 export function ConvertToMessageFormat(input: string | RichEmbed | { content: string, embed: RichEmbed }): [string, Record<string, any>] {
-    const messageId = GenerateUUID();
-    let message: { content?: Record<string, any>, embed?: Record<string, any>, messageId: string} = { messageId };
+    const messageID = GenerateUUID();
+    let message: { content?: Record<string, any>, embed?: Record<string, any>, messageId: string} = { messageId: messageID };
 
     if (typeof input === "string") {
         message["content"] = parseStringToMessage(input);
@@ -22,7 +22,7 @@ export function ConvertToMessageFormat(input: string | RichEmbed | { content: st
         message["embed"] = input.embed?.toJSON();
     }
 
-    return [messageId, message];
+    return [messageID, message];
 }
 
 function parseStringToMessage(str: string) {

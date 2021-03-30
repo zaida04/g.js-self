@@ -6,12 +6,12 @@ export default class Heartbeater {
     public active = false;
 
     constructor(public gateway: GatewayHandler) {}
-    public start(): void {
+    public start(interval?: number): void {
         this.gateway.client.debug('Heartbeating...');
         this.active = true;
         this.interval = setInterval(
             this.sendHB.bind(this),
-            this.gateway.client.options?.ws?.heartbeatInterval ?? 15000,
+            interval ?? this.gateway.client.options?.ws?.heartbeatInterval ?? 15000,
         );
     }
 

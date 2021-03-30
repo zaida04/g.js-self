@@ -1,7 +1,8 @@
-import { APIWebhook } from '@guildedjs/guilded-api-typings';
+import type { APIWebhook } from '@guildedjs/guilded-api-typings';
  
 import Base from './Base';
-import type TeamChannel from './channels/TeamChannel';
+import type { TeamChannel } from './Channel';
+import type { Client } from './Client';
 import type Team from './Team';
 import type User from './User';
  
@@ -14,47 +15,81 @@ export default class Webhook extends Base<APIWebhook> {
     /**
      * The ID of the channel this webhook belongs to
      */
-    public channelID!: string;
-
-    /**
-     * The channel object this webhook belongs to if cached
-     */
-    public channel!: TeamChannel | null;
+    public channelID: string;
 
     /**
      * The ID of the team this webhook belongs to 
      */
-    public teamID!: string;
-    
-    /**
-     * The team object this webhook belongs to if cached
-     */
-    public team!: Team | null;
+    public teamID: string;
 
     /**
      * The URL of the avatar belonging to this webhook
      */
-    public iconURL!: string | null;
+    public iconURL: string | null;
 
     /**
      * The ID of the user who created this webhook
      */
-    public createdByID!: string;
-
-    /**
-     * The User object of the user that created this webhook if cached
-     */
-    public createdBy!: User | null;
+    public createdByID: string;
 
     /**
      * The date in which this webhook was created
      */
-    public createdAt!: Date;
+    public createdAt: Date;
 
     /**
      * The date this webhook was deleted if it was deleted
      */
-    public deletedAt!: Date | null;
+    public deletedAt: Date | null;
+
+    private _team: Team | null;
+    private _createdBy: User | null;
+
+    public constructor(client: Client, data: APIWebhook, private _channel: TeamChannel | null) { 
+        super(client, data);
+        this.createdAt = new Date(data.createdAt);
+        this.deletedAt = null;
+        this.iconURL = null;
+        this.createdByID = data.createdBy;
+        this.channelID = data.channelId;
+        this.teamID = data.teamId;
+        this._team = _channel?.team ?? null;
+        this._createdBy = null;
+        this.patch(data);
+    }
+
+    /**
+     * The channel object this webhook belongs to if cached
+     */
+    get channel(): TeamChannel | null {
+        if(!this._channel) return this._channel;
+        const cachedChannel = this.client.channels.cache.get(this.channelID) as TeamChannel;
+        if(!cachedChannel) return null;        
+        this._channel = cachedChannel;
+        return cachedChannel;
+    }
+
+    /**
+     * The User object of the user that created this webhook if cached
+     */
+    get createdBy(): User | null {
+        if(!this._createdBy) return this._createdBy;
+        const cachedUser = this.client.users.cache.get(this.createdByID);
+        if(!cachedUser) return null;        
+        this._createdBy = cachedUser;
+        return cachedUser;
+    }
+
+    /**
+     * The team object this webhook belongs to if cached
+     */
+    get team(): Team | null {
+        if(!this._team) return this._team;
+        const cachedTeam = this.client.teams.cache.get(this.teamID);
+        if(!cachedTeam) return null;        
+        this._team = cachedTeam;
+        return cachedTeam;
+    }
 
     /**
      * Update the data in this structure
@@ -62,20 +97,7 @@ export default class Webhook extends Base<APIWebhook> {
      */  
     public patch(data: APIWebhook | Partial<APIWebhook>): this {
         if ('name' in data && data.name !== undefined) this.name = data.name;
-        if ('channelId' in data && data.channelId !== undefined) {
-            this.channelID = this.channelID;
-            this.channel = this.client.channels.cache.get(this.channelID) as TeamChannel ?? null;
-        }
-        if ('teamId' in data && data.teamId !== undefined) {
-            this.teamID = data.teamId;
-            this.team = this.client.teams.cache.get(this.teamID) ?? null;
-        }
         if ('iconUrl' in data && data.iconUrl !== undefined) this.iconURL = data.iconUrl;
-        if ('createdBy' in data && data.createdBy !== undefined) {
-            this.createdByID = data.createdBy;
-            this.createdBy = this.client.users.cache.get(this.createdByID) ?? null;
-        }
-        if ('createdAt' in data && data.createdAt !== undefined) this.createdAt = new Date(data.createdAt);
         if ('deletedAt' in data && data.deletedAt !== undefined)
             this.deletedAt = data.deletedAt ? new Date(data.deletedAt) : null;
  

@@ -1,4 +1,4 @@
-import Client from '../../structures/Client';
+import type { Client } from '../../structures/Client';
 
 export default abstract class Event {
     constructor(public client: Client) {}

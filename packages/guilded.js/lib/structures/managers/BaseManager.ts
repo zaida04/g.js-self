@@ -1,9 +1,7 @@
-import Collection from '@discordjs/collection';
-import { createDecipher } from 'crypto';
-
-import { BaseData, Constructable } from '../../typings';
+import type { BaseData, Constructable } from '../../typings';
+import CacheCollection, { CacheCollectionOptions } from '../../util/CacheCollection';
 import Base from '../Base';
-import Client from '../Client';
+import type { Client } from '../Client';
 
 /**
  * The manager in charge of cached objects and potential api endpoints
@@ -11,8 +9,8 @@ import Client from '../Client';
  * @param T The object that will be held in this manager
  */
 export default class BaseManager<K extends BaseData, T extends Base<K>> {
-    public cache: Collection<string, T> = new Collection();
-    constructor(public readonly client: Client, public readonly holds: Constructable<T>) {}
+    public cache: CacheCollection<string, T> = new CacheCollection(this.cacheOptions ?? {});
+    constructor(public readonly client: Client, public readonly holds: Constructable<T>, public readonly cacheOptions?: CacheCollectionOptions) {}
 
     /**
      * Add an object, potential data, or constructor params into this managers cache

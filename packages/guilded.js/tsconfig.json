@@ -4,7 +4,6 @@
         "outDir": "./dist",
         "declarationDir": "./types"
     },
-    "include": [
-        "./lib/**/*.ts"
-    ]
+    "include": [ "./lib/**/*.ts" ],
+    "exclude": [ "*.test.ts"]
 }

@@ -1,10 +1,67 @@
-import { APIAlias } from './Alias';
-import { Device } from './ExtraInfo';
-import { AboutInfo } from './Member';
-import { APIUserStatus } from './UserStatus';
+import { APIContent } from '../Content';
+import { APICustomReaction } from './Emoji';
+
+export interface APIUserStatus {
+    content: APIContent | null;
+    customReactionId: number | null;
+    customReaction?: APICustomReaction;
+}
+
+export interface APIAboutInfo {
+    bio?: string;
+    tagLine?: string;
+}
+
+export interface APISocialLink {
+    type: SocialLinkSource;
+    handle: null | string;
+    additionalInfo: APISocialLinkAdditionalInfo;
+}
+
+export interface APISocialLinkAdditionalInfo {
+    channelName?: string;
+}
+
+export enum USER_PRESENCE {
+    ONLINE = 1,
+    IDLE = 2,
+    DND = 3,
+    INVISIBLE = 4,
+}
+
+export interface APIAlias {
+    alias?: string;
+    discriminator: null | string;
+    name: string;
+    createdAt?: string;
+    userId?: string;
+    gameId: number;
+    socialLinkSource: SocialLinkSource | null;
+    additionalInfo: unknown;
+    editedAt?: string;
+    playerInfo: unknown;
+}
+
+export type SocialLinkSource =
+    | 'bnet'
+    | 'discord'
+    | 'psn'
+    | 'steam'
+    | 'switch'
+    | 'twitch'
+    | 'twitter'
+    | 'xbox'
+    | 'youtube';
+
+export interface APIDevice {
+    type: string;
+    id: string;
+    lastOnline: string;
+    isActive: boolean;
+}
 
 export interface APIUser {
-    aboutInfo: AboutInfo;
+    aboutInfo: APIAboutInfo;
     aliases: APIAlias[];
     email: string | null;
     id: string;
@@ -33,7 +90,7 @@ export interface APIClientUser extends APIUser {
     badges: any[];
     canRedeemGold: boolean;
     isUnrecoverable: boolean;
-    devices: Device[];
+    devices: APIDevice[];
     userChannelNotificationSettings: any[];
     upsell: null;
 }

@@ -1,6 +1,6 @@
 import WebSocket from 'ws';
 
-import Client from '../structures/Client';
+import type { Client } from '../structures/Client';
 import Heartbeater from './Heartbeater';
 
 export default abstract class GatewayHandler {

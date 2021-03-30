@@ -1,6 +1,5 @@
-import { APIChannel } from '@guildedjs/guilded-api-typings';
-import { BaseData } from '../typings';
-import type Client from './Client';
+import type { BaseData } from '../typings';
+import type { Client } from './Client';
 
 /**
  * The base of all structures
@@ -18,10 +17,9 @@ export default abstract class Base<T extends BaseData> {
      */
     public readonly raw: Partial<T>;
     
-    public constructor(public readonly client: Client, data: T, patch = true) {
+    public constructor(public readonly client: Client, data: T) {
         this.id = data.id.toString();
         this.raw = data;
-        if (patch) this.patch(data);
     }
     
     /**
@@ -29,4 +27,12 @@ export default abstract class Base<T extends BaseData> {
      * @internal
      */
     public abstract patch(data: T | Partial<T>): this;
+
+    /**
+     * Taken from https://github.com/discordjs/discord.js/blob/8e8d9b490a71de6cabe6f16375d7549a7c5c3737/src/structures/Base.js#L20
+     * Licensed under the Apache License 2.0 <https://github.com/discordjs/discord.js/blob/8e8d9b490a71de6cabe6f16375d7549a7c5c3737/LICENSE>
+     */
+    _clone(): this {
+        return Object.assign(Object.create(this), this);
+    }
 }

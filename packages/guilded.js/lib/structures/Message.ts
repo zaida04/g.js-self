@@ -1,20 +1,19 @@
-import { APIMessage } from '@guildedjs/guilded-api-typings';
+import Collection from '@discordjs/collection';
+import type { APIMessage } from '@guildedjs/guilded-api-typings';
 
 import * as MessageUtil from '../util/MessageUtil';
 import Base from './Base';
-import DMChannel from './channels/DMChannel';
-import PartialChannel from './channels/PartialChannel';
-import TeamChannel from './channels/TeamChannel';
-import type TextBasedChannel from './channels/TextBasedChannel';
-import TextChannel from './channels/TextChannel';
-import type Client from './Client';
+import type {DMChannel, PartialChannel} from './Channel';
+import { TeamChannel } from './Channel';
+import type { Client } from "./Client";
+import MessageReaction from './MessageReaction';
 import type Team from './Team';
 
 export default class Message extends Base<APIMessage> {
     /**
      * The channelID in which this message was sent. Will always be present, even if the channel isn't cached
      */
-    public channelID!: string;
+    public readonly channelID!: string;
 
     /**
      * The plain text content that this message has
@@ -32,12 +31,27 @@ export default class Message extends Base<APIMessage> {
     public parsedContent!: MessageUtil.parsedMessage;
 
     /**
+     * Author of the message
+     */
+    public readonly authorID!: string;
+
+    /**
      * The team in which this message was sent in, if any
      */
-    public team!: Team | null;
+    public readonly team!: Team | null;
 
-    public constructor(client: Client, data: APIMessage, public readonly channel: DMChannel | TextChannel | PartialChannel) {
-        super(client, data, false);
+    /**
+     * Reactions on this message
+     */
+    public reactions: Collection<string, MessageReaction>;
+
+    public constructor(client: Client, data: APIMessage, private _channel: DMChannel | TeamChannel | PartialChannel | null) {
+        super(client, data);
+
+        this.authorID = data.createdBy;
+        this.channelID = data.channelId;
+        this.team = this.channel instanceof TeamChannel ? (this.channel.team ?? null) : null;
+        this.reactions = new Collection();
         this.patch(data);
     }
 
@@ -46,15 +60,25 @@ export default class Message extends Base<APIMessage> {
      * @internal
      */
     public patch(data: APIMessage | Partial<APIMessage>): this {
-        if ("channelId" in data && data.channelId !== undefined) this.channelID = data.channelId;
-
-        if(this.channel instanceof TextChannel && this.channel?.team) this.team = this.channel.team
-
         if ('content' in data && data.content !== undefined) {
             this.parsedContent = MessageUtil.ParseMessage(data.content);
             this.content = this.parsedContent.parsedText;
         }
+
+        if('reactions' in data && data.reactions !== undefined) {
+            for(const reaction of data.reactions) {
+                this.reactions.set(reaction.customReactionId.toString(), new MessageReaction(this.client, reaction));
+            }
+        }
         return this;
+    }
+
+    get channel(): DMChannel | TeamChannel | PartialChannel | null {
+        if(!this._channel) return this._channel;
+        const cachedChannel = this.client.channels.cache.get(this.channelID) as TeamChannel;
+        if(!cachedChannel) return null;        
+        this._channel = cachedChannel;
+        return cachedChannel;
     }
 
     /**
@@ -81,7 +105,7 @@ export default class Message extends Base<APIMessage> {
      * Delete this message
      */
     public delete() {
-        return this.channel.messages.delete(this);
+        return this.client.channels.deleteMessage(this.channelID, this);
     }
 
     /**

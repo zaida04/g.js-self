@@ -1,14 +1,13 @@
-import {
-    AboutInfo,
+import type {
+    APIAboutInfo,
     APIAlias,
     APIMember,
     APIUserStatus,
     MembershipRole,
-    SocialLink,
+    APISocialLink,
 } from '@guildedjs/guilded-api-typings';
- 
 import Base from './Base';
-import type Client from './Client';
+import type { Client } from "./Client";
 import TeamMemberRoleManager from './managers/TeamMemberRoleManager';
 import type Team from './Team';
  
@@ -24,17 +23,17 @@ export default class Member extends Base<APIMember> {
     /**
      * The current nickname of this member in this team
      */
-    public nickname!: string | null;
+    public nickname: string | null;
 
     /**
      * Badges belonging to this member
      */
-    public badges!: string[] | null;
+    public badges: string[] | null;
 
     /**
      * The date in which this member joined
      */
-    public joinDate!: Date;
+    public joinDate: Date;
 
     /**
      * Unknown purpose
@@ -44,22 +43,22 @@ export default class Member extends Base<APIMember> {
     /**
      * The last date in which this member was detected to be online
      */
-    public lastOnline!: Date | null;
+    public lastOnline: Date | null;
 
     /**
      * The profile picture belonging to this member
      */
-    public profilePicture!: string | null;
+    public profilePicture: string | null;
 
     /**
      * The blurred out banner belonging to this member
      */
-    public profileBannerBlur!: string | null;
+    public profileBannerBlur: string | null;
 
     /**
      * Additional info regarding this member
      */
-    public aboutInfo!: AboutInfo | null;
+    public aboutInfo: APIAboutInfo | null;
     
     /**
      * This members current detected status
@@ -69,22 +68,22 @@ export default class Member extends Base<APIMember> {
     /**
      * Connections that this member has to other social media platforms
      */
-    public socialLinks!: SocialLink[] | null;
+    public socialLinks: APISocialLink[] | null;
 
     /**
      * The IDs of the roles that this member has
      */
-    public roleIds!: number[] | null;
+    public roleIDs: number[] | null;
 
     /**
      * Unknown purpose
      */
-    public subscriptionType!: string | null;
+    public subscriptionType: string | null;
 
     /**
      * Aliases this member may have on games
      */
-    public aliases!: APIAlias[];
+    public aliases: APIAlias[];
 
     /**
      * Unknown purpose
@@ -100,9 +99,22 @@ export default class Member extends Base<APIMember> {
      * The manager in charge of managing the roles this member has
      */
     public roles: TeamMemberRoleManager;
-    constructor(client: Client, data: APIMember, public team: Team) {
-        super(client, data, false);
+    constructor(client: Client, data: APIMember, public team: Team | null) {
+        super(client, data);
         this.roles = new TeamMemberRoleManager(client, this);
+        this.joinDate = new Date(data.joinDate);
+        this.badges = [];
+        this.nickname = null;
+        this.lastOnline = null;
+        this.profilePicture = null;
+        this.profileBannerBlur = null;
+        this.aboutInfo = null;
+        this.socialLinks = [];
+        this.roleIDs = [];
+        this.subscriptionType = null;
+        this.aliases = [];
+
+        this.patch(data);
     }
  
     /**
@@ -113,7 +125,6 @@ export default class Member extends Base<APIMember> {
         if ('name' in data && data.name !== undefined) this.name = data.name;
         if ('nickname' in data && data.nickname !== undefined) this.nickname = data.nickname;
         if ('badges' in data && data.badges !== undefined) this.badges = data.badges;
-        if ('joinDate' in data && data.joinDate !== undefined) this.joinDate = new Date(data.joinDate);
         if ('membershipRole' in data && data.membershipRole !== undefined) this.membershipRole = data.membershipRole;
         if ('lastOnline' in data && data.lastOnline !== undefined)
             this.lastOnline = data.lastOnline ? new Date(data.lastOnline) : null;
@@ -123,7 +134,7 @@ export default class Member extends Base<APIMember> {
         if ('aboutInfo' in data && data.aboutInfo !== undefined) this.aboutInfo = data.aboutInfo;
         if ('userStatus' in data && data.userStatus !== undefined) this.userStatus = data.userStatus;
         if ('socialLinks' in data && data.socialLinks !== undefined) this.socialLinks = data.socialLinks;
-        if ('roleIds' in data && data.roleIds !== undefined) this.roleIds = data.roleIds;
+        if ('roleIds' in data && data.roleIds !== undefined) this.roleIDs = data.roleIds;
         if ('subscriptionType' in data && data.subscriptionType !== undefined)
             this.subscriptionType = data.subscriptionType;
         if ('aliases' in data && data.aliases !== undefined) this.aliases = data.aliases;
@@ -135,10 +146,10 @@ export default class Member extends Base<APIMember> {
     }
 
     public kick() {
-        return this.team.members.kick(this);
+        return this.client.teams.kickMember(this.team!, this);
     }
 
     public setNickname(newNickname: string) {
-        return this.team.members.setNickname(this, newNickname);
+        return this.client.teams.setMemberNickname(this.team!, this, newNickname);
     }
 }

@@ -1,6 +1,6 @@
 import { APICustomReaction } from '../common';
 
-export interface ChatMessageReactionAdd {
+export interface WSChatMessageReactionAdd {
     type: string;
     guildedClientId: string;
     channelId: string;
@@ -8,13 +8,15 @@ export interface ChatMessageReactionAdd {
     channelType: string;
     teamId: string;
     contentType: string;
-    reaction: {
-        customReactionId: number;
-        customReaction: APICustomReaction;
-        createdBy: string;
-    };
+    reaction: WSReaction;
     message: {
         id: string;
     };
     silenceNotification: boolean;
+}
+
+export interface WSReaction {
+    customReactionId: number;
+    customReaction: APICustomReaction;
+    createdBy: string;
 }

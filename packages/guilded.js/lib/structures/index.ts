@@ -6,5 +6,5 @@ export * from './Role';
 export * from './Team';
 export * from './User';
 export * from './Webhook';
-export * from "./channels";
+export * from "./Channel";
 export * from "./managers";

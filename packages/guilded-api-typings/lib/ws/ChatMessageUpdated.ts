@@ -1,13 +1,13 @@
-import { APIMessage } from '../common';
+import { APIPartialMessage } from '../common';
 
-export interface ChatMessageUpdated {
+export interface WSChatMessageUpdated {
     channelCategoryId: string | null;
     channelId: string;
     channelType: string;
     contentId: string;
     contentType: string;
     guildedClientId: string;
-    message: Pick<APIMessage, 'id' | 'content' | 'editedAt'>;
+    message: APIPartialMessage;
     silenceNotification: boolean;
     teamId: string;
     type: string;

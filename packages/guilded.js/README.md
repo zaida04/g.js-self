@@ -65,7 +65,6 @@ Documentation is located [here](https://guilded.js.org)
 - `@discordjs/collection`: Map utility
 - `ws`: WebSocket interaction
 - `@guildedjs/guilded-api-typings` (DEV DEP ONLY): used for typing the REST and WS payloads
-- `@guildedjs/guildedjs-rest`: Rest Util
 - `uuid` - Generate IDs for structures such as Messages
 
 ## TODO
