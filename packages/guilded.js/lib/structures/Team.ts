@@ -6,6 +6,9 @@ import type { Client } from "./Client";
 import {TeamGroupManager} from './managers/TeamGroupManager';
 import {TeamMemberManager} from './managers/TeamMemberManager';
  
+/**
+ * A team is the basis of Guilded, it is where TeamChannels, TeamMembers, and TeamRoles reside. 
+ */
 export class Team extends Base<APITeam | APIPartialTeam> {
     /**
      * Whether the current client is an admin of this team.

@@ -6,6 +6,9 @@ import type { Client } from './Client';
 import type {Team} from './Team';
 import type {User} from './User';
  
+/**
+ * Object representing received webhook data. This object is NOT to be used to send data to webhooks. That will be WebhookClient
+ */
 export class Webhook extends Base<APIWebhook> {
     /**
      * The username belonging to this webhook

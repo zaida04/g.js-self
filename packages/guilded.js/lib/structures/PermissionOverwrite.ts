@@ -2,6 +2,9 @@ import { APITeamChannelRolePermissionOverwrite, RolePermissions } from "@guilded
 import { TeamChannel } from "./Channel";
 import { Client } from "./Client";
 
+/**
+ * Object representing permission overwrites for a role on a team channel.
+ */
 export class RolePermissionOverwrite {
     /**
      * The ID of the team this overwrite belongs to.
