@@ -26,7 +26,7 @@ Please see the main [README.md](https://github.com/guildedjs/guilded.js) for inf
 Huge thank you to [Shay](https://github.com/shayypy) and the rest of the [Unofficial GuildedAPI Team](https://github.com/GuildedAPI). The third rewrite of these API typings were based entirely on https://guildedapi.com/, which they built.
 
 Thank you to [Vlad](https://github.com/vladfrangu) and the rest of the contributors at https://github.com/discordjs/discord-api-types for the structure in which I based my typings on.
-
+  
 ## LICENSE
 Licensed under the [MIT License](https://github.com/guildedjs/guildedjs/blob/master/LICENSE)
   

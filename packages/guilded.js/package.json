@@ -29,7 +29,7 @@
   "scripts": {
     "test": "npm run build && node ./__tests__/index.js",
     "build": "tsc",
-    "prepublishOnly": "npx rimraf dist/ && npm run build"
+    "prepublishOnly": "npx rimraf dist/ && npx rimraf types/ && npm run build"
   },
   "devDependencies": {
     "@guildedjs/guilded-api-typings": "^1.0.1",
