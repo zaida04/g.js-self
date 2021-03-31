@@ -8,6 +8,9 @@ import { resolveColor } from "../util/MessageUtil";
  * Taken from https://github.com/discordjs/discord.js/blob/stable/src/util/Util.js#L436
  */
 
+/**
+ * Guilded RichEmbeds are identical to Discord RicEmbeds.
+ */
 export class RichEmbed {
     public data: APIEmbed = {}
 

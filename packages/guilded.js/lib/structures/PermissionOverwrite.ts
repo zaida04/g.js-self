@@ -3,12 +3,39 @@ import { TeamChannel } from "./Channel";
 import { Client } from "./Client";
 
 export class RolePermissionOverwrite {
+    /**
+     * The ID of the team this overwrite belongs to.
+     */
     public readonly teamID: string;
+
+    /**
+     * The ID of the channel this overwrite belongs to.
+     */
     public readonly channelID: string;
+
+    /**
+     * Date this overwrite was created on.
+     */
     public readonly createdAt: Date;
+
+    /**
+     * Date this overwrite was last updated on.
+     */
     public readonly updatedAt: Date | null;
+
+    /**
+     * The ID of the role this overwrite belongs to.
+     */
     public readonly teamRoleID: string;
+
+    /**
+     * The permissions this overwrite currently has denied.
+     */
     public readonly denyPermissions: RolePermissions;
+
+    /**
+     * The permissions this overwrite currently has allowed.
+     */
     public readonly allowPermissions: RolePermissions;
     
     public constructor(public client: Client, data: APITeamChannelRolePermissionOverwrite, public channel: TeamChannel) { 

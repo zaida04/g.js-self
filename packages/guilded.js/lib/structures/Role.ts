@@ -8,16 +8,60 @@ import type {Team} from './Team';
  * A role belonging to a team
  */
 export class Role extends Base<APITeamRole> {
+    /**
+     * Whether this role is mentionable.
+     */
     public mentionable!: boolean;
+
+    /**
+     * The base permissions this role has.
+     */
     public permissions!: RolePermissions;
+
+    /**
+     * Whether this role is hoisted or not.
+     */
     public hoisted!: boolean;
+
+    /**
+     * Discord sync'ed role info.
+     */
     public discord: { roleID: string | null, syncedAt: Date | null };
+
+    /**
+     * Whether this role is self assignable by others.
+     */
     public selfAssignable!: boolean;
+
+    /**
+     * Date this role was created on.
+     * @readonly
+     */
     public readonly createdAt: Date;
+
+    /**
+     * ID of the team this role belongs to.
+     */
     public readonly teamID: string;
+
+    /**
+     * Date this role was last updated on.
+     */
     public updatedAt: Date | null;
+    
+    /**
+     * The position of this role.
+     */
     public priority!: number;
+
+    /**
+     * The color of this role.
+     */
     public color!: string;
+
+    /**
+     * The name of this role.
+     */
     public name!: string;
 
     public constructor(client: Client, data: APITeamRole, private _team: Team | null) {

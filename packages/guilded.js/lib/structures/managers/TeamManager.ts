@@ -1,4 +1,4 @@
-import type { APIPartialTeam, APITeam, APIGetTeam } from '@guildedjs/guilded-api-typings';
+import type { APIPartialTeam, APITeam, APIGetTeam, APIUser } from '@guildedjs/guilded-api-typings';
 
 import type { Client } from '../Client';
 import {Member} from '../Member';
@@ -16,6 +16,12 @@ export class TeamManager extends BaseManager<APITeam | APIPartialTeam, Team> {
         return team instanceof Team ? team.id : team;
     }
 
+    /**
+     * Add a role to a TeamMember
+     * @param team The ID or team object of the Team the target member is in.
+     * @param member The ID or member object of the Member that will have the role added to them.
+     * @param role The ID or role object of the Role to add to the member.
+     */
     public addRoleToMember(team: string | Team, member: string | Member, role: string | Role): Promise<void> {
         const roleID = role instanceof Role ? role.id : role;
         const memberID = TeamMemberManager.resolve(member);
@@ -23,6 +29,12 @@ export class TeamManager extends BaseManager<APITeam | APIPartialTeam, Team> {
         return this.client.rest.put(`/teams/${teamID}/roles/${roleID}/users/${memberID}`).then(() => void 0);
     }
 
+    /**
+     * Remove a role from a TeamMember
+     * @param team The ID or team object of the Team the target member is in.
+     * @param member The ID or member object of the Member that will have the role removed from them.
+     * @param role The ID or role object of the Role to remove from the member.
+     */
     public removeRoleFromMember(team: string | Team, member: string | Member, role: string | Role): Promise<void> {
         const roleID = role instanceof Role ? role.id : role;
         const memberID = TeamMemberManager.resolve(member);
@@ -30,33 +42,49 @@ export class TeamManager extends BaseManager<APITeam | APIPartialTeam, Team> {
         return this.client.rest.delete(`/teams/${teamID}/roles/${roleID}/users/${memberID}`).then(() => void 0);
     }
 
+    /**
+     * Kick a TeamMember
+     * @param team The ID or team object of the Team the target member is in.
+     * @param member The ID or member object of the Member that will be kicked
+     */
     public kickMember(team: string | Team, member: string | Member) {
         const memberID = TeamMemberManager.resolve(member);
         const teamID = TeamManager.resolve(team);
         return this.client.rest.delete(`/teams/${teamID}/members/${memberID}`);
     }
 
+    /**
+     * Set a TeamMember's name
+     * @param team The ID or team object of the Team the target member is in.
+     * @param member The ID or member object of the Member that will be renamed.
+     * @param newNickname The new nickname to give to the Member.
+     */
     public setMemberNickname(team: string | Team, member: string | Member, newNickname: string) {
         if(typeof newNickname !== "string") throw new TypeError("Nickname must be a string!");
         const memberID = TeamMemberManager.resolve(member);
         const teamID = TeamManager.resolve(team);
         return this.client.rest.put(`/teams/${teamID}/members/${memberID}/nickname`, { nickname: newNickname })
     }
+
     /**
      * Fetch a team, will retrieve from cache if exists
+     * @param id the ID of the team to fetch.
+     * @param cache Whether to cache the fetched Team or not.
      */
     public fetch(id: string, cache = true) {
-        const existing = this.cache.get(id);
-        if (existing) return existing;
-
         return this.client.rest.get<APIGetTeam>(`/teams/${id}`).then((data) => {
-            let newTeam
-            if (cache) {
-                newTeam = this.add(data.team);
-            } else {
-                newTeam = new Team(this.client, data.team);
+            const cachedTeam = this.client.teams.cache.get(id);
+
+            if(cache) {
+                cachedTeam?.patch(data.team);
+                for(const member of data.team.members) {
+                    const existingMember = cachedTeam?.members.cache.get(member.id);
+                    if(existingMember) existingMember.patch(member);
+                    else cachedTeam?.members.cache.set(member.id, new Member(this.client, member, cachedTeam));
+                }
+                return cachedTeam
             }
-            return newTeam; 
+            return new Team(this.client, data.team); 
         })
     }
 }

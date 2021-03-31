@@ -34,7 +34,7 @@ client.once('ready', async () => {
 
     try {
         console.log("...adding role");
-        await team.members.addRoleTo(process.env.GUINEAPIG_ID, process.env.ROLE_ID);
+        await client.teams.addRoleToMember(team.id, process.env.GUINEAPIG_ID, process.env.ROLE_ID);
         tester(COLORS.GREEN, "Role successfully added.");
         passed++;
     } catch(e) {
@@ -44,7 +44,7 @@ client.once('ready', async () => {
 
     try {
         console.log("...removing role");
-        await team.members.removeRoleFrom(process.env.GUINEAPIG_ID, process.env.ROLE_ID);
+        await client.teams.removeRoleFromMember(team.id, process.env.GUINEAPIG_ID, process.env.ROLE_ID);
         tester(COLORS.GREEN, "Role successfully removed.");
         passed++;
     } catch(e) {
