@@ -93,4 +93,4 @@ Please see the main [README.md](https://github.com/guildedjs/guilded.js) for inf
 - [`Discord.js`](https://discord.js.org/#/) - Inspiration and caching strategy
 
 ## LICENSE
-Licensed under the [MIT License](https://github.com/guildedjs/guildedjs/blob/master/LICENSE)
+Licensed under the [MIT License](https://github.com/guildedjs/guildedjs/blob/master/LICENSE)  
