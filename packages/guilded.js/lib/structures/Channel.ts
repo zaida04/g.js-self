@@ -222,7 +222,7 @@ import { RichEmbed } from "./RichEmbed";
 }
 
 /**
- * A channel between the client user and an other user(s) in DMs
+ * A channel residing in a Team
  */
  export class TeamChannel extends PartialChannel {
     /**

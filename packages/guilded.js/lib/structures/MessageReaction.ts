@@ -1,8 +1,11 @@
 import Collection from "@discordjs/collection";
-import { APIMessageReaction, WSReaction } from "@guildedjs/guilded-api-typings";
-import { Client } from "./Client";
-import {User} from "./User";
+import type { APIMessageReaction } from "@guildedjs/guilded-api-typings";
+import type { Client } from "./Client";
+import type {User} from "./User";
 
+/**
+ * Object representing information about a certain reaction emoji on a message. This is NOT an individual object of a specific reaction on a message.
+ */
 export class MessageReaction {
     /**
      * The users that have reacted with the emoji this message reaction belongs to. It will contain either fully fledged User objects if the users are cached before hand, or it will contain minimal data about the users.

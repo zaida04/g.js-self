@@ -3,6 +3,9 @@ import type { APIAlias, APIUser, APIUserStatus } from '@guildedjs/guilded-api-ty
 import {Base} from './Base';
 import { Client } from './Client';
  
+/**
+ * Object representing a user on the guilded.gg platform.
+ */
 export class User extends Base<APIUser> {
     /**
      * Addition info about this user

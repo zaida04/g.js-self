@@ -6,6 +6,9 @@ import {Base} from './Base';
 import type { Client } from "./Client";
 import {Message} from './Message';
 
+/**
+ * Object representing a message that doesn't have enough data to construct a regular message.
+ */
 export class PartialMessage extends Base<PartialMessageData> {
     /**
      * The channelID in which this message was sent. Will always be present, even if the channel isn't cached

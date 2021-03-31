@@ -9,6 +9,9 @@ import type { Client } from "./Client";
 import {MessageReaction} from './MessageReaction';
 import type {Team} from './Team';
 
+/**
+ * Object representing a message sent on the Guilded API. The difference between this class and PartialMessage, is this is constructed with full amounts of data and has the capability of keeping track of reactions.
+ */
 export class Message extends Base<APIMessage> {
     /**
      * The channelID in which this message was sent. Will always be present, even if the channel isn't cached
