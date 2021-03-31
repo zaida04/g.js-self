@@ -1,5 +1,8 @@
 import Collection from "@discordjs/collection";
 
+/**
+ * A collection with a max cap size, which will remove a random element
+ */
 export class CacheCollection<K, V> extends Collection<K,V> {
     public maxSize: number;
 

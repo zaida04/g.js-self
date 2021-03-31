@@ -5,7 +5,7 @@ import { APIUser } from './User';
 
 export interface APIDMChannel {
     id: string;
-    type: string;
+    type: CHANNEL_TYPES;
     name: string | null;
     description: string | null;
     users: APIUser[];

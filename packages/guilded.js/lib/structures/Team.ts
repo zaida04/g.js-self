@@ -24,6 +24,7 @@ export class Team extends Base<APITeam | APIPartialTeam> {
 
     /**
      * The date in which this team was created
+     * @readonly
      */
     public readonly createdAt: Date;
 
@@ -229,6 +230,7 @@ export class Team extends Base<APITeam | APIPartialTeam> {
 
     /**
      * Retrive the banner belonging to this server depending on size
+     * @param size the size of the returned image url.
      */
     public bannerURL(size: 'small' | 'medium' | 'large' = 'small'): string | null {
         let url;

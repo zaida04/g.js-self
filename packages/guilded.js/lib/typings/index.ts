@@ -1,5 +1,4 @@
 export * from "./BaseData"
-export * from "./ChannelTypes"
 export * from "./Constructable"
 export * from "./PartialMessageData"
 export * from "./WebSocketEvents"

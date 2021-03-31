@@ -1,5 +1,5 @@
 import Collection from "@discordjs/collection";
-import type { APITeamChannel, APIDMChannel, APIUser, CHANNEL_CONTENT_TYPES, APITeamRole } from "@guildedjs/guilded-api-typings";
+import type { APITeamChannel, APIDMChannel, APIUser, CHANNEL_CONTENT_TYPES, APITeamRole, CHANNEL_TYPES } from "@guildedjs/guilded-api-typings";
 import { Client } from "./Client";
 import type { BaseData } from "../typings/BaseData";
 import {Base} from "./Base";
@@ -9,8 +9,8 @@ import type {Message} from "./Message";
 import type {Role} from "./Role";
 import type {Team} from "./Team";
 import type {User} from "./User";
-import type {ConvertToMessageFormat} from "../util"
 import {RolePermissionOverwrite} from "./PermissionOverwrite";
+import { RichEmbed } from "./RichEmbed";
 
 /**
  * A partial channel, not enough data received however to construct a full channel type object.
@@ -18,13 +18,40 @@ import {RolePermissionOverwrite} from "./PermissionOverwrite";
  export class PartialChannel extends Base<BaseData> {
 
     /**
-     * The messages belonging to this channel
+     * The messages belonging to this channel.
+     * @readonly
      */
     public readonly messages: MessageManager | null;
+
+    /**
+     * The id of the Team this channel belongs to if it is a part of a Team.
+     */
     public teamID: string | null;
-    public readonly type: string;
-    public readonly contentType: string;
+
+    /**
+     * The type of this channel ("Team", "DM").
+     * @see {@link https://guilded.js.org/modules/guilded_js.html#channel_types}
+     * @readonly
+     */
+    public readonly type: CHANNEL_TYPES;
+
+    /**
+     * The content type of this channel ("chat", "voice", "forum", "doc").
+     * @see {@link https://guilded.js.org/modules/guilded_js.html#channel_content_types}
+     * @readonly
+     */
+    public readonly contentType: CHANNEL_CONTENT_TYPES;
+
+    /**
+     * The date in which this channel was created.
+     * @readonly
+     */
     public readonly createdAt: Date;
+
+    /**
+     * The user ID belonging to the creator of this Team.
+     * @readonly
+     */
     public readonly createdBy: string;
 
     public constructor(client: Client, data: Partial<APITeamChannel | APIDMChannel>, private _team: Team | null, patch = true) {
@@ -34,11 +61,15 @@ import {RolePermissionOverwrite} from "./PermissionOverwrite";
         this.createdAt = new Date(data.createdAt!);
         this.createdBy = data.createdBy!;
         this.type = data.type!;
+        this.teamID = "teamId" in data ? data.teamId! : null;
         this.contentType = data.contentType!;
         
         if(patch) this.patch(data);
     }
 
+    /**
+     * Getter for retrieving the team this channel belongs to if it is cached.
+     */
     get team(): Team | null {
         if(!this.teamID) return null;
         if(!this._team) return this._team;
@@ -49,41 +80,109 @@ import {RolePermissionOverwrite} from "./PermissionOverwrite";
     }
 
     /**
-     * Update the data in this structure
+     * Update the data in this structure.
      * @internal
      */
     public patch(data: Partial<APITeamChannel | APIDMChannel>) {
-        if(!this.teamID && "teamId" in data && data.teamId) this.teamID = data.teamId;
-
         return this;
     }
 
     /**
-     * Send a message to this channel, hoping that it's a text channel
+     * Send a message to this channel.
+     * @param content Either a string content or RichEmbed to send to this channel.
+     * @param embed A RichEmbed to send to this channel.
      */
-    public send(...args: Parameters<typeof ConvertToMessageFormat>): Promise<Message | string> {
-        return this.client.channels.sendMessage(this, ...args);
+    public send(content: string | RichEmbed, embed?: RichEmbed): Promise<Message | string> {
+        if(this.contentType !== "chat") throw new TypeError("This channel cannot have messages sent to it. It is not a chat channel.");
+        return this.client.channels.sendMessage(this, content, embed);
     }
 }
 
 /**
- * A channel between the client user and an other user(s) in DMs
+ * A channel between the client user and an other user(s) in DMs.
  */
  export class DMChannel extends PartialChannel {
-    public type = "dm";
+    /**
+     * The type of this channel.
+     * @defaultValue "DM"
+     * @readonly
+     */
+    public readonly type: CHANNEL_TYPES = "DM";
+
+    /**
+     * The name of the channel (group channels?).
+     */
     public name: string | null;
+
+    /**
+     * The description of the channel (group channels?).
+     */
     public description!: string | null;
-    public users: Collection<string, User | APIUser>;
+
+    /**
+     * The users that belong in this channel, including the client.
+     * @readonly
+     */
+    public readonly users: Collection<string, User | APIUser>;
+
+    /**
+     * Latest date this channel was updated.
+     */
     public updatedAt: Date | null;
+
+    /**
+     * The type of the content in this channel ("chat", "voice", "etc").
+     * @readonly
+     */
     public readonly contentType: CHANNEL_CONTENT_TYPES;
+
+    /**
+     * Date this channel was archived.
+     */
     public archivedAt: Date | null;
+
+    /**
+     * Date this channel will auto archive.
+     */
     public autoArchiveAt: Date | null;
+
+    /**
+     * The ID of the parent channel.
+     */
     public parentChannelID: string | null;
+
+    /**
+     * Date this channel was deleted.
+     */
     public deletedAt: Date | null;
+
+    /**
+     * The webhook that created this channel.
+     * @readonly
+     */
     public readonly createdByWebhookID: string | null;
+
+    /**
+     * The type of this dm channel (???)
+     * @readonly
+     */
     public readonly dmType = "Default";
+
+    /**
+     * The ID of the owner of this channel
+     * @readonly
+     */
     public readonly ownerID: string;
+
+    /**
+     * The manager in charge of the messages sent in this channel.
+     * @readonly
+     */
     public readonly messages: MessageManager;
+
+    /**
+     * The current participants in a voice call within this channel.
+     */
     public voiceParticipants: APIUser[];
 
     constructor(client: Client, data: APIDMChannel) {
@@ -126,31 +225,137 @@ import {RolePermissionOverwrite} from "./PermissionOverwrite";
  * A channel between the client user and an other user(s) in DMs
  */
  export class TeamChannel extends PartialChannel {
+    /**
+     * The type of this channel.
+     * @defaultValue "Team"
+     * @readonly
+     */
     public readonly type = "Team";
+
+    /**
+     * Latest date this channel was updated.
+     */
     public updatedAt: Date | null;
+
+    /**
+     * The name of the channel (group channels?).
+     */
     public name!: string;
+
+    /**
+     * The type of the content in this channel ("chat", "voice", "etc").
+     * @readonly
+     */
     public readonly contentType!: CHANNEL_CONTENT_TYPES;
+
+    /**
+     * Date this channel was archived.
+     */
     public archivedAt: Date | null;
+    
+    /**
+     * Date this channel will auto archive.
+     */
     public autoArchiveAt: Date | null;
+
+    /**
+     * The ID of the parent channel.
+     */
     public parentChannelID: string | null;
+
+    /**
+     * Date this channel was deleted.
+     */
     public deletedAt: Date | null;
+
+    /**
+     * The ID of the user who archived this channel.
+     */
     public archivedByID: string | null;
+
+    /**
+     * The description of this channel.
+     */
     public description: string | null;
+
+    /**
+     * The ID of the webhook that created this channel.
+     */
     public createdByWebhookID: string | null;
+
+    /**
+     * The ID of the webhook that archived this channel.
+     */
     public archivedByWebhookID!: string | null;
+
+    /**
+     * The ID of the team this channel belongs to.
+     */
     public teamID: string;
+
+    /**
+     * The ID of the category this channel belongs to.
+     */
     public channelCategoryID: string | null;
+
+    /**
+     * Date this channel was added (??).
+     */
     public addedAt:  Date | null;
+
+    /**
+     * Whether the roles are synced (with discord?).
+     */
     public roleSynced: boolean | null;
+
+    /**
+     * The role permission overwrites that belong to this channel.
+     */
     public roles: Collection<string, Role | RolePermissionOverwrite>;
+
+    /**
+     * Array of role IDs that have an overwrite in this channel.
+     */
     public roleIDs: string[];
+
+    /**
+     * Array of tournament role IDs.
+     */
     public tournamentRoleIDs: string[];
+    
+    /**
+     * Array of IDs belonging to users that have an overwrite in this channel.
+     */
     public userPermissions: string[];
+
+    /**
+     * Tournament roles.
+     */
     public tournamentRoles: Collection<string, Role | RolePermissionOverwrite>;
+
+    /**
+     * Whether this channel can be seen without joining the Team/Group.
+     */
     public public!: boolean;
+
+    /**
+     * Position of the group.
+     */
     public priority!: number;
+
+    /**
+     * The ID of the group this channel belongs to
+     */
     public groupID!: string;
+
+    /**
+     * The type of the group this channel belongs to
+     */
     public groupType!: string;
+
+    /**
+     * The manager in charge of messages sent in this channel ONLY IF THIS CHANNEL SUPPORTS MESSAGES
+     */
     public readonly messages: MessageManager | null;
 
     constructor(client: Client, data: APITeamChannel, _team: Team | null, private _group: Group | null) {
@@ -177,8 +382,9 @@ import {RolePermissionOverwrite} from "./PermissionOverwrite";
         this.patch(data);
     }
 
-
-
+    /**
+     * The group object this channel belongs to, if cached.
+     */
     get group(): Group | null {
         return this._group ?? this.team?.groups.cache.get(this.groupID.toString()) ?? null
     }

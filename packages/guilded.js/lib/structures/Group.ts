@@ -5,33 +5,114 @@ import {TeamGroupChannelManager} from "./managers/TeamGroupChannelManager";
 import type {Team} from "./Team";
 
 /**
- * A group residing within a Team that contains channels
+ * A group residing within a Team that contains channels.
  */
 export class Group extends Base<APIGroup> {
     
     /**
-     * The channels that belong to this group
+     * The channels that belong to this group.
      */
     public readonly channels: TeamGroupChannelManager;
+
+    /**
+     * The name of this group.
+     */
     public name!: string;
+
+    /**
+     * The description of this group.
+     */
     public description: string | null;
+
+    /**
+     * The position of this group.
+     */
     public priority: string | null;
+
+    /**
+     * The type of this group.
+     */
     public type: string;
+
+    /**
+     * The avatar hash of this group.
+     */
     public avatar: string | null;
+
+    /**
+     * The banner hash of this group.
+     */
     public banner: string | null;
+
+    /**
+     * The ID of the team this group belongs to.
+     * @readonly
+     */
     public teamID: string;
+
+    /**
+     * The ID of the game this group belongs to.
+     */
     public gameID: string | null;
+
+    /**
+     * The role required to see this group.
+     */
     public visibilityTeamRoleID: number;
+
+    /**
+     * The role required to be considered a member of this group.
+     */
     public membershipTeamRoleID: number;
+
+    /**
+     * If this is the base group of the team this group belongs to.
+     */
     public isBase!: boolean;
+
+    /**
+     * The ID of the user that created this group.
+     */
     public readonly createdByID: string | null;
+
+    /**
+     * Date this group was created on.
+     */
     public readonly createdAt: Date;
+
+    /**
+     * The ID of the user that last updated this group.
+     */
     public updatedBy: string | null;
+
+    /**
+     * Date this group was last updated.
+     */
     public updatedAt: Date | null;
+
+    /**
+     * Date this group was deleted at.
+     */
     public deletedAt: Date | null;
+
+    /**
+     * ID of the custom reaction tied to this group.
+     */
     public customReactionID: string | null;
+
+    /**
+     * Whether this group is public or not (can be seen without being a member).
+     */
     public public!: boolean;
+
+    /**
+     * Date this group was archived at.
+     */
     public archivedAt: Date | null;
+
+    /**
+     * The ID of the user that archived this group.
+     */
     public archivedBy: string | null;
 
     public constructor(client: Client, data: APIGroup, public team: Team | null) {

@@ -9,22 +9,32 @@ import {Message} from './Message';
 export class PartialMessage extends Base<PartialMessageData> {
     /**
      * The channelID in which this message was sent. Will always be present, even if the channel isn't cached
+     * @readonly
      */
     public readonly channelID!: string;
 
+    /**
+     * The ID of the team this channel belongs to
+     * @readonly
+     */
     public readonly teamID!: string;
 
     /**
      * The plain text content that this message has
      */
-     public content!: string;
+    public content!: string;
 
     /**
      * The parsed but unjoined content that this message has
      */
     public parsedContent!: MessageUtil.parsedMessage;
 
-    public partial = true;
+    /**
+     * A boolean indicating that this is infact a partial message.
+     * @readonly
+     * @defaultValue true
+     */
+    public readonly partial = true;
 
     public constructor(client: Client, data: PartialMessageData) {
         super(client, data);
@@ -45,6 +55,9 @@ export class PartialMessage extends Base<PartialMessageData> {
         return this;
     }
 
+    /**
+     * Fetch a complete version of this message from the api, will error if the message has been deleted or isn't accessible by the client.
+     */
     public fetch(): Promise<Message> {
         return this.client.channels.fetchMessage(this.channelID, this.id);
     }

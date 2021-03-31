@@ -46,6 +46,7 @@ export class Client extends EventEmitter {
 
     /**
      * The User belonging to this Client
+     * @readonly
      */
     public user: ClientUser | null = null;
 
@@ -63,16 +64,19 @@ export class Client extends EventEmitter {
 
     /**
      * The teams that this client is in
+     * @readonly
      */
     public readonly teams = new TeamManager(this);
 
     /**
      * The channels that this client can access
+     * @readonly
      */
     public readonly channels = new ChannelManager(this);
 
     /**
      * The users belonging to anything handled by this client
+     * @readonly
      */
     public readonly users = new UserManager(this);
 
@@ -120,6 +124,7 @@ export class Client extends EventEmitter {
 
     /**
      * Set the password of this client.
+     * @param newPassword the new password to set the current password to.
      */
     public setPassword(newPassword: string) {
         if(typeof newPassword !== "string") throw new TypeError("Expecting a string password for password change.");
@@ -128,6 +133,7 @@ export class Client extends EventEmitter {
 
     /**
      * Destroy the current connection to the API
+     * @param intentionToReconnect Whether or not you want the client to reconnect immediately. Used internally for handling WS disconnects
      */
     public destroy(intentionToReconnect = false): void {
         if(intentionToReconnect) {

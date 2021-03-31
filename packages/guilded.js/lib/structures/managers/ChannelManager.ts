@@ -5,7 +5,7 @@ import { PartialChannel } from '../Channel';
 
 import type { Client } from '../Client';
 import { Message } from '../Message';
-import { RichEmbed} from '../RichEmbed';
+import { PartialMessage } from '../PartialMessage';
 import { BaseManager } from './BaseManager';
 import { MessageManager } from './MessageManager';
 
@@ -20,6 +20,7 @@ export class ChannelManager extends BaseManager<APITeamChannel, TeamChannel | DM
 
     /**
      * Send a message to a channel, using either the object or channel ID.
+     * @param channel The ID or channel object of the target channel to send this message to
      */
     public sendMessage(channel: string | PartialChannel, ...args: Parameters<typeof ConvertToMessageFormat>) {
         const channelID = ChannelManager.resolve(channel);
@@ -32,8 +33,11 @@ export class ChannelManager extends BaseManager<APITeamChannel, TeamChannel | DM
 
     /**
      * Fetch a message from a channel from the API
+     * @param channel The ID or channel object of the taret channel to fetch the message from.
+     * @param message The ID, message object, or partial message object of the message to fetch.
+     * @param cache Whether to cache the fetched message or not.
      */
-    public fetchMessage(channel: string | PartialChannel, message: string | Message, cache = true): Promise<Message> {
+    public fetchMessage(channel: string | PartialChannel, message: string | Message | PartialMessage, cache = true): Promise<Message> {
         const channelID = ChannelManager.resolve(channel);
         const messageID = MessageManager.resolve(message);
         return this.client.rest.get<APIGetChannelMessageResult>(`/channels/${channelID}/chat&messageId=${messageID}`).then(x => {
@@ -48,14 +52,17 @@ export class ChannelManager extends BaseManager<APITeamChannel, TeamChannel | DM
     }
 
     /**
-     * Delete a message
+     * Delete a message from a channel.
+     * @param channel The ID or channel object of the channel to delete the message from.
+     * @param msg The ID or message object of the message to delete.
      */
-    public deleteMessage(channel: string, msg: string | Message) {
+    public deleteMessage(channel: string | PartialChannel, msg: string | Message) {
         if(!msg) throw new TypeError("Expected a string or message object for message deletion.");
 
+        const channelID = ChannelManager.resolve(channel);
         const messageID = MessageManager.resolve(msg);
-        return this.client.rest.delete(`/channels/${channel}/messages/${messageID}`).then((x) => {
-            const existingChannel = this.cache.get(channel);
+        return this.client.rest.delete(`/channels/${channelID}/messages/${messageID}`).then((x) => {
+            const existingChannel = this.cache.get(channelID);
             const existingMessage = existingChannel?.messages?.cache.get(messageID);
 
             if(existingMessage) existingMessage.deleted = true;

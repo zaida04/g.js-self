@@ -1,5 +1,4 @@
-import type { APITeamChannel } from '@guildedjs/guilded-api-typings';
-import type { CHANNEL_TYPES } from '../../typings/ChannelTypes';
+import type { APITeamChannel, CHANNEL_TYPES } from '@guildedjs/guilded-api-typings';
 
 import { TeamChannel } from '../Channel';
 import type { Client } from '../Client';
@@ -11,6 +10,9 @@ export class TeamGroupChannelManager extends BaseManager<APITeamChannel, TeamCha
         super(client, TeamChannel, { maxSize: client.options?.cache?.cacheMaxSize?.channelsCache });
     }
 
+    /**
+     * Create a channel in the group this manager belongs to.
+     */
     public create({name, parent, type, isPublic = true}: { name: string, parent?: string, type: CHANNEL_TYPES, isPublic: boolean }) {
         return this.client.rest.post(`/teams/${this.group.team?.id}/groups/${this.group.id}/channels`, {
             name,

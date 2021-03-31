@@ -12,6 +12,7 @@ import type {Team} from './Team';
 export class Message extends Base<APIMessage> {
     /**
      * The channelID in which this message was sent. Will always be present, even if the channel isn't cached
+     * @readonly
      */
     public readonly channelID!: string;
 
@@ -45,6 +46,13 @@ export class Message extends Base<APIMessage> {
      */
     public reactions: Collection<string, MessageReaction>;
 
+    /**
+     * A boolean indicating that this message is NOT partial
+     * @readonly
+     * @defaultValue false
+     */
+    public readonly partial = false;
+
     public constructor(client: Client, data: APIMessage, private _channel: DMChannel | TeamChannel | PartialChannel | null) {
         super(client, data);
 
@@ -73,6 +81,9 @@ export class Message extends Base<APIMessage> {
         return this;
     }
 
+    /**
+     * Retrieve the channel object that this message belongs to.
+     */
     get channel(): DMChannel | TeamChannel | PartialChannel | null {
         if(!this._channel) return this._channel;
         const cachedChannel = this.client.channels.cache.get(this.channelID) as TeamChannel;
