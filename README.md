@@ -1,4 +1,4 @@
-> ### ⚠️ This project is in an Alpha stage, be weary of bugs. API Coverage is lacking at this point, will be waiting for the official Guilded API before adding more features. This library only works with selfbots for now. Selfbots are a gray zone in Guilded, so use this library at your own risk.
+> ### ⚠️ This project is in the works, but is usable. Be weary of bugs. This library only works with selfbots for now. Selfbots are a gray zone in Guilded, so use this library at your own risk.
 
 <div align="center">
     <img src="media/readme-header.png" width="546" alt="guildedjs"/>
