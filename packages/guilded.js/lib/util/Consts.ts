@@ -51,4 +51,4 @@ export const CONSTANTS = {
     TEAM_BANNER: (hash: string, size?: IMG_SIZE) => `${CONSTANTS.CDN}/TeamBanner/${hash}${size ? `-${size}` : ""}.png`
 };
 
-export const upload_image = (client: Client, file: FormData) => client.cdn.post<{url: string}>(`/media/upload`, { file: FormData });
+export const uploadImage = (client: Client, file: FormData) => client.cdn.post<{url: string}>(`/media/upload`, { file });

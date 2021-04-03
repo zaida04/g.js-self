@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import fetch, { Response } from 'node-fetch';
-
+import { sleep } from "../util";
 import { GuildedAPIError } from './GuildedAPIError';
-
-const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
 
 export class RestManager {
     public apiURL: string;
