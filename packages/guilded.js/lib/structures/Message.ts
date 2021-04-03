@@ -95,6 +95,10 @@ export class Message extends Base<APIMessage> {
         return cachedChannel;
     }
 
+    get author() {
+        return this.client.users.cache.get(this.authorID) ?? null;
+    }
+
     /**
      * Add a reaction to this message (UNFINISHED)
      * @hidden
