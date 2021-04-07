@@ -29,7 +29,7 @@ import type { User } from './User';
  * })
  * ```
  */
-export class Client extends EventEmitter {
+export class Client extends EventEmitter implements ClientEvents {
     /**
      * Manager in charge of managing REST requests to the guilded API
      * @private
@@ -160,7 +160,7 @@ export class Client extends EventEmitter {
     }
 }
 
-export interface Client {
+export interface ClientEvents {
     /**
      * Fired when a reaction is removed from a message
      * @event
