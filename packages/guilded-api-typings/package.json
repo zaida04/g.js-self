@@ -1,6 +1,6 @@
 {
   "name": "@guildedjs/guilded-api-typings",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Typings for the guilded API",
   "keywords": [
     "guilded",
