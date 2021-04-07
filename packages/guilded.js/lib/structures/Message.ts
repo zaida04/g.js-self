@@ -1,5 +1,6 @@
 import Collection from '@discordjs/collection';
 import type { APIMessage } from '@guildedjs/guilded-api-typings';
+import type { UpgradedMessageData } from '../typings/UpgradedMessageData';
 
 import * as MessageUtil from '../util/MessageUtil';
 import {Base} from './Base';
@@ -40,9 +41,9 @@ export class Message extends Base<APIMessage> {
     public readonly authorID!: string;
 
     /**
-     * The team in which this message was sent in, if any
+     * The ID of the team this message was sent in
      */
-    public readonly team!: Team | null;
+    public readonly teamID: string | null;
 
     /**
      * Reactions on this message
@@ -56,12 +57,15 @@ export class Message extends Base<APIMessage> {
      */
     public readonly partial = false;
 
-    public constructor(client: Client, data: APIMessage, private _channel: DMChannel | TeamChannel | PartialChannel | null) {
+    private _team: Team | null;
+
+    public constructor(client: Client, data: UpgradedMessageData, private _channel: DMChannel | TeamChannel | PartialChannel | null) {
         super(client, data);
 
         this.authorID = data.createdBy;
         this.channelID = data.channelId;
-        this.team = this.channel instanceof TeamChannel ? (this.channel.team ?? null) : null;
+        this.teamID = data.teamId ?? null;
+        this._team = this.channel instanceof TeamChannel ? (this.channel.team ?? null) : this.teamID && this.client.teams.cache.get(this.teamID) || null;
         this.reactions = new Collection();
         this.patch(data);
     }
@@ -82,6 +86,17 @@ export class Message extends Base<APIMessage> {
             }
         }
         return this;
+    }
+
+    /**
+     * Retrieve the team object that channel this message belongs to belongs to.
+     */
+     get team(): Team | null {
+        if(!this._team) return this._team;
+        const cachedTeam = this.teamID && this.client.teams.cache.get(this.teamID);
+        if(!cachedTeam) return null;        
+        this._team = cachedTeam;
+        return cachedTeam;
     }
 
     /**

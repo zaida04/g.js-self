@@ -17,10 +17,12 @@ client.prefix = "gg!";
 // client.on("raw", (a) => console.log(a));
 // client.on("debug", (a) => console.log(a));
 
+client.on(Guilded.events.MESSAGE_REACTION_ADD, console.log);
+
 /**
  * Testing login
  */
-client.once('ready', async () => {
+client.once(Guilded.events.READY, async () => {
     let passed = 0;
     let failed = 0;
 
@@ -118,7 +120,7 @@ client.on("debug", (data, additional_info) => {
 })
 */
 
-client.on('messageCreate', async message => {
+client.on(Guilded.events.MESSAGE_CREATE, async message => {
     if(!message.content.startsWith(client.prefix)) return;
     const args = message.content.split(/ /g);
     const command = args.shift().slice(client.prefix.length);

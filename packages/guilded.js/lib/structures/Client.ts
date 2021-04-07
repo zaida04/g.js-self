@@ -2,7 +2,7 @@ import type { APIGetCurrentUser } from '@guildedjs/guilded-api-typings';
 import {RestManager} from '../rest/RestManager';
 import { EventEmitter } from 'events';
 
-import type { WebSocketEvents } from '../typings/WebSocketEvents';
+import type { events } from '../typings/WebSocketEvents';
 import * as Util from '../util';
 import {ClientGatewayHandler} from '../ws/ClientGatewayHandler';
 import { DMChannel } from './Channel';
@@ -12,6 +12,8 @@ import {TeamManager} from './managers/TeamManager';
 import {UserManager} from './managers/UserManager';
 import type {Message} from './Message';
 import {Team} from './Team';
+import type { MessageReaction } from './MessageReaction';
+import type { User } from './User';
 
 
 /**
@@ -160,6 +162,12 @@ export class Client extends EventEmitter {
 
 export interface Client {
     /**
+     * Fired when a reaction is added to a message
+     * @event
+     */
+    on(event: "messageReactionAdd", listener: (reaction: MessageReaction, reacter: User | string) => any): this;
+
+    /**
      * Fired when a message is sent
      * @event
      */
@@ -237,7 +245,7 @@ export interface ClientOptions {
     }
     ws: {
         heartbeatInterval: number;
-        disabledEvents: WebSocketEvents[];
+        disabledEvents: events[];
         disallowReconnect: boolean;
         reconnectLimit: number;
         blockTeamWSConnection: boolean;
