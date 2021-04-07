@@ -1,10 +1,11 @@
-import { WSChatMessageCreated, WSChatMessageReactionAdd, WSChatMessageUpdated, WSGatewayReady } from '@guildedjs/guilded-api-typings';
+import type { WSChatMessageCreated, WSChatMessageReactionAdded, WSChatMessageUpdated, WSGatewayReady, WSChatMessageReactionDeleted } from '@guildedjs/guilded-api-typings';
 import WebSocket from 'ws';
 
 import type { Client } from '../structures/Client';
 import { events, websocket_events } from '../typings';
 import ChatMessageCreatedEvent from './events/ChatMessageCreated';
 import ChatMessageReactionAddedEvent from './events/ChatMessageReactionAdded';
+import ChatMessageReactionDeletedEvent from './events/ChatMessageReactionDeleted';
 import ChatMessageUpdatedEvent from './events/ChatMessageUpdated';
 import GatewayHandler from './GatewayHandler';
 
@@ -16,6 +17,7 @@ export class ClientGatewayHandler extends GatewayHandler {
         ChatMessageCreated: new ChatMessageCreatedEvent(this.client),
         ChatMessageReactionAdded: new ChatMessageReactionAddedEvent(this.client),
         ChatMessageUpdated: new ChatMessageUpdatedEvent(this.client),
+        ChatMessageReactionDeleted: new ChatMessageReactionDeletedEvent(this.client)
     };
     constructor(client: Client) {
         super(client);
@@ -47,13 +49,6 @@ export class ClientGatewayHandler extends GatewayHandler {
         return this;
     }
 
-    // TODO: Separate actions in switch case statement
-    /*
-        Action Types:
-        - ChatMessageCreated
-        - ChatMessageUpdated
-        - ChatMessageReactionAdded
-    */
     dataRecieved(incomingData: string): void {
         let data: string = incomingData;
         let opCode = '';
@@ -63,7 +58,6 @@ export class ClientGatewayHandler extends GatewayHandler {
             opCode += char;
         }
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         try {
             switch (Number(opCode)) {
                 case 0: {
@@ -105,25 +99,31 @@ export class ClientGatewayHandler extends GatewayHandler {
                     
                     if (this.client.options?.ws?.disabledEvents?.includes(event_name)) return;
                     this.client.emit('raw', event_name, event_data);
+
+                    let result: (boolean | string)[] | undefined;
                     switch (event_name) {
                         case websocket_events.CHAT_MESSAGE_CREATED: {
-                            const result = this.events.ChatMessageCreated.ingest(event_data as WSChatMessageCreated);
-                            if (!result[0]) this.client.debug(`Event dropped because of ${result[1]}`);
+                            result = this.events.ChatMessageCreated.ingest(event_data as WSChatMessageCreated);
                             break;
                         }
                         case websocket_events.CHAT_MESSAGE_UPDATED: {
-                            const result = this.events.ChatMessageUpdated.ingest(event_data as WSChatMessageUpdated);
-                            if (!result[0]) this.client.debug(`Event dropped because of ${result[1]}`);
+                            result = this.events.ChatMessageUpdated.ingest(event_data as WSChatMessageUpdated);
                             break;
                         }
-                        case websocket_events.CHAT_MESSAGE_REACTION_ADD: {
-                            const result = this.events.ChatMessageReactionAdded.ingest(
-                                event_data as WSChatMessageReactionAdd,
+                        case websocket_events.CHAT_MESSAGE_REACTION_ADDED: {
+                            result = this.events.ChatMessageReactionAdded.ingest(
+                                event_data as WSChatMessageReactionAdded,
                             );
-                            if (!result[0]) this.client.debug(`Event dropped because of ${result[1]}`);
+                            break;
+                        }
+                        case websocket_events.CHAT_MESSAGE_REACTION_DELETED: {
+                            result = this.events.ChatMessageReactionDeleted.ingest(
+                                event_data as WSChatMessageReactionDeleted,
+                            );
                             break;
                         }
                     }
+                    if (!result?.[0]) this.client.debug(`Event dropped because of ${result?.[1]}`);
                     break;
                 }
             }
