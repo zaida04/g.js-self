@@ -1,6 +1,6 @@
 {
   "name": "@guildedjs/guilded.js",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A Node.js library for the Guilded.gg (https://www.guilded.gg/) API written in TypeScript, usable in either JavaScript or TypeScript projects.",
   "types": "types/index.d.ts",
   "keywords": [
@@ -32,7 +32,7 @@
     "prepublishOnly": "npx rimraf dist/ && npx rimraf types/ && npm run build"
   },
   "devDependencies": {
-    "@guildedjs/guilded-api-typings": "^1.0.2",
+    "@guildedjs/guilded-api-typings": "^1.0.4",
     "@types/node": "^14.14.9",
     "@types/node-fetch": "^2.5.8",
     "@types/uuid": "^8.3.0",
