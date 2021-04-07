@@ -2,6 +2,7 @@ import { WSChatMessageCreated, WSChatMessageReactionAdd, WSChatMessageUpdated, W
 import WebSocket from 'ws';
 
 import type { Client } from '../structures/Client';
+import { events, websocket_events } from '../typings';
 import ChatMessageCreatedEvent from './events/ChatMessageCreated';
 import ChatMessageReactionAddedEvent from './events/ChatMessageReactionAdded';
 import ChatMessageUpdatedEvent from './events/ChatMessageUpdated';
@@ -89,7 +90,7 @@ export class ClientGatewayHandler extends GatewayHandler {
 
                 case 40: {
                     this.client.debug('Ready event recieved.');
-                    this.client.emit('ready');
+                    this.client.emit(events.READY);
                     break;
                 }
 
@@ -105,17 +106,17 @@ export class ClientGatewayHandler extends GatewayHandler {
                     if (this.client.options?.ws?.disabledEvents?.includes(event_name)) return;
                     this.client.emit('raw', event_name, event_data);
                     switch (event_name) {
-                        case 'ChatMessageCreated': {
+                        case websocket_events.CHAT_MESSAGE_CREATED: {
                             const result = this.events.ChatMessageCreated.ingest(event_data as WSChatMessageCreated);
                             if (!result[0]) this.client.debug(`Event dropped because of ${result[1]}`);
                             break;
                         }
-                        case 'ChatMessageUpdated': {
+                        case websocket_events.CHAT_MESSAGE_UPDATED: {
                             const result = this.events.ChatMessageUpdated.ingest(event_data as WSChatMessageUpdated);
                             if (!result[0]) this.client.debug(`Event dropped because of ${result[1]}`);
                             break;
                         }
-                        case 'ChatMessageReactionAdded': {
+                        case websocket_events.CHAT_MESSAGE_REACTION_ADD: {
                             const result = this.events.ChatMessageReactionAdded.ingest(
                                 event_data as WSChatMessageReactionAdd,
                             );

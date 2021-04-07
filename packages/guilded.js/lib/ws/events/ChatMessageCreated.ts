@@ -3,6 +3,7 @@ import type { Client } from '../../structures/Client';
 import {Message} from '../../structures/Message';
 import Event from './Event';
 import { PartialChannel} from '../../structures';
+import { events } from '../../typings';
 
 export default class ChatMessageCreatedEvent extends Event {
     constructor(client: Client) {
@@ -18,8 +19,8 @@ export default class ChatMessageCreatedEvent extends Event {
                 this.client.channels.cache.set(channel.id, channel);
             }
 
-            const newMessage = new Message(this.client, { channelId: data.channelId, ...data.message }, channel)!;
-            this.client.emit('messageCreate', newMessage);
+            const newMessage = new Message(this.client, { channelId: data.channelId, teamId: data.teamId, ...data.message }, channel)!;
+            this.client.emit(events.MESSAGE_CREATE, newMessage);
             channel.messages!.cache.set(newMessage.id, newMessage);
             return [true];
         }

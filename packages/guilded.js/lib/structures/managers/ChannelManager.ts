@@ -22,7 +22,7 @@ export class ChannelManager extends BaseManager<APITeamChannel, TeamChannel | DM
      * Send a message to a channel, using either the object or channel ID.
      * @param channel The ID or channel object of the target channel to send this message to
      */
-    public sendMessage(channel: string | PartialChannel, ...args: Parameters<typeof ConvertToMessageFormat>) {
+    public sendMessage(channel: string | PartialChannel, ...args: Parameters<typeof ConvertToMessageFormat>): Promise<Message | string> {
         const channelID = ChannelManager.resolve(channel);
         const [id, formattedContent] = ConvertToMessageFormat(...args);
         
@@ -47,6 +47,7 @@ export class ChannelManager extends BaseManager<APITeamChannel, TeamChannel | DM
                 this.client.channels.add(targetChannel);
             }
             const newMessage = new Message(this.client, x, targetChannel!);
+            targetChannel!.messages!.cache.set(newMessage.id, newMessage);
             return newMessage;
         })
     }
