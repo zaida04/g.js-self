@@ -1,4 +1,4 @@
-import { WSChatMessageReactionAdd } from '@guildedjs/guilded-api-typings';
+import { WSChatMessageReactionAdded } from '@guildedjs/guilded-api-typings';
 import { MessageReaction } from '../../structures';
 
 import type { Client } from '../../structures/Client';
@@ -9,7 +9,7 @@ export default class ChatMessageReactionAddedEvent extends Event {
     constructor(client: Client) {
         super(client);
     }
-    public ingest(data: WSChatMessageReactionAdd): (string | boolean)[] {
+    public ingest(data: WSChatMessageReactionAdded) {
         if(data) {
             const reacter = this.client.users.cache.get(data.reaction.createdBy);
             const channel = this.client.channels.cache.get(data.channelId);

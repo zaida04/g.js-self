@@ -1,4 +1,4 @@
-import { APITeamChannel, WSChatMessageCreated } from '@guildedjs/guilded-api-typings';
+import { WSChatMessageCreated } from '@guildedjs/guilded-api-typings';
 import type { Client } from '../../structures/Client';
 import {Message} from '../../structures/Message';
 import Event from './Event';
@@ -9,7 +9,7 @@ export default class ChatMessageCreatedEvent extends Event {
     constructor(client: Client) {
         super(client);
     }
-    public ingest(data: WSChatMessageCreated): (string | boolean)[] {
+    public ingest(data: WSChatMessageCreated) {
         if (data) {
             let channel = this.client.channels.cache.get(data.channelId);
             let team = (data.teamId ? this.client.teams.cache.get(data.teamId) : null) ?? null;

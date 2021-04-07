@@ -9,7 +9,7 @@ export default class ChatMessageUpdatedEvent extends Event {
     constructor(client: Client) {
         super(client);
     }
-    public ingest(data: WSChatMessageUpdated): (string | boolean)[] {
+    public ingest(data: WSChatMessageUpdated) {
         if(data) {
             const channel = this.client.channels.cache.get(data.channelId);
             const oldMessage = channel?.messages?.cache.get(data.message.id);

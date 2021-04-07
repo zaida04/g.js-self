@@ -14,10 +14,11 @@ const client = new Guilded.Client({
 });
 client.prefix = "gg!";
 
-// client.on("raw", (a) => console.log(a));
+// client.on("raw", (a, b) => console.log(a, b));
 // client.on("debug", (a) => console.log(a));
 
-client.on(Guilded.events.MESSAGE_REACTION_ADD, console.log);
+client.on(Guilded.events.MESSAGE_REACTION_ADD, (a) => console.log(`REACTION ADDED: ${a.id}`));
+client.on(Guilded.events.MESSAGE_REACTION_DELETE, (a) => console.log(`REACTION REMOVED: ${a.id}`));
 
 /**
  * Testing login
