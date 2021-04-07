@@ -162,6 +162,12 @@ export class Client extends EventEmitter {
 
 export interface Client {
     /**
+     * Fired when a reaction is removed from a message
+     * @event
+     */
+    on(event: "messageReactionDelete", listener: (reaction: MessageReaction, remover: User | string) => any): this;
+
+    /**
      * Fired when a reaction is added to a message
      * @event
      */
@@ -175,6 +181,7 @@ export interface Client {
 
     /**
      * Fired when a message is updated
+     * @event
      */
     on(event: 'messageUpdate', listener: (oldMessage: Message, newMessage: Message) => any): this;
 
