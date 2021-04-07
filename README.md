@@ -84,12 +84,8 @@ Documentation is viewable here: https://guilded.js.org
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+As you start to contribute your beginner workflow should look similar to this:   
+`fork repo` ->  `clone repo` -> `cd into the repo` -> `npm install` -> `npm run bootstrap` -> `npm run build` -> `create new branch` -> `your code changes` -> `npm run lint` -> `npm run build` -> `commit & push changes` -> `open pull request`
 
 **Please ensure your commits pass the tests, lints, and builds. This means you should test it locally before pushing.**
 
