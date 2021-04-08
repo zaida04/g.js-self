@@ -56,8 +56,8 @@ export class RichEmbed {
         return this;
     }
 
-    public setTimestamp(date: Date | number = Date.now()) {
-        this.data.timestamp = (date instanceof Date ? date.getTime() : date).toString();
+    public setTimestamp(date: Date = new Date()) {
+        this.data.timestamp = date.toISOString();
         return this;
     }
 
