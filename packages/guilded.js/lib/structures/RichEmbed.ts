@@ -51,7 +51,7 @@ export class RichEmbed {
         return this;
     }
 
-    public setColor(color: string | number) {
+    public setColor(color: string | number | [number, number, number]) {
         this.data.color = resolveColor(color);
         return this;
     }
