@@ -12,10 +12,10 @@ import { resolveColor } from "../util/MessageUtil";
  * Guilded RichEmbeds are identical to Discord RicEmbeds.
  */
 export class RichEmbed {
-    public data: APIEmbed = {}
+    public data: APIEmbed = {};
 
     public constructor(data?: APIEmbed) {
-        if(data) this.data = data;
+        if (data) this.data = data;
     }
 
     public setFooter(text: string, icon_url?: string) {
@@ -39,22 +39,25 @@ export class RichEmbed {
     }
 
     public addField(name: string, value: string, inline?: boolean) {
-        this.addFields({name, value, inline});
+        this.addFields({ name, value, inline });
         return this;
     }
 
-    public addFields(...fields: { inline?: boolean, name: string, value: string }[]) {
+    public addFields(...fields: { inline?: boolean; name: string; value: string }[]) {
+        if (!this.data.fields) {
+            this.data.fields = [];
+        }
         this.data.fields?.push(...fields);
         return this;
     }
 
-    public setColor(color: string | number) {
+    public setColor(color: string | number | [number, number, number]) {
         this.data.color = resolveColor(color);
         return this;
     }
 
-    public setTimestamp(date: Date | number = Date.now()) {
-        this.data.timestamp = (date instanceof Date ? date.getTime() : date).toString();
+    public setTimestamp(date: Date = new Date()) {
+        this.data.timestamp = date.toISOString();
         return this;
     }
 
@@ -83,18 +86,18 @@ export class RichEmbed {
             fields: this.data.fields,
             thumbnail: this.data.thumbnail,
             image: this.data.image,
-            author: this.data.author ? 
-                {
-                    name: this.data.author.name,
-                    icon_url: this.data.author.icon_url
-                } 
+            author: this.data.author
+                ? {
+                      name: this.data.author.name,
+                      icon_url: this.data.author.icon_url,
+                  }
                 : undefined,
-            footer: this.data.footer ? 
-                {
-                    text: this.data.footer.text,
-                    icon_url: this.data.footer.icon_url,
-                }
-                : undefined
+            footer: this.data.footer
+                ? {
+                      text: this.data.footer.text,
+                      icon_url: this.data.footer.icon_url,
+                  }
+                : undefined,
         };
     }
 }
