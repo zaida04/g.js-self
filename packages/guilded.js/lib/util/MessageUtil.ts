@@ -268,7 +268,7 @@ export function resolveColor(color: string | number | [number, number, number]):
         if (color === "DEFAULT") return 0;
         resolvedColor = CONSTANTS.COLORS[color] || parseInt(color.replace("#", ""), 16);
     } else if (Array.isArray(color)) {
-        resolvedColor = (color[0] << 16) | (color[1] << 8) | color[2];
+        color = (color[0] << 16) | (color[1] << 8) | color[2];
     }
 
     if (color < 0 || color > 0xffffff) throw new RangeError("COLOR_RANGE");
