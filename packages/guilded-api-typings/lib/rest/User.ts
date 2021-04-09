@@ -12,7 +12,7 @@ import {
  * Get User
  * @destination /users/:id
  */
-export interface APIGetUser extends Record<string, any> {
+export interface APIGetUser {
     user: APIUser;
 }
 
@@ -20,7 +20,7 @@ export interface APIGetUser extends Record<string, any> {
  * Get Current User
  * @destination /me
  */
-export interface APIGetCurrentUser extends Record<string, any> {
+export interface APIGetCurrentUser {
     updateMessage: string | null;
     user: APIClientUser;
     teams: APITeam[];
@@ -33,7 +33,7 @@ export interface APIGetCurrentUser extends Record<string, any> {
  * Modify Current User
  * @destination /users/:userID/profilev2
  */
-export interface APIPutCurrentUserBody extends Record<string, any> {
+export interface APIPutCurrentUserBody {
     name: string;
     avatar: string;
     subdomain: string;
@@ -56,7 +56,7 @@ export type APIDeleteUserTeam = never;
  * Login the Client
  * @destination /login
  */
-export interface APIPostLoginResponse extends Record<string, any> {
+export interface APIPostLoginResponse {
     user: Omit<APIUser, 'userStatus' | 'email' | 'profileBannerSm'>;
 }
 
@@ -64,7 +64,7 @@ export interface APIPostLoginResponse extends Record<string, any> {
  * Create DM Channel
  * @destination /users/:id/channels
  */
-export interface APIGetUserDMChannels extends Record<string, any> {
+export interface APIGetUserDMChannels {
     channels: APIDMChannel[];
     unreadInfoByChannelId: unknown;
     users: any[];

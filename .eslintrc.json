@@ -1,6 +1,6 @@
 {
     "root": true,
-    "ignorePatterns": ["__tests__/**", "node_modules/**", "dist/**", "types/**", "*.js", "*.d.ts"],
+    "ignorePatterns": ["__tests__/**", "node_modules/**", "dist/**", "types/**", "*.d.ts"],
     "parser": "@typescript-eslint/parser",
     "extends": [
         "plugin:@typescript-eslint/recommended",
@@ -34,32 +34,9 @@
         "@typescript-eslint/explicit-member-accessibility": "warn",
         "no-template-curly-in-string": "warn",
         "no-unsafe-negation": "warn",
-        "valid-jsdoc": [
-            "warn",
-            {
-                "requireReturn": false,
-                "requireReturnDescription": false,
-                "prefer": {
-                    "return": "returns",
-                    "arg": "param"
-                },
-                "preferType": {
-                    "String": "string",
-                    "Number": "number",
-                    "Boolean": "boolean",
-                    "Symbol": "symbol",
-                    "object": "Object",
-                    "function": "Function",
-                    "array": "Array",
-                    "date": "Date",
-                    "warn": "warn",
-                    "null": "void"
-                }
-            }
-        ],
+        "valid-jsdoc": "off",
         "accessor-pairs": "warn",
         "array-callback-return": "warn",
-        "consistent-return": "warn",
         "curly": [
             "warn",
             "multi-line",
@@ -80,6 +57,7 @@
         "no-new": "warn",
         "@typescript-eslint/no-empty-interface": "warn",
         "@typescript-eslint/no-empty-function": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
         "no-octal-escape": "warn",
         "no-return-assign": "warn",
         "no-return-await": "warn",
@@ -92,7 +70,6 @@
         "no-useless-concat": "warn",
         "no-useless-escape": "warn",
         "no-useless-return": "warn",
-        "no-void": "warn",
         "no-warning-comments": "warn",
         "require-await": "warn",
         "wrap-iife": "warn",
@@ -148,7 +125,7 @@
         "max-depth": "warn",
         "max-len": [
             "warn",
-            120,
+            150,
             2
         ],
         "max-nested-callbacks": [
@@ -186,7 +163,7 @@
         "no-trailing-spaces": "warn",
         "no-unneeded-ternary": "warn",
         "no-whitespace-before-property": "warn",
-        "nonblock-statement-body-position": "warn",
+        "nonblock-statement-body-position": "off",
         "object-curly-spacing": [
             "warn",
             "always"

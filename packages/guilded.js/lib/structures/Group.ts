@@ -1,14 +1,14 @@
-import type { APIGroup } from "@guildedjs/guilded-api-typings";
-import {Base} from "./Base";
-import type { Client } from "./Client";
-import {TeamGroupChannelManager} from "./managers/TeamGroupChannelManager";
-import type {Team} from "./Team";
+import type { APIGroup } from '@guildedjs/guilded-api-typings';
+
+import { Base } from './Base';
+import type { Client } from './Client';
+import { TeamGroupChannelManager } from './managers/TeamGroupChannelManager';
+import type { Team } from './Team';
 
 /**
  * A group residing within a Team that contains channels.
  */
 export class Group extends Base<APIGroup> {
-    
     /**
      * The channels that belong to this group.
      */
@@ -127,14 +127,14 @@ export class Group extends Base<APIGroup> {
         this.gameID = null;
         this.visibilityTeamRoleID = data.visibilityTeamRoleId;
         this.membershipTeamRoleID = data.membershipTeamRoleId;
-        this.createdByID = data.createdBy
+        this.createdByID = data.createdBy;
         this.createdAt = new Date(data.createdAt);
         this.updatedAt = null;
         this.updatedBy = null;
-        this.deletedAt = null;   
+        this.deletedAt = null;
         this.customReactionID = null;
         this.archivedAt = null;
-        this.archivedBy = null;     
+        this.archivedBy = null;
 
         this.patch(data);
     }
@@ -143,20 +143,28 @@ export class Group extends Base<APIGroup> {
      * Update the data in this structure
      * @internal
      */
-    public patch(data: APIGroup | Partial<APIGroup>) {
-        if("name" in data && data.name !== undefined) this.name = data.name;
-        if("description" in data && data.description !== undefined) this.description = data.description;
-        if("priority" in data && data.priority !== undefined) this.priority = data.priority;
-        if("type" in data && data.type !== undefined) this.type = data.type;
-        if("avatar" in data && data.avatar !== undefined) this.avatar = data.avatar;
-        if("banner" in data && data.banner !== undefined) this.banner = data.banner;
-        if("updatedBy" in data && data.updatedBy !== undefined) this.updatedBy = data.updatedBy ?? null;
-        if("updatedAt" in data && data.updatedAt !== undefined) this.updatedAt = data.updatedAt ? new Date(data.updatedAt) : null;
-        if("deletedAt" in data && data.deletedAt !== undefined) this.deletedAt = data.deletedAt ? new Date(data.deletedAt) : null;
-        if("customReactionId" in data && data.customReactionId !== undefined) this.customReactionID = data.customReactionId;
-        if("isPublic" in data && data.isPublic !== undefined) this.public = data.isPublic;
-        if("archivedAt" in data && data.archivedAt !== undefined) this.archivedAt = data.archivedAt ? new Date(data.archivedAt) : null;
-        if("archivedBy" in data && data.archivedBy !== undefined) this.archivedBy = data.archivedBy ?? null;
+    public patch(data: APIGroup | Partial<APIGroup>): this {
+        if ('name' in data && data.name !== undefined) this.name = data.name;
+        if ('description' in data && data.description !== undefined) this.description = data.description;
+        if ('priority' in data && data.priority !== undefined) this.priority = data.priority;
+        if ('type' in data && data.type !== undefined) this.type = data.type;
+        if ('avatar' in data && data.avatar !== undefined) this.avatar = data.avatar;
+        if ('banner' in data && data.banner !== undefined) this.banner = data.banner;
+        if ('updatedBy' in data && data.updatedBy !== undefined) this.updatedBy = data.updatedBy ?? null;
+        if ('updatedAt' in data && data.updatedAt !== undefined) {
+            this.updatedAt = data.updatedAt ? new Date(data.updatedAt) : null;
+        }
+        if ('deletedAt' in data && data.deletedAt !== undefined) {
+            this.deletedAt = data.deletedAt ? new Date(data.deletedAt) : null;
+        }
+        if ('customReactionId' in data && data.customReactionId !== undefined) {
+            this.customReactionID = data.customReactionId;
+        }
+        if ('isPublic' in data && data.isPublic !== undefined) this.public = data.isPublic;
+        if ('archivedAt' in data && data.archivedAt !== undefined) {
+            this.archivedAt = data.archivedAt ? new Date(data.archivedAt) : null;
+        }
+        if ('archivedBy' in data && data.archivedBy !== undefined) this.archivedBy = data.archivedBy ?? null;
         return this;
     }
 }

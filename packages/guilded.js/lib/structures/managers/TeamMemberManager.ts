@@ -1,10 +1,9 @@
-import type { APIMember, APIPartialTeam, APITeam } from '@guildedjs/guilded-api-typings';
+import type { APIMember } from '@guildedjs/guilded-api-typings';
 
 import type { Client } from '../Client';
-import {Member} from '../Member';
-import {Role} from '../Role';
-import type {Team} from '../Team';
-import {BaseManager} from './BaseManager';
+import { Member } from '../Member';
+import type { Team } from '../Team';
+import { BaseManager } from './BaseManager';
 
 export class TeamMemberManager extends BaseManager<APIMember, Member> {
     public constructor(client: Client, public readonly team: Team) {

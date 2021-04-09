@@ -1,13 +1,14 @@
-import type { APIMeasurements, APIPartialTeam, APITeam, APIGetTeamChannels } from '@guildedjs/guilded-api-typings';
- 
-import {Base} from './Base';
+import Collection from '@discordjs/collection';
+import type { APIGetTeamChannels, APIMeasurements, APIPartialTeam, APITeam } from '@guildedjs/guilded-api-typings';
+
+import { Base } from './Base';
 import { TeamChannel } from './Channel';
-import type { Client } from "./Client";
-import {TeamGroupManager} from './managers/TeamGroupManager';
-import {TeamMemberManager} from './managers/TeamMemberManager';
- 
+import type { Client } from './Client';
+import { TeamGroupManager } from './managers/TeamGroupManager';
+import { TeamMemberManager } from './managers/TeamMemberManager';
+
 /**
- * A team is the basis of Guilded, it is where TeamChannels, TeamMembers, and TeamRoles reside. 
+ * A team is the basis of Guilded, it is where TeamChannels, TeamMembers, and TeamRoles reside.
  */
 export class Team extends Base<APITeam | APIPartialTeam> {
     /**
@@ -31,11 +32,11 @@ export class Team extends Base<APITeam | APIPartialTeam> {
      */
     public readonly createdAt: Date;
 
-    /** 
+    /**
      * The description of this team
-    */
+     */
     public description!: string;
-    
+
     /**
      * Whether the current client has this team favorited
      */
@@ -50,7 +51,7 @@ export class Team extends Base<APITeam | APIPartialTeam> {
      * Whether people can be invited to this team
      */
     public invitable: boolean | null;
-    
+
     /**
      * The measurement system that this team goes by
      */
@@ -82,7 +83,7 @@ export class Team extends Base<APITeam | APIPartialTeam> {
     public pro!: boolean;
 
     /**
-     * icon of this team
+     * Icon of this team
      */
     public profilePicture!: string;
 
@@ -100,7 +101,7 @@ export class Team extends Base<APITeam | APIPartialTeam> {
      * The subdomain belonging to this team
      */
     public subdomain!: string;
-    
+
     /**
      * The main timezone of this team
      */
@@ -109,16 +110,16 @@ export class Team extends Base<APITeam | APIPartialTeam> {
     /**
      * The type of this team
      */
-    public type: string | null; 
-    
+    public type: string | null;
+
     /**
      * Whether this team is verified or not
      */
     public verified!: boolean;
 
-    /** 
+    /**
      * The ID of the main group belonging to this team
-    */
+     */
     public baseGroupID!: string;
 
     /**
@@ -147,7 +148,7 @@ export class Team extends Base<APITeam | APIPartialTeam> {
         medium: string | null;
         large: string | null;
     };
-    
+
     public constructor(client: Client, data: APITeam) {
         super(client, data);
         this.createdAt = new Date(data.createdAt);
@@ -186,8 +187,9 @@ export class Team extends Base<APITeam | APIPartialTeam> {
     public patch(data: Partial<APITeam> | APITeam): this {
         if ('isAdmin' in data && data.isAdmin !== undefined) this.admin = data.isAdmin;
         if ('baseGroup' in data && data.baseGroup !== undefined) this.baseGroupID = data.baseGroup.id;
-        if ('isUserBannedFromTeam' in data && data.isUserBannedFromTeam !== undefined)
+        if ('isUserBannedFromTeam' in data && data.isUserBannedFromTeam !== undefined) {
             this.banned = data.isUserBannedFromTeam;
+        }
         if ('bio' in data && data.bio !== undefined) this.bio = data.bio;
         if ('description' in data && data.description !== undefined) this.description = data.description;
         if ('isFavorite' in data && data.isFavorite !== undefined) this.favorited = data.isFavorite;
@@ -205,18 +207,22 @@ export class Team extends Base<APITeam | APIPartialTeam> {
         if ('type' in data && data.type !== undefined) this.type = data.type;
         if ('isVerified' in data && data.isVerified !== undefined) this.verified = data.isVerified;
         if ('discordGuildId' in data && data.discordGuildId !== undefined) this.discord.guild_id = data.discordGuildId;
-        if ('discordServerName' in data && data.discordServerName !== undefined)
+        if ('discordServerName' in data && data.discordServerName !== undefined) {
             this.discord.name = data.discordServerName;
+        }
         if ('games' in data && data.games) this.games = data.games;
-        if ('homeBannerImageLg' in data && data.homeBannerImageLg !== undefined)
+        if ('homeBannerImageLg' in data && data.homeBannerImageLg !== undefined) {
             this.banners.large = data.homeBannerImageLg;
-        if ('homeBannerImageMd' in data && data.homeBannerImageMd !== undefined)
+        }
+        if ('homeBannerImageMd' in data && data.homeBannerImageMd !== undefined) {
             this.banners.medium = data.homeBannerImageMd;
-        if ('homeBannerImageSm' in data && data.homeBannerImageSm !== undefined)
+        }
+        if ('homeBannerImageSm' in data && data.homeBannerImageSm !== undefined) {
             this.banners.small = data.homeBannerImageSm;
- 
+        }
+
         if (!this.client.options?.cache?.disableMembers && 'members' in data && data.members?.length) {
-            for(const member of data.members) {
+            for (const member of data.members) {
                 this.members.add(member);
             }
         }
@@ -227,8 +233,10 @@ export class Team extends Base<APITeam | APIPartialTeam> {
     /**
      * Create an invite to this team
      */
-    public createInvite() {
-        return this.client.rest.post(`/teams/${this.id}/invites`, { teamId: this.id }).then(x => x.data.invite.id);
+    public createInvite(): Promise<string> {
+        return this.client.rest
+            .post(`/teams/${this.id}/invites`, { teamId: this.id })
+            .then(x => x.data.invite.id as string);
     }
 
     /**
@@ -257,29 +265,36 @@ export class Team extends Base<APITeam | APIPartialTeam> {
         return url ?? null;
     }
 
-    public fetch() {
+    public fetch(): Promise<Team> {
         return this.client.teams.fetch(this.id);
     }
 
     /**
      * Fetch all the channels belonging to this team
      */
-    public fetchChannels() {
-        return this.client.rest.get<APIGetTeamChannels>(`/teams/${this.id}/channels`).then((x) => {
+    public fetchChannels(cache = true): Promise<Collection<string, TeamChannel>> {
+        const fetchedChannels = new Collection<string, TeamChannel>();
+
+        return this.client.rest.get<APIGetTeamChannels>(`/teams/${this.id}/channels`).then(x => {
             for (const channel of x.channels) {
                 const group = this.groups.cache.get(channel.groupId.toString());
-                switch (channel.contentType) {
-                    case "chat": {
-                        const tempChannel = new TeamChannel(this.client, channel, this, group ?? null);
-                        group?.channels.add(tempChannel);
-                        break;
-                    }
-                    case "voice": {
-                        // add voice channel logic
-                        break;
+                const newChannel = new TeamChannel(this.client, channel, this, group ?? null);
+                fetchedChannels.set(newChannel.id, newChannel);
+
+                if (cache) {
+                    switch (channel.contentType) {
+                        case 'chat': {
+                            group?.channels.add(newChannel);
+                            break;
+                        }
+                        case 'voice': {
+                            // Add voice channel logic
+                            break;
+                        }
                     }
                 }
             }
-        })
+            return fetchedChannels;
+        });
     }
 }

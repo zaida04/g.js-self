@@ -1,11 +1,11 @@
 import type { APIWebhook } from '@guildedjs/guilded-api-typings';
- 
-import {Base} from './Base';
+
+import { Base } from './Base';
 import type { TeamChannel } from './Channel';
 import type { Client } from './Client';
-import type {Team} from './Team';
-import type {User} from './User';
- 
+import type { Team } from './Team';
+import type { User } from './User';
+
 /**
  * Object representing received webhook data. This object is NOT to be used to send data to webhooks. That will be WebhookClient
  */
@@ -21,7 +21,7 @@ export class Webhook extends Base<APIWebhook> {
     public channelID: string;
 
     /**
-     * The ID of the team this webhook belongs to 
+     * The ID of the team this webhook belongs to
      */
     public teamID: string;
 
@@ -48,7 +48,7 @@ export class Webhook extends Base<APIWebhook> {
     private _team: Team | null;
     private _createdBy: User | null;
 
-    public constructor(client: Client, data: APIWebhook, private _channel: TeamChannel | null) { 
+    public constructor(client: Client, data: APIWebhook, private _channel: TeamChannel | null) {
         super(client, data);
         this.createdAt = new Date(data.createdAt);
         this.deletedAt = null;
@@ -64,10 +64,10 @@ export class Webhook extends Base<APIWebhook> {
     /**
      * The channel object this webhook belongs to if cached
      */
-    get channel(): TeamChannel | null {
-        if(!this._channel) return this._channel;
+    public get channel(): TeamChannel | null {
+        if (!this._channel) return this._channel;
         const cachedChannel = this.client.channels.cache.get(this.channelID) as TeamChannel;
-        if(!cachedChannel) return null;        
+        if (!cachedChannel) return null;
         this._channel = cachedChannel;
         return cachedChannel;
     }
@@ -75,10 +75,10 @@ export class Webhook extends Base<APIWebhook> {
     /**
      * The User object of the user that created this webhook if cached
      */
-    get createdBy(): User | null {
-        if(!this._createdBy) return this._createdBy;
+    public get createdBy(): User | null {
+        if (!this._createdBy) return this._createdBy;
         const cachedUser = this.client.users.cache.get(this.createdByID);
-        if(!cachedUser) return null;        
+        if (!cachedUser) return null;
         this._createdBy = cachedUser;
         return cachedUser;
     }
@@ -86,10 +86,10 @@ export class Webhook extends Base<APIWebhook> {
     /**
      * The team object this webhook belongs to if cached
      */
-    get team(): Team | null {
-        if(!this._team) return this._team;
+    public get team(): Team | null {
+        if (!this._team) return this._team;
         const cachedTeam = this.client.teams.cache.get(this.teamID);
-        if(!cachedTeam) return null;        
+        if (!cachedTeam) return null;
         this._team = cachedTeam;
         return cachedTeam;
     }
@@ -97,14 +97,14 @@ export class Webhook extends Base<APIWebhook> {
     /**
      * Update the data in this structure
      * @internal
-     */  
+     */
     public patch(data: APIWebhook | Partial<APIWebhook>): this {
         if ('name' in data && data.name !== undefined) this.name = data.name;
         if ('iconUrl' in data && data.iconUrl !== undefined) this.iconURL = data.iconUrl;
-        if ('deletedAt' in data && data.deletedAt !== undefined)
+        if ('deletedAt' in data && data.deletedAt !== undefined) {
             this.deletedAt = data.deletedAt ? new Date(data.deletedAt) : null;
- 
+        }
+
         return this;
     }
 }
- 

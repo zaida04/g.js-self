@@ -1,7 +1,8 @@
 import type { APIClientUser, APIDevice, APIUser } from '@guildedjs/guilded-api-typings';
+
 import type { Client } from './Client';
-import {User} from './User';
- 
+import { User } from './User';
+
 /**
  * The user belonging to this client
  */
@@ -9,28 +10,28 @@ export class ClientUser extends User {
     /**
      * List of users that this client has blocked
      */
-    blockedUsers: any[];
+    public blockedUsers: any[];
 
     /**
      * Connections with other social media this client has
      */
-    socialLinks: any[];
+    public socialLinks: any[];
 
     /**
      * Badges this client owns
      */
-    badges: any[];
-    
+    public badges: any[];
+
     /**
      * The type of presence this client has
      */
-    userPresenceStatus!: number;
+    public userPresenceStatus!: number;
 
     /**
      * Information regarding the devices that have been used with this client
      */
-    devices: APIDevice[];
- 
+    public devices: APIDevice[];
+
     public constructor(client: Client, data: APIClientUser) {
         super(client, data as APIUser);
         this.blockedUsers = data.blockedUsers ?? [];
@@ -50,19 +51,23 @@ export class ClientUser extends User {
         return this;
     }
 
-    public setPresence(presence: "online" | "idle" | "dnd" | "invisible") {
+    public setPresence(presence: 'online' | 'idle' | 'dnd' | 'invisible'): Promise<this> {
         const newPresence = PRECENSES[presence];
-        if(!newPresence) throw new TypeError(`Incorrect status option. Expected online, idle, dnd, or invisible. Recieved ${presence}`);
+        if (!newPresence) {
+            throw new TypeError(
+                `Incorrect status option. Expected online, idle, dnd, or invisible. Recieved ${presence}`,
+            );
+        }
 
-        return this.client.rest.post("/users/me/presence", {status: newPresence}).then(() => {
+        return this.client.rest.post('/users/me/presence', { status: newPresence }).then(() => {
             this.userPresenceStatus = newPresence;
             return this;
         });
     }
 
-    public setUsername(newUsername: string) {
-        if(typeof newUsername !== "string") throw new TypeError("Expected a string for username change.");
-        return this.client.rest.put(`/users/${this.id}/profilev2`, {name: newUsername}).then(() => this);
+    public setUsername(newUsername: string): Promise<this> {
+        if (typeof newUsername !== 'string') throw new TypeError('Expected a string for username change.');
+        return this.client.rest.put(`/users/${this.id}/profilev2`, { name: newUsername }).then(() => this);
     }
 }
 
@@ -70,5 +75,5 @@ const PRECENSES = {
     online: 1,
     idle: 2,
     dnd: 3,
-    invisible: 4
-}
+    invisible: 4,
+};
