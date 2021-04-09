@@ -1,22 +1,28 @@
-import Collection from "@discordjs/collection";
-import type { APITeamChannel, APIDMChannel, APIUser, CHANNEL_CONTENT_TYPES, APITeamRole, CHANNEL_TYPES } from "@guildedjs/guilded-api-typings";
-import { Client } from "./Client";
-import type { BaseData } from "../typings/BaseData";
-import {Base} from "./Base";
-import type {Group} from "./Group";
-import {MessageManager} from "./managers/MessageManager";
-import type {Message} from "./Message";
-import type {Role} from "./Role";
-import type {Team} from "./Team";
-import type {User} from "./User";
-import {RolePermissionOverwrite} from "./PermissionOverwrite";
-import { RichEmbed } from "./RichEmbed";
+import Collection from '@discordjs/collection';
+import type {
+    APIDMChannel,
+    APITeamChannel,
+    APIUser,
+    CHANNEL_CONTENT_TYPES,
+    CHANNEL_TYPES,
+} from '@guildedjs/guilded-api-typings';
+
+import type { BaseData } from '../typings/BaseData';
+import { Base } from './Base';
+import { Client } from './Client';
+import type { Group } from './Group';
+import { MessageManager } from './managers/MessageManager';
+import type { Message } from './Message';
+import { RolePermissionOverwrite } from './PermissionOverwrite';
+import { RichEmbed } from './RichEmbed';
+import type { Role } from './Role';
+import type { Team } from './Team';
+import type { User } from './User';
 
 /**
  * A partial channel, not enough data received however to construct a full channel type object.
  */
- export class PartialChannel extends Base<BaseData> {
-
+export class PartialChannel extends Base<BaseData> {
     /**
      * The messages belonging to this channel.
      * @readonly
@@ -54,27 +60,32 @@ import { RichEmbed } from "./RichEmbed";
      */
     public readonly createdBy: string;
 
-    public constructor(client: Client, data: Partial<APITeamChannel | APIDMChannel>, private _team: Team | null, patch = true) {
+    public constructor(
+        client: Client,
+        data: Partial<APITeamChannel | APIDMChannel>,
+        private _team: Team | null,
+        patch = true,
+    ) {
         super(client, data as { id: string });
-        this.teamID = _team?.id ?? ("teamId" in data && data.teamId ? data.teamId : null) ?? null;
+        this.teamID = _team?.id ?? ('teamId' in data && data.teamId ? data.teamId : null) ?? null;
         this.messages = new MessageManager(this.client, this);
         this.createdAt = new Date(data.createdAt!);
         this.createdBy = data.createdBy!;
         this.type = data.type!;
-        this.teamID = "teamId" in data ? data.teamId! : null;
+        this.teamID = 'teamId' in data ? data.teamId! : null;
         this.contentType = data.contentType!;
-        
-        if(patch) this.patch(data);
+
+        if (patch) this.patch(data);
     }
 
     /**
      * Getter for retrieving the team this channel belongs to if it is cached.
      */
-    get team(): Team | null {
-        if(!this.teamID) return null;
-        if(!this._team) return this._team;
+    public get team(): Team | null {
+        if (!this.teamID) return null;
+        if (!this._team) return this._team;
         const cachedTeam = this.client.teams.cache.get(this.teamID);
-        if(!cachedTeam) return null;        
+        if (!cachedTeam) return null;
         this._team = cachedTeam;
         return cachedTeam;
     }
@@ -83,7 +94,7 @@ import { RichEmbed } from "./RichEmbed";
      * Update the data in this structure.
      * @internal
      */
-    public patch(data: Partial<APITeamChannel | APIDMChannel>) {
+    public patch(data: Partial<APITeamChannel | APIDMChannel>): this {
         return this;
     }
 
@@ -93,7 +104,9 @@ import { RichEmbed } from "./RichEmbed";
      * @param embed A RichEmbed to send to this channel.
      */
     public send(content: string | RichEmbed, embed?: RichEmbed): Promise<Message | string> {
-        if(this.contentType !== "chat") throw new TypeError("This channel cannot have messages sent to it. It is not a chat channel.");
+        if (this.contentType !== 'chat') {
+            throw new TypeError('This channel cannot have messages sent to it. It is not a chat channel.');
+        }
         return this.client.channels.sendMessage(this, content, embed);
     }
 }
@@ -101,13 +114,13 @@ import { RichEmbed } from "./RichEmbed";
 /**
  * A channel between the client user and an other user(s) in DMs.
  */
- export class DMChannel extends PartialChannel {
+export class DMChannel extends PartialChannel {
     /**
      * The type of this channel.
      * @defaultValue "DM"
      * @readonly
      */
-    public readonly type: CHANNEL_TYPES = "DM";
+    public readonly type: CHANNEL_TYPES = 'DM';
 
     /**
      * The name of the channel (group channels?).
@@ -166,7 +179,7 @@ import { RichEmbed } from "./RichEmbed";
      * The type of this dm channel (???)
      * @readonly
      */
-    public readonly dmType = "Default";
+    public readonly dmType = 'Default';
 
     /**
      * The ID of the owner of this channel
@@ -185,7 +198,7 @@ import { RichEmbed } from "./RichEmbed";
      */
     public voiceParticipants: APIUser[];
 
-    constructor(client: Client, data: APIDMChannel) {
+    public constructor(client: Client, data: APIDMChannel) {
         super(client, data, null, false);
         this.contentType = data.contentType;
         this.createdByWebhookID = data.createdByWebhookId;
@@ -203,34 +216,45 @@ import { RichEmbed } from "./RichEmbed";
     }
 
     public patch(data: APIDMChannel | Partial<APIDMChannel>): this {
-        if("name" in data && data.name !== undefined) this.name = data.name ?? null;
-        if("description" in data && data.description !== undefined) this.description = data.description;
-        if("users" in data && data.users !== undefined) {
-            for(const user of data.users) {
+        if ('name' in data && data.name !== undefined) this.name = data.name ?? null;
+        if ('description' in data && data.description !== undefined) this.description = data.description;
+        if ('users' in data && data.users !== undefined) {
+            for (const user of data.users) {
                 this.users.set(user.id, this.client.users.cache.get(user.id) ?? user);
             }
         }
-        if("updatedAt" in data && data.updatedAt !== undefined) this.updatedAt = data.updatedAt ? new Date(data.updatedAt) : null;
-        if("archivedAt" in data && data.archivedAt !== undefined) this.archivedAt = data.archivedAt ? new Date(data.archivedAt) : null;
-        if("autoArchiveAt" in data && data.autoArchiveAt !== undefined) this.autoArchiveAt = data.autoArchiveAt ? new Date(data.autoArchiveAt) : null;
-        if("parentChannelId" in data && data.parentChannelId !== undefined) this.parentChannelID = data.parentChannelId ?? null;
-        if("deletedAt" in data && data.deletedAt !== undefined) this.deletedAt = data.deletedAt ? new Date(data.deletedAt) : null;
-        if("voiceParticipants" in data && data.voiceParticipants !== undefined) this.voiceParticipants = data.voiceParticipants;   
+        if ('updatedAt' in data && data.updatedAt !== undefined) {
+            this.updatedAt = data.updatedAt ? new Date(data.updatedAt) : null;
+        }
+        if ('archivedAt' in data && data.archivedAt !== undefined) {
+            this.archivedAt = data.archivedAt ? new Date(data.archivedAt) : null;
+        }
+        if ('autoArchiveAt' in data && data.autoArchiveAt !== undefined) {
+            this.autoArchiveAt = data.autoArchiveAt ? new Date(data.autoArchiveAt) : null;
+        }
+        if ('parentChannelId' in data && data.parentChannelId !== undefined) {
+            this.parentChannelID = data.parentChannelId ?? null;
+        }
+        if ('deletedAt' in data && data.deletedAt !== undefined) {
+            this.deletedAt = data.deletedAt ? new Date(data.deletedAt) : null;
+        }
+        if ('voiceParticipants' in data && data.voiceParticipants !== undefined) {
+            this.voiceParticipants = data.voiceParticipants;
+        }
         return this;
     }
-
 }
 
 /**
  * A channel residing in a Team
  */
- export class TeamChannel extends PartialChannel {
+export class TeamChannel extends PartialChannel {
     /**
      * The type of this channel.
      * @defaultValue "Team"
      * @readonly
      */
-    public readonly type = "Team";
+    public readonly type = 'Team';
 
     /**
      * Latest date this channel was updated.
@@ -252,7 +276,7 @@ import { RichEmbed } from "./RichEmbed";
      * Date this channel was archived.
      */
     public archivedAt: Date | null;
-    
+
     /**
      * Date this channel will auto archive.
      */
@@ -301,7 +325,7 @@ import { RichEmbed } from "./RichEmbed";
     /**
      * Date this channel was added (??).
      */
-    public addedAt:  Date | null;
+    public addedAt: Date | null;
 
     /**
      * Whether the roles are synced (with discord?).
@@ -322,7 +346,7 @@ import { RichEmbed } from "./RichEmbed";
      * Array of tournament role IDs.
      */
     public tournamentRoleIDs: string[];
-    
+
     /**
      * Array of IDs belonging to users that have an overwrite in this channel.
      */
@@ -358,9 +382,9 @@ import { RichEmbed } from "./RichEmbed";
      */
     public readonly messages: MessageManager | null;
 
-    constructor(client: Client, data: APITeamChannel, _team: Team | null, private _group: Group | null) {
+    public constructor(client: Client, data: APITeamChannel, _team: Team | null, private _group: Group | null) {
         super(client, data, _team, false);
-        this.messages = data.contentType === "chat" ? new MessageManager(this.client, this) : null;
+        this.messages = data.contentType === 'chat' ? new MessageManager(this.client, this) : null;
         this.teamID = _team?.id ?? data.teamId;
         this.updatedAt = null;
         this.archivedAt = null;
@@ -385,37 +409,57 @@ import { RichEmbed } from "./RichEmbed";
     /**
      * The group object this channel belongs to, if cached.
      */
-    get group(): Group | null {
-        return this._group ?? this.team?.groups.cache.get(this.groupID.toString()) ?? null
+    public get group(): Group | null {
+        return this._group ?? this.team?.groups.cache.get(this.groupID.toString()) ?? null;
     }
 
     public patch(data: APITeamChannel | Partial<APITeamChannel>): this {
-        if("name" in data && data.name !== undefined) this.name = data.name ?? null;
-        if("description" in data && data.description !== undefined) this.description = data.description;
-        if("updatedAt" in data && data.updatedAt !== undefined) this.updatedAt = data.updatedAt ? new Date(data.updatedAt) : null;
-        if("archivedAt" in data && data.archivedAt !== undefined) this.archivedAt = data.archivedAt ? new Date(data.archivedAt) : null;
-        if("autoArchiveAt" in data && data.autoArchiveAt !== undefined) this.autoArchiveAt = data.autoArchiveAt ? new Date(data.autoArchiveAt) : null;
-        if("isPublic" in data && data.isPublic !== undefined) this.public = data.isPublic;
-        if("priority" in data && data.priority !== undefined) this.priority = data.priority;
-        if("groupId" in data && data.groupId !== undefined) this.groupID = data.groupId.toString();        
-        if("parentChannelId" in data && data.parentChannelId !== undefined) this.parentChannelID = data.parentChannelId;
-        if("archivedBy" in data && data.archivedBy !== undefined) this.archivedByID = data.archivedBy;
-        if("archivedByWebhookId" in data && data.archivedByWebhookId !== undefined) this.archivedByWebhookID = data.archivedByWebhookId;
-        if("channelCategoryId" in data && data.channelCategoryId !== undefined) this.channelCategoryID = data.channelCategoryId;
-        if("deletedAt" in data && data.deletedAt !== undefined) this.deletedAt = data.deletedAt ? new Date(data.deletedAt) : null;
-        if("addedAt" in data && data.addedAt !== undefined) this.addedAt = data.addedAt ? new Date(data.addedAt) : null;
-        if("isRoleSynced" in data && data.isRoleSynced !== undefined) this.roleSynced = data.isRoleSynced;
-        if("rolesById" in data && data.rolesById !== undefined) {
-            for(const role in data.rolesById) {
+        if ('name' in data && data.name !== undefined) this.name = data.name ?? null;
+        if ('description' in data && data.description !== undefined) this.description = data.description;
+        if ('updatedAt' in data && data.updatedAt !== undefined) {
+            this.updatedAt = data.updatedAt ? new Date(data.updatedAt) : null;
+        }
+        if ('archivedAt' in data && data.archivedAt !== undefined) {
+            this.archivedAt = data.archivedAt ? new Date(data.archivedAt) : null;
+        }
+        if ('autoArchiveAt' in data && data.autoArchiveAt !== undefined) {
+            this.autoArchiveAt = data.autoArchiveAt ? new Date(data.autoArchiveAt) : null;
+        }
+        if ('isPublic' in data && data.isPublic !== undefined) this.public = data.isPublic;
+        if ('priority' in data && data.priority !== undefined) this.priority = data.priority;
+        if ('groupId' in data && data.groupId !== undefined) this.groupID = data.groupId.toString();
+        if ('parentChannelId' in data && data.parentChannelId !== undefined) {
+            this.parentChannelID = data.parentChannelId;
+        }
+        if ('archivedBy' in data && data.archivedBy !== undefined) this.archivedByID = data.archivedBy;
+        if ('archivedByWebhookId' in data && data.archivedByWebhookId !== undefined) {
+            this.archivedByWebhookID = data.archivedByWebhookId;
+        }
+        if ('channelCategoryId' in data && data.channelCategoryId !== undefined) {
+            this.channelCategoryID = data.channelCategoryId;
+        }
+        if ('deletedAt' in data && data.deletedAt !== undefined) {
+            this.deletedAt = data.deletedAt ? new Date(data.deletedAt) : null;
+        }
+        if ('addedAt' in data && data.addedAt !== undefined) {
+            this.addedAt = data.addedAt ? new Date(data.addedAt) : null;
+        }
+        if ('isRoleSynced' in data && data.isRoleSynced !== undefined) this.roleSynced = data.isRoleSynced;
+        if ('rolesById' in data && data.rolesById !== undefined) {
+            for (const role in data.rolesById) {
                 const role_data = data.rolesById[role];
-                this.roles.set(role, new RolePermissionOverwrite(this.client, role_data , this));
+                this.roles.set(role, new RolePermissionOverwrite(this.client, role_data, this));
             }
         }
-        if("userPermissions" in data && data.userPermissions !== undefined) this.userPermissions = data.userPermissions ?? [];
-        if("roles" in data && data.roles !== undefined) this.roleIDs = data.roles ?? [];
-        if("tournamentRoles" in data && data.tournamentRoles !== undefined) this.tournamentRoleIDs = data.tournamentRoles ?? [];
-        if("tournamentRolesById" in data && data.tournamentRolesById !== undefined){
-            for(const role in data.tournamentRolesById) {
+        if ('userPermissions' in data && data.userPermissions !== undefined) {
+            this.userPermissions = data.userPermissions ?? [];
+        }
+        if ('roles' in data && data.roles !== undefined) this.roleIDs = data.roles ?? [];
+        if ('tournamentRoles' in data && data.tournamentRoles !== undefined) {
+            this.tournamentRoleIDs = data.tournamentRoles ?? [];
+        }
+        if ('tournamentRolesById' in data && data.tournamentRolesById !== undefined) {
+            for (const role in data.tournamentRolesById) {
                 const role_data = data.tournamentRolesById[role];
                 this.tournamentRoles.set(role, new RolePermissionOverwrite(this.client, role_data, this));
             }

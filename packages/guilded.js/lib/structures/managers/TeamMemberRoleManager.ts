@@ -1,9 +1,9 @@
 import type { APITeamRole } from '@guildedjs/guilded-api-typings';
 
 import type { Client } from '../Client';
-import type {Member} from '../Member';
-import {Role} from '../Role';
-import {BaseManager} from './BaseManager';
+import type { Member } from '../Member';
+import { Role } from '../Role';
+import { BaseManager } from './BaseManager';
 
 export class TeamMemberRoleManager extends BaseManager<APITeamRole, Role> {
     public constructor(client: Client, public readonly member: Member) {

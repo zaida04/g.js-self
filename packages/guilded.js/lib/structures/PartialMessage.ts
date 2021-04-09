@@ -1,10 +1,10 @@
-import type { APIMessage, APIPartialMessage } from '@guildedjs/guilded-api-typings';
-import { PartialMessageData } from '../typings/PartialMessageData';
+import type { APIMessage } from '@guildedjs/guilded-api-typings';
 
+import { PartialMessageData } from '../typings/PartialMessageData';
 import * as MessageUtil from '../util/MessageUtil';
-import {Base} from './Base';
-import type { Client } from "./Client";
-import {Message} from './Message';
+import { Base } from './Base';
+import type { Client } from './Client';
+import { Message } from './Message';
 
 /**
  * Object representing a message that doesn't have enough data to construct a regular message.

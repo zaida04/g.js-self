@@ -5,7 +5,7 @@ export default class Heartbeater {
     public lastPingSentAt = 0;
     public active = false;
 
-    constructor(public gateway: GatewayHandler) {}
+    public constructor(public gateway: GatewayHandler) {}
     public start(interval?: number): void {
         this.gateway.client.debug('Heartbeating...');
         this.active = true;

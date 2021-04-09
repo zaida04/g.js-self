@@ -59,9 +59,3 @@ export type APIPatchTeamEmojisResult = never;
  * @destination
  */
 export type APIDeleteTeamEmojiResult = never;
-
-/**
- * Get Team Emoji Creators
- * @destination
- */
-export interface APIGetTeamEmojisResult {}

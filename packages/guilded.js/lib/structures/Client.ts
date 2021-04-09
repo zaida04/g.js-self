@@ -1,28 +1,27 @@
 import type { APIGetCurrentUser } from '@guildedjs/guilded-api-typings';
-import {RestManager} from '../rest/RestManager';
 import { EventEmitter } from 'events';
 
+import { RestManager } from '../rest/RestManager';
 import type { events } from '../typings/WebSocketEvents';
 import * as Util from '../util';
-import {ClientGatewayHandler} from '../ws/ClientGatewayHandler';
+import { ClientGatewayHandler } from '../ws/ClientGatewayHandler';
 import { DMChannel } from './Channel';
-import {ClientUser} from './ClientUser';
-import {ChannelManager} from './managers/ChannelManager';
-import {TeamManager} from './managers/TeamManager';
-import {UserManager} from './managers/UserManager';
-import type {Message} from './Message';
-import {Team} from './Team';
+import { ClientUser } from './ClientUser';
+import { ChannelManager } from './managers/ChannelManager';
+import { TeamManager } from './managers/TeamManager';
+import { UserManager } from './managers/UserManager';
+import type { Message } from './Message';
 import type { MessageReaction } from './MessageReaction';
+import { Team } from './Team';
 import type { User } from './User';
-
 
 /**
  * The main class used to interact with the Guilded API
- * 
+ *
  * ```javascript
  * const { Client } = require("@guildedjs/guilded.js");
  * const client = new Client();
- * 
+ *
  * client.login({
  *  email: "email",
  *  password: "password"
@@ -36,15 +35,15 @@ export class Client extends EventEmitter implements ClientEvents {
      */
     public readonly rest: RestManager = new RestManager({
         apiURL: this.options?.rest?.apiURL,
-    });;
+    });
 
     /**
      * Manager in charge of managing REST requests related to the guilded CDN
      * @private
      */
     public readonly cdn: RestManager = new RestManager({
-        apiURL: this.options?.rest?.cdnURL ?? "media.guilded.gg",
-    })
+        apiURL: this.options?.rest?.cdnURL ?? 'media.guilded.gg',
+    });
 
     /**
      * The User belonging to this Client
@@ -82,7 +81,6 @@ export class Client extends EventEmitter implements ClientEvents {
      */
     public readonly users = new UserManager(this);
 
-
     public constructor(public readonly options?: Partial<ClientOptions>) {
         super();
     }
@@ -99,15 +97,19 @@ export class Client extends EventEmitter implements ClientEvents {
     public async login(options: LoginOptions): Promise<this> {
         await this.rest.init(options);
 
-        const fetch_me: APIGetCurrentUser = await this.rest.get('/me') as APIGetCurrentUser;
+        const fetch_me: APIGetCurrentUser = (await this.rest.get('/me')) as APIGetCurrentUser;
         this.debug('Initial ME data recieved');
         this.user = new ClientUser(this, fetch_me.user);
         if (!this.options?.cache?.startupRestrictions.dropTeams) {
+            const teamChannelDataRequests = [];
             for (const team_data of fetch_me.teams) {
                 const team = new Team(this, team_data);
-                if (!this.options?.cache?.startupRestrictions.dropChannels) await team.fetchChannels();
+                if (!this.options?.cache?.startupRestrictions.dropChannels) {
+                    teamChannelDataRequests.push(team.fetchChannels());
+                }
                 this.teams.add(team);
             }
+            await Promise.all(teamChannelDataRequests);
             this.debug('Initial Team data recieved.');
         }
 
@@ -128,9 +130,9 @@ export class Client extends EventEmitter implements ClientEvents {
      * Set the password of this client.
      * @param newPassword the new password to set the current password to.
      */
-    public setPassword(newPassword: string) {
-        if(typeof newPassword !== "string") throw new TypeError("Expecting a string password for password change.");
-        return this.rest.post("/users/me/password", { newPassword }).then(() => void 0);
+    public setPassword(newPassword: string): Promise<void> {
+        if (typeof newPassword !== 'string') throw new TypeError('Expecting a string password for password change.');
+        return this.rest.post('/users/me/password', { newPassword }).then(() => void 0);
     }
 
     /**
@@ -138,10 +140,10 @@ export class Client extends EventEmitter implements ClientEvents {
      * @param intentionToReconnect Whether or not you want the client to reconnect immediately. Used internally for handling WS disconnects
      */
     public destroy(intentionToReconnect = false): void {
-        if(intentionToReconnect) {
+        if (intentionToReconnect) {
             return this.gateway?.destroy(true);
         } else {
-            this.rest.post("/logout", {}).finally(() => {
+            this.rest.post('/logout', {}).finally(() => {
                 this.rest.destroy();
                 this.gateway?.destroy(false);
             });
@@ -152,7 +154,7 @@ export class Client extends EventEmitter implements ClientEvents {
 
     /**
      * Used to emit debug statements
-     * @hidden 
+     * @hidden
      */
     public debug(str: string, ...args: any[]): undefined {
         // eslint-disable-next-line no-void
@@ -165,13 +167,13 @@ export interface ClientEvents {
      * Fired when a reaction is removed from a message
      * @event
      */
-    on(event: "messageReactionDelete", listener: (reaction: MessageReaction, remover: User | string) => any): this;
+    on(event: 'messageReactionDelete', listener: (reaction: MessageReaction, remover: User | string) => any): this;
 
     /**
      * Fired when a reaction is added to a message
      * @event
      */
-    on(event: "messageReactionAdd", listener: (reaction: MessageReaction, reacter: User | string) => any): this;
+    on(event: 'messageReactionAdd', listener: (reaction: MessageReaction, reacter: User | string) => any): this;
 
     /**
      * Fired when a message is sent
@@ -213,7 +215,7 @@ export interface ClientEvents {
      * Fired when the WS is reconnecting
      * @event
      */
-    on(event: "reconnecting", listener: () => any): this;
+    on(event: 'reconnecting', listener: () => any): this;
 }
 
 export type ClientPartial = 'MEMBER' | 'MESSAGE' | 'USER';
@@ -228,7 +230,7 @@ export interface ClientOptions {
             dropDMs: boolean;
             dropTeams: boolean;
             dropChannels: boolean;
-        }
+        };
         cacheMaxSize: {
             teamsCache: number;
             channelsCache: number;
@@ -239,7 +241,7 @@ export interface ClientOptions {
             teamWebhooksCache: number;
             groupsCache: number;
             messagesCache: number;
-        }
+        };
         disableTeam: boolean;
         disableChannels: boolean;
         disableUsers: boolean;
@@ -249,7 +251,7 @@ export interface ClientOptions {
         disableWebhooks: boolean;
         disableGroups: boolean;
         disableMessages: boolean;
-    }
+    };
     ws: {
         heartbeatInterval: number;
         disabledEvents: events[];

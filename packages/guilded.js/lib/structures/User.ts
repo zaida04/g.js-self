@@ -1,8 +1,8 @@
 import type { APIAlias, APIUser, APIUserStatus } from '@guildedjs/guilded-api-typings';
- 
-import {Base} from './Base';
+
+import { Base } from './Base';
 import { Client } from './Client';
- 
+
 /**
  * Object representing a user on the guilded.gg platform.
  */
@@ -68,7 +68,7 @@ export class User extends Base<APIUser> {
      * Unknown property
      */
     public serviceEmail: string | null;
-    
+
     /**
      * This users steam ID
      */
@@ -83,28 +83,28 @@ export class User extends Base<APIUser> {
      * The current status of this user
      */
     public userStatus!: APIUserStatus;
- 
-    public constructor(client: Client, data: APIUser) { 
+
+    public constructor(client: Client, data: APIUser) {
         super(client, data);
 
         this.aboutInfo = {
-            "bio": null,
-            "tagLine": null
-        }
+            bio: null,
+            tagLine: null,
+        };
         this.aliases = [];
         this.email = null;
         this.moderationStatus = null;
         this.banners = {
-            "blur": null,
-            "large": null,
-            "small": null,
-        }
+            blur: null,
+            large: null,
+            small: null,
+        };
         this.avatarURLs = {
-            "blur": null,
-            "large": null,
-            "small": null,
-            "medium": null,
-        }
+            blur: null,
+            large: null,
+            small: null,
+            medium: null,
+        };
         this.serviceEmail = null;
         this.steamID = null;
         this.subdomain = data.subdomain;
@@ -120,8 +120,8 @@ export class User extends Base<APIUser> {
     public patch(data: APIUser | Partial<APIUser>): this {
         if ('aboutInfo' in data && data.aboutInfo !== undefined) {
             this.aboutInfo = {
-                "bio": data.aboutInfo.bio ?? null,
-                "tagLine": data.aboutInfo.tagLine ?? null,
+                bio: data.aboutInfo.bio ?? null,
+                tagLine: data.aboutInfo.tagLine ?? null,
             };
         }
         if ('aliases' in data && data.aliases !== undefined) this.aliases = data.aliases;
@@ -132,8 +132,8 @@ export class User extends Base<APIUser> {
         if ('subdomain' in data && data.subdomain !== undefined) this.subdomain = data.subdomain;
         if ('userStatus' in data && data.userStatus !== undefined) this.userStatus = data.userStatus;
 
-        this.banners = {blur: null, large: null, small: null};
-        this.avatarURLs = {blur: null, large: null, small: null, medium: null};
+        this.banners = { blur: null, large: null, small: null };
+        this.avatarURLs = { blur: null, large: null, small: null, medium: null };
 
         if ('profileBannerBlur' in data && data.profileBannerBlur) this.banners.blur = data.profileBannerBlur;
         if ('profileBannerLg' in data && data.profileBannerLg) this.banners.large = data.profileBannerLg;
@@ -142,7 +142,7 @@ export class User extends Base<APIUser> {
         if ('profilePictureBlur' in data && data.profilePictureBlur) this.avatarURLs.blur = data.profilePictureBlur;
         if ('profilePictureLg' in data && data.profilePictureLg) this.avatarURLs.large = data.profilePictureLg;
         if ('profilePictureSm' in data && data.profilePictureSm) this.avatarURLs.small = data.profilePictureSm;
- 
+
         return this;
     }
 

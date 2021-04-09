@@ -1,16 +1,17 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable max-depth */
-import { APIContent } from "@guildedjs/guilded-api-typings";
-import { GenerateUUID } from "./GenerateID";
-import { RichEmbed } from "../structures/RichEmbed";
-import { CONSTANTS } from "./Consts";
+import { APIContent } from '@guildedjs/guilded-api-typings';
+
+import { RichEmbed } from '../structures/RichEmbed';
+import { CONSTANTS } from './Consts';
+import { GenerateUUID } from './GenerateID';
 
 /**
  * Convert a string or other content to a message suitable to be sent to guilded
  * @internal
  */
 export function ConvertToMessageFormat(i: string | RichEmbed, e?: RichEmbed): [string, Record<string, any>] {
-    let str_input = "";
+    let str_input = '';
     let embed;
 
     if (i instanceof RichEmbed) embed = i;
@@ -18,29 +19,29 @@ export function ConvertToMessageFormat(i: string | RichEmbed, e?: RichEmbed): [s
     if (e) embed = e;
 
     const messageID = GenerateUUID();
-    let message: { content?: Record<string, any>; messageId: string } = { messageId: messageID };
-    message["content"] = parseToMessage(str_input, embed);
+    const message: { content?: Record<string, any>; messageId: string } = { messageId: messageID };
+    message.content = parseToMessage(str_input, embed);
     return [messageID, message];
 }
 
 function parseToMessage(input: string | RichEmbed, embed?: RichEmbed) {
     return {
-        object: "value",
+        object: 'value',
         document: {
-            object: "document",
+            object: 'document',
             data: {},
             nodes: [
                 {
-                    object: "block",
-                    type: "markdown-plain-text",
+                    object: 'block',
+                    type: 'markdown-plain-text',
                     data: {},
                     nodes: [
                         {
-                            object: "text",
+                            object: 'text',
                             leaves: [
                                 {
-                                    object: "leaf",
-                                    text: typeof input === "string" ? input : "",
+                                    object: 'leaf',
+                                    text: typeof input === 'string' ? input : '',
                                     marks: [],
                                 },
                             ],
@@ -48,8 +49,8 @@ function parseToMessage(input: string | RichEmbed, embed?: RichEmbed) {
                     ],
                 },
                 {
-                    object: "block",
-                    type: "webhookMessage",
+                    object: 'block',
+                    type: 'webhookMessage',
                     data: {
                         embeds: embed ? [embed?.toJSON()] : [],
                     },
@@ -79,44 +80,44 @@ export function ParseMessage(data: APIContent): parsedMessage {
 
     for (const messageLine of data.document.nodes) {
         switch (messageLine.type) {
-            case "paragraph": {
+            case 'paragraph': {
                 for (const node of messageLine.nodes) {
                     switch (node.object) {
-                        case "text": {
+                        case 'text': {
                             for (const leaf of node.leaves!) {
                                 parsedMessageArray.push({
-                                    type: "text",
+                                    type: 'text',
                                     content: leaf.text,
                                 });
                             }
                             break;
                         }
-                        case "inline": {
+                        case 'inline': {
                             const castedDataNode = node.data as MessageDataNode;
                             for (const leaf of node.nodes![0].leaves!) {
                                 switch (node.type) {
-                                    case "mention": {
+                                    case 'mention': {
                                         mentions.users.push(castedDataNode.mention!.id);
                                         parsedMessageArray.push({
-                                            type: "mention",
+                                            type: 'mention',
                                             content: leaf.text,
                                             mention: castedDataNode.mention,
                                         });
                                         break;
                                     }
-                                    case "reaction": {
+                                    case 'reaction': {
                                         mentions.reactions.push(castedDataNode.reaction!.id);
                                         parsedMessageArray.push({
-                                            type: "reaction",
+                                            type: 'reaction',
                                             content: leaf.text,
                                             reaction: castedDataNode.reaction,
                                         });
                                         break;
                                     }
-                                    case "channel": {
+                                    case 'channel': {
                                         mentions.channels.push(castedDataNode.channel!.id);
                                         parsedMessageArray.push({
-                                            type: "mention",
+                                            type: 'mention',
                                             content: leaf.text,
                                             channel: castedDataNode.channel,
                                         });
@@ -130,42 +131,42 @@ export function ParseMessage(data: APIContent): parsedMessage {
                 }
                 break;
             }
-            case "block-quote-container": {
+            case 'block-quote-container': {
                 for (const MessageNodes of messageLine.nodes) {
                     for (const node of MessageNodes.nodes!) {
                         switch (node.object) {
-                            case "text": {
+                            case 'text': {
                                 parsedMessageArray.push({
-                                    type: "text",
+                                    type: 'text',
                                     content: node.leaves![0].text,
                                 });
                                 break;
                             }
-                            case "inline": {
+                            case 'inline': {
                                 const castedDataNode = node.data as MessageDataNode;
                                 switch (node.type) {
-                                    case "mention": {
+                                    case 'mention': {
                                         mentions.users.push(castedDataNode.mention!.id);
                                         parsedMessageArray.push({
-                                            type: "mention",
+                                            type: 'mention',
                                             content: node.nodes![0].leaves![0].text,
                                             mention: castedDataNode.mention,
                                         });
                                         break;
                                     }
-                                    case "reaction": {
+                                    case 'reaction': {
                                         mentions.reactions.push(castedDataNode.reaction!.id);
                                         parsedMessageArray.push({
-                                            type: "text",
+                                            type: 'text',
                                             content: node.nodes![0].leaves![0].text,
                                             reaction: castedDataNode.reaction,
                                         });
                                         break;
                                     }
-                                    case "channel": {
+                                    case 'channel': {
                                         mentions.channels.push(castedDataNode.channel!.id);
                                         parsedMessageArray.push({
-                                            type: "mention",
+                                            type: 'mention',
                                             content: node.nodes![0].leaves![0].text,
                                             channel: castedDataNode.channel,
                                         });
@@ -179,14 +180,14 @@ export function ParseMessage(data: APIContent): parsedMessage {
                 }
                 break;
             }
-            case "markdown-plain-text": {
+            case 'markdown-plain-text': {
                 parsedMessageArray.push({
-                    type: "text",
+                    type: 'text',
                     content: messageLine.nodes![0].leaves![0].text,
                 });
                 break;
             }
-            case "webhookMessage": {
+            case 'webhookMessage': {
                 embeds.push((messageLine.data as { embeds: unknown[] }).embeds);
                 break;
             }
@@ -194,7 +195,7 @@ export function ParseMessage(data: APIContent): parsedMessage {
     }
 
     return {
-        parsedText: parsedMessageArray.map((x) => x.content).join("\n"),
+        parsedText: parsedMessageArray.map(x => x.content).join('\n'),
         parsedArr: parsedMessageArray,
         mentions: {
             users: mentions.users,
@@ -263,16 +264,16 @@ export interface enforcedMessageStructure {
 export function resolveColor(color: string | number | [number, number, number]): number {
     let resolvedColor;
 
-    if (typeof color === "string") {
-        if (color === "RANDOM") return Math.floor(Math.random() * (0xffffff + 1));
-        if (color === "DEFAULT") return 0;
-        resolvedColor = CONSTANTS.COLORS[color] || parseInt(color.replace("#", ""), 16);
+    if (typeof color === 'string') {
+        if (color === 'RANDOM') return Math.floor(Math.random() * (0xffffff + 1));
+        if (color === 'DEFAULT') return 0;
+        resolvedColor = CONSTANTS.COLORS[color] || parseInt(color.replace('#', ''), 16);
     } else if (Array.isArray(color)) {
         color = (color[0] << 16) | (color[1] << 8) | color[2];
     }
 
-    if (color < 0 || color > 0xffffff) throw new RangeError("COLOR_RANGE");
-    else if (color && isNaN(color as number)) throw new TypeError("COLOR_CONVERT");
+    if (color < 0 || color > 0xffffff) throw new RangeError('COLOR_RANGE');
+    else if (color && isNaN(color as number)) throw new TypeError('COLOR_CONVERT');
     else resolvedColor = color as number;
 
     return resolvedColor;

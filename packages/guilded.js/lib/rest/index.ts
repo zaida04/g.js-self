@@ -1,2 +1,2 @@
-export * from "./GuildedAPIError";
-export * from "./RestManager";
+export * from './GuildedAPIError';
+export * from './RestManager';

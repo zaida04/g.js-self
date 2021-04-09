@@ -10,7 +10,11 @@ import type { Client } from '../Client';
  */
 export class BaseManager<K extends BaseData, T extends Base<K>> {
     public cache: CacheCollection<string, T> = new CacheCollection(this.cacheOptions ?? {});
-    constructor(public readonly client: Client, public readonly holds: Constructable<T>, public readonly cacheOptions?: CacheCollectionOptions) {}
+    public constructor(
+        public readonly client: Client,
+        public readonly holds: Constructable<T>,
+        public readonly cacheOptions?: CacheCollectionOptions,
+    ) {}
 
     /**
      * Add an object, potential data, or constructor params into this managers cache

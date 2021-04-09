@@ -1,9 +1,9 @@
 import type { APIWebhook } from '@guildedjs/guilded-api-typings';
 
 import type { Client } from '../Client';
-import type {Team} from '../Team';
-import {Webhook} from '../Webhook';
-import {BaseManager} from './BaseManager';
+import type { Team } from '../Team';
+import { Webhook } from '../Webhook';
+import { BaseManager } from './BaseManager';
 
 export class TeamWebhookManager extends BaseManager<APIWebhook, Webhook> {
     public constructor(client: Client, public readonly team: Team) {

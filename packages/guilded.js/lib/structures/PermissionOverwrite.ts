@@ -1,6 +1,7 @@
-import { APITeamChannelRolePermissionOverwrite, RolePermissions } from "@guildedjs/guilded-api-typings";
-import { TeamChannel } from "./Channel";
-import { Client } from "./Client";
+import { APITeamChannelRolePermissionOverwrite, RolePermissions } from '@guildedjs/guilded-api-typings';
+
+import { TeamChannel } from './Channel';
+import { Client } from './Client';
 
 /**
  * Object representing permission overwrites for a role on a team channel.
@@ -40,8 +41,12 @@ export class RolePermissionOverwrite {
      * The permissions this overwrite currently has allowed.
      */
     public readonly allowPermissions: RolePermissions;
-    
-    public constructor(public client: Client, data: APITeamChannelRolePermissionOverwrite, public channel: TeamChannel) { 
+
+    public constructor(
+        public client: Client,
+        data: APITeamChannelRolePermissionOverwrite,
+        public channel: TeamChannel,
+    ) {
         this.teamID = data.teamId;
         this.channelID = data.channelId;
         this.createdAt = new Date(data.createdAt);

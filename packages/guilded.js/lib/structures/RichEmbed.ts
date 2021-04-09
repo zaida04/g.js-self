@@ -1,5 +1,6 @@
-import type { APIEmbed } from "@guildedjs/guilded-api-typings";
-import { resolveColor } from "../util/MessageUtil";
+import type { APIEmbed } from '@guildedjs/guilded-api-typings';
+
+import { resolveColor } from '../util/MessageUtil';
 
 /**
  * Heavy code taken from https://github.com/discordjs/discord.js/blob/stable/src/structures/MessageEmbed.js
@@ -18,32 +19,32 @@ export class RichEmbed {
         if (data) this.data = data;
     }
 
-    public setFooter(text: string, icon_url?: string) {
+    public setFooter(text: string, icon_url?: string): this {
         this.data.footer = { text, icon_url };
         return this;
     }
 
-    public setImage(url: string) {
+    public setImage(url: string): this {
         this.data.image = { url };
         return this;
     }
 
-    public setThumbnail(url: string) {
+    public setThumbnail(url: string): this {
         this.data.thumbnail = { url };
         return this;
     }
 
-    public setAuthor(name: string, icon_url?: string) {
+    public setAuthor(name: string, icon_url?: string): this {
         this.data.author = { name, icon_url };
         return this;
     }
 
-    public addField(name: string, value: string, inline?: boolean) {
+    public addField(name: string, value: string, inline?: boolean): this {
         this.addFields({ name, value, inline });
         return this;
     }
 
-    public addFields(...fields: { inline?: boolean; name: string; value: string }[]) {
+    public addFields(...fields: { inline?: boolean; name: string; value: string }[]): this {
         if (!this.data.fields) {
             this.data.fields = [];
         }
@@ -51,27 +52,27 @@ export class RichEmbed {
         return this;
     }
 
-    public setColor(color: string | number | [number, number, number]) {
+    public setColor(color: string | number | [number, number, number]): this {
         this.data.color = resolveColor(color);
         return this;
     }
 
-    public setTimestamp(date: Date = new Date()) {
+    public setTimestamp(date: Date = new Date()): this {
         this.data.timestamp = date.toISOString();
         return this;
     }
 
-    public setDescription(description: string) {
+    public setDescription(description: string): this {
         this.data.description = description;
         return this;
     }
 
-    public setURL(url: string) {
+    public setURL(url: string): this {
         this.data.url = url;
         return this;
     }
 
-    public setTitle(title: string) {
+    public setTitle(title: string): this {
         this.data.title = title;
         return this;
     }

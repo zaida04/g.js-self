@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import fetch, { Response } from 'node-fetch';
-import { sleep } from "../util";
+
+import { sleep } from '../util';
 import { GuildedAPIError } from './GuildedAPIError';
 
 export class RestManager {
@@ -68,14 +69,14 @@ export class RestManager {
                 path: path,
             },
             authenticated,
-        ).then(x => x[1] as Record<string, any> as T);
+        ).then(x => (x[1] as Record<string, any>) as T);
     }
 
     public post<T extends Record<string, any>>(
         path: string,
         body: Record<string, any>,
         authenticated = true,
-    ): Promise<T>  {
+    ): Promise<T> {
         return this.make(
             {
                 method: 'POST',
@@ -83,14 +84,14 @@ export class RestManager {
                 path: path,
             },
             authenticated,
-        ).then(x => x[1] as Record<string, any> as T);
+        ).then(x => (x[1] as Record<string, any>) as T);
     }
 
     public delete<T extends Record<string, any>>(
         path: string,
         body?: Record<string, any>,
         authenticated = true,
-    ): Promise<T>  {
+    ): Promise<T> {
         return this.make(
             {
                 method: 'DELETE',
@@ -98,14 +99,14 @@ export class RestManager {
                 path: path,
             },
             authenticated,
-        ).then(x => x[1] as Record<string, any> as T);
+        ).then(x => (x[1] as Record<string, any>) as T);
     }
 
     public patch<T extends Record<string, any>>(
         path: string,
         body: Record<string, any>,
         authenticated = true,
-    ): Promise<T>  {
+    ): Promise<T> {
         return this.make(
             {
                 method: 'PATCH',
@@ -113,14 +114,14 @@ export class RestManager {
                 path: path,
             },
             authenticated,
-        ).then(x => x[1] as Record<string, any> as T);
+        ).then(x => (x[1] as Record<string, any>) as T);
     }
 
     public put<T extends Record<string, any>>(
         path: string,
         body?: Record<string, any>,
         authenticated = true,
-    ): Promise<T>  {
+    ): Promise<T> {
         return this.make(
             {
                 method: 'PUT',
@@ -128,7 +129,7 @@ export class RestManager {
                 path: path,
             },
             authenticated,
-        ).then(x => x[1] as Record<string, any> as T);
+        ).then(x => (x[1] as Record<string, any>) as T);
     }
 
     public async init(data: LoginData): Promise<Record<string, any>> {

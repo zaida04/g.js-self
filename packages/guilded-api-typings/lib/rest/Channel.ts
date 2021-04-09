@@ -10,7 +10,7 @@ export type APIGetChannel = APITeamChannel;
  * Modify Channel
  * @destination /channels/:id
  */
-export interface APIPatchChannelBody extends Record<string, any> {
+export interface APIPatchChannelBody {
     name?: string;
     type?: CHANNEL_TYPES;
     position?: number | null;
@@ -38,7 +38,7 @@ export type APIDeleteChannel = never;
  * Get Channel Messages
  * @destination /channels/:id/messages?limit=:amt
  */
-export interface APIGetChannelMessages extends Record<string, any> {
+export interface APIGetChannelMessages {
     messages: APIMessage[];
     hasPastMessages: boolean;
 }
@@ -47,7 +47,7 @@ export interface APIGetChannelMessages extends Record<string, any> {
  * Get Channel Message
  * @destination /content/route/metadata?route=//channels/:channelID/chat&messageId=:messageID
  */
-export interface APIGetChannelMessageQuery extends Record<string, any> {
+export interface APIGetChannelMessageQuery {
     route: string;
     messageId: string;
 }
@@ -63,7 +63,7 @@ export type APIGetChannelMessageResult = APIMessage;
  * @destination /channels/:id/messages?limit=:amt
  * Tested upto 50k messages
  */
-export interface APIGetChannelMessagesQuery extends Record<string, any> {
+export interface APIGetChannelMessagesQuery {
     limit?: number;
 }
 
@@ -71,7 +71,7 @@ export interface APIGetChannelMessagesQuery extends Record<string, any> {
  * Send Message
  * @destination /channels/:id/messages
  */
-export interface APIPostChannelMessagesBody extends Record<string, any> {
+export interface APIPostChannelMessagesBody {
     messageId: string;
     content: APIContent;
     embed: APIEmbed;
@@ -87,7 +87,7 @@ export type APIPostChannelMessagesResult = APIMessage;
  * Edit Message
  * @destination /channels/:id/messages/:messageID
  */
-export interface APIPatchChannelMessageBody extends Record<string, any> {
+export interface APIPatchChannelMessageBody {
     content: string;
     embed: APIEmbed;
 }
@@ -142,7 +142,7 @@ export type APIDeleteChannelPinnedMessage = never;
  * Create Thread
  * @destination /channels/:id/threads
  */
-export interface APIPostChannelCreateThread extends Record<string, any> {
+export interface APIPostChannelCreateThread {
     name: string;
     message: APIMessage;
     channelId: string;
@@ -180,7 +180,7 @@ export interface APIPostChannelAnnouncementsBody {
 /**
  * @destination /teams/:id/channels
  */
-export interface APIGetTeamChannels extends Record<string, any> {
+export interface APIGetTeamChannels {
     channels: APITeamChannel[];
     badgedChannelContentByChannelId: unknown;
     temporalChannels: any[];
