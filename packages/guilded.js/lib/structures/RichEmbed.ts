@@ -89,16 +89,16 @@ export class RichEmbed {
             image: this.data.image,
             author: this.data.author
                 ? {
-                      name: this.data.author.name,
-                      iconUrl: this.data.author.iconUrl,
-                      url: this.data.author.url,
-                  }
+                    name: this.data.author.name,
+                    iconUrl: this.data.author.iconUrl,
+                    url: this.data.author.url,
+                }
                 : undefined,
             footer: this.data.footer
                 ? {
-                      text: this.data.footer.text,
-                      iconUrl: this.data.footer.iconUrl,
-                  }
+                    text: this.data.footer.text,
+                    iconUrl: this.data.footer.iconUrl,
+                }
                 : undefined,
         };
     }
