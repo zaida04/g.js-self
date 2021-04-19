@@ -34,8 +34,8 @@ export class RichEmbed {
         return this;
     }
 
-    public setAuthor(name: string, icon_url?: string): this {
-        this.data.author = { name, icon_url };
+    public setAuthor(name: string, icon_url?: string, url?: string): this {
+        this.data.author = { name, icon_url, url };
         return this;
     }
 
@@ -90,13 +90,14 @@ export class RichEmbed {
             author: this.data.author
                 ? {
                       name: this.data.author.name,
-                      icon_url: this.data.author.icon_url,
+                      iconUrl: this.data.author.icon_url,
+                      url: this.data.author.url
                   }
                 : undefined,
             footer: this.data.footer
                 ? {
                       text: this.data.footer.text,
-                      icon_url: this.data.footer.icon_url,
+                      iconUrl: this.data.footer.icon_url,
                   }
                 : undefined,
         };
