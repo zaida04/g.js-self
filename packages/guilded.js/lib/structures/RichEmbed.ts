@@ -91,7 +91,7 @@ export class RichEmbed {
                 ? {
                       name: this.data.author.name,
                       iconUrl: this.data.author.icon_url,
-                      url: this.data.author.url
+                      url: this.data.author.url,
                   }
                 : undefined,
             footer: this.data.footer
