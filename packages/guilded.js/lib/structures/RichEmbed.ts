@@ -20,7 +20,7 @@ export class RichEmbed {
     }
 
     public setFooter(text: string, icon_url?: string): this {
-        this.data.footer = { text, icon_url };
+        this.data.footer = { text, iconUrl: icon_url };
         return this;
     }
 
@@ -35,7 +35,7 @@ export class RichEmbed {
     }
 
     public setAuthor(name: string, icon_url?: string, url?: string): this {
-        this.data.author = { name, icon_url, url };
+        this.data.author = { name, iconUrl: icon_url, url };
         return this;
     }
 
