@@ -1,13 +1,14 @@
 import Collection from '@discordjs/collection';
 import type { APIGetChannelMessages, APIMessage } from '@guildedjs/guilded-api-typings';
 
+import { UpgradedMessageData } from '../../typings/UpgradedMessageData';
 import type { DMChannel, PartialChannel, TeamChannel } from '../Channel';
 import type { Client } from '../Client';
 import { Message } from '../Message';
 import { PartialMessage } from '../PartialMessage';
 import { BaseManager } from './BaseManager';
 
-export class MessageManager extends BaseManager<APIMessage, Message> {
+export class MessageManager extends BaseManager<APIMessage | UpgradedMessageData, Message> {
     public constructor(client: Client, public readonly channel: TeamChannel | DMChannel | PartialChannel) {
         super(client, Message, { maxSize: client.options?.cache?.cacheMaxSize?.messagesCache });
     }
@@ -37,7 +38,7 @@ export class MessageManager extends BaseManager<APIMessage, Message> {
             .get<APIGetChannelMessages>(`/channels/${this.channel.id}/messages?limit=${amnt}`)
             .then(x => {
                 for (const message of x.messages) {
-                    const tempMessage = this.add(message);
+                    const tempMessage = this.add([this.client, message, this.channel]);
                     messages.set(message.id, tempMessage!);
                     if (cache) this.add(tempMessage!);
                 }

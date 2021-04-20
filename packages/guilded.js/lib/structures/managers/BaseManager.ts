@@ -22,7 +22,7 @@ export class BaseManager<K extends BaseData, T extends Base<K>> {
      */
     public add(data: T | K | Partial<K> | ConstructorParameters<Constructable<T>>): T | null {
         if (this.isConstructorParamsOfHolds(data)) {
-            const addition = new this.holds(this.client, ...data);
+            const addition = new this.holds(...data);
             this.cache.set(addition.id.toString(), addition);
             return addition;
         } else if (this.isInstanceOfHolds(data)) {
