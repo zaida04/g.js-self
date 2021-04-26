@@ -79,10 +79,10 @@ Documentation is located [here](https://guilded.js.org)
 - [X] CI/CD
 - [X] Documentation
 - [X] WS Event handling structures (does NOT mean all events are covered)
-- [ ] Permissions & Role structures
+- [X] Permissions & Role structures
 - [ ] Full API Coverage 
-- [ ] Caching Control
-- [ ] Handles WS reconnections and connection destructions
+- [X] Caching Control
+- [X] Handles WS reconnections and connection destructions
 - [ ] Framework (@guildedjs/itami)
 - [ ] Guide
 
