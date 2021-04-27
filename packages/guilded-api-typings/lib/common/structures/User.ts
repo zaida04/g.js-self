@@ -61,7 +61,7 @@ export interface APIDevice {
 }
 
 export interface APIUser {
-    aboutInfo: APIAboutInfo;
+    aboutInfo: APIAboutInfo | null;
     aliases: APIAlias[];
     email: string | null;
     id: string;

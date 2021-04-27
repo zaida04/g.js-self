@@ -120,8 +120,8 @@ export class User extends Base<APIUser> {
     public patch(data: APIUser | Partial<APIUser>): this {
         if ('aboutInfo' in data && data.aboutInfo !== undefined) {
             this.aboutInfo = {
-                bio: data.aboutInfo.bio ?? null,
-                tagLine: data.aboutInfo.tagLine ?? null,
+                bio: data.aboutInfo?.bio ?? null,
+                tagLine: data.aboutInfo?.tagLine ?? null,
             };
         }
         if ('aliases' in data && data.aliases !== undefined) this.aliases = data.aliases;
