@@ -35,8 +35,8 @@ export default class ChatMessageCreatedEvent extends Event {
                 { channelId: data.channelId, teamId: data.teamId, ...data.message },
                 channel,
             )!;
-            this.client.emit(events.MESSAGE_CREATE, newMessage);
             channel.messages!.cache.set(newMessage.id, newMessage);
+            this.client.emit(events.MESSAGE_CREATE, newMessage);
             return [true];
         }
         return [false, 'passthrough'];
