@@ -64,7 +64,7 @@ This repo serves as a monorepo that houses several packages, mainly the `@guilde
 
 ## Packages
 * [`@guildedjs/guilded.js`](https://github.com/zaida04/guilded.js/tree/master/packages/guilded.js#readme) - main package that provides a lib for the guilded.gg api. Comes with built in caching, structures, etc.
-* [`@guildedjs/itami`](https://github.com/zaida04/guildedjs/tree/master/packages/itami#readme) - official framework for `@guildedjs/guilded.js`, comes with highly customizable commands, listeners, and other abstractions.
+* [`@guildedjs/itami`](https://github.com/zaida04/guilded.js/tree/master/packages/itami#readme) - official framework for `@guildedjs/guilded.js`, comes with highly customizable commands, listeners, and other abstractions.
 * [`@guildedjs/guilded-api-types`](https://github.com/zaida04/guilded.js/tree/master/packages/guilded-api-typings#readme) - thinking of making your own guilded lib/wrapper? This package consists of typings for the guilded.gg api compiled together by the community. No need to write your own typings and reinventing the wheel.
 
 ## Getting Started
@@ -100,4 +100,4 @@ As you start to contribute your beginner workflow should look similar to this:
 
 ## LICENSING  
 
-> **Guilded.JS** © [zaida04](https://github.com/zaida04), Released under the [MIT](https://github.com/zaida04/guildedjs/blob/master/LICENSE) License. All subpackages are also released under the MIT License
+> **Guilded.JS** © [zaida04](https://github.com/zaida04), Released under the [MIT](https://github.com/zaida04/guilded.js/blob/master/LICENSE) License. All subpackages are also released under the MIT License
