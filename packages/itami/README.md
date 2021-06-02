@@ -43,4 +43,4 @@ Please see the main [README.md](https://github.com/zaida04/guilded.js) for info 
 This package is heavily influenced from [`discord-akairo`](https://github.com/discord-akairo/discord-akairo), a command framework for the popular discord.js library. Big thanks to [`1Computer1`](https://github.com/1Computer1)
 
 ## LICENSE
-Licensed under the [MIT License](https://github.com/zaida04/guildedjs/blob/master/LICENSE)
+Licensed under the [MIT License](https://github.com/zaida04/guilded.js/blob/master/LICENSE)
