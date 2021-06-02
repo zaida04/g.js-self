@@ -3,7 +3,7 @@
 <div align="center">
 <img src="../../media/itami-transparent.png" width="546" alt="guildedjs"/>
 
-<p><a href="https://github.com/zaida04/guildedjs/blob/master/LICENSE"><img src="https://img.shields.io/github/license/guildedjs/guilded.js" alt="GitHub"></a>
+<p><a href="https://github.com/zaida04/guilded.js/blob/master/LICENSE"><img src="https://img.shields.io/github/license/guildedjs/guilded.js" alt="GitHub"></a>
 <a href="https://www.npmjs.com/package/@guildedjs/itami"><img src="https://img.shields.io/npm/v/@guildedjs/itami?color=crimson&amp;logo=npm" alt="npm"></a>
 <a href="https://github.com/zaida04/guilded.js/actions/workflows/typescript.yml"><img src="https://github.com/zaida04/guilded.js/actions/workflows/typescript.yml/badge.svg" alt="TypeScript"></a></p>
 

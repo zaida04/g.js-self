@@ -28,5 +28,5 @@ Huge thank you to [Shay](https://github.com/shayypy) and the rest of the [Unoffi
 Thank you to [Vlad](https://github.com/vladfrangu) and the rest of the contributors at https://github.com/discordjs/discord-api-types for the structure in which I based my typings on.
   
 ## LICENSE
-Licensed under the [MIT License](https://github.com/zaida04/guildedjs/blob/master/LICENSE)
+Licensed under the [MIT License](https://github.com/zaida04/guilded.js/blob/master/LICENSE)
   
