@@ -35,7 +35,7 @@ jobs:
         with:
           source-directory: 'docs'
           destination-github-username: 'github-actions[bot]'
-          destination-repository-username: "guildedjs"
+          destination-repository-username: "zaida04"
           destination-repository-name: 'guildedjs.github.io'
           target-branch: 'master'
           user-email: 41898282+github-actions[bot]@users.noreply.github.com
