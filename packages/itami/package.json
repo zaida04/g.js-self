@@ -12,7 +12,7 @@
     "guilded.gg"
   ],
   "author": "Zaid \"Nico\" <me@zaid-arshad.tech>",
-  "homepage": "https://github.com/guildedjs/guildedjs/tree/master/packages/itami#readme",
+  "homepage": "https://github.com/zaida04/guildedjs/tree/master/packages/itami#readme",
   "license": "MIT",
   "main": "dist/index.js",
   "directories": {
@@ -24,13 +24,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/guildedjs/guilded.js.git"
+    "url": "git+https://github.com/zaida04/guilded.js.git"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
-    "url": "https://github.com/guildedjs/guilded.js/issues"
+    "url": "https://github.com/zaida04/guilded.js/issues"
   },
   "gitHead": "fd2b3b1f8d37a69fb6a38edf4a4fb427d511440e"
 }

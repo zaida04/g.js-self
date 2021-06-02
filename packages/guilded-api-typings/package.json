@@ -12,7 +12,7 @@
     "guilded-api-typings"
   ],
   "author": "zaid450 <me@zaid-arshad.tech>",
-  "homepage": "https://github.com/guildedjs/guilded.js/tree/master/packages/guilded-api-typings#readme",
+  "homepage": "https://github.com/zaida04/guilded.js/tree/master/packages/guilded-api-typings#readme",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -25,7 +25,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/guildedjs/guilded.js.git"
+    "url": "git+https://github.com/zaida04/guilded.js.git"
   },
   "devDependencies": {
     "@types/node": "^14.14.9",
@@ -36,7 +36,7 @@
     "prepublishOnly": "npx rimraf dist/ && npm run build"
   },
   "bugs": {
-    "url": "https://github.com/guildedjs/guilded.js/issues"
+    "url": "https://github.com/zaida04/guilded.js/issues"
   },
   "gitHead": "fd2b3b1f8d37a69fb6a38edf4a4fb427d511440e"
 }

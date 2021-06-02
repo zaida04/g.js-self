@@ -1,9 +1,9 @@
 <div align="center">
 <h1>Guilded.js</h1>
 
-<p><a href="https://github.com/guildedjs/guilded.js/blob/master/LICENSE"><img src="https://img.shields.io/github/license/guildedjs/guilded.js" alt="GitHub"></a>
+<p><a href="https://github.com/zaida04/guilded.js/blob/master/LICENSE"><img src="https://img.shields.io/github/license/guildedjs/guilded.js" alt="GitHub"></a>
 <a href="https://www.npmjs.com/package/@guildedjs/guilded.js"><img src="https://img.shields.io/npm/v/@guildedjs/guilded.js?color=crimson&amp;logo=npm" alt="npm"></a>
-<a href="https://github.com/guildedjs/guilded.js/actions/workflows/typescript.yml"><img src="https://github.com/guildedjs/guilded.js/actions/workflows/typescript.yml/badge.svg" alt="TypeScript"></a></p>
+<a href="https://github.com/zaida04/guilded.js/actions/workflows/typescript.yml"><img src="https://github.com/zaida04/guilded.js/actions/workflows/typescript.yml/badge.svg" alt="TypeScript"></a></p>
 
 <p><a href="https://guilded.js.org/modules/guilded_js.html"><b>Documentation</b></a></p>
 
@@ -87,10 +87,10 @@ Documentation is located [here](https://guilded.js.org)
 - [ ] Guide
 
 ## Contributing
-Please see the main [README.md](https://github.com/guildedjs/guilded.js) for info on how to contribute to this package or the other `@guildedjs` packages.
+Please see the main [README.md](https://github.com/zaida04/guilded.js) for info on how to contribute to this package or the other `@guildedjs` packages.
 
 ## Acknowledgements
 - [`Discord.js`](https://discord.js.org/#/) - Inspiration and caching strategy
   
 ## LICENSE
-Licensed under the [MIT License](https://github.com/guildedjs/guildedjs/blob/master/LICENSE)  
+Licensed under the [MIT License](https://github.com/zaida04/guildedjs/blob/master/LICENSE)  

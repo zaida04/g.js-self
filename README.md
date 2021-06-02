@@ -6,11 +6,11 @@
     <p><a href="https://discord.gg/jf66UUN"><b>Join our Discord Server!</b></a> > <a href="https://guilded.js.org"><b>Documentation</b></a></p>
     <br />
     <p>
-        <img src="https://github.com/guildedjs/guilded.js/workflows/Linting/badge.svg" alt="Linting">
-        <img src="https://github.com/guildedjs/guilded.js/workflows/TypeScript/badge.svg" alt="TypeScript">
+        <img src="https://github.com/zaida04/guilded.js/workflows/Linting/badge.svg" alt="Linting">
+        <img src="https://github.com/zaida04/guilded.js/workflows/TypeScript/badge.svg" alt="TypeScript">
         <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
-        <a href="https://github.com/guildedjs/guilded.js/issues"><img src="https://img.shields.io/github/issues-raw/guildedjs/guilded.js.svg?maxAge=25000" alt="Issues"></a>
-        <a href="https://github.com/guildedjs/guilded.js/pulls"><img src="https://img.shields.io/github/issues-pr/guildedjs/guilded.js.svg?style=flat" alt="GitHub pull requests"></a><br>
+        <a href="https://github.com/zaida04/guilded.js/issues"><img src="https://img.shields.io/github/issues-raw/zaida04/guilded.js.svg?maxAge=25000" alt="Issues"></a>
+        <a href="https://github.com/zaida04/guilded.js/pulls"><img src="https://img.shields.io/github/issues-pr/zaida04/guilded.js.svg?style=flat" alt="GitHub pull requests"></a><br>
         <a href="https://npmjs.org/package/@guildedjs/guilded.js"><img src="https://nodei.co/npm/@guildedjs/guilded.js.png" alt="NPM"></a>
     </p>
 </div>
@@ -63,9 +63,9 @@ This repo serves as a monorepo that houses several packages, mainly the `@guilde
 <!--GETTING STARTED-->
 
 ## Packages
-* [`@guildedjs/guilded.js`](https://github.com/guildedjs/guildedjs/tree/master/packages/guilded.js#readme) - main package that provides a lib for the guilded.gg api. Comes with built in caching, structures, etc.
-* [`@guildedjs/itami`](https://github.com/guildedjs/guildedjs/tree/master/packages/itami#readme) - official framework for `@guildedjs/guilded.js`, comes with highly customizable commands, listeners, and other abstractions.
-* [`@guildedjs/guilded-api-types`](https://github.com/guildedjs/guildedjs/tree/master/packages/guilded-api-typings#readme) - thinking of making your own guilded lib/wrapper? This package consists of typings for the guilded.gg api compiled together by the community. No need to write your own typings and reinventing the wheel.
+* [`@guildedjs/guilded.js`](https://github.com/zaida04/guilded.js/tree/master/packages/guilded.js#readme) - main package that provides a lib for the guilded.gg api. Comes with built in caching, structures, etc.
+* [`@guildedjs/itami`](https://github.com/zaida04/guildedjs/tree/master/packages/itami#readme) - official framework for `@guildedjs/guilded.js`, comes with highly customizable commands, listeners, and other abstractions.
+* [`@guildedjs/guilded-api-types`](https://github.com/zaida04/guilded.js/tree/master/packages/guilded-api-typings#readme) - thinking of making your own guilded lib/wrapper? This package consists of typings for the guilded.gg api compiled together by the community. No need to write your own typings and reinventing the wheel.
 
 ## Getting Started
 
@@ -100,4 +100,4 @@ As you start to contribute your beginner workflow should look similar to this:
 
 ## LICENSING  
 
-> **Guilded.JS** © [zaida04](https://github.com/zaida04), Released under the [MIT](https://github.com/guildedjs/guildedjs/blob/master/LICENSE) License. All subpackages are also released under the MIT License
+> **Guilded.JS** © [zaida04](https://github.com/zaida04), Released under the [MIT](https://github.com/zaida04/guildedjs/blob/master/LICENSE) License. All subpackages are also released under the MIT License
