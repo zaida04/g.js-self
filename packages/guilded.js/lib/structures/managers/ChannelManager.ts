@@ -60,7 +60,7 @@ export class ChannelManager extends BaseManager<APITeamChannel, TeamChannel | DM
         const channelID = ChannelManager.resolve(channel);
         const messageID = MessageManager.resolve(message);
         return this.client.rest
-            .get<APIGetChannelMessageResult>(`/channels/${channelID}/chat&messageId=${messageID}`)
+            .get<APIGetChannelMessageResult>(`/channels/${channelID}/chat?messageId=${messageID}`)
             .then(x => {
                 let targetChannel =
                     channel instanceof PartialChannel ? channel : this.client.channels.cache.get(channelID);
