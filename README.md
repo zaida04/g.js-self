@@ -85,9 +85,9 @@ Documentation is viewable here: https://guilded.js.org
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 As you start to contribute your beginner workflow should look similar to this:   
-`fork repo` ->  `clone repo` -> `cd into the repo` -> `npm install` -> `npm run bootstrap` -> `npm run build` -> `create new branch` -> `your code changes` -> `npm run lint` -> `npm run build` -> `commit & push changes` -> `open pull request`
+`fork repo & clone repo` ->  `npm install` -> `npm run bootstrap` -> `create new branch` -> `your code changes` -> `npm run build` -> `npm run lint` -> `commit, push, PR`
 
-**Please ensure your commits pass the tests, lints, and builds. This means you should test it locally before pushing.**
+**Please ensure your commits pass the test, lint, and build scripts.**
 
 **We make use of [lerna](https://lerna.js.org/) to manage our monorepo. The main commands used are below**
 * `lerna add <module> [--scope=package-name]` - add npm module dependency to all/specific package(s)
@@ -96,8 +96,7 @@ As you start to contribute your beginner workflow should look similar to this:
 * `lerna run <npm-script>` - recursively execute command in all packages (must exist in each packages package.json)
 
 ## Acknowledgements
-[Discord.js](https://github.com/discordjs/discord.js) - Caching strategy and overall layout
+[Discord.js](https://github.com/discordjs/discord.js) - Main inspiration & lots of derived work.
 
 ## LICENSING  
-
 > **Guilded.JS** © [zaida04](https://github.com/zaida04), Released under the [MIT](https://github.com/zaida04/guilded.js/blob/master/LICENSE) License. All subpackages are also released under the MIT License
