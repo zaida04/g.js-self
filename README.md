@@ -69,6 +69,9 @@ This repo serves as a monorepo that houses several packages, mainly the `@guilde
 
 ## Getting Started
 
+### Examples
+You can find example projects [here](https://github.com/zaida04/guilded.js/tree/master/examples)
+
 ### Prerequisites
 You are expected to have a reasonably supported version of node.js. Guildedjs is tested on node.js >12.0.0 and we make no guarantees that it will work on earlier versions
 
