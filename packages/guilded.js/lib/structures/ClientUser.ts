@@ -72,8 +72,8 @@ export class ClientUser extends User {
 }
 
 const PRECENSES = {
-    online: 1,
-    idle: 2,
     dnd: 3,
+    idle: 2,
     invisible: 4,
+    online: 1,
 };

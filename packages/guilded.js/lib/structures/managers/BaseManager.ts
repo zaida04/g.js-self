@@ -1,4 +1,4 @@
-import type { BaseData, Constructable } from '../../typings';
+import type { BaseData, constructable } from '../../typings';
 import { CacheCollection, CacheCollectionOptions } from '../../util/CacheCollection';
 import { Base } from '../Base';
 import type { Client } from '../Client';
@@ -12,7 +12,7 @@ export class BaseManager<K extends BaseData, T extends Base<K>> {
     public cache: CacheCollection<string, T> = new CacheCollection(this.cacheOptions ?? {});
     public constructor(
         public readonly client: Client,
-        public readonly holds: Constructable<T>,
+        public readonly holds: constructable<T>,
         public readonly cacheOptions?: CacheCollectionOptions,
     ) {}
 
@@ -20,7 +20,7 @@ export class BaseManager<K extends BaseData, T extends Base<K>> {
      * Add an object, potential data, or constructor params into this managers cache
      * @private
      */
-    public add(data: T | K | Partial<K> | ConstructorParameters<Constructable<T>>): T | null {
+    public add(data: T | K | Partial<K> | ConstructorParameters<constructable<T>>): T | null {
         if (this.isConstructorParamsOfHolds(data)) {
             const addition = new this.holds(...data);
             this.cache.set(addition.id.toString(), addition);
@@ -38,8 +38,8 @@ export class BaseManager<K extends BaseData, T extends Base<K>> {
     }
 
     private isConstructorParamsOfHolds(
-        data: ConstructorParameters<Constructable<T>> | any,
-    ): data is ConstructorParameters<Constructable<T>> {
+        data: ConstructorParameters<constructable<T>> | any,
+    ): data is ConstructorParameters<constructable<T>> {
         return Array.isArray(data);
     }
 

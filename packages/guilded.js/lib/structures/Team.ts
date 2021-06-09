@@ -126,7 +126,7 @@ export class Team extends Base<APITeam | APIPartialTeam> {
      * Information about the respective connected discord server
      */
     public discord: {
-        guild_id: string | null;
+        guildID: string | null;
         name: string | null;
     };
 
@@ -154,24 +154,24 @@ export class Team extends Base<APITeam | APIPartialTeam> {
         this.createdAt = new Date(data.createdAt);
         this.members = new TeamMemberManager(this.client, this);
         this.groups = new TeamGroupManager(this.client, this);
-        this.discord = { guild_id: null, name: null };
-        this.banners = { small: null, medium: null, large: null };
+        this.discord = { guildID: null, name: null };
+        this.banners = { large: null, medium: null, small: null };
         this.games = [];
         this.admin = null;
         this.banned = null;
         this.bio = null;
         this.invitable = null;
         this.measurements = {
-            numMembers: 0,
-            numFollowers: 0,
-            numRecentMatches: 0,
-            numRecentMatchWins: 0,
             matchmakingGameRanks: [],
-            numFollowersAndMembers: 0,
-            numMembersAddedInLastDay: 0,
-            numMembersAddedInLastWeek: 0,
             mostRecentMemberLastOnline: 0,
+            numFollowers: 0,
+            numFollowersAndMembers: 0,
+            numMembers: 0,
+            numMembersAddedInLastDay: 0,
             numMembersAddedInLastMonth: 0,
+            numMembersAddedInLastWeek: 0,
+            numRecentMatchWins: 0,
+            numRecentMatches: 0,
             subscriptionMonthsRemaining: null,
         };
         this.timezone = null;
@@ -206,7 +206,7 @@ export class Team extends Base<APITeam | APIPartialTeam> {
         if ('timezone' in data && data.timezone !== undefined) this.timezone = data.timezone;
         if ('type' in data && data.type !== undefined) this.type = data.type;
         if ('isVerified' in data && data.isVerified !== undefined) this.verified = data.isVerified;
-        if ('discordGuildId' in data && data.discordGuildId !== undefined) this.discord.guild_id = data.discordGuildId;
+        if ('discordGuildId' in data && data.discordGuildId !== undefined) this.discord.guildID = data.discordGuildId;
         if ('discordServerName' in data && data.discordServerName !== undefined) {
             this.discord.name = data.discordServerName;
         }

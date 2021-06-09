@@ -25,10 +25,10 @@ export class TeamGroupChannelManager extends BaseManager<APITeamChannel, TeamCha
         isPublic: boolean;
     }): Promise<unknown> {
         return this.client.rest.post(`/teams/${this.group.team?.id}/groups/${this.group.id}/channels`, {
-            name,
             channelCategoryId: parent,
             contentType: type,
             isPublic: isPublic,
+            name,
         });
     }
 }

@@ -19,11 +19,11 @@ export default class ChatMessageCreatedEvent extends Event {
                 channel = new PartialChannel(
                     this.client,
                     {
-                        id: data.channelId,
-                        type: data.channelType,
+                        contentType: data.contentType,
                         createdAt: data.createdAt,
                         createdBy: data.createdBy,
-                        contentType: data.contentType,
+                        id: data.channelId,
+                        type: data.channelType,
                     },
                     team,
                 );

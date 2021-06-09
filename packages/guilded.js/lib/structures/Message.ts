@@ -86,7 +86,7 @@ export class Message extends Base<APIMessage> {
      */
     public patch(data: APIMessage | Partial<APIMessage>): this {
         if ('content' in data && data.content !== undefined) {
-            this.parsedContent = MessageUtil.ParseMessage(data.content);
+            this.parsedContent = MessageUtil.parseMessage(data.content);
             this.content = this.parsedContent.parsedText;
         }
 

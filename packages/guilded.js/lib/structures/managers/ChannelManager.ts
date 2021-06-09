@@ -4,7 +4,7 @@ import type {
     APITeamChannel,
 } from '@guildedjs/guilded-api-typings';
 
-import { ConvertToMessageFormat } from '../../util/MessageUtil';
+import { convertToMessageFormat } from '../../util/MessageUtil';
 import type { DMChannel, TeamChannel } from '../Channel';
 // eslint-disable-next-line no-duplicate-imports
 import { PartialChannel } from '../Channel';
@@ -29,10 +29,10 @@ export class ChannelManager extends BaseManager<APITeamChannel, TeamChannel | DM
      */
     public sendMessage(
         channel: string | PartialChannel,
-        ...args: Parameters<typeof ConvertToMessageFormat>
+        ...args: Parameters<typeof convertToMessageFormat>
     ): Promise<Message | string> {
         const channelID = ChannelManager.resolve(channel);
-        const [id, formattedContent] = ConvertToMessageFormat(...args);
+        const [id, formattedContent] = convertToMessageFormat(...args);
 
         return this.client.rest
             .post<APIPostChannelMessagesResult | never>(`/channels/${channelID}/messages`, formattedContent)
