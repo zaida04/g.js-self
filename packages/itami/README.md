@@ -1,7 +1,7 @@
 > ## This is a work in progress and is not usable yet.
 
 <div align="center">
-<img src="../../media/itami-transparent.png" width="546" alt="guildedjs"/>
+<img src="../../static/itami-transparent.png" width="546" alt="guildedjs"/>
 
 <p><a href="https://github.com/zaida04/guilded.js/blob/master/LICENSE"><img src="https://img.shields.io/github/license/guildedjs/guilded.js" alt="GitHub"></a>
 <a href="https://www.npmjs.com/package/@guildedjs/itami"><img src="https://img.shields.io/npm/v/@guildedjs/itami?color=crimson&amp;logo=npm" alt="npm"></a>

@@ -1,7 +1,7 @@
 > ### ⚠️ This project is in the works, but is usable. Be weary of bugs. This library only works with selfbots for now. Selfbots are a gray zone in Guilded, so use this library at your own risk.
 
 <div align="center">
-    <img src="media/readme-header.png" width="546" alt="guildedjs"/>
+    <img src="static/readme-header.png" width="546" alt="guildedjs"/>
     <p><b>Tools for interacting with the <a href="https://www.guilded.gg/">Guilded.gg</a> API. <br>Written in TS</b></p>  
     <p><a href="https://discord.gg/jf66UUN"><b>Join our Discord Server!</b></a> > <a href="https://guilded.js.org"><b>Documentation</b></a></p>
     <br />
