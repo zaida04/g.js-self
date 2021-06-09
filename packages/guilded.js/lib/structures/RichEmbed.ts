@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import type { APIEmbed } from '@guildedjs/guilded-api-typings';
 
 import { resolveColor } from '../util/MessageUtil';
@@ -20,7 +21,7 @@ export class RichEmbed {
     }
 
     public setFooter(text: string, icon_url?: string): this {
-        this.data.footer = { text, icon_url };
+        this.data.footer = { icon_url, text };
         return this;
     }
 
@@ -35,12 +36,12 @@ export class RichEmbed {
     }
 
     public setAuthor(name: string, icon_url?: string): this {
-        this.data.author = { name, icon_url };
+        this.data.author = { icon_url, name };
         return this;
     }
 
     public addField(name: string, value: string, inline?: boolean): this {
-        this.addFields({ name, value, inline });
+        this.addFields({ inline, name, value });
         return this;
     }
 
@@ -79,26 +80,26 @@ export class RichEmbed {
 
     public toJSON(): APIEmbed {
         return {
-            title: this.data.title,
-            description: this.data.description,
-            url: this.data.url,
-            timestamp: this.data.timestamp?.toString(),
-            color: this.data.color,
-            fields: this.data.fields,
-            thumbnail: this.data.thumbnail,
-            image: this.data.image,
             author: this.data.author
                 ? {
-                      name: this.data.author.name,
                       icon_url: this.data.author.icon_url,
+                      name: this.data.author.name,
                   }
                 : undefined,
+            color: this.data.color,
+            description: this.data.description,
+            fields: this.data.fields,
             footer: this.data.footer
                 ? {
-                      text: this.data.footer.text,
                       icon_url: this.data.footer.icon_url,
+                      text: this.data.footer.text,
                   }
                 : undefined,
+            image: this.data.image,
+            thumbnail: this.data.thumbnail,
+            timestamp: this.data.timestamp?.toString(),
+            title: this.data.title,
+            url: this.data.url,
         };
     }
 }

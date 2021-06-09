@@ -102,8 +102,8 @@ export class User extends Base<APIUser> {
         this.avatarURLs = {
             blur: null,
             large: null,
-            small: null,
             medium: null,
+            small: null,
         };
         this.serviceEmail = null;
         this.steamID = null;
@@ -133,7 +133,7 @@ export class User extends Base<APIUser> {
         if ('userStatus' in data && data.userStatus !== undefined) this.userStatus = data.userStatus;
 
         this.banners = { blur: null, large: null, small: null };
-        this.avatarURLs = { blur: null, large: null, small: null, medium: null };
+        this.avatarURLs = { blur: null, large: null, medium: null, small: null };
 
         if ('profileBannerBlur' in data && data.profileBannerBlur) this.banners.blur = data.profileBannerBlur;
         if ('profileBannerLg' in data && data.profileBannerLg) this.banners.large = data.profileBannerLg;

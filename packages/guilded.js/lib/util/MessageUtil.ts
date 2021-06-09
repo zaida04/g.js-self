@@ -10,54 +10,54 @@ import { GenerateUUID } from './GenerateID';
  * Convert a string or other content to a message suitable to be sent to guilded
  * @internal
  */
-export function ConvertToMessageFormat(i: string | RichEmbed, e?: RichEmbed): [string, Record<string, any>] {
-    let str_input = '';
+export function convertToMessageFormat(i: string | RichEmbed, e?: RichEmbed): [string, Record<string, any>] {
+    let STR_INPUT = '';
     let embed;
 
     if (i instanceof RichEmbed) embed = i;
-    else str_input = i;
+    else STR_INPUT = i;
     if (e) embed = e;
 
     const messageID = GenerateUUID();
     const message: { content?: Record<string, any>; messageId: string } = { messageId: messageID };
-    message.content = parseToMessage(str_input, embed);
+    message.content = parseToMessage(STR_INPUT, embed);
     return [messageID, message];
 }
 
 function parseToMessage(input: string | RichEmbed, embed?: RichEmbed) {
     return {
-        object: 'value',
         document: {
-            object: 'document',
             data: {},
             nodes: [
                 {
-                    object: 'block',
-                    type: 'markdown-plain-text',
                     data: {},
                     nodes: [
                         {
-                            object: 'text',
                             leaves: [
                                 {
+                                    marks: [],
                                     object: 'leaf',
                                     text: typeof input === 'string' ? input : '',
-                                    marks: [],
                                 },
                             ],
+                            object: 'text',
                         },
                     ],
+                    object: 'block',
+                    type: 'markdown-plain-text',
                 },
                 {
-                    object: 'block',
-                    type: 'webhookMessage',
                     data: {
                         embeds: embed ? [embed?.toJSON()] : [],
                     },
                     nodes: [],
+                    object: 'block',
+                    type: 'webhookMessage',
                 },
             ],
+            object: 'document',
         },
+        object: 'value',
     };
 }
 
@@ -65,16 +65,16 @@ function parseToMessage(input: string | RichEmbed, embed?: RichEmbed) {
  * Parse a message recieved from Guilded into a more digestable structure
  * @internal
  */
-export function ParseMessage(data: APIContent): parsedMessage {
+export function parseMessage(data: APIContent): parsedMessage {
     const parsedMessageArray: parsedTextResponse[] = [];
     const mentions: {
         users: string[];
         channels: string[];
         reactions: string[];
     } = {
-        users: [],
         channels: [],
         reactions: [],
+        users: [],
     };
     const embeds: unknown[] = [];
 
@@ -86,8 +86,8 @@ export function ParseMessage(data: APIContent): parsedMessage {
                         case 'text': {
                             for (const leaf of node.leaves!) {
                                 parsedMessageArray.push({
-                                    type: 'text',
                                     content: leaf.text,
+                                    type: 'text',
                                 });
                             }
                             break;
@@ -99,27 +99,27 @@ export function ParseMessage(data: APIContent): parsedMessage {
                                     case 'mention': {
                                         mentions.users.push(castedDataNode.mention!.id);
                                         parsedMessageArray.push({
-                                            type: 'mention',
                                             content: leaf.text,
                                             mention: castedDataNode.mention,
+                                            type: 'mention',
                                         });
                                         break;
                                     }
                                     case 'reaction': {
                                         mentions.reactions.push(castedDataNode.reaction!.id);
                                         parsedMessageArray.push({
-                                            type: 'reaction',
                                             content: leaf.text,
                                             reaction: castedDataNode.reaction,
+                                            type: 'reaction',
                                         });
                                         break;
                                     }
                                     case 'channel': {
                                         mentions.channels.push(castedDataNode.channel!.id);
                                         parsedMessageArray.push({
-                                            type: 'mention',
-                                            content: leaf.text,
                                             channel: castedDataNode.channel,
+                                            content: leaf.text,
+                                            type: 'mention',
                                         });
                                         break;
                                     }
@@ -132,13 +132,13 @@ export function ParseMessage(data: APIContent): parsedMessage {
                 break;
             }
             case 'block-quote-container': {
-                for (const MessageNodes of messageLine.nodes) {
-                    for (const node of MessageNodes.nodes!) {
+                for (const MESSAGE_NODES of messageLine.nodes) {
+                    for (const node of MESSAGE_NODES.nodes!) {
                         switch (node.object) {
                             case 'text': {
                                 parsedMessageArray.push({
-                                    type: 'text',
                                     content: node.leaves![0].text,
+                                    type: 'text',
                                 });
                                 break;
                             }
@@ -148,27 +148,27 @@ export function ParseMessage(data: APIContent): parsedMessage {
                                     case 'mention': {
                                         mentions.users.push(castedDataNode.mention!.id);
                                         parsedMessageArray.push({
-                                            type: 'mention',
                                             content: node.nodes![0].leaves![0].text,
                                             mention: castedDataNode.mention,
+                                            type: 'mention',
                                         });
                                         break;
                                     }
                                     case 'reaction': {
                                         mentions.reactions.push(castedDataNode.reaction!.id);
                                         parsedMessageArray.push({
-                                            type: 'text',
                                             content: node.nodes![0].leaves![0].text,
                                             reaction: castedDataNode.reaction,
+                                            type: 'text',
                                         });
                                         break;
                                     }
                                     case 'channel': {
                                         mentions.channels.push(castedDataNode.channel!.id);
                                         parsedMessageArray.push({
-                                            type: 'mention',
-                                            content: node.nodes![0].leaves![0].text,
                                             channel: castedDataNode.channel,
+                                            content: node.nodes![0].leaves![0].text,
+                                            type: 'mention',
                                         });
                                         break;
                                     }
@@ -182,8 +182,8 @@ export function ParseMessage(data: APIContent): parsedMessage {
             }
             case 'markdown-plain-text': {
                 parsedMessageArray.push({
-                    type: 'text',
                     content: messageLine.nodes![0].leaves![0].text,
+                    type: 'text',
                 });
                 break;
             }
@@ -195,13 +195,13 @@ export function ParseMessage(data: APIContent): parsedMessage {
     }
 
     return {
-        parsedText: parsedMessageArray.map(x => x.content).join('\n'),
-        parsedArr: parsedMessageArray,
         mentions: {
-            users: mentions.users,
             channels: mentions.channels,
             reactions: mentions.reactions,
+            users: mentions.users,
         },
+        parsedArr: parsedMessageArray,
+        parsedText: parsedMessageArray.map(x => x.content).join('\n'),
     };
 }
 

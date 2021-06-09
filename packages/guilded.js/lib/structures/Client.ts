@@ -28,13 +28,13 @@ import type { User } from './User';
  * })
  * ```
  */
-export class Client extends EventEmitter implements ClientEvents {
+export class Client extends EventEmitter implements clientEvents {
     /**
      * Manager in charge of managing REST requests to the guilded API
      * @private
      */
     public readonly rest: RestManager = new RestManager({
-        apiURL: this.options?.rest?.apiURL,
+        apiURL: this.options?.rest?.apiURL ?? Util.CONSTANTS.BASE_DOMAIN,
     });
 
     /**
@@ -42,7 +42,7 @@ export class Client extends EventEmitter implements ClientEvents {
      * @private
      */
     public readonly cdn: RestManager = new RestManager({
-        apiURL: this.options?.rest?.cdnURL ?? 'media.guilded.gg',
+        apiURL: this.options?.rest?.cdnURL ?? Util.CONSTANTS.MEDIA_DOMAIN,
     });
 
     /**
@@ -97,13 +97,13 @@ export class Client extends EventEmitter implements ClientEvents {
     public async login(options: LoginOptions): Promise<this> {
         await this.rest.init(options);
 
-        const fetch_me: APIGetCurrentUser = (await this.rest.get('/me')) as APIGetCurrentUser;
+        const FETCH_ME: APIGetCurrentUser = (await this.rest.get('/me')) as APIGetCurrentUser;
         this.debug('Initial ME data recieved');
-        this.user = new ClientUser(this, fetch_me.user);
+        this.user = new ClientUser(this, FETCH_ME.user);
         if (!this.options?.cache?.startupRestrictions.dropTeams) {
             const teamChannelDataRequests = [];
-            for (const team_data of fetch_me.teams) {
-                const team = new Team(this, team_data);
+            for (const TEAM_DATA of FETCH_ME.teams) {
+                const team = new Team(this, TEAM_DATA);
                 if (!this.options?.cache?.startupRestrictions.dropChannels) {
                     teamChannelDataRequests.push(team.fetchChannels());
                 }
@@ -114,9 +114,9 @@ export class Client extends EventEmitter implements ClientEvents {
         }
 
         if (!this.options?.cache?.startupRestrictions.dropDMs) {
-            const fetch_dms = await this.rest.get(`/users/${this.user.id}/channels`);
-            for (const dm_data of fetch_dms.channels) {
-                const dm = new DMChannel(this, dm_data);
+            const FETCH_DMS = await this.rest.get(`/users/${this.user.id}/channels`);
+            for (const DM_DATA of FETCH_DMS.channels) {
+                const dm = new DMChannel(this, DM_DATA);
                 this.channels.add(dm);
             }
             this.debug('Initial DM Channel data recieved.');
@@ -162,7 +162,7 @@ export class Client extends EventEmitter implements ClientEvents {
     }
 }
 
-export interface ClientEvents {
+export interface clientEvents {
     /**
      * Fired when a reaction is removed from a message
      * @event
@@ -218,13 +218,13 @@ export interface ClientEvents {
     on(event: 'reconnecting', listener: () => any): this;
 }
 
-export type ClientPartial = 'MEMBER' | 'MESSAGE' | 'USER';
+export type clientPartial = 'MEMBER' | 'MESSAGE' | 'USER';
 
 /**
  * Options you can instantiate the client with.
  */
 export interface ClientOptions {
-    partials: ClientPartial[];
+    partials: clientPartial[];
     cache: {
         startupRestrictions: {
             dropDMs: boolean;

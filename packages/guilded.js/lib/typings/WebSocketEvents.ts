@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 export enum websocket_events {
     CHAT_MESSAGE_CREATED = 'ChatMessageCreated',
     CHAT_MESSAGE_UPDATED = 'ChatMessageUpdated',

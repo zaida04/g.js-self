@@ -447,8 +447,8 @@ export class TeamChannel extends PartialChannel {
         if ('isRoleSynced' in data && data.isRoleSynced !== undefined) this.roleSynced = data.isRoleSynced;
         if ('rolesById' in data && data.rolesById !== undefined) {
             for (const role in data.rolesById) {
-                const role_data = data.rolesById[role];
-                this.roles.set(role, new RolePermissionOverwrite(this.client, role_data, this));
+                const ROLE_DATA = data.rolesById[role];
+                this.roles.set(role, new RolePermissionOverwrite(this.client, ROLE_DATA, this));
             }
         }
         if ('userPermissions' in data && data.userPermissions !== undefined) {
@@ -460,8 +460,8 @@ export class TeamChannel extends PartialChannel {
         }
         if ('tournamentRolesById' in data && data.tournamentRolesById !== undefined) {
             for (const role in data.tournamentRolesById) {
-                const role_data = data.tournamentRolesById[role];
-                this.tournamentRoles.set(role, new RolePermissionOverwrite(this.client, role_data, this));
+                const ROLE_DATA = data.tournamentRolesById[role];
+                this.tournamentRoles.set(role, new RolePermissionOverwrite(this.client, ROLE_DATA, this));
             }
         }
         return this;

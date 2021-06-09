@@ -21,7 +21,7 @@ export default class ChatMessageReactionAddedEvent extends Event {
                 const newMessageReaction = new MessageReaction(this.client, {
                     ...data.reaction,
                     createdAt: new Date().toISOString(),
-                    users: [{ id: data.reaction.createdBy, webhookId: null, botId: null }],
+                    users: [{ botId: null, id: data.reaction.createdBy, webhookId: null }],
                 });
                 message?.reactions.set(newMessageReaction.id, newMessageReaction);
                 messageReaction = newMessageReaction;
