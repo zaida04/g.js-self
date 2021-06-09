@@ -8,6 +8,7 @@ export class RestManager {
     public apiURL: string;
     public token: string | undefined;
     public cookieJar: string | undefined;
+    public guildedMID: string | undefined;
 
     public constructor(public config?: RestManagerOptions) {
         this.apiURL = `https://${config?.apiURL ?? CONSTANTS.BASE_DOMAIN}`;
@@ -21,7 +22,8 @@ export class RestManager {
         let headers = {};
         if (authenticated) {
             headers = {
-                hmac_signed_session: this.token,
+                // eslint-disable-next-line @typescript-eslint/naming-convention
+                HMAC_SIGNED_SESSION: this.token,
                 cookie: this.cookieJar,
             };
         }
@@ -29,16 +31,18 @@ export class RestManager {
         // Glue fix until the rest module supports retry-after
         sleep(this.config?.restOffset ?? 3500);
         let request;
+        const requestOptions: any = {
+            headers: {
+                'content-type': 'application/json',
+                ...headers,
+            },
+            method: data.method,
+        };
+
+        if (data.body) requestOptions.body = JSON.stringify(data.body);
 
         try {
-            request = await fetch(this.apiURL + data.path, {
-                method: data.method,
-                body: data.body ? JSON.stringify(data.body) : undefined,
-                headers: {
-                    'Content-Type': 'application/json',
-                    ...headers,
-                },
-            });
+            request = await fetch(this.apiURL + data.path, requestOptions);
 
             if (request.status < 200 || request.status > 299) {
                 if (request.status === 429) {
@@ -78,8 +82,8 @@ export class RestManager {
     ): Promise<T> {
         return this.make(
             {
+                body,
                 method: 'POST',
-                body: body,
                 path: path,
             },
             authenticated,
@@ -93,8 +97,8 @@ export class RestManager {
     ): Promise<T> {
         return this.make(
             {
+                body,
                 method: 'DELETE',
-                body: body,
                 path: path,
             },
             authenticated,
@@ -108,8 +112,8 @@ export class RestManager {
     ): Promise<T> {
         return this.make(
             {
+                body,
                 method: 'PATCH',
-                body: body,
                 path: path,
             },
             authenticated,
@@ -123,8 +127,8 @@ export class RestManager {
     ): Promise<T> {
         return this.make(
             {
+                body,
                 method: 'PUT',
-                body: body,
                 path: path,
             },
             authenticated,
@@ -135,12 +139,12 @@ export class RestManager {
         if (data.email && data.password) {
             const [loginData] = await this.make(
                 {
-                    path: '/login',
-                    method: 'POST',
                     body: {
                         email: data.email,
                         password: data.password,
                     },
+                    method: 'POST',
+                    path: '/login',
                 },
                 false,
             );
@@ -149,6 +153,7 @@ export class RestManager {
             if (!this.cookieJar) throw new Error('Incorrect Email/Pasword');
             const setCookies = this.cookieJar.split(' ');
             this.token = setCookies[0].split('=')[1].split(';')[0];
+            this.guildedMID = setCookies[11].split('=')[1].split(';')[0];
             return loginData;
         } else {
             throw new Error('You must provide an email/password');
@@ -170,7 +175,7 @@ export interface RestManagerOptions {
 export interface MakeOptions {
     method: string;
     path: string;
-    body?: Record<string, string>;
+    body?: Record<string, string> | undefined;
 }
 
 export interface LoginData {
