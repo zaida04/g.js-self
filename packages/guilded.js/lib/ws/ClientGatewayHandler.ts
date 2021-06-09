@@ -9,6 +9,7 @@ import WebSocket from 'ws';
 
 import type { Client } from '../structures/Client';
 import { events, websocket_events } from '../typings';
+import { CONSTANTS } from '../util/Consts';
 import ChatMessageCreatedEvent from './events/ChatMessageCreated';
 import ChatMessageReactionAddedEvent from './events/ChatMessageReactionAdded';
 import ChatMessageReactionDeletedEvent from './events/ChatMessageReactionDeleted';
@@ -31,7 +32,7 @@ export class ClientGatewayHandler extends GatewayHandler {
 
     public init(): this | null {
         if (this.ws) return this;
-        const socketURL = `wss://${this.client.rest.baseDomain}/socket.io/?jwt=undefined&EIO=3&transport=websocket`;
+        const socketURL = `wss://${CONSTANTS.BASE_DOMAIN}/socket.io/?jwt=undefined&EIO=3&transport=websocket`;
         this.ws = new WebSocket(socketURL, {
             headers: {
                 cookie: `hmac_signed_session=${this.client.rest.token}`,
