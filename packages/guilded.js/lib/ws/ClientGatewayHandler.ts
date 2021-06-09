@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import type {
     WSChatMessageCreated,
     WSChatMessageReactionAdded,
@@ -21,10 +22,10 @@ export class ClientGatewayHandler extends GatewayHandler {
     private reconnectionAmnt = 0;
 
     public events = {
-        ChatMessageCreated: new ChatMessageCreatedEvent(this.client),
-        ChatMessageReactionAdded: new ChatMessageReactionAddedEvent(this.client),
-        ChatMessageUpdated: new ChatMessageUpdatedEvent(this.client),
-        ChatMessageReactionDeleted: new ChatMessageReactionDeletedEvent(this.client),
+        chatMessageCreated: new ChatMessageCreatedEvent(this.client),
+        chatMessageReactionAdded: new ChatMessageReactionAddedEvent(this.client),
+        chatMessageReactionDeleted: new ChatMessageReactionDeletedEvent(this.client),
+        chatMessageUpdated: new ChatMessageUpdatedEvent(this.client),
     };
     public constructor(client: Client) {
         super(client);
@@ -32,10 +33,11 @@ export class ClientGatewayHandler extends GatewayHandler {
 
     public init(): this | null {
         if (this.ws) return this;
-        const socketURL = `wss://${CONSTANTS.BASE_DOMAIN}/socket.io/?jwt=undefined&EIO=3&transport=websocket`;
+        // eslint-disable-next-line max-len
+        const socketURL = `wss://${CONSTANTS.BASE_DOMAIN}/socket.io/?jwt=undefined&guildedClientId=${this.client.rest.guildedMID}&EIO=3&transport=websocket`;
         this.ws = new WebSocket(socketURL, {
             headers: {
-                cookie: `hmac_signed_session=${this.client.rest.token}`,
+                Origin: 'https://www.guilded.gg',
             },
         });
         this.ws
@@ -98,36 +100,36 @@ export class ClientGatewayHandler extends GatewayHandler {
                 }
 
                 case 42: {
-                    let event_name, event_data;
+                    let EVENT_NAME, EVENT_DATA;
 
                     try {
-                        [event_name, event_data] = JSON.parse(data);
+                        [EVENT_NAME, EVENT_DATA] = JSON.parse(data);
                     } catch (e) {
                         throw new Error(`malformed payload! ${data}`);
                     }
 
-                    if (this.client.options?.ws?.disabledEvents?.includes(event_name)) return;
-                    this.client.emit('raw', event_name, event_data);
+                    if (this.client.options?.ws?.disabledEvents?.includes(EVENT_NAME)) return;
+                    this.client.emit('raw', EVENT_NAME, EVENT_DATA);
 
                     let result: (boolean | (string | undefined))[] | undefined;
-                    switch (event_name) {
+                    switch (EVENT_NAME) {
                         case websocket_events.CHAT_MESSAGE_CREATED: {
-                            result = this.events.ChatMessageCreated.ingest(event_data as WSChatMessageCreated);
+                            result = this.events.chatMessageCreated.ingest(EVENT_DATA as WSChatMessageCreated);
                             break;
                         }
                         case websocket_events.CHAT_MESSAGE_UPDATED: {
-                            result = this.events.ChatMessageUpdated.ingest(event_data as WSChatMessageUpdated);
+                            result = this.events.chatMessageUpdated.ingest(EVENT_DATA as WSChatMessageUpdated);
                             break;
                         }
                         case websocket_events.CHAT_MESSAGE_REACTION_ADDED: {
-                            result = this.events.ChatMessageReactionAdded.ingest(
-                                event_data as WSChatMessageReactionAdded,
+                            result = this.events.chatMessageReactionAdded.ingest(
+                                EVENT_DATA as WSChatMessageReactionAdded,
                             );
                             break;
                         }
                         case websocket_events.CHAT_MESSAGE_REACTION_DELETED: {
-                            result = this.events.ChatMessageReactionDeleted.ingest(
-                                event_data as WSChatMessageReactionDeleted,
+                            result = this.events.chatMessageReactionDeleted.ingest(
+                                EVENT_DATA as WSChatMessageReactionDeleted,
                             );
                             break;
                         }
