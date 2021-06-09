@@ -1,17 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import fetch, { Response } from 'node-fetch';
 
-import { sleep } from '../util';
+import { CONSTANTS, sleep } from '../util';
 import { GuildedAPIError } from './GuildedAPIError';
 
 export class RestManager {
     public apiURL: string;
-    public baseDomain = 'api.guilded.gg';
     public token: string | undefined;
     public cookieJar: string | undefined;
 
     public constructor(public config?: RestManagerOptions) {
-        this.apiURL = `https://${config?.apiURL ?? this.baseDomain}`;
+        this.apiURL = `https://${config?.apiURL ?? CONSTANTS.BASE_DOMAIN}`;
     }
 
     private async make(

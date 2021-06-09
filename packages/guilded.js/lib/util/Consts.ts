@@ -43,6 +43,7 @@ export const CONSTANTS = {
     COLORS,
     CDN: 'https://img.guildedcdn.com/',
     AWS_CDN: 'https://s3-us-west-2.amazonaws.com/www.guilded.gg/',
+    BASE_DOMAIN: 'api.guilded.gg',
     AVATAR_URL: (hash: string, extension: 'PNG' | 'GIF', size?: IMG_SIZE): string =>
         `${CONSTANTS.CDN}/UserAvatar/${hash}${size ? `-${size}` : ''}.${extension.toLowerCase()}`,
     PROFILE_BANNER: (hash: string, size?: IMG_SIZE): string =>
