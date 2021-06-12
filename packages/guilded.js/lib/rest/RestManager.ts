@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import fetch, { Response } from 'node-fetch';
 
-import { CONSTANTS, sleep, extractFromCookieJar } from '../util';
+import { CONSTANTS, extractFromCookieJar, sleep } from '../util';
 import { GuildedAPIError } from './GuildedAPIError';
 
 export class RestManager {
@@ -32,12 +32,12 @@ export class RestManager {
         sleep(this.config?.restOffset ?? 3500);
         let request;
         const requestOptions: any = {
+            body: data.body ? JSON.stringify(data.body) : undefined,
             headers: {
                 'content-type': 'application/json',
                 ...headers,
             },
             method: data.method,
-            body: data.body ? JSON.stringify(data.body) : undefined
         };
 
         try {
