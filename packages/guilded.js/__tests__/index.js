@@ -15,8 +15,8 @@ const client = new Guilded.Client({
 });
 client.prefix = 'gg!';
 
-// Client.on("raw", (a, b) => console.log(a, b));
-// client.on("debug", (a) => console.log(a));
+// client.on("raw", (a, b) => console.log(a, b));
+// client.on("debug", (...a) => console.log(a));
 
 client.on(Guilded.events.MESSAGE_REACTION_ADD, a => console.log(`REACTION ADDED: ${a.id}`));
 client.on(Guilded.events.MESSAGE_REACTION_DELETE, a => console.log(`REACTION REMOVED: ${a.id}`));
@@ -150,6 +150,10 @@ client.on(Guilded.events.MESSAGE_CREATE, async message => {
             📤 **Output**
             \`\`\`${evaled}\`\`\`
             `);
+            break;
+        }
+        case "ping": {
+            return message.channel.send("HI!");
             break;
         }
     }
