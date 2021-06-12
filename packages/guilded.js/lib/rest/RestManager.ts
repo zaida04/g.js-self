@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import fetch, { Response } from 'node-fetch';
 
-import { CONSTANTS, sleep } from '../util';
+import { CONSTANTS, sleep, extractFromCookieJar } from '../util';
 import { GuildedAPIError } from './GuildedAPIError';
 
 export class RestManager {
@@ -37,9 +37,8 @@ export class RestManager {
                 ...headers,
             },
             method: data.method,
+            body: data.body ? JSON.stringify(data.body) : undefined
         };
-
-        if (data.body) requestOptions.body = JSON.stringify(data.body);
 
         try {
             request = await fetch(this.apiURL + data.path, requestOptions);
@@ -69,7 +68,7 @@ export class RestManager {
         return this.make(
             {
                 method: 'GET',
-                path: path,
+                path,
             },
             authenticated,
         ).then(x => (x[1] as Record<string, any>) as T);
@@ -84,7 +83,7 @@ export class RestManager {
             {
                 body,
                 method: 'POST',
-                path: path,
+                path,
             },
             authenticated,
         ).then(x => (x[1] as Record<string, any>) as T);
@@ -99,7 +98,7 @@ export class RestManager {
             {
                 body,
                 method: 'DELETE',
-                path: path,
+                path,
             },
             authenticated,
         ).then(x => (x[1] as Record<string, any>) as T);
@@ -114,7 +113,7 @@ export class RestManager {
             {
                 body,
                 method: 'PATCH',
-                path: path,
+                path,
             },
             authenticated,
         ).then(x => (x[1] as Record<string, any>) as T);
@@ -129,7 +128,7 @@ export class RestManager {
             {
                 body,
                 method: 'PUT',
-                path: path,
+                path,
             },
             authenticated,
         ).then(x => (x[1] as Record<string, any>) as T);
@@ -152,8 +151,9 @@ export class RestManager {
             this.cookieJar = (loginData as Response).headers.get('Set-Cookie')!;
             if (!this.cookieJar) throw new Error('Incorrect Email/Pasword');
             const setCookies = this.cookieJar.split(' ');
-            this.token = setCookies[0].split('=')[1].split(';')[0];
-            this.guildedMID = setCookies[11].split('=')[1].split(';')[0];
+
+            this.token = extractFromCookieJar(setCookies, 0);
+            this.guildedMID = extractFromCookieJar(setCookies, 11);
             return loginData;
         } else {
             throw new Error('You must provide an email/password');
