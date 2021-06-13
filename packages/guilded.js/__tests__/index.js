@@ -15,7 +15,7 @@ const client = new Guilded.Client({
 });
 client.prefix = 'gg!';
 
-// client.on("raw", (a, b) => console.log(a, b));
+// Client.on("raw", (a, b) => console.log(a, b));
 // client.on("debug", (...a) => console.log(a));
 
 client.on(Guilded.events.MESSAGE_REACTION_ADD, a => console.log(`REACTION ADDED: ${a.id}`));
@@ -124,6 +124,35 @@ client.once(Guilded.events.READY, async () => {
         failed++;
     }
 
+    /**
+     * Test 5
+     */
+
+    tester(COLORS.YELLOW, '\n---Test 5: Create Invite---');
+
+    let invite;
+    try {
+        console.log('... creating Invite');
+        invite = await client.teams.createInvite(process.env.TEAM_ID);
+        tester(COLORS.GREEN, `Successfully created invite! id: ${invite.id}`);
+        passed++;
+    } catch (e) {
+        tester(COLORS.RED, `Creating invite failed! ${e}`);
+        console.log(e);
+        failed++;
+    }
+
+    try {
+        console.log('...deleting Invite');
+        const responseID = await client.teams.deleteInvite(process.env.TEAM_ID, invite.id);
+        tester(COLORS.GREEN, `Successfully deleted invite! response-id ${responseID}`);
+        passed++;
+    } catch (e) {
+        tester(COLORS.RED, `Deleting invite failed! ${e}`);
+        console.log(e);
+        failed++;
+    }
+
     console.log(`\n\n${COLORS.GREEN} ${passed} tests passed.${COLORS.RED} ${failed} tests failed. ${COLORS.RESET}`);
 });
 
@@ -152,9 +181,8 @@ client.on(Guilded.events.MESSAGE_CREATE, async message => {
             `);
             break;
         }
-        case "ping": {
-            return message.channel.send("HI!");
-            break;
+        case 'ping': {
+            return message.channel.send('HI!');
         }
     }
 });
@@ -164,11 +192,10 @@ if (!process.env.PASSWORD) throw new Error('Must supply password for testing');
 if (!process.env.TEAM_ID) throw new Error('Must provide a testing team ID');
 if (!process.env.ROLE_ID) throw new Error('Must provide a testing role ID');
 if (!process.env.GUINEAPIG_ID) throw new Error('Must provide a testing user ID');
-// If (!process.env.GROUP_ID) throw new Error('Must proivde a testing group ID');
+if (!process.env.GROUP_ID) throw new Error('Must proivde a testing group ID');
 if (!process.env.CHANNEL_ID) throw new Error('Must provide a testing channel ID');
 
 client.login({
     email: process.env.EMAIL,
     password: process.env.PASSWORD,
 });
-

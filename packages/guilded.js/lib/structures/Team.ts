@@ -1,5 +1,12 @@
 import Collection from '@discordjs/collection';
-import type { APIGetTeamChannels, APIMeasurements, APIPartialTeam, APITeam } from '@guildedjs/guilded-api-typings';
+import type {
+    APIGetTeamChannels,
+    APIMeasurements,
+    APIPartialTeam,
+    APIPostCreateInviteResult,
+    APITeam,
+    CHANNEL_CONTENT_TYPES,
+} from '@guildedjs/guilded-api-typings';
 
 import { Base } from './Base';
 import { TeamChannel } from './Channel';
@@ -233,10 +240,38 @@ export class Team extends Base<APITeam | APIPartialTeam> {
     /**
      * Create an invite to this team
      */
-    public createInvite(): Promise<string> {
-        return this.client.rest
-            .post(`/teams/${this.id}/invites`, { teamId: this.id })
-            .then(x => x.data.invite.id as string);
+    public createInvite(): Promise<APIPostCreateInviteResult> {
+        return this.client.teams.createInvite(this.id);
+    }
+
+    public deleteInvite(inviteID: string): Promise<string> {
+        return this.client.teams.deleteInvite(this.id, inviteID);
+    }
+
+    /**
+     * Creates a Teamchannel and fires a CreateChannelEvent on success. (UNFINISHED)
+     * @hidden
+     * @param name The name of the channel.
+     * @param contentType The type of the channel.
+     * @param channelCategoryID the category's ID to create this channel under.
+     * @param isPublic whether or not this channel should be visible to users who aren't in the team.
+     * @returns
+     */
+
+    public createChannel(
+        name: string,
+        contentType: CHANNEL_CONTENT_TYPES,
+        channelCategoryID: number | null = null,
+        isPublic = false,
+    ): Promise<TeamChannel> {
+        return this.client.teams.createChannel(
+            this.id,
+            this.baseGroupID,
+            name,
+            contentType,
+            channelCategoryID,
+            isPublic,
+        );
     }
 
     /**
