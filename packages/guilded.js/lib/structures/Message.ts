@@ -133,7 +133,7 @@ export class Message extends Base<APIMessage> {
             .post(`/channels/${this.channel?.id ?? this.channelID}/messages/${this.id}/reactions/${emoji}`, {})
             .then(x => {
                 // Add reaction to message object
-            }); // MessageManager how?
+            });
     }
 
     /**
