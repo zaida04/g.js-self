@@ -7,6 +7,7 @@ import type { Client } from '../Client';
 import { Message } from '../Message';
 import { PartialMessage } from '../PartialMessage';
 import { BaseManager } from './BaseManager';
+import { ChannelManager } from './ChannelManager';
 
 export class MessageManager extends BaseManager<APIMessage | UpgradedMessageData, Message> {
     public constructor(client: Client, public readonly channel: TeamChannel | DMChannel | PartialChannel) {
@@ -22,6 +23,32 @@ export class MessageManager extends BaseManager<APIMessage | UpgradedMessageData
      */
     public delete(msg: string | Message): Promise<Message | string> {
         return this.client.channels.deleteMessage(this.channel.id, msg);
+    }
+
+    /**
+     * Add a reaction to this message (UNFINISHED)
+     * @hidden
+     */
+    public react(emoji: string, channel: string | PartialChannel, message: string | Message): unknown {
+        const messageID = MessageManager.resolve(message);
+        const channelID = ChannelManager.resolve(channel);
+        return this.client.rest.post(`/channels/${channelID}/messages/${messageID}/reactions/${emoji}`, {}).then(x => {
+            // Add reaction to message object
+        });
+    }
+
+    /**
+     * Remove a reaction from this message (UNFINISHED)
+     * @hidden
+     */
+    public unreact(emoji: string, channel: string | PartialChannel, message: string | Message): unknown {
+        const messageID = MessageManager.resolve(message);
+        const channelID = ChannelManager.resolve(channel);
+        return this.client.rest
+            .delete(`/channels/${channelID}/messages/${messageID}/reactions/${emoji}`, {})
+            .then(x => {
+                // Add reaction to message object
+            });
     }
 
     /**

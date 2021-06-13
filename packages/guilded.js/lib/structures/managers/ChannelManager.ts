@@ -99,12 +99,5 @@ export class ChannelManager extends BaseManager<APITeamChannel, TeamChannel | DM
      */
     private editMessage(channel: string, msg: string | Message, newContent: string) {
         throw new Error('Method not implemented and not intended for use yet.');
-
-        const messageID = MessageManager.resolve(msg);
-        return this.client.rest.put(`/channels/${channel}/messages/${messageID}`).then(x => {
-            const existing = this.cache.get(messageID);
-            if (existing) existing.patch(x);
-            return existing ?? null;
-        });
     }
 }

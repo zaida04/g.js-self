@@ -1,10 +1,19 @@
-import type { APIGetTeam, APIPartialTeam, APITeam } from '@guildedjs/guilded-api-typings';
+import type {
+    APIGetTeam,
+    APIPartialTeam,
+    APIPostCreateInviteResult,
+    APITeam,
+    CHANNEL_CONTENT_TYPES,
+} from '@guildedjs/guilded-api-typings';
 
+import { TeamChannel } from '../Channel';
 import type { Client } from '../Client';
+import { Group } from '../Group';
 import { Member } from '../Member';
 import { Role } from '../Role';
 import { Team } from '../Team';
 import { BaseManager } from './BaseManager';
+import { TeamGroupManager } from './TeamGroupManager';
 import { TeamMemberManager } from './TeamMemberManager';
 
 export class TeamManager extends BaseManager<APITeam | APIPartialTeam, Team> {
@@ -66,6 +75,56 @@ export class TeamManager extends BaseManager<APITeam | APIPartialTeam, Team> {
         return this.client.rest
             .put(`/teams/${teamID}/members/${memberID}/nickname`, { nickname: newNickname })
             .then(() => void 0);
+    }
+
+    /**
+     * Creates an Invite for the Team
+     * @param team The ID or team object of the Team.
+     * @returns The ID of the created Invite
+     */
+    public createInvite(team: string | Team): Promise<APIPostCreateInviteResult> {
+        const teamID = TeamManager.resolve(team);
+        return this.client.rest.post(`/teams/${teamID}/invites`, { teamId: teamID }).then(x => x.invite);
+    }
+
+    public deleteInvite(team: string | Team, inviteID: string): Promise<string> {
+        if (typeof inviteID !== 'string') throw new TypeError('InviteID must be a string!');
+        const teamID = TeamManager.resolve(team);
+        return this.client.rest.delete(`/teams/${teamID}/invites/${inviteID}`).then(x => x.id);
+    }
+
+    /**
+     * Creates a Teamchannel (UNFINISHED)
+     * @hidden
+     * @param team
+     * @param group
+     * @param name
+     * @param contentType
+     * @param channelCategoryId
+     * @param isPublic
+     * @returns
+     */
+
+    public createChannel(
+        team: string | Team,
+        group: string | Group,
+        name: string,
+        contentType: CHANNEL_CONTENT_TYPES,
+        channelCategoryId: number | null = null,
+        isPublic = false,
+    ): Promise<TeamChannel> {
+        if (typeof name !== 'string') {
+            throw new TypeError('Name must be a string!');
+        }
+        const teamID = TeamManager.resolve(team);
+        const groupID = TeamGroupManager.resolve(group);
+        return this.client.rest.post(`/teams/${teamID}/groups/${groupID}`, {
+            channelCategoryId,
+            contentType,
+            isPublic,
+            name,
+        });
+        // .then(x => new TeamChannel(this.client, x, null, null));
     }
 
     /**
