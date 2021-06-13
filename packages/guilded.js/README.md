@@ -1,7 +1,7 @@
 <div align="center">
 <h1>Guilded.js</h1>
 
-<p><a href="https://github.com/zaida04/guilded.js/blob/master/LICENSE"><img src="https://img.shields.io/github/license/guildedjs/guilded.js" alt="GitHub"></a>
+<p><a href="https://github.com/zaida04/guilded.js/blob/main/LICENSE"><img src="https://img.shields.io/github/license/guildedjs/guilded.js" alt="GitHub"></a>
 <a href="https://www.npmjs.com/package/@guildedjs/guilded.js"><img src="https://img.shields.io/npm/v/@guildedjs/guilded.js?color=crimson&amp;logo=npm" alt="npm"></a>
 <a href="https://github.com/zaida04/guilded.js/actions/workflows/typescript.yml"><img src="https://github.com/zaida04/guilded.js/actions/workflows/typescript.yml/badge.svg" alt="TypeScript"></a></p>
  
@@ -93,4 +93,4 @@ Please see the main [README.md](https://github.com/zaida04/guilded.js) for info 
 - [`Discord.js`](https://discord.js.org/#/) - Inspiration and caching strategy
   
 ## LICENSE
-Licensed under the [MIT License](https://github.com/zaida04/guilded.js/blob/master/LICENSE)  
+Licensed under the [MIT License](https://github.com/zaida04/guilded.js/blob/main/LICENSE)  

@@ -63,14 +63,14 @@ This repo serves as a monorepo that houses several packages, mainly the `@guilde
 <!--GETTING STARTED-->
 
 ## Packages
-* [`@guildedjs/guilded.js`](https://github.com/zaida04/guilded.js/tree/master/packages/guilded.js#readme) - main package that provides a lib for the guilded.gg api. Comes with built in caching, structures, etc.
-* [`@guildedjs/itami`](https://github.com/zaida04/guilded.js/tree/master/packages/itami#readme) - official framework for `@guildedjs/guilded.js`, comes with highly customizable commands, listeners, and other abstractions.
-* [`@guildedjs/guilded-api-types`](https://github.com/zaida04/guilded.js/tree/master/packages/guilded-api-typings#readme) - thinking of making your own guilded lib/wrapper? This package consists of typings for the guilded.gg api compiled together by the community. No need to write your own typings and reinventing the wheel.
+* [`@guildedjs/guilded.js`](https://github.com/zaida04/guilded.js/tree/main/packages/guilded.js#readme) - main package that provides a lib for the guilded.gg api. Comes with built in caching, structures, etc.
+* [`@guildedjs/itami`](https://github.com/zaida04/guilded.js/tree/main/packages/itami#readme) - official framework for `@guildedjs/guilded.js`, comes with highly customizable commands, listeners, and other abstractions.
+* [`@guildedjs/guilded-api-types`](https://github.com/zaida04/guilded.js/tree/main/packages/guilded-api-typings#readme) - thinking of making your own guilded lib/wrapper? This package consists of typings for the guilded.gg api compiled together by the community. No need to write your own typings and reinventing the wheel.
 
 ## Getting Started
 
 ### Examples
-You can find example projects [here](https://github.com/zaida04/guilded.js/tree/master/examples)
+You can find example projects [here](https://github.com/zaida04/guilded.js/tree/main/examples)
 
 ### Prerequisites
 You are expected to have a reasonably supported version of node.js. Guildedjs is tested on node.js >12.0.0 and we make no guarantees that it will work on earlier versions
@@ -102,4 +102,4 @@ As you start to contribute your beginner workflow should look similar to this:
 [Discord.js](https://github.com/discordjs/discord.js) - Main inspiration & lots of derived work.
 
 ## LICENSING  
-> **Guilded.JS** © [zaida04](https://github.com/zaida04), Released under the [MIT](https://github.com/zaida04/guilded.js/blob/master/LICENSE) License. All subpackages are also released under the MIT License
+> **Guilded.JS** © [zaida04](https://github.com/zaida04), Released under the [MIT](https://github.com/zaida04/guilded.js/blob/main/LICENSE) License. All subpackages are also released under the MIT License

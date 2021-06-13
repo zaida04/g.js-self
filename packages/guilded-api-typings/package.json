@@ -12,7 +12,7 @@
     "guilded-api-typings"
   ],
   "author": "zaid450 <me@zaid-arshad.tech>",
-  "homepage": "https://github.com/zaida04/guilded.js/tree/master/packages/guilded-api-typings#readme",
+  "homepage": "https://github.com/zaida04/guilded.js/tree/main/packages/guilded-api-typings#readme",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
