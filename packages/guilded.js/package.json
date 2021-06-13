@@ -11,7 +11,7 @@
     "guilded"
   ],
   "author": "zaid450 <me@zaid-arshad.tech>",
-  "homepage": "https://github.com/zaida04/guilded.js/tree/master/packages/guilded.js#readme",
+  "homepage": "https://github.com/zaida04/guilded.js/tree/main/packages/guilded.js#readme",
   "license": "MIT",
   "main": "dist/index.js",
   "directories": {

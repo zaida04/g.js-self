@@ -1,6 +1,6 @@
 # `@guildedjs/guilded-api-typings`  
 
-[![GitHub](https://img.shields.io/github/license/guildedjs/guilded.js)](https://github.com/zaida04/guilded.js/blob/master/LICENSE)
+[![GitHub](https://img.shields.io/github/license/guildedjs/guilded.js)](https://github.com/zaida04/guilded.js/blob/main/LICENSE)
 [![npm](https://img.shields.io/npm/v/@guildedjs/guilded-api-typings?color=crimson&logo=npm)](https://www.npmjs.com/package/@guildedjs/guilded-api-typings)
 [![TypeScript](https://github.com/zaida04/guilded.js/actions/workflows/typescript.yml/badge.svg)](https://github.com/zaida04/guilded.js/actions/workflows/typescript.yml)
 
@@ -28,5 +28,5 @@ Huge thank you to [Shay](https://github.com/shayypy) and the rest of the [Unoffi
 Thank you to [Vlad](https://github.com/vladfrangu) and the rest of the contributors at https://github.com/discordjs/discord-api-types for the structure in which I based my typings structure on.
   
 ## LICENSE
-Licensed under the [MIT License](https://github.com/zaida04/guilded.js/blob/master/LICENSE)
+Licensed under the [MIT License](https://github.com/zaida04/guilded.js/blob/main/LICENSE)
   

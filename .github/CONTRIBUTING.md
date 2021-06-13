@@ -6,7 +6,7 @@ If you wish to contribute to the codebase or documentation, feel free to fork th
 # Setup
 To get ready to work on the codebase, please do the following:
 
-Fork & clone the repository, and make sure you're on the master branch
+Fork & clone the repository, and make sure you're on the main branch
 Run npm install
 Code your heart out!
 Run npm run test to run ESLint and ensure any JSDoc changes are valid
