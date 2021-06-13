@@ -6,3 +6,9 @@ import { APITeam } from '../common';
 export interface APIGetTeam {
     team: APITeam;
 }
+/**
+ * @destination /teams/:id/invites
+ */
+export interface APIPostCreateInviteResult {
+    id: string;
+}
