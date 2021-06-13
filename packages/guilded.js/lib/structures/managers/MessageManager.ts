@@ -29,7 +29,7 @@ export class MessageManager extends BaseManager<APIMessage | UpgradedMessageData
      * Add a reaction to this message (UNFINISHED)
      * @hidden
      */
-    public react(emoji: string, channel: string | PartialChannel, message: string | Message): unknown {
+    public react(message: string | Message, channel: string | PartialChannel, emoji: string): unknown {
         const messageID = MessageManager.resolve(message);
         const channelID = ChannelManager.resolve(channel);
         return this.client.rest.post(`/channels/${channelID}/messages/${messageID}/reactions/${emoji}`, {}).then(x => {
@@ -41,7 +41,7 @@ export class MessageManager extends BaseManager<APIMessage | UpgradedMessageData
      * Remove a reaction from this message (UNFINISHED)
      * @hidden
      */
-    public unreact(emoji: string, channel: string | PartialChannel, message: string | Message): unknown {
+    public unreact(message: string | Message, channel: string | PartialChannel, emoji: string): unknown {
         const messageID = MessageManager.resolve(message);
         const channelID = ChannelManager.resolve(channel);
         return this.client.rest
