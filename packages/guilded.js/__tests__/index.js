@@ -191,6 +191,7 @@ if (!process.env.EMAIL) throw new Error('Must supply email for testing');
 if (!process.env.PASSWORD) throw new Error('Must supply password for testing');
 if (!process.env.TEAM_ID) throw new Error('Must provide a testing team ID');
 if (!process.env.ROLE_ID) throw new Error('Must provide a testing role ID');
+if (!process.env.GUINEAPIG_ID) throw new Error('Must provide a testing user ID');
 if (!process.env.GROUP_ID) throw new Error('Must proivde a testing group ID');
 if (!process.env.CHANNEL_ID) throw new Error('Must provide a testing channel ID');
 
