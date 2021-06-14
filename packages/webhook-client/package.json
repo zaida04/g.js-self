@@ -21,11 +21,17 @@
     "lib": "lib",
     "test": "__tests__"
   },
+  "devDependencies": {
+    "@guildedjs/guilded-api-typings": "^1.0.8",
+    "@types/node-fetch": "^2.5.10"
+  },
   "dependencies": {
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "@guildedjs/embeds": "^0.0.1"
   },
   "files": [
-    "lib"
+    "lib",
+    "types"
   ],
   "publishConfig": {
     "access": "public"
@@ -36,8 +42,5 @@
   },
   "bugs": {
     "url": "https://github.com/zaida04/guilded.js/issues"
-  },
-  "devDependencies": {
-    "@types/node-fetch": "^2.5.10"
   }
 }

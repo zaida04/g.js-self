@@ -1,7 +1,7 @@
+import * as MessageUtil from '@guildedjs/common';
 import type { APIMessage } from '@guildedjs/guilded-api-typings';
 
 import { PartialMessageData } from '../typings/PartialMessageData';
-import * as MessageUtil from '../util/MessageUtil';
 import { Base } from './Base';
 import type { Client } from './Client';
 import { Message } from './Message';

@@ -1,4 +1,4 @@
-import { APIEmbed, APIWebhook } from '../common';
+import { APIContent, APIEmbed, APIWebhook } from '../common';
 
 /**
  * Create Webhook
@@ -52,4 +52,15 @@ export type APIDeleteWebhookResult = Pick<APIWebhook, 'id' | 'deletedAt'>;
 export interface APIPostWebhookBody {
     content: string;
     embeds: APIEmbed[];
+}
+
+export interface APIPostWebhookResult {
+    id: string;
+    channelId: string;
+    content: APIContent;
+    type: string;
+    createdBy: string;
+    createdAt: string;
+    webhookId: string;
+    botId: string | null;
 }

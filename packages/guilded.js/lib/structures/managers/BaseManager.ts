@@ -1,5 +1,6 @@
+import { CacheCollection, CacheCollectionOptions } from '@guildedjs/common';
+
 import type { BaseData, constructable } from '../../typings';
-import { CacheCollection, CacheCollectionOptions } from '../../util/CacheCollection';
 import { Base } from '../Base';
 import type { Client } from '../Client';
 

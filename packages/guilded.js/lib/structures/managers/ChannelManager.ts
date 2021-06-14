@@ -1,3 +1,4 @@
+import { convertToMessageFormat } from '@guildedjs/common';
 import Embed from '@guildedjs/embeds';
 import type {
     APIGetChannelMessageResult,
@@ -5,7 +6,6 @@ import type {
     APITeamChannel,
 } from '@guildedjs/guilded-api-typings';
 
-import { convertToMessageFormat } from '../../util/MessageUtil';
 import type { DMChannel, TeamChannel } from '../Channel';
 // eslint-disable-next-line no-duplicate-imports
 import { PartialChannel } from '../Channel';

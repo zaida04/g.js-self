@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-import type { Client } from '../structures/Client';
-
 /**
  * Copyright 2015 - 2021 Amish Shah
  * Copyrights licensed under the Apache License 2.0, https://github.com/discordjs/discord.js/blob/master/LICENSE
@@ -59,6 +56,3 @@ export const CONSTANTS = {
     TEAM_ICON: (hash: string, size?: IMG_SIZE): string =>
         `${CONSTANTS.CDN}/TeamAvatar/${hash}${size ? `-${size}` : ''}.png`,
 };
-
-export const uploadImage = (client: Client, file: FormData): Promise<unknown> =>
-    client.cdn.post<{ url: string }>(`/media/upload`, { file });

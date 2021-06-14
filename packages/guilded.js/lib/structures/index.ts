@@ -9,6 +9,7 @@ export * from './MessageReaction';
 export * from './PartialMessage';
 export * from './PermissionOverwrite';
 export * from '@guildedjs/embeds';
+export * from '@guildedjs/webhook-client';
 export * from './Role';
 export * from './Team';
 export * from './User';

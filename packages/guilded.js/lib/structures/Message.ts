@@ -1,8 +1,8 @@
 import Collection from '@discordjs/collection';
+import * as MessageUtil from '@guildedjs/common';
 import type { APIMessage } from '@guildedjs/guilded-api-typings';
 
 import type { UpgradedMessageData } from '../typings/UpgradedMessageData';
-import * as MessageUtil from '../util/MessageUtil';
 import { Base } from './Base';
 import type { DMChannel, PartialChannel } from './Channel';
 // eslint-disable-next-line no-duplicate-imports

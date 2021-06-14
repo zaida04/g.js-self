@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+import { CONSTANTS } from '@guildedjs/common';
 import type {
     WSChatMessageCreated,
     WSChatMessageReactionAdded,
@@ -10,7 +11,6 @@ import WebSocket from 'ws';
 
 import type { Client } from '../structures/Client';
 import { events, websocket_events } from '../typings';
-import { CONSTANTS } from '../util/Consts';
 import ChatMessageCreatedEvent from './events/ChatMessageCreated';
 import ChatMessageReactionAddedEvent from './events/ChatMessageReactionAdded';
 import ChatMessageReactionDeletedEvent from './events/ChatMessageReactionDeleted';
