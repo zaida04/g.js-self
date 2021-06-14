@@ -15,22 +15,16 @@
     </p>
 </div>
 
-## Table of Contents
-* [Example Usage](#usage)
-* [About the Project](#about)
-* [Packages](#packages)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-  * [Documentation](#documentation)
-* [Contributing](#contributing)
-* [License](#LICENSING)
+## About
+This repo serves as a monorepo that houses several packages, mainly the `@guildedjs/guilded.js` package, which is a library for the Guilded API. Inspired heavily by [discord.js](https://github.com/discordjs/discord.js)
 
+## Packages
+* [`@guildedjs/guilded.js`](https://github.com/zaida04/guilded.js/tree/main/packages/guilded.js#readme) - main package that provides a lib for the guilded.gg api. Comes with built in caching, structures, etc.
+* [`@guildedjs/itami`](https://github.com/zaida04/guilded.js/tree/main/packages/itami#readme) - official framework for `@guildedjs/guilded.js`, comes with highly customizable commands, listeners, and other abstractions.
+* [`@guildedjs/guilded-api-types`](https://github.com/zaida04/guilded.js/tree/main/packages/guilded-api-typings#readme) - thinking of making your own guilded lib/wrapper? This package consists of typings for the guilded.gg api compiled together by the community. No need to write your own typings and reinventing the wheel.
 
 ## Usage
-
 ```ts
-// commonJS:
 const { Client } = require("@guildedjs/guilded.js");
 
 /*
@@ -53,43 +47,21 @@ client.login({
     password: "password"
 });
 ```
-<!--ABOUT THE PROJECT-->
 
-## About
-This repo serves as a monorepo that houses several packages, mainly the `@guildedjs/guilded.js` package, which is a library for the Guilded API. Inspired heavily by [discord.js](https://github.com/discordjs/discord.js)
-
-<!--EMD OF ABOUT THE PROJECT>
-
-<!--GETTING STARTED-->
-
-## Packages
-* [`@guildedjs/guilded.js`](https://github.com/zaida04/guilded.js/tree/main/packages/guilded.js#readme) - main package that provides a lib for the guilded.gg api. Comes with built in caching, structures, etc.
-* [`@guildedjs/itami`](https://github.com/zaida04/guilded.js/tree/main/packages/itami#readme) - official framework for `@guildedjs/guilded.js`, comes with highly customizable commands, listeners, and other abstractions.
-* [`@guildedjs/guilded-api-types`](https://github.com/zaida04/guilded.js/tree/main/packages/guilded-api-typings#readme) - thinking of making your own guilded lib/wrapper? This package consists of typings for the guilded.gg api compiled together by the community. No need to write your own typings and reinventing the wheel.
-
-## Getting Started
-
-### Examples
-You can find example projects [here](https://github.com/zaida04/guilded.js/tree/main/examples)
-
-### Prerequisites
-You are expected to have a reasonably supported version of node.js. Guildedjs is tested on node.js >12.0.0 and we make no guarantees that it will work on earlier versions
-
-### Installation
+## Installation
 - `npm install @guildedjs/guilded.js`  
 - `yarn add @guildedjs/guilded.js`
 
-### Documentation
+## Documentation
 Documentation is viewable here: https://guilded.js.org
 
 <!--END GETTING STARTED-->
 
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-As you start to contribute your beginner workflow should look similar to this:   
-`fork repo & clone repo` ->  `npm install` -> `npm run bootstrap` -> `create new branch` -> `your code changes` -> `npm run build` -> `npm run lint` -> `commit, push, PR`
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
+**Please run `npm run bootstrap` after running npm install in your local environment.**
 **Please ensure your commits pass the test, lint, and build scripts.**
 
 **We make use of [lerna](https://lerna.js.org/) to manage our monorepo. The main commands used are below**
