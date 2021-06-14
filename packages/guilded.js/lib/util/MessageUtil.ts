@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable max-depth */
+import Embed from '@guildedjs/embeds';
 import { APIContent } from '@guildedjs/guilded-api-typings';
 
-import { RichEmbed } from '../structures/RichEmbed';
 import { CONSTANTS } from './Consts';
 import { GenerateUUID } from './GenerateID';
 
@@ -10,11 +10,11 @@ import { GenerateUUID } from './GenerateID';
  * Convert a string or other content to a message suitable to be sent to guilded
  * @internal
  */
-export function convertToMessageFormat(i: string | RichEmbed, e?: RichEmbed): [string, Record<string, any>] {
+export function convertToMessageFormat(i: string | Embed, e?: Embed): [string, Record<string, any>] {
     let STR_INPUT = '';
     let embed;
 
-    if (i instanceof RichEmbed) embed = i;
+    if (i instanceof Embed) embed = i;
     else STR_INPUT = i;
     if (e) embed = e;
 
@@ -24,7 +24,7 @@ export function convertToMessageFormat(i: string | RichEmbed, e?: RichEmbed): [s
     return [messageID, message];
 }
 
-function parseToMessage(input: string | RichEmbed, embed?: RichEmbed) {
+function parseToMessage(input: string | Embed, embed?: Embed) {
     return {
         document: {
             data: {},

@@ -47,12 +47,11 @@ client.login({
 ```
 
 ## About
-`@guildedjs/guilded.js` is an OOP library written in TypeScript usable in either TypeScript or JavaScript projects. It provides interaction between the Guilded.gg REST API and WS gateway, with a numerous amount of features.
-
-## Prerequisites
-You are expected to have a reasonably supported version of node.js. Guildedjs is tested on node.js >12.0.0 and we make no guarantees that it will work on earlier versions
+`@guildedjs/guilded.js` is a library written in TypeScript usable in either TypeScript or JavaScript projects. It provides interaction between the Guilded.gg REST API and WS gateway, with a numerous amount of features.
 
 ## Installation
+**Recommended that you use node v12+**
+
 You can install this package from [NPM](https://www.npmjs.com/package/@guildedjs/guilded.js)
 
 - `npm install @guildedjs/guilded.js`

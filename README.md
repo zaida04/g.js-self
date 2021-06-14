@@ -19,9 +19,10 @@
 This repo serves as a monorepo that houses several packages, mainly the `@guildedjs/guilded.js` package, which is a library for the Guilded API. Inspired heavily by [discord.js](https://github.com/discordjs/discord.js)
 
 ## Packages
-* [`@guildedjs/guilded.js`](https://github.com/zaida04/guilded.js/tree/main/packages/guilded.js#readme) - main package that provides a lib for the guilded.gg api. Comes with built in caching, structures, etc.
-* [`@guildedjs/itami`](https://github.com/zaida04/guilded.js/tree/main/packages/itami#readme) - official framework for `@guildedjs/guilded.js`, comes with highly customizable commands, listeners, and other abstractions.
-* [`@guildedjs/guilded-api-types`](https://github.com/zaida04/guilded.js/tree/main/packages/guilded-api-typings#readme) - thinking of making your own guilded lib/wrapper? This package consists of typings for the guilded.gg api compiled together by the community. No need to write your own typings and reinventing the wheel.
+* `@guildedjs/guilded.js` ([Github](https://github.com/zaida04/guilded.js/tree/main/packages/guilded.js#readme), [NPM](https://www.npmjs.com/package/@guildedjs/guilded.js)) - main package that provides a lib for the guilded.gg api. Comes with built in caching, structures, etc.
+* `@guildedjs/guilded-api-types` ([GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/guilded-api-typings#readme), [NPM](https://www.npmjs.com/package/@guildedjs/guilded-api-typings)) - thinking of making your own guilded lib/wrapper? This package consists of typings for the guilded.gg api compiled together by the community. No need to write your own typings and reinventing the wheel.
+* `@guildedjs/embeds` ([GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/embeds#readme), [NPM](https://www.npmjs.com/package/@guildedjs/embeds)) - Library-agnostic embed builder for sending messages with rich content through the guilded.gg API.
+* `@guildedjs/itami` ([GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/itami#readme)) - official framework for @guildedjs/guilded.js, comes with highly customizable commands, listeners, and other abstractions.
 
 ## Usage
 ```ts
@@ -49,6 +50,7 @@ client.login({
 ```
 
 ## Installation
+**Recommended that you use node v12+**
 - `npm install @guildedjs/guilded.js`  
 - `yarn add @guildedjs/guilded.js`
 

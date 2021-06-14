@@ -8,7 +8,7 @@ export * from './MessageMentions';
 export * from './MessageReaction';
 export * from './PartialMessage';
 export * from './PermissionOverwrite';
-export * from './RichEmbed';
+export * from '@guildedjs/embeds';
 export * from './Role';
 export * from './Team';
 export * from './User';
