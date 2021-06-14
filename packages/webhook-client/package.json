@@ -1,0 +1,43 @@
+{
+  "name": "@guildedjs/webhook-client",
+  "version": "0.0.1",
+  "description": "Library-agnostic webhook client for the guilded.gg API",
+  "author": "Zaid \"Nico\" <me@zaid-arshad.tech>",
+  "homepage": "https://github.com/zaida04/guilded.js/tree/main/packages/webhook-client#readme",
+  "license": "MIT",
+  "types": "types/index.d.ts",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "npm run build && node ./__tests__/index.js",
+    "build": "tsc",
+    "prepublishOnly": "npx rimraf dist/ && npx rimraf types/ && npm run build"
+  },
+  "keywords": [
+    "guilded-gg",
+    "guilded-api",
+    "guilded-webhook"
+  ],
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zaida04/guilded.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zaida04/guilded.js/issues"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^2.5.10"
+  }
+}
