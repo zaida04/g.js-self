@@ -1,9 +1,9 @@
+import * as Util from '@guildedjs/common';
 import type { APIGetCurrentUser } from '@guildedjs/guilded-api-typings';
 import { EventEmitter } from 'events';
 
 import { RestManager } from '../rest/RestManager';
 import type { events } from '../typings/WebSocketEvents';
-import * as Util from '../util';
 import { ClientGatewayHandler } from '../ws/ClientGatewayHandler';
 import { DMChannel } from './Channel';
 import { ClientUser } from './ClientUser';

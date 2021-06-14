@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { CONSTANTS, GuildedAPIError, sleep } from '@guildedjs/common';
 import fetch, { Response } from 'node-fetch';
 
-import { CONSTANTS, extractFromCookieJar, sleep } from '../util';
-import { GuildedAPIError } from './GuildedAPIError';
+import { extractFromCookieJar } from '../util';
 
 export class RestManager {
     public apiURL: string;
@@ -18,7 +18,7 @@ export class RestManager {
         data: MakeOptions,
         authenticated = true,
         retryCount = 0,
-    ): Promise<Array<Response | Promise<Record<string, any>>>> {
+    ): Promise<Array<Response | Promise<JSONB>>> {
         let headers = {};
         if (authenticated) {
             headers = {
@@ -64,21 +64,17 @@ export class RestManager {
         }
     }
 
-    public get<T extends Record<string, any>>(path: string, authenticated = true): Promise<T> {
+    public get<T extends JSONB>(path: string, authenticated = true): Promise<T> {
         return this.make(
             {
                 method: 'GET',
                 path,
             },
             authenticated,
-        ).then(x => (x[1] as Record<string, any>) as T);
+        ).then(x => (x[1] as JSONB) as T);
     }
 
-    public post<T extends Record<string, any>>(
-        path: string,
-        body: Record<string, any>,
-        authenticated = true,
-    ): Promise<T> {
+    public post<T extends JSONB>(path: string, body: JSONB, authenticated = true): Promise<T> {
         return this.make(
             {
                 body,
@@ -177,6 +173,8 @@ export interface MakeOptions {
     path: string;
     body?: Record<string, string> | undefined;
 }
+
+export type JSONB = Record<string, any>;
 
 export interface LoginData {
     email: string;
