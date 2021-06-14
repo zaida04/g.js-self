@@ -71,6 +71,11 @@ client.once(guilded.events.READY, async () => {
         .then(() => passed++)
         .catch(() => failed++);
 
+    testText('Embed sending');
+    await require('./modules/embed')(client, passed, failed, successText, errorText)
+        .then(() => passed++)
+        .catch(() => failed++);
+
     console.log(`\n\n${COLORS.GREEN} ${passed} tests passed.${COLORS.RED} ${failed} tests failed. ${COLORS.RESET}`);
 });
 

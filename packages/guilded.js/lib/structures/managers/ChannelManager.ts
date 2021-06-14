@@ -1,3 +1,4 @@
+import Embed from '@guildedjs/embeds';
 import type {
     APIGetChannelMessageResult,
     APIPostChannelMessagesResult,
@@ -29,10 +30,11 @@ export class ChannelManager extends BaseManager<APITeamChannel, TeamChannel | DM
      */
     public sendMessage(
         channel: string | PartialChannel,
-        ...args: Parameters<typeof convertToMessageFormat>
+        content: string | Embed,
+        embed?: Embed,
     ): Promise<Message | string> {
         const channelID = ChannelManager.resolve(channel);
-        const [id, formattedContent] = convertToMessageFormat(...args);
+        const [id, formattedContent] = convertToMessageFormat(content, embed);
 
         return this.client.rest
             .post<APIPostChannelMessagesResult | never>(`/channels/${channelID}/messages`, formattedContent)

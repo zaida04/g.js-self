@@ -1,4 +1,5 @@
 import Collection from '@discordjs/collection';
+import Embed from '@guildedjs/embeds';
 import type {
     APIDMChannel,
     APITeamChannel,
@@ -14,7 +15,6 @@ import type { Group } from './Group';
 import { MessageManager } from './managers/MessageManager';
 import type { Message } from './Message';
 import { RolePermissionOverwrite } from './PermissionOverwrite';
-import { RichEmbed } from './RichEmbed';
 import type { Role } from './Role';
 import type { Team } from './Team';
 import type { User } from './User';
@@ -103,7 +103,7 @@ export class PartialChannel extends Base<BaseData> {
      * @param content Either a string content or RichEmbed to send to this channel.
      * @param embed A RichEmbed to send to this channel.
      */
-    public send(content: string | RichEmbed, embed?: RichEmbed): Promise<Message | string> {
+    public send(content: string | Embed, embed?: Embed): Promise<Message | string> {
         if (this.contentType !== 'chat') {
             throw new TypeError('This channel cannot have messages sent to it. It is not a chat channel.');
         }

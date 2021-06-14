@@ -8,7 +8,7 @@
   "homepage": "https://github.com/zaida04/guilded.js/tree/main/packages/guilded.js#readme",
   "license": "MIT",
   "scripts": {
-    "test": "npm run build && node ./__tests__/index.js",
+    "test": "cd ../../ && npm run build && cd packages/guilded.js && node ./__tests__/index.js",
     "build": "tsc",
     "prepublishOnly": "npx rimraf dist/ && npx rimraf types/ && npm run build"
   },
@@ -34,6 +34,8 @@
   },
   "dependencies": {
     "@discordjs/collection": "^0.1.6",
+    "@guildedjs/embeds": "^0.0.1",
+    "@guildedjs/webhook-client": "^0.0.1",
     "node-fetch": "^2.6.1",
     "uuid": "^8.3.2",
     "ws": "^7.4.0"
