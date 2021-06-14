@@ -8,4 +8,6 @@ exports.COLORS = {
     YELLOW: '\u001B[33m',
 };
 
-exports.tester = (color, str) => console.log(`${color} ${str} ${exports.COLORS.RESET}`);
+exports.testText = str => console.log(`\n${exports.COLORS.YELLOW} ---${str}--- ${exports.COLORS.RESET}`);
+exports.successText = str => console.log(`${exports.COLORS.GREEN} ${str} ${exports.COLORS.RESET}`);
+exports.errorText = str => console.log(`\n${exports.COLORS.RED} ${str} ${exports.COLORS.RESET}\n`);
