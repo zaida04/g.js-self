@@ -21,7 +21,9 @@ This repo serves as a monorepo that houses several packages, mainly the `@guilde
 ## Packages
 * `@guildedjs/guilded.js` ([Github](https://github.com/zaida04/guilded.js/tree/main/packages/guilded.js#readme), [NPM](https://www.npmjs.com/package/@guildedjs/guilded.js)) - main package that provides a lib for the guilded.gg api. Comes with built in caching, structures, etc.
 * `@guildedjs/guilded-api-types` ([GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/guilded-api-typings#readme), [NPM](https://www.npmjs.com/package/@guildedjs/guilded-api-typings)) - thinking of making your own guilded lib/wrapper? This package consists of typings for the guilded.gg api compiled together by the community. No need to write your own typings and reinventing the wheel.
+* `@guildedjs/webhook-client` ([GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/webhook-client#readme), [NPM](https://www.npmjs.com/package/@guildedjs/webhook-client)) - Library-agnostic webhook client for interaction with guilded.gg webhooks.
 * `@guildedjs/embeds` ([GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/embeds#readme), [NPM](https://www.npmjs.com/package/@guildedjs/embeds)) - Library-agnostic embed builder for sending messages with rich content through the guilded.gg API.
+* `@guildedjs/common` ([GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/common#readme), [NPM](https://www.npmjs.com/package/@guildedjs/common)) - Utilities and structures shared across various @guildedjs packages.
 * `@guildedjs/itami` ([GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/itami#readme)) - official framework for @guildedjs/guilded.js, comes with highly customizable commands, listeners, and other abstractions.
 
 ## Usage
