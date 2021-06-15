@@ -1,6 +1,6 @@
 {
   "name": "@guildedjs/guilded-api-typings",
-  "version": "1.0.8",
+  "version": "1.1.0",
   "description": "Typings for the guilded API",
   "author": "zaid450 <nico.03727+github@gmail.com>",
   "homepage": "https://github.com/zaida04/guilded.js/tree/main/packages/guilded-api-typings#readme",
@@ -38,5 +38,5 @@
   "bugs": {
     "url": "https://github.com/zaida04/guilded.js/issues"
   },
-  "gitHead": "fd2b3b1f8d37a69fb6a38edf4a4fb427d511440e"
+  "gitHead": "aadbfe42f11f843b76ca1df14ebb72d6ef6adf62"
 }
