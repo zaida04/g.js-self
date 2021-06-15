@@ -1,6 +1,6 @@
 {
   "name": "@guildedjs/embeds",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Library-agnostic guilded embed builder utility for the guilded.gg API",
   "author": "Zaid \"Nico\" <nico.03727+github@gmail.com>",
   "homepage": "https://github.com/zaida04/guilded.js/tree/main/packages/embeds#readme",
@@ -23,11 +23,10 @@
     "test": "__tests__"
   },
   "devDependencies": {
-    "@guildedjs/guilded-api-typings": "^1.0.8"
+    "@guildedjs/guilded-api-typings": "^1.1.0"
   },
-  "dependencies": {},
   "files": [
-    "lib",
+    "dist",
     "types"
   ],
   "publishConfig": {
@@ -39,5 +38,6 @@
   },
   "bugs": {
     "url": "https://github.com/zaida04/guilded.js/issues"
-  }
+  },
+  "gitHead": "aadbfe42f11f843b76ca1df14ebb72d6ef6adf62"
 }
