@@ -12,11 +12,13 @@ export class WebhookClient {
     public token: string;
 
     public constructor(webhookConnection: string | { id: string; token: string }) {
+        if (!webhookConnection) throw new TypeError('Must provide Webhook connection info.');
+
         if (typeof webhookConnection === 'string') {
             this.URL = webhookConnection;
-            const destructuredWebhookURL = webhookConnection.match(/guilded.com\/webhooks\/([^/]+)\/([^/]+)/);
+            const destructuredWebhookURL = webhookConnection.match(/guilded.gg\/webhooks\/([^/]+)\/([^/]+)/);
             if (!destructuredWebhookURL) {
-                throw new Error('Not a proper discord webhook URL! Alternatively, you can provide an ID/token');
+                throw new Error('Not a proper guilded webhook URL! Alternatively, you can provide an ID/token');
             }
             this.id = destructuredWebhookURL[1];
             this.token = destructuredWebhookURL[2];
