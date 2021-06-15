@@ -9,9 +9,10 @@
     "lint": "npx eslint packages/ --ext .ts",
     "lint:fix": "npx eslint packages/ --ext .ts --fix",
     "docs": "npx rimraf docs && npx typedoc --options typedoc.config.js packages && node scripts/post-docs.js",
-    "test": "npx lerna run test",
+    "test": "npm run build && npx jest",
     "prepublishOnly": "npm run lint && npx lerna run prepublishOnly",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "changelog": "npx conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,8 @@
     "babel-jest": "^26.6.3",
     "babel-plugin-const-enum": "^1.0.1",
     "babel-plugin-replace-ts-export-assignment": "^0.0.2",
+    "conventional-changelog-cli": "^2.1.1",
+    "dotenv": "^8.2.0",
     "eslint": "^7.6.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
