@@ -1,6 +1,6 @@
 {
   "name": "@guildedjs/guilded.js",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A Node.js library for the Guilded.gg (https://www.guilded.gg/) API written in TypeScript, usable in either JavaScript or TypeScript projects.",
   "types": "types/index.d.ts",
   "main": "dist/index.js",
@@ -35,6 +35,7 @@
     "@guildedjs/common": "^1.0.0",
     "@guildedjs/embeds": "^1.0.0",
     "@guildedjs/webhook-client": "^1.0.0",
+    "@discordjs/collection": "^0.1.6",
     "node-fetch": "^2.6.1",
     "ws": "^7.4.0"
   },
