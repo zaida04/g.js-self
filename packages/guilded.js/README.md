@@ -61,9 +61,12 @@ You can install this package from [NPM](https://www.npmjs.com/package/@guildedjs
 Documentation is located [here](https://guilded.js.org)
 
 ## Dependencies
+- `@guildedjs/guilded-api-typings` (DEV DEP ONLY): used for typing the REST and WS payloads
+- `@guildedjs/common`: Utilities between `@guildedjs` packages
+- `@guildedjs/embeds`: Embed builder/utility
+- `@guildedjs/webhook-client`: Webhook Client
 - `@discordjs/collection`: Map utility
 - `ws`: WebSocket interaction
-- `@guildedjs/guilded-api-typings` (DEV DEP ONLY): used for typing the REST and WS payloads
 - `uuid` - Generate IDs for structures such as Messages
 
 ## TODO
