@@ -19,6 +19,7 @@ module.exports = {
     plugins: ['simple-import-sort', 'sort-keys-fix'],
     root: true,
     rules: {
+        '@typescript-eslint/no-var-requires': "off",
         '@typescript-eslint/explicit-member-accessibility': 'warn',
         '@typescript-eslint/naming-convention': [
             'warn',
