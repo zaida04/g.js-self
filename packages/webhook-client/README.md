@@ -4,7 +4,7 @@
 [![npm](https://img.shields.io/npm/v/@guildedjs/webhook-client?color=crimson&logo=npm)](https://www.npmjs.com/package/@guildedjs/webhook-client)
 [![TypeScript](https://github.com/zaida04/guilded.js/actions/workflows/typescript.yml/badge.svg)](https://github.com/zaida04/guilded.js/actions/workflows/typescript.yml)
 
-webhook-client structures and utilities used in various @guildedjs packages
+Library-agnostic webhook client and utility
 
 > ⚠️ If you intend to use `@guildedjs/guilded.js` you won't need to install this, as it's already a dependency of that package.
 
