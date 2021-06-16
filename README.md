@@ -1,21 +1,20 @@
-> ### ⚠️ This library only works with selfbots, which are a gray zone in Guilded, so use this library at your own risk.
-
 <div align="center">
     <img src="static/readme-header.png" width="546" alt="guildedjs"/>
-    <p><b>Tools for interacting with the <a href="https://www.guilded.gg/">Guilded.gg</a> API. <br>Written in TS</b></p>  
-    <p><a href="https://discord.gg/jf66UUN"><b>Join our Discord Server!</b></a> > <a href="https://guilded.js.org"><b>Documentation</b></a></p>
+    <p><b>Tools for interacting with the <a href="https://www.guilded.gg/">Guilded.gg</a> API.</p>  
     <br />
     <p>
+        <a href="https://discord.gg/jf66UUN"><img src="https://img.shields.io/discord/732714723744940032.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2 "></a>
         <img src="https://github.com/zaida04/guilded.js/workflows/Linting/badge.svg" alt="Linting">
         <img src="https://github.com/zaida04/guilded.js/workflows/TypeScript/badge.svg" alt="TypeScript">
-        <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+        <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a><br>
         <a href="https://github.com/zaida04/guilded.js/issues"><img src="https://img.shields.io/github/issues-raw/zaida04/guilded.js.svg?maxAge=25000" alt="Issues"></a>
         <a href="https://github.com/zaida04/guilded.js/pulls"><img src="https://img.shields.io/github/issues-pr/zaida04/guilded.js.svg?style=flat" alt="GitHub pull requests"></a><br>
-        <a href="https://npmjs.org/package/@guildedjs/guilded.js"><img src="https://nodei.co/npm/@guildedjs/guilded.js.png" alt="NPM"></a>
     </p>
 </div>
 
 ## About
+> ### ⚠️ This library only works with selfbots, which are a gray zone in Guilded. Use at your own risk.
+
 This repo serves as a monorepo that houses several packages, mainly the `@guildedjs/guilded.js` package, which is a library for the Guilded API. Inspired heavily by [discord.js](https://github.com/discordjs/discord.js)
 
 ## Packages
@@ -52,6 +51,9 @@ client.login({
 ```
 
 ## Installation
+
+<a href="https://npmjs.org/package/@guildedjs/guilded.js"><img src="https://nodei.co/npm/@guildedjs/guilded.js.png" alt="NPM"></a>
+
 **Recommended that you use node v12+**
 - `npm install @guildedjs/guilded.js`  
 - `yarn add @guildedjs/guilded.js`
