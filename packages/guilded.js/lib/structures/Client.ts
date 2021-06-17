@@ -218,7 +218,7 @@ export interface clientEvents {
     on(event: 'reconnecting', listener: () => any): this;
 }
 
-export type clientPartial = 'MEMBER' | 'MESSAGE' | 'USER';
+export type clientPartial = 'MEMBER' | 'MESSAGE' | 'USER' | 'CHANNEL';
 
 /**
  * Options you can instantiate the client with.

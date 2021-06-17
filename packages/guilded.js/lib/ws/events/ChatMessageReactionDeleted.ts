@@ -12,9 +12,18 @@ export default class ChatMessageReactionDeletedEvent extends Event {
         if (data) {
             const reactionID = data.reaction.customReactionId.toString();
             const reacter = this.client.users.cache.get(data.reaction.createdBy);
-            const channel = this.client.channels.cache.get(data.channelId);
 
-            if (!channel) return [false, 'Uncached channel'];
+            let channel = this.client.channels.cache.get(data.channelId);
+            if (!channel) {
+                if (!this.client.options?.partials?.includes('CHANNEL')) return [false, 'Uncached channel'];
+                channel = this.client.channels.add({
+                    contentType: data.contentType,
+                    id: data.channelId,
+                    teamId: data.teamId ?? undefined,
+                    type: data.channelType,
+                })!;
+            }
+
             const message = channel?.messages?.cache.get(data.message.id);
             if (!message && !this.client.options?.partials?.includes('MESSAGE')) return [false, 'Uncached message'];
 
