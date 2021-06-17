@@ -72,7 +72,6 @@ export class PartialChannel extends Base<BaseData> {
         this.createdAt = new Date(data.createdAt!);
         this.createdBy = data.createdBy!;
         this.type = data.type!;
-        this.teamID = 'teamId' in data ? data.teamId! : null;
         this.contentType = data.contentType!;
 
         if (patch) this.patch(data);

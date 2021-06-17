@@ -134,7 +134,11 @@ export class ClientGatewayHandler extends GatewayHandler {
                             break;
                         }
                     }
-                    if (!result?.[0]) this.client.debug(`Event dropped because of ${result?.[1]}`);
+                    if (!result?.[0]) {
+                        this.client.debug(
+                            `Event ${EVENT_NAME} dropped because of ${result?.[1] ?? 'unknown reason or not handled'}`,
+                        );
+                    }
                     break;
                 }
             }

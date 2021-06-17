@@ -12,10 +12,21 @@ export default class ChatMessageReactionAddedEvent extends Event {
     public ingest(data: WSChatMessageReactionAdded): (boolean | (string | undefined))[] {
         if (data) {
             const reacter = this.client.users.cache.get(data.reaction.createdBy);
-            const channel = this.client.channels.cache.get(data.channelId);
-            if (!channel) return [false, 'Uncached channel'];
+
+            let channel = this.client.channels.cache.get(data.channelId);
+            if (!channel) {
+                if (!this.client.options?.partials?.includes('CHANNEL')) return [false, 'Uncached channel'];
+                channel = this.client.channels.add({
+                    contentType: data.contentType,
+                    id: data.channelId,
+                    teamId: data.teamId ?? undefined,
+                    type: data.channelType,
+                })!;
+            }
+
             const message = channel?.messages?.cache.get(data.message.id);
             if (!message && !this.client.options?.partials?.includes('MESSAGE')) return [false, 'Uncached message'];
+
             let messageReaction = message?.reactions.get(data.reaction.customReactionId.toString());
             if (!messageReaction) {
                 const newMessageReaction = new MessageReaction(this.client, {
@@ -30,6 +41,7 @@ export default class ChatMessageReactionAddedEvent extends Event {
                 data.reaction.createdBy,
                 this.client.users.cache.get(data.reaction.createdBy) ?? { id: data.reaction.createdBy },
             );
+
             this.client.emit(events.MESSAGE_REACTION_ADD, messageReaction, reacter ?? data.reaction.createdBy);
             return [true];
         }
