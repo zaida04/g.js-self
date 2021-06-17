@@ -22,9 +22,7 @@ export class RestManager {
         let headers = {};
         if (authenticated) {
             headers = {
-                // eslint-disable-next-line @typescript-eslint/naming-convention
-                HMAC_SIGNED_SESSION: this.token,
-                cookie: this.cookieJar,
+                cookie: `hmac_signed_session=${this.token};`,
             };
         }
 
