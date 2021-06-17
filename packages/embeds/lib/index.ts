@@ -155,7 +155,10 @@ export class Embed {
         return this;
     }
 
-    public setTimestamp(timestamp: string | number | Date): this {
+    public setTimestamp(timestamp?: string | number | Date): this {
+        if (!timestamp) {
+            return this.setTimestamp(new Date());
+        }
         const isTimestampDateObject = timestamp instanceof Date;
 
         this.timestamp = isTimestampDateObject
