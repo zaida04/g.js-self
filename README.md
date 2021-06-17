@@ -26,6 +26,8 @@ This repo serves as a monorepo that houses several packages, mainly the `@guilde
 * `@guildedjs/itami` (**[GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/itami#readme)**) - official framework for @guildedjs/guilded.js, comes with highly customizable commands, listeners, and other abstractions.
 
 ## ⚡ Usage
+You can find extra examples [here](https://github.com/zaida04/guilded.js/tree/main/examples)
+
 ```ts
 const { Client } = require("@guildedjs/guilded.js");
 
