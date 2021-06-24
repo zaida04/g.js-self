@@ -26,8 +26,6 @@ export class RestManager {
             };
         }
 
-        // Glue fix until the rest module supports retry-after
-        sleep(this.config?.restOffset ?? 3500);
         let request;
         const requestOptions: any = {
             body: data.body ? JSON.stringify(data.body) : undefined,
@@ -46,7 +44,7 @@ export class RestManager {
                     if (retryCount >= (this.config?.maxRatelimitRetryLimit ?? 3)) {
                         throw new Error('MAX REQUEST RATELIMIT RETRY LIMIT REACHED.');
                     }
-
+                    await sleep(this.config?.restOffset ?? 3500);
                     this.make(data, authenticated, retryCount++);
                 }
 
