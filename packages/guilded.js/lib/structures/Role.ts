@@ -1,5 +1,6 @@
 import type { APITeamRole, RolePermissions } from '@guildedjs/guilded-api-typings';
 
+import { retrieveTeamFromStructureCache } from '../util';
 import { Base } from './Base';
 import type { Client } from './Client';
 import type { Team } from './Team';
@@ -74,11 +75,11 @@ export class Role extends Base<APITeamRole> {
     }
 
     public get team(): Team | null {
-        if (!this._team) return this._team;
-        const cachedTeam = this.client.teams.cache.get(this.teamID);
-        if (!cachedTeam) return null;
-        this._team = cachedTeam;
-        return cachedTeam;
+        return retrieveTeamFromStructureCache({
+            _team: this._team,
+            client: this.client,
+            teamID: this.teamID,
+        });
     }
 
     /**

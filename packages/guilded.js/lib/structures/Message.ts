@@ -3,6 +3,7 @@ import * as MessageUtil from '@guildedjs/common';
 import type { APIMessage } from '@guildedjs/guilded-api-typings';
 
 import type { UpgradedMessageData } from '../typings/UpgradedMessageData';
+import { retrieveChannelFromStructureCache, retrieveTeamFromStructureCache } from '../util';
 import { Base } from './Base';
 import type { DMChannel, PartialChannel } from './Channel';
 // eslint-disable-next-line no-duplicate-imports
@@ -102,22 +103,22 @@ export class Message extends Base<APIMessage> {
      * Retrieve the team object that channel this message belongs to belongs to.
      */
     public get team(): Team | null {
-        if (!this._team) return this._team;
-        const cachedTeam = this.teamID && this.client.teams.cache.get(this.teamID);
-        if (!cachedTeam) return null;
-        this._team = cachedTeam;
-        return cachedTeam;
+        return retrieveTeamFromStructureCache({
+            _team: this._team,
+            client: this.client,
+            teamID: this.teamID,
+        });
     }
 
     /**
      * Retrieve the channel object that this message belongs to.
      */
     public get channel(): DMChannel | TeamChannel | PartialChannel | null {
-        if (!this._channel) return this._channel;
-        const cachedChannel = this.client.channels.cache.get(this.channelID) as TeamChannel;
-        if (!cachedChannel) return null;
-        this._channel = cachedChannel;
-        return cachedChannel;
+        return retrieveChannelFromStructureCache({
+            _channel: this._channel,
+            channelID: this.channelID,
+            client: this.client,
+        });
     }
 
     public get author(): User | null {

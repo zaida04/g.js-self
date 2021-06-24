@@ -9,6 +9,7 @@ import type {
 } from '@guildedjs/guilded-api-typings';
 
 import type { BaseData } from '../typings/BaseData';
+import { retrieveTeamFromStructureCache } from '../util';
 import { Base } from './Base';
 import { Client } from './Client';
 import type { Group } from './Group';
@@ -81,12 +82,11 @@ export class PartialChannel extends Base<BaseData> {
      * Getter for retrieving the team this channel belongs to if it is cached.
      */
     public get team(): Team | null {
-        if (!this.teamID) return null;
-        if (!this._team) return this._team;
-        const cachedTeam = this.client.teams.cache.get(this.teamID);
-        if (!cachedTeam) return null;
-        this._team = cachedTeam;
-        return cachedTeam;
+        return retrieveTeamFromStructureCache({
+            _team: this._team,
+            client: this.client,
+            teamID: this.teamID,
+        });
     }
 
     /**
