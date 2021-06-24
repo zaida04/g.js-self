@@ -39,7 +39,7 @@ export class RestManager {
         try {
             request = await fetch(this.apiURL + data.path, requestOptions);
 
-            if (!response.ok) {
+            if (!request.ok) {
                 if (request.status === 429) {
                     if (retryCount >= (this.config?.maxRatelimitRetryLimit ?? 3)) {
                         throw new Error('MAX REQUEST RATELIMIT RETRY LIMIT REACHED.');
