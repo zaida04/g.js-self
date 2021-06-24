@@ -15,9 +15,6 @@ You can install this package from [NPM](https://www.npmjs.com/package/@guildedjs
 
 ## Contributing
 Please see the main [README.md](https://github.com/zaida04/guilded.js) for info on how to contribute to this package or the other `@guildedjs` packages.
-
-## Credits
-Concept and structure dervied from https://github.com/discordjs/discord.js/blob/stable/src/structures/MessageEmbed.js#L9 - [Discord.js](https://github.com/discordjs/discord.js) ([License](https://github.com/discordjs/discord.js/blob/stable/LICENSE))
   
 ## LICENSE
 Licensed under the [MIT License](https://github.com/zaida04/guilded.js/blob/main/LICENSE)
