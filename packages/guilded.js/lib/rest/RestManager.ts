@@ -78,7 +78,7 @@ export class RestManager {
                 path,
             },
             authenticated,
-        ).then(x => (x[1] as Record<string, any>) as T);
+        ).then(x => (x[1] as JSONB) as T);
     }
 
     public delete<T extends Record<string, any>>(
@@ -93,7 +93,7 @@ export class RestManager {
                 path,
             },
             authenticated,
-        ).then(x => (x[1] as Record<string, any>) as T);
+        ).then(x => (x[1] as JSONB) as T);
     }
 
     public patch<T extends Record<string, any>>(
@@ -108,7 +108,7 @@ export class RestManager {
                 path,
             },
             authenticated,
-        ).then(x => (x[1] as Record<string, any>) as T);
+        ).then(x => (x[1] as JSONB) as T);
     }
 
     public put<T extends Record<string, any>>(
@@ -123,10 +123,10 @@ export class RestManager {
                 path,
             },
             authenticated,
-        ).then(x => (x[1] as Record<string, any>) as T);
+        ).then(x => (x[1] as JSONB) as T);
     }
 
-    public async init(data: LoginData): Promise<Record<string, any>> {
+    public async init(data: LoginData): Promise<void> {
         if (data.email && data.password) {
             const [loginData] = await this.make(
                 {
@@ -146,7 +146,7 @@ export class RestManager {
 
             this.token = extractFromCookieJar(setCookies, 0);
             this.guildedMID = extractFromCookieJar(setCookies, 11);
-            return loginData;
+            return void 0;
         } else {
             throw new Error('You must provide an email/password');
         }
