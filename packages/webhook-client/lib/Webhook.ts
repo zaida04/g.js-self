@@ -15,11 +15,11 @@ export class WebhookClient {
         if (!webhookConnection) throw new TypeError('Must provide Webhook connection info.');
 
         if (typeof webhookConnection === 'string') {
-            this.URL = webhookConnection;
             const destructuredWebhookURL = webhookConnection.match(/guilded.gg\/webhooks\/([^/]+)\/([^/]+)/);
-            if (!destructuredWebhookURL) {
+            if (!destructuredWebhookURL?.length) {
                 throw new Error('Not a proper guilded webhook URL! Alternatively, you can provide an ID/token');
             }
+            this.URL = webhookConnection;
             this.id = destructuredWebhookURL[1];
             this.token = destructuredWebhookURL[2];
         } else if (webhookConnection.id && webhookConnection.token) {
