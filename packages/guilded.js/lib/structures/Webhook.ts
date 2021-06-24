@@ -1,5 +1,10 @@
 import type { APIWebhook } from '@guildedjs/guilded-api-typings';
 
+import {
+    retrieveChannelFromStructureCache,
+    retrieveCreatorFromStructureCache,
+    retrieveTeamFromStructureCache,
+} from '../util';
 import { Base } from './Base';
 import type { TeamChannel } from './Channel';
 import type { Client } from './Client';
@@ -65,33 +70,33 @@ export class Webhook extends Base<APIWebhook> {
      * The channel object this webhook belongs to if cached
      */
     public get channel(): TeamChannel | null {
-        if (!this._channel) return this._channel;
-        const cachedChannel = this.client.channels.cache.get(this.channelID) as TeamChannel;
-        if (!cachedChannel) return null;
-        this._channel = cachedChannel;
-        return cachedChannel;
+        return retrieveChannelFromStructureCache({
+            _channel: this._channel,
+            channelID: this.channelID,
+            client: this.client,
+        }) as TeamChannel | null;
     }
 
     /**
      * The User object of the user that created this webhook if cached
      */
     public get createdBy(): User | null {
-        if (!this._createdBy) return this._createdBy;
-        const cachedUser = this.client.users.cache.get(this.createdByID);
-        if (!cachedUser) return null;
-        this._createdBy = cachedUser;
-        return cachedUser;
+        return retrieveCreatorFromStructureCache({
+            _createdBy: this._createdBy,
+            client: this.client,
+            createdByID: this.createdByID,
+        });
     }
 
     /**
      * The team object this webhook belongs to if cached
      */
     public get team(): Team | null {
-        if (!this._team) return this._team;
-        const cachedTeam = this.client.teams.cache.get(this.teamID);
-        if (!cachedTeam) return null;
-        this._team = cachedTeam;
-        return cachedTeam;
+        return retrieveTeamFromStructureCache({
+            _team: this._team,
+            client: this.client,
+            teamID: this.teamID,
+        });
     }
 
     /**
