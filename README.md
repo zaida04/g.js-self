@@ -25,6 +25,14 @@ This repo serves as a monorepo that houses several packages, mainly the `@guilde
 * `@guildedjs/common` (**[GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/common#readme), [NPM](https://www.npmjs.com/package/@guildedjs/common)**) - Utilities and structures shared across various @guildedjs packages.
 * `@guildedjs/itami` (**[GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/itami#readme)**) - official framework for @guildedjs/guilded.js, comes with highly customizable commands, listeners, and other abstractions.
 
+## 📥 Installation
+
+<a href="https://npmjs.org/package/@guildedjs/guilded.js"><img src="https://nodei.co/npm/@guildedjs/guilded.js.png" alt="NPM"></a>
+
+**Recommended that you use node v12+**
+- `npm install @guildedjs/guilded.js`  
+- `yarn add @guildedjs/guilded.js`
+
 ## ⚡ Usage
 You can find extra examples [here](https://github.com/zaida04/guilded.js/tree/main/examples)
 
@@ -51,14 +59,6 @@ client.login({
     password: "password"
 });
 ```
-
-## 📥 Installation
-
-<a href="https://npmjs.org/package/@guildedjs/guilded.js"><img src="https://nodei.co/npm/@guildedjs/guilded.js.png" alt="NPM"></a>
-
-**Recommended that you use node v12+**
-- `npm install @guildedjs/guilded.js`  
-- `yarn add @guildedjs/guilded.js`
 
 ## 📃 Documentation
 Documentation is viewable here: https://guilded.js.org
