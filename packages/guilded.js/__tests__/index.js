@@ -23,8 +23,8 @@ const client = new guilded.Client({
 });
 const prefix = 'gg!';
 
-// Client.on("raw", (a, b) => console.log(a, b));
-// client.on("debug", (...a) => console.log(a));
+// Client.on("raw", console.log);
+// client.on("debug", console.log);
 
 client.on(guilded.events.MESSAGE_REACTION_ADD, a => console.log(`REACTION ADDED: ${a.id}`));
 client.on(guilded.events.MESSAGE_REACTION_DELETE, a => console.log(`REACTION REMOVED: ${a.id}`));
@@ -78,13 +78,6 @@ client.once(guilded.events.READY, async () => {
 
     console.log(`\n\n${COLORS.GREEN} ${passed} tests passed.${COLORS.RED} ${failed} tests failed. ${COLORS.RESET}`);
 });
-
-/*
-Client.on("debug", (data, additional_info) => {
-    console.log(data);
-    console.log(additional_info);
-})
-*/
 
 client.on(guilded.events.MESSAGE_CREATE, message => {
     if (!message.content.startsWith(prefix)) return;

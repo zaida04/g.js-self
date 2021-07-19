@@ -4,7 +4,7 @@ import Embed from '@guildedjs/embeds';
 import { APIContent } from '@guildedjs/guilded-api-typings';
 
 import { CONSTANTS } from './Consts';
-import { GenerateUUID } from './GenerateID';
+import { generateUUID } from './etc';
 
 /**
  * Convert a string or other content to a message suitable to be sent to guilded
@@ -18,7 +18,7 @@ export function convertToMessageFormat(i: string | Embed, e?: Embed): [string, R
     else STR_INPUT = i;
     if (e) embed = e;
 
-    const messageID = GenerateUUID();
+    const messageID = generateUUID();
     const message: { content?: Record<string, any>; messageId: string } = { messageId: messageID };
     message.content = parseToMessage(STR_INPUT, embed);
     return [messageID, message];

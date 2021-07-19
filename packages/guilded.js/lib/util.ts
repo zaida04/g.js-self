@@ -1,8 +1,5 @@
 import type { Client, PartialChannel, Team, User } from './structures';
 
-export const extractFromCookieJar = (decodedCookieJar: string[], i: number) =>
-    decodedCookieJar[i].split('=')[1].split(';')[0];
-
 export function retrieveTeamFromStructureCache({
     client,
     _team,

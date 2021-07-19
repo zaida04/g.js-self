@@ -1,12 +1,11 @@
-import { parsedMessage, parseMessage } from '@guildedjs/common';
+import { parsedMessage, parseMessage, RestManager } from '@guildedjs/common';
 import Embed from '@guildedjs/embeds';
 import { APIContent, APIPostWebhookResult } from '@guildedjs/guilded-api-typings';
 
 import { BASE_URL } from './consts';
-import RestHandler from './Rest';
 
 export class WebhookClient {
-    private api = new RestHandler(this);
+    private api = new RestManager();
     public URL: string;
     public id: string;
     public token: string;

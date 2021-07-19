@@ -12,7 +12,8 @@
     "test": "npm run build && npx jest",
     "prepublishOnly": "npm run lint && npx lerna run prepublishOnly",
     "prepare": "husky install",
-    "changelog": "npx conventional-changelog -p angular -i CHANGELOG.md -s"
+    "changelog": "npx conventional-changelog -p angular -i CHANGELOG.md -s",
+    "reset": "cd scripts && node refresh.js"
   },
   "repository": {
     "type": "git",
