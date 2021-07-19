@@ -55,8 +55,9 @@ client.login({
 Documentation is located [here](https://guilded.js.org)
 
 ## 📦 Dependencies
-- [`@guildedjs/guilded-api-typings`](https://github.com/zaida04/guilded.js/tree/main/packages/guilded-api-typings) (DEV DEP ONLY): used for typing the REST and WS payloads
+- [`@guildedjs/guilded-api-typings`](https://github.com/zaida04/guilded.js/tree/main/packages/guilded-api-typings) (dev dep): used for typing the REST and WS payloads
 - [`@guildedjs/common`](https://github.com/zaida04/guilded.js/tree/main/packages/common): Utilities between `@guildedjs` packages
+- [`@guildedjs/rest`](https://github.com/zaida04/guilded.js/tree/main/packages/rest): Rest structure for `@guildedjs` packages
 - [`@guildedjs/embeds`](https://github.com/zaida04/guilded.js/tree/main/packages/embeds): Embed builder/utility
 - [`@guildedjs/webhook-client`](https://github.com/zaida04/guilded.js/tree/main/packages/webhook-client): Webhook Client
 - `@discordjs/collection`: Map utility
