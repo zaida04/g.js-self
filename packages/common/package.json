@@ -23,12 +23,14 @@
   },
   "devDependencies": {
     "@guildedjs/guilded-api-typings": "^1.1.0",
+    "@types/node-fetch": "^2.5.8",
     "@types/uuid": "^8.3.0"
   },
   "dependencies": {
     "@discordjs/collection": "^0.1.6",
     "@guildedjs/embeds": "^1.0.0",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "node-fetch": "^2.6.1"
   },
   "files": [
     "dist",

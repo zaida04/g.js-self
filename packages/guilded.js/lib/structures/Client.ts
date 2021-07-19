@@ -1,8 +1,7 @@
-import * as Util from '@guildedjs/common';
+import { CONSTANTS, RestManager } from '@guildedjs/common';
 import type { APIGetCurrentUser } from '@guildedjs/guilded-api-typings';
 import { EventEmitter } from 'events';
 
-import { RestManager } from '../rest/RestManager';
 import type { events } from '../typings/WebSocketEvents';
 import { ClientGatewayHandler } from '../ws/ClientGatewayHandler';
 import { DMChannel } from './Channel';
@@ -34,7 +33,7 @@ export class Client extends EventEmitter implements clientEvents {
      * @private
      */
     public readonly rest: RestManager = new RestManager({
-        apiURL: this.options?.rest?.apiURL ?? Util.CONSTANTS.BASE_DOMAIN,
+        apiURL: this.options?.rest?.apiURL ?? CONSTANTS.BASE_DOMAIN,
     });
 
     /**
@@ -42,7 +41,7 @@ export class Client extends EventEmitter implements clientEvents {
      * @private
      */
     public readonly cdn: RestManager = new RestManager({
-        apiURL: this.options?.rest?.cdnURL ?? Util.CONSTANTS.MEDIA_DOMAIN,
+        apiURL: this.options?.rest?.cdnURL ?? CONSTANTS.MEDIA_DOMAIN,
     });
 
     /**
@@ -56,12 +55,6 @@ export class Client extends EventEmitter implements clientEvents {
      * @private
      */
     public gateway: ClientGatewayHandler | null = null;
-
-    /**
-     * Utilities used throughout the project, such as converting a plain text string to a message
-     * @internal
-     */
-    public readonly util = Util;
 
     /**
      * The teams that this client is in
@@ -95,11 +88,27 @@ export class Client extends EventEmitter implements clientEvents {
      * ```
      */
     public async login(options: LoginOptions): Promise<this> {
-        await this.rest.init(options);
+        if (!options.email || !options.password) throw new Error('You must provide an email/password');
+        const [loginData] = await this.rest.make(
+            {
+                body: {
+                    email: options.email,
+                    password: options.password,
+                },
+                method: 'POST',
+                path: '/login',
+            },
+            false,
+        );
 
-        const FETCH_ME: APIGetCurrentUser = (await this.rest.get('/me')) as APIGetCurrentUser;
+        const cookieJar = loginData.headers.get('Set-Cookie')!;
+        if (!cookieJar) throw new Error('Incorrect Email/Pasword');
+        this.rest.setAuth(cookieJar);
+
+        const FETCH_ME = await this.rest.get<APIGetCurrentUser>('/me');
         this.debug('Initial ME data recieved');
         this.user = new ClientUser(this, FETCH_ME.user);
+
         if (!this.options?.cache?.startupRestrictions.dropTeams) {
             const teamChannelDataRequests = [];
             for (const TEAM_DATA of FETCH_ME.teams) {
@@ -121,7 +130,6 @@ export class Client extends EventEmitter implements clientEvents {
             }
             this.debug('Initial DM Channel data recieved.');
         }
-
         this.gateway = new ClientGatewayHandler(this).init();
         return this;
     }
