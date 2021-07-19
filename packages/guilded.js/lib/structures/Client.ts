@@ -1,18 +1,17 @@
-import { CONSTANTS, RestManager } from '@guildedjs/common';
-import type { APIGetCurrentUser } from '@guildedjs/guilded-api-typings';
+import { CONSTANTS } from '@guildedjs/common';
+import type { APIClientUser, APIDevice, APIGetCurrentUser, APIUser } from '@guildedjs/guilded-api-typings';
+import { RestManager } from '@guildedjs/rest';
 import { EventEmitter } from 'events';
 
-import type { events } from '../typings/WebSocketEvents';
+import type { ClientOptions, LoginOptions } from '../typings';
 import { ClientGatewayHandler } from '../ws/ClientGatewayHandler';
 import { DMChannel } from './Channel';
-import { ClientUser } from './ClientUser';
 import { ChannelManager } from './managers/ChannelManager';
 import { TeamManager } from './managers/TeamManager';
 import { UserManager } from './managers/UserManager';
-import type { Message } from './Message';
-import type { MessageReaction } from './MessageReaction';
+import type { Message, MessageReaction } from './Message';
 import { Team } from './Team';
-import type { User } from './User';
+import { User } from './User';
 
 /**
  * The main class used to interact with the Guilded API
@@ -164,119 +163,139 @@ export class Client extends EventEmitter implements clientEvents {
      * Used to emit debug statements
      * @hidden
      */
-    public debug(str: string, ...args: any[]): undefined {
+    public debug(str: string, ...args: unknown[]): undefined {
         // eslint-disable-next-line no-void
         return void this.emit('debug', `[DEBUG]: ${str}`, args);
     }
 }
+
+/**
+ * The user belonging to this client
+ */
+export class ClientUser extends User {
+    /**
+     * List of users that this client has blocked
+     */
+    public blockedUsers: unknown[];
+
+    /**
+     * Connections with other social media this client has
+     */
+    public socialLinks: unknown[];
+
+    /**
+     * Badges this client owns
+     */
+    public badges: string[];
+
+    /**
+     * The type of presence this client has
+     */
+    public userPresenceStatus!: number;
+
+    /**
+     * Information regarding the devices that have been used with this client
+     */
+    public devices: APIDevice[];
+
+    public constructor(client: Client, data: APIClientUser) {
+        super(client, data as APIUser);
+        this.blockedUsers = data.blockedUsers ?? [];
+        this.socialLinks = data.socialLinks ?? [];
+        this.badges = data.badges ?? [];
+        this.userPresenceStatus = data.userPresenceStatus;
+        this.devices = data.devices ?? [];
+
+        this.patch(data);
+    }
+
+    /**
+     * Update the data in this structure
+     * @internal
+     */
+    public patch(data: APIClientUser): this {
+        return this;
+    }
+
+    public setPresence(presence: 'online' | 'idle' | 'dnd' | 'invisible'): Promise<this> {
+        const newPresence = PRECENSES[presence];
+        if (!newPresence) {
+            throw new TypeError(
+                `Incorrect status option. Expected online, idle, dnd, or invisible. Recieved ${presence}`,
+            );
+        }
+
+        return this.client.rest.post('/users/me/presence', { status: newPresence }).then(() => {
+            this.userPresenceStatus = newPresence;
+            return this;
+        });
+    }
+
+    public setUsername(newUsername: string): Promise<this> {
+        if (typeof newUsername !== 'string') throw new TypeError('Expected a string for username change.');
+        return this.client.rest.put(`/users/${this.id}/profilev2`, { name: newUsername }).then(() => this);
+    }
+}
+
+const PRECENSES = {
+    dnd: 3,
+    idle: 2,
+    invisible: 4,
+    online: 1,
+};
 
 export interface clientEvents {
     /**
      * Fired when a reaction is removed from a message
      * @event
      */
-    on(event: 'messageReactionDelete', listener: (reaction: MessageReaction, remover: User | string) => any): this;
+    on(event: 'messageReactionDelete', listener: (reaction: MessageReaction, remover: User | string) => unknown): this;
 
     /**
      * Fired when a reaction is added to a message
      * @event
      */
-    on(event: 'messageReactionAdd', listener: (reaction: MessageReaction, reacter: User | string) => any): this;
+    on(event: 'messageReactionAdd', listener: (reaction: MessageReaction, reacter: User | string) => unknown): this;
 
     /**
      * Fired when a message is sent
      * @event
      */
-    on(event: 'messageCreate', listener: (message: Message) => any): this;
+    on(event: 'messageCreate', listener: (message: Message) => unknown): this;
 
     /**
      * Fired when a message is updated
      * @event
      */
-    on(event: 'messageUpdate', listener: (oldMessage: Message, newMessage: Message) => any): this;
+    on(event: 'messageUpdate', listener: (oldMessage: Message, newMessage: Message) => unknown): this;
 
     /**
      * Fired when client is confirmed destroyed with no reconnect
      * @event
      */
-    on(event: 'disconnected', listener: () => any): this;
+    on(event: 'disconnected', listener: () => unknown): this;
 
     /**
      * Fired when the client has a ready connection to the WS gateway
      * @event
      */
-    on(event: 'ready', listener: () => any): this;
+    on(event: 'ready', listener: () => unknown): this;
 
     /**
      * Fired on any event from the WS gateway that includes a payload and type 42
      * @event
      */
-    on(event: 'raw', listener: (event_name: string, event_data: Record<string, any>) => any): this;
+    on(event: 'raw', listener: (event_name: string, event_data: Record<string, unknown>) => unknown): this;
 
     /**
      * Fired in various different places, used for diagnostic purposes
      * @event
      */
-    on(event: 'debug', listener: (...args: any[]) => any): this;
+    on(event: 'debug', listener: (...args: unknown[]) => unknown): this;
 
     /**
      * Fired when the WS is reconnecting
      * @event
      */
-    on(event: 'reconnecting', listener: () => any): this;
-}
-
-export type clientPartial = 'MEMBER' | 'MESSAGE' | 'USER' | 'CHANNEL';
-
-/**
- * Options you can instantiate the client with.
- */
-export interface ClientOptions {
-    partials: clientPartial[];
-    cache: {
-        startupRestrictions: {
-            dropDMs: boolean;
-            dropTeams: boolean;
-            dropChannels: boolean;
-        };
-        cacheMaxSize: {
-            teamsCache: number;
-            channelsCache: number;
-            usersCache: number;
-            membersCache: number;
-            memberRolesCache: number;
-            teamRolesCache: number;
-            teamWebhooksCache: number;
-            groupsCache: number;
-            messagesCache: number;
-        };
-        disableTeam: boolean;
-        disableChannels: boolean;
-        disableUsers: boolean;
-        disableMembers: boolean;
-        disableMembersRoles: boolean;
-        disableTeamRoles: boolean;
-        disableWebhooks: boolean;
-        disableGroups: boolean;
-        disableMessages: boolean;
-    };
-    ws: {
-        heartbeatInterval: number;
-        disabledEvents: events[];
-        disallowReconnect: boolean;
-        reconnectLimit: number;
-        blockTeamWSConnection: boolean;
-    };
-    rest: {
-        apiURL: string;
-        cdnURL: string;
-    };
-}
-
-/**
- * Options to log the client in with
- */
-export interface LoginOptions {
-    email: string;
-    password: string;
+    on(event: 'reconnecting', listener: () => unknown): this;
 }

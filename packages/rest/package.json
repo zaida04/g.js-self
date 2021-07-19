@@ -1,0 +1,32 @@
+{
+  "name": "@guildedjs/rest",
+  "version": "1.0.0",
+  "description": "Rest structure for @guildedjs/guilded.js",
+  "author": "Zaid \"Nico\" <me@zaid-arshad.tech>",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "types/index.d.ts",
+  "scripts": {
+    "test": "npm run build && node ./__tests__/index.js",
+    "build": "tsc",
+    "prepublishOnly": "npx rimraf dist/ && npx rimraf types/ && npm run build"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^2.5.8"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  },
+  "homepage": "https://github.com/zaida04/guilded.js/tree/main/packages/rest#readme",
+  "files": [
+    "dist",
+    "types"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guildedjs/guilded.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/guildedjs/guilded.js/issues"
+  }
+}

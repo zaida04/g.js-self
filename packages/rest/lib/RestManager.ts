@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import fetch, { Response } from 'node-fetch';
 
-import { CONSTANTS, extractFromCookieJar, sleep } from '../util';
 import { GuildedAPIError } from './GuildedAPIError';
 
 export class RestManager {
@@ -11,7 +9,7 @@ export class RestManager {
     public guildedMID?: string;
 
     public constructor(public config?: RestManagerOptions) {
-        this.apiURL = `https://${config?.apiURL ?? CONSTANTS.BASE_DOMAIN}`;
+        this.apiURL = `https://${config?.apiURL ?? 'api.guilded.gg'}`;
     }
 
     public async make<T extends JSONB>(
@@ -136,3 +134,6 @@ export interface LoginData {
     email: string;
     password: string;
 }
+
+const extractFromCookieJar = (decodedCookieJar: string[], i: number) => decodedCookieJar[i].split('=')[1].split(';')[0];
+const sleep = (ms: number): Promise<unknown> => new Promise(r => setTimeout(r, ms));

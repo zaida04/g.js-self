@@ -1,15 +1,12 @@
 import Collection from '@discordjs/collection';
-import * as MessageUtil from '@guildedjs/common';
-import type { APIMessage } from '@guildedjs/guilded-api-typings';
+import { parsedMessage, parseMessage } from '@guildedjs/common';
+import type { APIMessage, APIMessageReaction } from '@guildedjs/guilded-api-typings';
 
-import type { UpgradedMessageData } from '../typings/UpgradedMessageData';
+import type { PartialMessageData, UpgradedMessageData } from '../typings';
 import { retrieveChannelFromStructureCache, retrieveTeamFromStructureCache } from '../util';
 import { Base } from './Base';
-import type { DMChannel, PartialChannel } from './Channel';
-// eslint-disable-next-line no-duplicate-imports
-import { TeamChannel } from './Channel';
+import { DMChannel, PartialChannel, TeamChannel } from './Channel';
 import type { Client } from './Client';
-import { MessageReaction } from './MessageReaction';
 import type { Team } from './Team';
 import { User } from './User';
 
@@ -37,7 +34,7 @@ export class Message extends Base<APIMessage> {
     /**
      * The parsed but unjoined content that this message has
      */
-    public parsedContent!: MessageUtil.parsedMessage;
+    public parsedContent!: parsedMessage;
 
     /**
      * Author of the message
@@ -87,7 +84,7 @@ export class Message extends Base<APIMessage> {
      */
     public patch(data: APIMessage | Partial<APIMessage>): this {
         if ('content' in data && data.content !== undefined) {
-            this.parsedContent = MessageUtil.parseMessage(data.content);
+            this.parsedContent = parseMessage(data.content);
             this.content = this.parsedContent.parsedText;
         }
 
@@ -162,5 +159,96 @@ export class Message extends Base<APIMessage> {
      */
     private edit(content: string) {
         throw new Error('Method not implemented and not meant to be used.');
+    }
+}
+
+/**
+ * Object representing a message that doesn't have enough data to construct a regular message.
+ */
+export class PartialMessage extends Base<PartialMessageData> {
+    /**
+     * The channelID in which this message was sent. Will always be present, even if the channel isn't cached
+     * @readonly
+     */
+    public readonly channelID!: string;
+
+    /**
+     * The ID of the team this channel belongs to
+     * @readonly
+     */
+    public readonly teamID!: string;
+
+    /**
+     * The plain text content that this message has
+     */
+    public content!: string;
+
+    /**
+     * The parsed but unjoined content that this message has
+     */
+    public parsedContent!: parsedMessage;
+
+    /**
+     * A boolean indicating that this is infact a partial message.
+     * @readonly
+     * @defaultValue true
+     */
+    public readonly partial = true;
+
+    public constructor(client: Client, data: PartialMessageData) {
+        super(client, data);
+        this.channelID = data.channelId;
+
+        this.patch(data);
+    }
+
+    /**
+     * Update the data in this structure
+     * @internal
+     */
+    public patch(data: APIMessage | Partial<APIMessage>): this {
+        if ('content' in data && data.content !== undefined) {
+            this.parsedContent = parseMessage(data.content);
+            this.content = this.parsedContent.parsedText;
+        }
+        return this;
+    }
+
+    /**
+     * Fetch a complete version of this message from the api, will error if the message has been deleted or isn't accessible by the client.
+     */
+    public fetch(): Promise<Message> {
+        return this.client.channels.fetchMessage(this.channelID, this.id);
+    }
+}
+
+/**
+ * Object representing information about a certain reaction emoji on a message. This is NOT an individual object of a specific reaction on a message.
+ */
+export class MessageReaction {
+    /**
+     * The users that have reacted with the emoji this message reaction belongs to.
+     * It will contain either fully fledged User objects if the users are cached before hand, or it will contain minimal data about the users.
+     */
+    public readonly users: Collection<string, User | { id: string; webhookId?: string | null; botId?: string | null }>;
+
+    /**
+     * Date the first user reacted with the emoji this message reaction belongs to
+     */
+    public readonly createdAt: Date;
+
+    /**
+     * The ID of the emoji this message reaction belongs to.
+     */
+    public readonly id: string;
+
+    public constructor(public client: Client, data: APIMessageReaction) {
+        this.id = data.customReactionId.toString();
+        this.createdAt = new Date(data.createdAt);
+        this.users = new Collection();
+
+        for (const user of data.users) {
+            this.users.set(user.id, this.client.users.cache.get(user.id) ?? user);
+        }
     }
 }

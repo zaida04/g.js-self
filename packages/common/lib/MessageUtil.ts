@@ -4,7 +4,7 @@ import Embed from '@guildedjs/embeds';
 import { APIContent } from '@guildedjs/guilded-api-typings';
 
 import { CONSTANTS } from './Consts';
-import { generateUUID } from './etc';
+import { generateUUID } from './UUID';
 
 /**
  * Convert a string or other content to a message suitable to be sent to guilded

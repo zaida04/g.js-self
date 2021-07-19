@@ -27,6 +27,7 @@
   "dependencies": {
     "@guildedjs/common": "^1.0.0",
     "@guildedjs/embeds": "^1.0.0",
+    "@guildedjs/rest": "^1.0.0",
     "node-fetch": "^2.6.1"
   },
   "files": [

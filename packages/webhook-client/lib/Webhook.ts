@@ -1,6 +1,7 @@
-import { parsedMessage, parseMessage, RestManager } from '@guildedjs/common';
+import { parsedMessage, parseMessage } from '@guildedjs/common';
 import Embed from '@guildedjs/embeds';
 import { APIContent, APIPostWebhookResult } from '@guildedjs/guilded-api-typings';
+import { RestManager } from '@guildedjs/rest';
 
 import { BASE_URL } from './consts';
 
