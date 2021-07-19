@@ -34,6 +34,7 @@
     "@guildedjs/common": "^1.0.0",
     "@guildedjs/embeds": "^1.0.0",
     "@guildedjs/webhook-client": "^1.0.0",
+    "@guildedjs/rest": "^1.0.0",
     "@discordjs/collection": "^0.1.6",
     "ws": "^7.4.0"
   },

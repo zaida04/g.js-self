@@ -1,7 +1,7 @@
 import { WSChatMessageUpdated } from '@guildedjs/guilded-api-typings';
 
 import type { Client } from '../../structures/Client';
-import { PartialMessage } from '../../structures/PartialMessage';
+import { PartialMessage } from '../../structures/Message';
 import { events } from '../../typings';
 import Event from './Event';
 

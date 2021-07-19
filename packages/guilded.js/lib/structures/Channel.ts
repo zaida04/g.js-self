@@ -8,15 +8,14 @@ import type {
     CHANNEL_TYPES,
 } from '@guildedjs/guilded-api-typings';
 
-import type { BaseData } from '../typings/BaseData';
+import type { BaseData } from '../typings';
 import { retrieveTeamFromStructureCache } from '../util';
 import { Base } from './Base';
 import { Client } from './Client';
 import type { Group } from './Group';
 import { MessageManager } from './managers/MessageManager';
 import type { Message } from './Message';
-import { RolePermissionOverwrite } from './PermissionOverwrite';
-import type { Role } from './Role';
+import { Role, RolePermissionOverwrite } from './Role';
 import type { Team } from './Team';
 import type { User } from './User';
 

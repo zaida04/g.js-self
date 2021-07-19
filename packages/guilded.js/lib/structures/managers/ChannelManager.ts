@@ -6,12 +6,9 @@ import type {
     APITeamChannel,
 } from '@guildedjs/guilded-api-typings';
 
-import type { DMChannel, TeamChannel } from '../Channel';
-// eslint-disable-next-line no-duplicate-imports
-import { PartialChannel } from '../Channel';
+import { DMChannel, PartialChannel, TeamChannel } from '../Channel';
 import type { Client } from '../Client';
-import { Message } from '../Message';
-import { PartialMessage } from '../PartialMessage';
+import { Message, PartialMessage } from '../Message';
 import { BaseManager } from './BaseManager';
 import { MessageManager } from './MessageManager';
 

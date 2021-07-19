@@ -1,11 +1,10 @@
 import Collection from '@discordjs/collection';
 import type { APIGetChannelMessages, APIMessage } from '@guildedjs/guilded-api-typings';
 
-import { UpgradedMessageData } from '../../typings/UpgradedMessageData';
+import { UpgradedMessageData } from '../../typings';
 import type { DMChannel, PartialChannel, TeamChannel } from '../Channel';
 import type { Client } from '../Client';
-import { Message } from '../Message';
-import { PartialMessage } from '../PartialMessage';
+import { Message, PartialMessage } from '../Message';
 import { BaseManager } from './BaseManager';
 import { ChannelManager } from './ChannelManager';
 
