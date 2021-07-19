@@ -1,7 +1,8 @@
-import { convertToMessageFormat } from '@guildedjs/common';
+import { convertToMessageFormat, parseToMessage } from '@guildedjs/common';
 import Embed from '@guildedjs/embeds';
 import type {
     APIGetChannelMessageResult,
+    APIMessage,
     APIPostChannelMessagesResult,
     APITeamChannel,
 } from '@guildedjs/guilded-api-typings';
@@ -80,7 +81,6 @@ export class ChannelManager extends BaseManager<APITeamChannel, TeamChannel | DM
      */
     public deleteMessage(channel: string | PartialChannel, msg: string | Message): Promise<Message | string> {
         if (!msg) throw new TypeError('Expected a string or message object for message deletion.');
-
         const channelID = ChannelManager.resolve(channel);
         const messageID = MessageManager.resolve(msg);
         return this.client.rest.delete(`/channels/${channelID}/messages/${messageID}`).then(() => {
@@ -93,18 +93,20 @@ export class ChannelManager extends BaseManager<APITeamChannel, TeamChannel | DM
     }
 
     /**
-     * Edit a message (UNFINISHED)
+     * Edit a message
      * @hidden
      */
-    private editMessage(channel: string, msg: string | Message, newContent: string) {
-        throw new Error('Method not implemented and not intended for use yet.');
-        /*
-        Const messageID = MessageManager.resolve(msg);
-        return this.client.rest.put(`/channels/${channel}/messages/${messageID}`).then(x => {
-            const existing = this.cache.get(messageID);
-            if (existing) existing.patch(x);
-            return existing ?? null;
-        });
-        */
+    public editMessage(channel: string | PartialChannel, msg: string | Message, newContent: string): Promise<Message> {
+        const channelID = ChannelManager.resolve(channel);
+        const messageID = MessageManager.resolve(msg);
+        return this.client.rest
+            .put<APIMessage>(`/channels/${channelID}/messages/${messageID}`, { content: parseToMessage(newContent) })
+            .then(x => {
+                const existingChannel = this.client.channels.cache.get(x.channelId);
+                if (!existingChannel) return new Message(this.client, x, null);
+                const existingMessage = existingChannel.messages!.cache.get(x.id);
+                if (existingMessage) return existingMessage.patch(x);
+                return existingChannel.messages!.add(x)!;
+            });
     }
 }

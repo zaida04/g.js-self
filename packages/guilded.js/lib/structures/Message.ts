@@ -123,27 +123,19 @@ export class Message extends Base<APIMessage> {
     }
 
     /**
-     * Add a reaction to this message (UNFINISHED)
+     * Add a reaction to this message
      * @hidden
      */
     public react(emoji: string): unknown {
-        return this.client.rest
-            .post(`/channels/${this.channel?.id ?? this.channelID}/messages/${this.id}/reactions/${emoji}`, {})
-            .then(x => {
-                // Add reaction to message object
-            });
+        return this.channel!.messages!.react(this, this.channelID, emoji);
     }
 
     /**
-     * Remove a reaction from this message (UNFINISHED)
+     * Remove a reaction from this message
      * @hidden
      */
     public unreact(emoji: string): unknown {
-        return this.client.rest
-            .delete(`/channels/${this.channel?.id ?? this.channelID}/messages/${this.id}/reactions/${emoji}`, {})
-            .then(x => {
-                // Add reaction to message object
-            });
+        return this.channel!.messages!.unreact(this, this.channelID, emoji);
     }
 
     /**
@@ -154,11 +146,11 @@ export class Message extends Base<APIMessage> {
     }
 
     /**
-     * Edit the content of this message (UNFINISHED)
+     * Edit the content of this message
      * @hidden
      */
-    private edit(content: string) {
-        throw new Error('Method not implemented and not meant to be used.');
+    public edit(content: string): Promise<Message> {
+        return this.channel!.messages!.edit(this, content);
     }
 }
 

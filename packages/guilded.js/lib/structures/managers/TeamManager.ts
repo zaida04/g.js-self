@@ -94,8 +94,7 @@ export class TeamManager extends BaseManager<APITeam | APIPartialTeam, Team> {
     }
 
     /**
-     * Creates a Teamchannel (UNFINISHED)
-     * @hidden
+     * Creates a Teamchannel
      * @param team
      * @param group
      * @param name

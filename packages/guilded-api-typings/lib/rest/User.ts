@@ -67,5 +67,5 @@ export interface APIPostLoginResponse {
 export interface APIGetUserDMChannels {
     channels: APIDMChannel[];
     unreadInfoByChannelId: unknown;
-    users: any[];
+    users: APIUser[];
 }

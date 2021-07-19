@@ -92,6 +92,7 @@ export class PartialChannel extends Base<BaseData> {
      * Update the data in this structure.
      * @internal
      */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public patch(data: Partial<APITeamChannel | APIDMChannel>): this {
         return this;
     }

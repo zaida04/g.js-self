@@ -39,7 +39,7 @@ export class BaseManager<K extends BaseData, T extends Base<K>> {
     }
 
     private isConstructorParamsOfHolds(
-        data: ConstructorParameters<constructable<T>> | any,
+        data: ConstructorParameters<constructable<T>> | unknown,
     ): data is ConstructorParameters<constructable<T>> {
         return Array.isArray(data);
     }

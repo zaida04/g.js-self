@@ -18,6 +18,13 @@ export class MessageManager extends BaseManager<APIMessage | UpgradedMessageData
     }
 
     /**
+     * Edit a message
+     */
+    public edit(msg: string | Message, newContent: string): Promise<Message> {
+        return this.client.channels.editMessage(this.channel.id, msg, newContent);
+    }
+
+    /**
      * Delete a message
      */
     public delete(msg: string | Message): Promise<Message | string> {
@@ -25,29 +32,21 @@ export class MessageManager extends BaseManager<APIMessage | UpgradedMessageData
     }
 
     /**
-     * Add a reaction to this message (UNFINISHED)
-     * @hidden
+     * Add a reaction to this message
      */
     public react(message: string | Message, channel: string | PartialChannel, emoji: string): unknown {
         const messageID = MessageManager.resolve(message);
         const channelID = ChannelManager.resolve(channel);
-        return this.client.rest.post(`/channels/${channelID}/messages/${messageID}/reactions/${emoji}`, {}).then(x => {
-            // Add reaction to message object
-        });
+        return this.client.rest.post(`/channels/${channelID}/messages/${messageID}/reactions/${emoji}`, {});
     }
 
     /**
-     * Remove a reaction from this message (UNFINISHED)
-     * @hidden
+     * Remove a reaction from this message
      */
     public unreact(message: string | Message, channel: string | PartialChannel, emoji: string): unknown {
         const messageID = MessageManager.resolve(message);
         const channelID = ChannelManager.resolve(channel);
-        return this.client.rest
-            .delete(`/channels/${channelID}/messages/${messageID}/reactions/${emoji}`, {})
-            .then(x => {
-                // Add reaction to message object
-            });
+        return this.client.rest.delete(`/channels/${channelID}/messages/${messageID}/reactions/${emoji}`, {});
     }
 
     /**
