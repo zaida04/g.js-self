@@ -30,16 +30,6 @@ client.login({
     password: "password"
 });
 ```
-
-## Table of Contents
-* [About the Project](#about)
-* [Prerequisites](#prerequisites)
-* [Installation](#installation)
-* [Documentation](#documentation)
-* [TO:DO](#todo)
-* [Contributing](#contributing)
-* [License](#LICENSING)
-
 ## 📝 About
 `@guildedjs/guilded.js` is a library written in TypeScript usable in either TypeScript or JavaScript projects. It provides structures, abstraction, and utilities for interaction between the guilded API and your userbot.
 
