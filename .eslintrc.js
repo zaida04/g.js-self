@@ -19,12 +19,11 @@ module.exports = {
     plugins: ['simple-import-sort', 'sort-keys-fix'],
     root: true,
     rules: {
-        '@typescript-eslint/no-var-requires': "off",
         '@typescript-eslint/explicit-member-accessibility': 'warn',
         '@typescript-eslint/naming-convention': [
             'warn',
             {
-                format: ['camelCase', 'UPPER_CASE'],
+                format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
                 leadingUnderscore: 'allow',
                 selector: 'default',
                 trailingUnderscore: 'allow',
@@ -51,6 +50,7 @@ module.exports = {
         '@typescript-eslint/no-empty-function': 'off',
         '@typescript-eslint/no-empty-interface': 'warn',
         '@typescript-eslint/no-non-null-assertion': 'off',
+        '@typescript-eslint/no-var-requires': 'off',
         'accessor-pairs': 'warn',
         'array-bracket-spacing': 'warn',
         'array-callback-return': 'warn',

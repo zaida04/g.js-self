@@ -183,6 +183,6 @@ export interface APIPostChannelAnnouncementsBody {
 export interface APIGetTeamChannels {
     channels: APITeamChannel[];
     badgedChannelContentByChannelId: unknown;
-    temporalChannels: any[];
+    temporalChannels: unknown[];
     categories: APITeamChannel[];
 }

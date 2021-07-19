@@ -145,7 +145,7 @@ export class Team extends Base<APITeam | APIPartialTeam> {
     /**
      * The games that this team plays
      */
-    public games: any[];
+    public games: unknown[];
 
     /**
      * The various banner styles belonging to this server
@@ -249,7 +249,7 @@ export class Team extends Base<APITeam | APIPartialTeam> {
     }
 
     /**
-     * Creates a Teamchannel and fires a CreateChannelEvent on success. (UNFINISHED)
+     * Creates a Teamchannel and fires a CreateChannelEvent on success.
      * @hidden
      * @param name The name of the channel.
      * @param contentType The type of the channel.

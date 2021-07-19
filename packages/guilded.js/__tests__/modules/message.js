@@ -1,11 +1,27 @@
 module.exports = async (client, passed, failed, testText, errorText) => {
     let message;
+    const content = 'TESTING MESSAGE';
+
     try {
         console.log('...sending message');
-        message = await client.channels.sendMessage(process.env.CHANNEL_ID, 'TESTING MESSAGE');
+        message = await client.channels.sendMessage(process.env.CHANNEL_ID, content);
         testText(`Successfully sent message with ID: ${message}!`);
     } catch (e) {
         errorText(`Message sending failed! ${e}`);
+        throw e;
+    }
+
+    try {
+        console.log('...editing message');
+        const newMessage = await client.channels.editMessage(
+            process.env.CHANNEL_ID,
+            message,
+            'THIS IS AN EDITED TEST MESSAGE',
+        );
+        if (content === newMessage.content) throw new Error('Content is unchanged!');
+        testText(`Successfully edited message ${message} with new content ${newMessage.content}`);
+    } catch (e) {
+        errorText(`Message editing failed! ${e}`);
         throw e;
     }
 

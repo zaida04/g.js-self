@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "description": "Main overarching package utilizing lerna to manage all the @guildedjs packages",
   "private": true,
+  "author": "Zaid \"Nico\"",
+  "license": "MIT",
   "scripts": {
     "build": "npx lerna run build",
     "bootstrap": "npx lerna bootstrap",
@@ -15,12 +17,6 @@
     "changelog": "npx conventional-changelog -p angular -i CHANGELOG.md -s",
     "reset": "cd scripts && node refresh.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zaida04/guilded.js.git"
-  },
-  "author": "Zaid \"Nico\"",
-  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.12.17",
     "@babel/generator": "^7.13.0",
@@ -51,6 +47,10 @@
     "typedoc": "^0.19.2",
     "typedoc-plugin-remove-references": "0.0.5",
     "typescript": "^4.0.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zaida04/guilded.js.git"
   },
   "bugs": {
     "url": "https://github.com/zaida04/guilded.js/issues"

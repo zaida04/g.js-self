@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable max-depth */
 import Embed from '@guildedjs/embeds';
-import { APIContent } from '@guildedjs/guilded-api-typings';
+import type { APIContent } from '@guildedjs/guilded-api-typings';
 
 import { CONSTANTS } from './Consts';
 import { generateUUID } from './UUID';
@@ -10,7 +10,10 @@ import { generateUUID } from './UUID';
  * Convert a string or other content to a message suitable to be sent to guilded
  * @internal
  */
-export function convertToMessageFormat(i: string | Embed, e?: Embed): [string, Record<string, any>] {
+export function convertToMessageFormat(
+    i: string | Embed,
+    e?: Embed,
+): [string, { messageId: string; content: APIContent }] {
     let STR_INPUT = '';
     let embed;
 
@@ -19,12 +22,14 @@ export function convertToMessageFormat(i: string | Embed, e?: Embed): [string, R
     if (e) embed = e;
 
     const messageID = generateUUID();
-    const message: { content?: Record<string, any>; messageId: string } = { messageId: messageID };
-    message.content = parseToMessage(STR_INPUT, embed);
+    const message = {
+        content: parseToMessage(STR_INPUT, embed),
+        messageId: messageID,
+    };
     return [messageID, message];
 }
 
-function parseToMessage(input: string | Embed, embed?: Embed) {
+export function parseToMessage(input: string | Embed, embed?: Embed): APIContent {
     return {
         document: {
             data: {},
@@ -242,7 +247,7 @@ export interface MessageDataNode {
  */
 export interface parsedTextResponse {
     type: string;
-    content: any;
+    content: string;
     mention?: unknown;
     reaction?: unknown;
     channel?: unknown;

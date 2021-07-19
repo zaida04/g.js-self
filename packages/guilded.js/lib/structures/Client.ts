@@ -213,6 +213,7 @@ export class ClientUser extends User {
      * Update the data in this structure
      * @internal
      */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public patch(data: APIClientUser): this {
         return this;
     }

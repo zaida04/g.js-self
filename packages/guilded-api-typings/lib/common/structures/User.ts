@@ -84,13 +84,19 @@ export interface APIUser {
 
 export interface APIClientUser extends APIUser {
     useMinimalNav: boolean;
-    blockedUsers: any[];
-    socialLinks: any[];
+    blockedUsers: unknown[];
+    socialLinks: APIUserSocialLinks[];
     userPresenceStatus: number;
-    badges: any[];
+    badges: string[];
     canRedeemGold: boolean;
     isUnrecoverable: boolean;
     devices: APIDevice[];
-    userChannelNotificationSettings: any[];
+    userChannelNotificationSettings: unknown[];
     upsell: null;
+}
+
+export interface APIUserSocialLinks {
+    type: string;
+    handle: string;
+    additionalInfo: unknown;
 }
