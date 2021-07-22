@@ -33,6 +33,8 @@ client.login({
 ## 📝 About
 `@guildedjs/guilded.js` is a library written in TypeScript usable in either TypeScript or JavaScript projects. It provides structures, abstraction, and utilities for interaction between the guilded API and your userbot.
 
+Off the bat there are very noticable similarities between this package and [`discord.js`](https://discord.js.org). This is intentional in order to make the migration or copying of your codebase to a Guilded bot smooth and predictable. We've adopted the same managers/cache structure that they've implemented because we find that it's what works well without much complications. Our folder structure is influenced by theirs as well, however our underlying structure with how we handle things like WebSocket events is different.
+
 ## 📥 Installation
 
 <a href="https://npmjs.org/package/@guildedjs/guilded.js"><img src="https://nodei.co/npm/@guildedjs/guilded.js.png" alt="NPM"></a>
