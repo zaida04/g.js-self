@@ -1,6 +1,6 @@
 {
   "name": "@guildedjs/itami",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "private": true,
   "description": "A framework for @guildedjs/guilded.js that provides a layer of abstraction. Create bots easier and more reliably!",
   "types": "types/index.d.ts",

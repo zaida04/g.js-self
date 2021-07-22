@@ -1,6 +1,6 @@
 {
   "name": "@guildedjs/guilded.js",
-  "version": "1.2.2",
+  "version": "2.0.0",
   "description": "A Node.js library for the Guilded.gg (https://www.guilded.gg/) API written in TypeScript, usable in either JavaScript or TypeScript projects.",
   "types": "types/index.d.ts",
   "main": "dist/index.js",
@@ -25,17 +25,17 @@
     "guilded"
   ],
   "devDependencies": {
-    "@guildedjs/guilded-api-typings": "^1.1.0",
+    "@guildedjs/guilded-api-typings": "^1.2.1",
     "@types/node": "^14.14.9",
     "@types/ws": "^7.4.0",
     "typescript": "^3.9.7"
   },
   "dependencies": {
-    "@guildedjs/common": "^1.0.0",
-    "@guildedjs/embeds": "^1.0.0",
-    "@guildedjs/webhook-client": "^1.0.0",
-    "@guildedjs/rest": "^1.0.0",
     "@discordjs/collection": "^0.1.6",
+    "@guildedjs/common": "^1.0.1",
+    "@guildedjs/embeds": "^1.0.1",
+    "@guildedjs/rest": "^1.0.1",
+    "@guildedjs/webhook-client": "^1.0.1",
     "ws": "^7.4.0"
   },
   "directories": {
@@ -49,5 +49,5 @@
   "bugs": {
     "url": "https://github.com/zaida04/guilded.js/issues"
   },
-  "gitHead": "aadbfe42f11f843b76ca1df14ebb72d6ef6adf62"
+  "gitHead": "0719b880becce0aa4bccaf5eb5b210ecb08b0547"
 }

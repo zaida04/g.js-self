@@ -1,6 +1,6 @@
 {
   "name": "@guildedjs/common",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Common structures and utilities used in various @guildedjs packages",
   "author": "Zaid \"Nico\" <me@zaid-arshad.tech>",
   "homepage": "https://github.com/zaida04/guilded.js/tree/main/packages/common#readme",
@@ -22,12 +22,12 @@
     "test": "__tests__"
   },
   "devDependencies": {
-    "@guildedjs/guilded-api-typings": "^1.1.0",
+    "@guildedjs/guilded-api-typings": "^1.2.1",
     "@types/uuid": "^8.3.0"
   },
   "dependencies": {
     "@discordjs/collection": "^0.1.6",
-    "@guildedjs/embeds": "^1.0.0",
+    "@guildedjs/embeds": "^1.0.1",
     "uuid": "^8.3.2"
   },
   "files": [
@@ -44,5 +44,5 @@
   "bugs": {
     "url": "https://github.com/zaida04/guilded.js/issues"
   },
-  "gitHead": "aadbfe42f11f843b76ca1df14ebb72d6ef6adf62"
+  "gitHead": "0719b880becce0aa4bccaf5eb5b210ecb08b0547"
 }
