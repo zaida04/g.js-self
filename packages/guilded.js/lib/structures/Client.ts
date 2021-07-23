@@ -215,6 +215,7 @@ export class ClientUser extends User {
      */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public patch(data: APIClientUser): this {
+        super.patch(data);
         return this;
     }
 

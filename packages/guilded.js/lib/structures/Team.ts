@@ -320,6 +320,7 @@ export class Team extends Base<APITeam | APIPartialTeam> {
                     switch (channel.contentType) {
                         case 'chat': {
                             group?.channels.add(newChannel);
+                            this.client.channels.add(newChannel);
                             break;
                         }
                         case 'voice': {
