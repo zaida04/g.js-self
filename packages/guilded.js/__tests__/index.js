@@ -23,8 +23,8 @@ const client = new guilded.Client({
 });
 const prefix = 'gg!';
 
-// Client.on("raw", console.log);
-// client.on("debug", console.log);
+// client.on('raw', console.log);
+// client.on('debug', console.log);
 
 client.on(guilded.events.MESSAGE_REACTION_ADD, a => console.log(`REACTION ADDED: ${a.id}`));
 client.on(guilded.events.MESSAGE_REACTION_DELETE, a => console.log(`REACTION REMOVED: ${a.id}`));
@@ -80,6 +80,7 @@ client.once(guilded.events.READY, async () => {
 });
 
 client.on(guilded.events.MESSAGE_CREATE, message => {
+    if (message.teamID !== process.env.TEAM_ID) return;
     if (!message.content.startsWith(prefix)) return;
     const args = message.content.split(/ /g);
     const command = args.shift().slice(prefix.length);

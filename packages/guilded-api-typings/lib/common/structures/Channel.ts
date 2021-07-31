@@ -122,6 +122,8 @@ export interface APIMessage {
     editedAt?: string | null;
     deletedAt?: string | null;
     channelId: string;
+    repliesToIds: string[];
+    repliesTo: string | null;
     webhookId?: string | null;
     botId?: string | null;
     isPinned?: boolean;
