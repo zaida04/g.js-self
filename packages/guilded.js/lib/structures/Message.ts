@@ -59,6 +59,11 @@ export class Message extends Base<APIMessage> {
     public mentions = {
         channels: new Collection<string, PartialChannel>(),
         members: new Collection<string, Member>(),
+        raw: {
+            channels: new Set<string>(),
+            roles: new Set<string>(),
+            users: new Set<string>(),
+        },
         roles: new Collection<string, Role>(),
         users: new Collection<string, User>(),
     };
@@ -99,6 +104,7 @@ export class Message extends Base<APIMessage> {
             this.content = this.parsedContent.parsedText;
 
             for (const userMention of this.parsedContent.mentions.users) {
+                this.mentions.raw.users.add(userMention);
                 const user = this.client.users.cache.get(userMention);
                 if (!user) continue;
                 this.mentions.users.set(user.id, user);
@@ -108,6 +114,7 @@ export class Message extends Base<APIMessage> {
                 this.mentions.members.set(member.id, member);
             }
             for (const channelMention of this.parsedContent.mentions.channels) {
+                this.mentions.raw.channels.add(channelMention);
                 const channel = this.client.channels.cache.get(channelMention);
                 if (!channel) continue;
                 this.mentions.channels.set(channel.id, channel);
