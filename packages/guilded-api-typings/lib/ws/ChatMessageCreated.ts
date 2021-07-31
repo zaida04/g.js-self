@@ -9,7 +9,11 @@ export interface WSChatMessageCreated {
     createdBy: string;
     guildedClientId: string;
     id: string;
-    message: Pick<APIMessage, 'id' | 'createdBy' | 'content' | 'type' | 'createdAt' | 'webhookId' | 'botId'>;
+    message: Pick<
+        APIMessage,
+        'id' | 'createdBy' | 'content' | 'type' | 'createdAt' | 'webhookId' | 'botId' | 'repliesTo' | 'repliesToIds'
+    >;
+    repliedToMessage?: APIMessage[];
     silenceNotification: boolean;
     teamId?: string;
     type: 'ChatMessageCreated';

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable max-depth */
 import Embed from '@guildedjs/embeds';
-import type { APIContent } from '@guildedjs/guilded-api-typings';
+import type { APIContent, APIEmbed } from '@guildedjs/guilded-api-typings';
 
 import { CONSTANTS } from './Consts';
 import { generateUUID } from './UUID';
@@ -81,7 +81,7 @@ export function parseMessage(data: APIContent): parsedMessage {
         reactions: [],
         users: [],
     };
-    const embeds: unknown[] = [];
+    const embeds: APIEmbed[] = [];
 
     for (const messageLine of data.document.nodes) {
         switch (messageLine.type) {
@@ -193,7 +193,7 @@ export function parseMessage(data: APIContent): parsedMessage {
                 break;
             }
             case 'webhookMessage': {
-                embeds.push((messageLine.data as { embeds: unknown[] }).embeds);
+                embeds.push(...(messageLine.data as { embeds: APIEmbed[] }).embeds);
                 break;
             }
         }

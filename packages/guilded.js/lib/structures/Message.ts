@@ -7,6 +7,8 @@ import { retrieveChannelFromStructureCache, retrieveTeamFromStructureCache } fro
 import { Base } from './Base';
 import { DMChannel, PartialChannel, TeamChannel } from './Channel';
 import type { Client } from './Client';
+import { Member } from './Member';
+import { Role } from './Role';
 import type { Team } from './Team';
 import { User } from './User';
 
@@ -52,6 +54,16 @@ export class Message extends Base<APIMessage> {
     public reactions: Collection<string, MessageReaction>;
 
     /**
+     * Mentions contained in this message
+     */
+    public mentions = {
+        channels: new Collection<string, PartialChannel>(),
+        members: new Collection<string, Member>(),
+        roles: new Collection<string, Role>(),
+        users: new Collection<string, User>(),
+    };
+
+    /**
      * A boolean indicating that this message is NOT partial
      * @readonly
      * @defaultValue false
@@ -66,7 +78,6 @@ export class Message extends Base<APIMessage> {
         private _channel: DMChannel | TeamChannel | PartialChannel | null,
     ) {
         super(client, data);
-
         this.authorID = data.createdBy;
         this.channelID = data.channelId;
         this.teamID = data.teamId ?? null;
@@ -86,6 +97,21 @@ export class Message extends Base<APIMessage> {
         if ('content' in data && data.content !== undefined) {
             this.parsedContent = parseMessage(data.content);
             this.content = this.parsedContent.parsedText;
+
+            for (const userMention of this.parsedContent.mentions.users) {
+                const user = this.client.users.cache.get(userMention);
+                if (!user) continue;
+                this.mentions.users.set(user.id, user);
+
+                const member = this.team?.members.cache.get(user.id);
+                if (!member) continue;
+                this.mentions.members.set(member.id, member);
+            }
+            for (const channelMention of this.parsedContent.mentions.channels) {
+                const channel = this.client.channels.cache.get(channelMention);
+                if (!channel) continue;
+                this.mentions.channels.set(channel.id, channel);
+            }
         }
 
         if ('reactions' in data && data.reactions !== undefined) {
