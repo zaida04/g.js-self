@@ -5,8 +5,8 @@ export class Embed {
     public title: string | null;
     public description: string | null;
     public url: string | null;
-    public timestamp: string | null;
-    public timestampRaw: number | null;
+    public timestamp: number | null;
+    public timestampString: string | null;
     public color: number | null;
     public footer: {
         text: string;
@@ -43,7 +43,7 @@ export class Embed {
         this.provider = null;
         this.color = null;
         this.timestamp = null;
-        this.timestampRaw = null;
+        this.timestampString = null;
         this.description = null;
         this.url = null;
         this.title = null;
@@ -107,8 +107,8 @@ export class Embed {
             }
 
             if ('timestamp' in data) {
-                this.timestamp = data.timestamp ? new Date(data.timestamp).toISOString() : null;
-                this.timestampRaw = data.timestamp ? Date.parse(data.timestamp) : null;
+                this.timestamp = data.timestamp ? Date.parse(data.timestamp) : null;
+                this.timestampString = data.timestamp ? new Date(data.timestamp).toISOString() : null;
             }
 
             if ('description' in data) {
@@ -160,18 +160,17 @@ export class Embed {
         if (!timestamp) {
             return this.setTimestamp(new Date());
         }
-        const isTimestampDateObject = timestamp instanceof Date;
 
-        this.timestamp = isTimestampDateObject
-            ? (timestamp as Date).toISOString()
-            : Number.isInteger(timestamp) || typeof timestamp === 'string'
-            ? new Date(timestamp).toISOString()
-            : null;
-        this.timestampRaw = isTimestampDateObject
-            ? (timestamp as Date).getTime()
-            : Number.isInteger(timestamp)
-            ? new Date(timestamp).getTime()
-            : Date.parse(timestamp as string);
+        const parsedTimestamp =
+            timestamp instanceof Date
+                ? timestamp
+                : Number.isInteger(timestamp) || typeof timestamp === 'string'
+                ? new Date(timestamp)
+                : null;
+        if (!parsedTimestamp) throw new TypeError('Invalid DateResolvable passed into setTimestamp.');
+
+        this.timestamp = parsedTimestamp.getTime();
+        this.timestampString = parsedTimestamp.toISOString();
         return this;
     }
 
@@ -278,7 +277,7 @@ export class Embed {
                       width: this.thumbnail.width ?? undefined,
                   }
                 : undefined,
-            timestamp: this.timestamp?.toString() ?? undefined,
+            timestamp: this.timestampString ?? undefined,
             title: this.title ?? undefined,
             url: this.url ?? undefined,
             video: this.video
