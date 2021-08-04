@@ -4,11 +4,8 @@
     <br />
     <p>
         <a href="https://discord.gg/jf66UUN"><img src="https://img.shields.io/discord/732714723744940032.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2 "></a>
-        <img src="https://github.com/zaida04/guilded.js/workflows/Linting/badge.svg" alt="Linting">
-        <img src="https://github.com/zaida04/guilded.js/workflows/TypeScript/badge.svg" alt="TypeScript">
+        <img src="https://github.com/zaida04/guilded.js/actions/workflows/ci.yml/badge.svg" alt="CI">
         <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a><br>
-        <a href="https://github.com/zaida04/guilded.js/issues"><img src="https://img.shields.io/github/issues-raw/zaida04/guilded.js.svg?maxAge=25000" alt="Issues"></a>
-        <a href="https://github.com/zaida04/guilded.js/pulls"><img src="https://img.shields.io/github/issues-pr/zaida04/guilded.js.svg?style=flat" alt="GitHub pull requests"></a><br>
     </p>
 </div>
 

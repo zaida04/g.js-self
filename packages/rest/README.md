@@ -2,7 +2,7 @@
 
 [![GitHub](https://img.shields.io/github/license/guildedjs/guilded.js)](https://github.com/zaida04/guilded.js/blob/main/LICENSE)
 [![npm](https://img.shields.io/npm/v/@guildedjs/rest?color=crimson&logo=npm)](https://www.npmjs.com/package/@guildedjs/rest)
-[![TypeScript](https://github.com/zaida04/guilded.js/actions/workflows/typescript.yml/badge.svg)](https://github.com/zaida04/guilded.js/actions/workflows/typescript.yml)
+[![CI workflows](https://github.com/zaida04/guilded.js/actions/workflows/ci.yml/badge.svg)](https://github.com/zaida04/guilded.js/actions/workflows/ci.yml)
 
 Rest utility for [`@guildedjs/guilded.js`](https://github.com/zaida04/guilded.js/tree/main/packages/guilded.js) and [`@guildedjs/webhook-client`](https://github.com/zaida04/guilded.js/tree/main/packages/webhook-client).
 
