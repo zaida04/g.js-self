@@ -11,25 +11,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install Node v12
+      - name: Install Node v15
         uses: actions/setup-node@v1
         with:
-          node-version: 12
-
-      - name: Use node_modules cache
-        uses: actions/cache@v2
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+          node-version: 15
 
       - name: Install Main Dependencies
-        if: ${{ !steps.cache-restore.outputs.cache-hit }}
         run: npm i
 
       - name: Install Sub Dependencies
         run: npm run bootstrap
 
-      - name: Run TSC
+      - name: Run TypeScript compiler
         run: npm run build
 
       - name: Build the docs
