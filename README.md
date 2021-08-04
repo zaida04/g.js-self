@@ -23,7 +23,6 @@ This repo serves as a monorepo that houses several packages, mainly the `@guilde
 * `@guildedjs/webhook-client` (**[GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/webhook-client#readme), [NPM](https://www.npmjs.com/package/@guildedjs/webhook-client)**) - Library-agnostic webhook client for interaction with guilded.gg API webhooks.
 * `@guildedjs/embeds` (**[GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/embeds#readme), [NPM](https://www.npmjs.com/package/@guildedjs/embeds)**) - Library-agnostic embed builder for sending messages with rich content through the guilded.gg API.
 * `@guildedjs/common` (**[GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/common#readme), [NPM](https://www.npmjs.com/package/@guildedjs/common)**) - Utilities and structures shared across various @guildedjs packages.
-* `@guildedjs/itami` (**[GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/itami#readme)**) - official framework for @guildedjs/guilded.js, comes with highly customizable commands, listeners, and other abstractions.
 
 ## 📥 Installation
 

@@ -1,7 +1,7 @@
 const rimraf = require('rimraf');
 const { join } = require('path');
 const BASE_DIR = join(__dirname, '..');
-const packages = ['common', 'embeds', 'guilded-api-typings', 'guilded.js', 'itami', 'webhook-client', 'rest'];
+const packages = ['common', 'embeds', 'guilded-api-typings', 'guilded.js', 'webhook-client', 'rest'];
 const subDirs = ['node_modules', 'dist', 'types'];
 
 rimraf.sync(join(BASE_DIR, 'node_modules'));
