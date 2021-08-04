@@ -12,6 +12,9 @@
     "build": "tsc",
     "prepublishOnly": "npx rimraf dist/ && npx rimraf types/ && npm run build"
   },
+  "devDependencies": {
+    "@guildedjs/guilded-api-typings": "^1.2.1"
+  },
   "keywords": [
     "guilded-gg",
     "guilded-api",
@@ -21,9 +24,6 @@
   "directories": {
     "lib": "lib",
     "test": "__tests__"
-  },
-  "devDependencies": {
-    "@guildedjs/guilded-api-typings": "^1.2.1"
   },
   "files": [
     "dist",

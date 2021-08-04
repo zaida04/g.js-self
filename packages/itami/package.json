@@ -5,11 +5,9 @@
   "description": "A framework for @guildedjs/guilded.js that provides a layer of abstraction. Create bots easier and more reliably!",
   "types": "types/index.d.ts",
   "main": "dist/index.js",
-  "author": "Zaid \"Nico\" <nico.03727+github@gmail.com>",
-  "homepage": "https://github.com/zaida04/guilded.js/tree/main/packages/itami#readme",
-  "license": "MIT",
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "build": "tsc"
   },
   "files": [
     "types",
@@ -34,5 +32,8 @@
   "bugs": {
     "url": "https://github.com/zaida04/guilded.js/issues"
   },
+  "author": "Zaid \"Nico\" <nico.03727+github@gmail.com>",
+  "homepage": "https://github.com/zaida04/guilded.js/tree/main/packages/itami#readme",
+  "license": "MIT",
   "gitHead": "fd2b3b1f8d37a69fb6a38edf4a4fb427d511440e"
 }

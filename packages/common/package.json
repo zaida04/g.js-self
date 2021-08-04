@@ -12,15 +12,6 @@
     "build": "tsc",
     "prepublishOnly": "npx rimraf dist/ && npx rimraf types/ && npm run build"
   },
-  "keywords": [
-    "guilded-gg",
-    "guilded-api",
-    "guilded-webhook"
-  ],
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
-  },
   "devDependencies": {
     "@guildedjs/guilded-api-typings": "^1.2.1",
     "@types/uuid": "^8.3.0"
@@ -29,6 +20,15 @@
     "@discordjs/collection": "^0.1.6",
     "@guildedjs/embeds": "^1.0.1",
     "uuid": "^8.3.2"
+  },
+  "keywords": [
+    "guilded-gg",
+    "guilded-api",
+    "guilded-webhook"
+  ],
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
   },
   "files": [
     "dist",
