@@ -179,7 +179,7 @@ export interface APIEmbedProvider {
 }
 
 export interface APIEmbedAuthor {
-    name?: string;
+    name: string;
     icon_url?: string;
     url?: string;
     proxy_icon_url?: string;
