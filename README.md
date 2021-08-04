@@ -82,4 +82,4 @@ Contributions are what make the open source community such an amazing place to l
 [Discord.js](https://github.com/discordjs/discord.js) - Main inspiration & lots of derived work.
 
 ## ⚖️ LICENSING  
-> **Guilded.JS** © [zaida04](https://github.com/zaida04), Released under the [MIT](https://github.com/zaida04/guilded.js/blob/main/LICENSE) License. All subpackages are also released under the MIT License
+> **Guilded.JS** © [zaida04](https://github.com/zaida04). All packages released under [MIT](https://github.com/zaida04/guilded.js/blob/main/LICENSE). 

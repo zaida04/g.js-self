@@ -1,5 +1,3 @@
-'use strict';
-
 const itami = require('..');
 
 describe('itami', () => {
