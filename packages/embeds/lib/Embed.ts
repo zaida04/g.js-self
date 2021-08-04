@@ -31,7 +31,6 @@ export class Embed {
         name: string;
         value: string;
     }[];
-    private raw?: Partial<APIEmbed>;
 
     public constructor(data?: Partial<APIEmbed>) {
         this.footer = null;
@@ -47,116 +46,76 @@ export class Embed {
         this.description = null;
         this.url = null;
         this.title = null;
-        this.raw = data;
 
-        if (data) {
-            if ('footer' in data) {
-                this.footer = data.footer
-                    ? {
-                          iconURL: data.footer.icon_url ?? null,
-                          proxyIconURL: data.footer.proxy_icon_url ?? null,
-                          text: data.footer.text ?? null,
-                      }
-                    : null;
-            }
+        if (data) this.update(data);
+    }
 
-            if ('image' in data) {
-                this.image = data.image
-                    ? {
-                          height: data.image.height ?? null,
-                          proxyURL: data.image.proxy_url ?? null,
-                          url: data.image.url,
-                          width: data.image.width ?? null,
-                      }
-                    : null;
-            }
-
-            if ('thumbnail' in data) {
-                this.thumbnail = data.thumbnail
-                    ? {
-                          height: data.thumbnail.height ?? null,
-                          proxyURL: data.thumbnail.proxy_url ?? null,
-                          url: data.thumbnail.url,
-                          width: data.thumbnail.width ?? null,
-                      }
-                    : null;
-            }
-
-            if ('author' in data) {
-                this.author = data.author
-                    ? {
-                          iconURL: data.author.icon_url ?? null,
-                          name: data.author.name ?? null,
-                          proxyIconURL: data.author.proxy_icon_url ?? null,
-                          url: data.author.url ?? null,
-                      }
-                    : null;
-            }
-
-            if ('fields' in data) {
-                this.fields =
-                    data.fields?.map(field => ({
-                        inline: field.inline ?? false,
-                        name: field.name,
-                        value: field.value,
-                    })) ?? [];
-            }
-
-            if ('color' in data) {
-                this.color = data.color ?? null;
-            }
-
-            if ('timestamp' in data) {
-                this.timestamp = data.timestamp ? Date.parse(data.timestamp) : null;
-                this.timestampString = data.timestamp ? new Date(data.timestamp).toISOString() : null;
-            }
-
-            if ('description' in data) {
-                this.description = data.description ?? null;
-            }
-
-            if ('url' in data) {
-                this.url = data.url ?? null;
-            }
-
-            if ('video' in data) {
-                this.video = data.video
-                    ? {
-                          height: data.video.height ?? null,
-                          proxyURL: data.video.proxy_url ?? null,
-                          url: data.video.url,
-                          width: data.video.width ?? null,
-                      }
-                    : null;
-            }
-
-            if ('provider' in data) {
-                this.provider = data.provider
-                    ? {
-                          name: data.provider.name ?? null,
-                          url: data.provider.url ?? null,
-                      }
-                    : null;
-            }
+    public update(data: Partial<APIEmbed>): void {
+        if ('color' in data && data.color !== undefined) {
+            this.setColor(data.color);
+        }
+        if ('timestamp' in data && data.timestamp !== undefined) {
+            this.setTimestamp(data.timestamp);
+        }
+        if ('title' in data && data.title !== undefined) {
+            this.setTitle(data.title);
+        }
+        if ('description' in data && data.description !== undefined) {
+            this.setDescription(data.description);
+        }
+        if ('url' in data && data.url !== undefined) {
+            this.setURL(data.url);
+        }
+        if ('provider' in data && data.provider !== undefined) {
+            this.setProvider(data.provider.name, data.provider.url);
+        }
+        if ('footer' in data && data.footer !== undefined) {
+            this.setFooter(data.footer.text, data.footer.icon_url, data.footer.proxy_icon_url);
+        }
+        if ('image' in data && data.image !== undefined) {
+            this.setImage(data.image.url, data.image.height, data.image.width, data.image.proxy_url);
+        }
+        if ('thumbnail' in data && data.thumbnail !== undefined) {
+            this.setThumbnail(
+                data.thumbnail.url,
+                data.thumbnail.height,
+                data.thumbnail.width,
+                data.thumbnail.proxy_url,
+            );
+        }
+        if ('author' in data && data.author !== undefined) {
+            this.setAuthor(data.author.name, data.author.icon_url, data.author.url, data.author.proxy_icon_url);
+        }
+        if ('fields' in data && data.fields !== undefined) {
+            this.addFields(data.fields);
+        }
+        if ('video' in data && data.video !== undefined) {
+            this.setVideo(data.video.url, data.video.height, data.video.width, data.video.proxy_url);
         }
     }
 
-    public setTitle(title: string): this {
+    public setTitle(title: string | null): this {
         this.title = title;
         return this;
     }
 
-    public setDescription(description: string): this {
+    public setDescription(description: string | null): this {
         this.description = description;
         return this;
     }
 
-    public setURL(url: string): this {
+    public setURL(url: string | null): this {
         this.url = url;
         return this;
     }
 
-    public setTimestamp(timestamp?: string | number | Date): this {
+    public setTimestamp(timestamp?: string | number | Date | null): this {
+        if (timestamp === null) {
+            this.timestamp = null;
+            this.timestampString = null;
+            return this;
+        }
+
         if (!timestamp) {
             return this.setTimestamp(new Date());
         }
@@ -174,37 +133,37 @@ export class Embed {
         return this;
     }
 
-    public setColor(color: number): this {
+    public setColor(color: number | null): this {
         this.color = color;
         return this;
     }
 
-    public setFooter(text: string, iconURL?: string, proxyIconURL?: string): this {
+    public setFooter(text: string, iconURL?: string | null, proxyIconURL?: string | null): this {
         this.footer = { iconURL: iconURL ?? null, proxyIconURL: proxyIconURL ?? null, text };
         return this;
     }
 
-    public setImage(url: string, height?: string, width?: string, proxyURL?: string): this {
+    public setImage(url: string, height?: string | null, width?: string | null, proxyURL?: string | null): this {
         this.image = { height: height ?? null, proxyURL: proxyURL ?? null, url, width: width ?? null };
         return this;
     }
 
-    public setThumbnail(url: string, height?: string, width?: string, proxyURL?: string): this {
+    public setThumbnail(url: string, height?: string | null, width?: string | null, proxyURL?: string | null): this {
         this.thumbnail = { height: height ?? null, proxyURL: proxyURL ?? null, url, width: width ?? null };
         return this;
     }
 
-    public setVideo(url: string, height?: string, width?: string, proxyURL?: string): this {
+    public setVideo(url: string, height?: string | null, width?: string | null, proxyURL?: string | null): this {
         this.video = { height: height ?? null, proxyURL: proxyURL ?? null, url, width: width ?? null };
         return this;
     }
 
-    public setProvider(name?: string, url?: string): this {
+    public setProvider(name?: string | null, url?: string | null): this {
         this.provider = { name: name ?? null, url: url ?? null };
         return this;
     }
 
-    public setAuthor(name?: string, iconURL?: string, url?: string, proxyIconURL?: string): this {
+    public setAuthor(name: string, iconURL?: string | null, url?: string | null, proxyIconURL?: string | null): this {
         this.author = {
             iconURL: iconURL ?? null,
             name: name ?? null,
@@ -226,16 +185,21 @@ export class Embed {
     }
 
     public addField(name: string, value: string, inline?: boolean): this {
-        this.addFields([{ inline: inline ?? false, name, value }]);
+        this.addFields([{ inline, name, value }]);
+        return this;
+    }
+
+    public clearFields(): this {
+        this.fields.length = 0;
         return this;
     }
 
     public toJSON(): APIEmbed {
         return {
-            author: this.author
+            author: this.author?.name
                 ? {
                       icon_url: this.author.iconURL ?? undefined,
-                      name: this.author.name ?? undefined,
+                      name: this.author.name,
                       proxy_icon_url: this.author.proxyIconURL ?? undefined,
                       url: this.author.url ?? undefined,
                   }
