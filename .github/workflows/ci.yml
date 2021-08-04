@@ -54,5 +54,5 @@ jobs:
       - name: Install Sub Dependencies
         run: npm run bootstrap
 
-      - name: Run ESLint
+      - name: Run TSC
         run: npm run build
