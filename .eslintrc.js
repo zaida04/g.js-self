@@ -3,7 +3,6 @@ module.exports = {
         node: true,
     },
     extends: ['plugin:@typescript-eslint/recommended', 'prettier/@typescript-eslint', 'plugin:prettier/recommended'],
-    ignorePatterns: ['__tests__/**', 'node_modules/**', 'dist/**', 'types/**', '*.d.ts'],
     overrides: [
         {
             files: ['packages/guilded-api-typings/**', 'packages/embeds'],

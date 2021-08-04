@@ -1,0 +1,5 @@
+__tests__/
+node_modules/
+dist/
+types/
+*.d.ts

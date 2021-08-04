@@ -6,8 +6,6 @@
     <img src="https://github.com/zaida04/guilded.js/workflows/Linting/badge.svg" alt="Linting">
     <img src="https://github.com/zaida04/guilded.js/workflows/TypeScript/badge.svg" alt="TypeScript">
     <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a><br>
-    <a href="https://github.com/zaida04/guilded.js/issues"><img src="https://img.shields.io/github/issues-raw/zaida04/guilded.js.svg?maxAge=25000" alt="Issues"></a>
-    <a href="https://github.com/zaida04/guilded.js/pulls"><img src="https://img.shields.io/github/issues-pr/zaida04/guilded.js.svg?style=flat" alt="GitHub pull requests"></a><br>
 </p>
 </div>
 
@@ -33,7 +31,7 @@ client.login({
 ## 📝 About
 `@guildedjs/guilded.js` is a library written in TypeScript usable in either TypeScript or JavaScript projects. It provides structures, abstraction, and utilities for interaction between the guilded API and your userbot.
 
-Off the bat there are very noticable similarities between this package and [`discord.js`](https://discord.js.org). This is intentional in order to make the migration or copying of your codebase to a Guilded bot smooth and predictable. We've adopted the same managers/cache structure that they've implemented because we find that it's what works well without much complications. Our folder structure is influenced by theirs as well, however our underlying structure with how we handle things like WebSocket events is different.
+Off the bat there are very noticable similarities between this package and [`discord.js`](https://discord.js.org) structure-wise. This is intentional in order to make the migration or copying of your codebase to a Guilded bot smooth and predictable. We've adopted the same managers/cache structure that they've implemented because we find that it's what works well without complications. While our structure is **influenced** by them, there are underlying differences with how we handle things like websockets, events, and utilities. In addition to that, the library is split up into multiple packages (this being the main one) and written in TypeScript over JavaScript.
 
 ## 📥 Installation
 
