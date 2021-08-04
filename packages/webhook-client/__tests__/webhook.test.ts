@@ -1,8 +1,5 @@
-import { config } from 'dotenv';
 import { join } from 'path';
-config({
-    path: join(__dirname, '..', '..', '..', 'testing.env'),
-});
+require('dotenv').config({ path: join(__dirname, '..', '..', '..', 'testing.env') });
 import { WebhookClient } from '..';
 
 if (!process.env.WEBHOOK_URL) {

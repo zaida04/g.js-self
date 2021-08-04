@@ -19,12 +19,6 @@ jobs:
       - name: Install Main Dependencies
         run: npm i
 
-      - name: Install Sub Dependencies
-        run: npm run bootstrap
-
-      - name: Run TypeScript compiler
-        run: npm run build
-
       - name: Build the docs
         run: npm run docs
         
