@@ -1,11 +1,21 @@
-# `@guildedjs/rest`
+# `@guildedjs/rest`  
 
-> Rest structure for guilded.js
+[![GitHub](https://img.shields.io/github/license/guildedjs/guilded.js)](https://github.com/zaida04/guilded.js/blob/main/LICENSE)
+[![npm](https://img.shields.io/npm/v/@guildedjs/rest?color=crimson&logo=npm)](https://www.npmjs.com/package/@guildedjs/rest)
+[![TypeScript](https://github.com/zaida04/guilded.js/actions/workflows/typescript.yml/badge.svg)](https://github.com/zaida04/guilded.js/actions/workflows/typescript.yml)
 
-## Usage
+Library-agnostic webhook client and utility
 
-```
-const rest = require('@guildedjs/rest');
+> ⚠️ If you intend to use `@guildedjs/guilded.js` you won't need to install this, as it's already a dependency of that package.
 
-// TODO: DEMONSTRATE API
-```
+## Installation
+You can install this package from [NPM](https://www.npmjs.com/package/@guildedjs/rest)
+- `npm install @guildedjs/rest`  
+- `yarn add @guildedjs/rest`
+
+## Contributing
+Please see the main [README.md](https://github.com/zaida04/guilded.js) for info on how to contribute to this package or the other `@guildedjs` packages.
+  
+## LICENSE
+Licensed under the [MIT License](https://github.com/zaida04/guilded.js/blob/main/LICENSE)
+  
