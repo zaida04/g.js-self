@@ -1,7 +1,8 @@
+/** @type {import('@ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
     collectCoverage: true,
     coverageDirectory: 'coverage',
-    coveragePathIgnorePatterns: ['<rootDir>dist/', '<rootDir>packages/itami', '<rootDir>packages/guilded-api-typings'],
+    coveragePathIgnorePatterns: ['<rootDir>dist/'],
     coverageReporters: ['text', 'lcov', 'clover'],
     coverageThreshold: {
         global: {
@@ -11,7 +12,7 @@ module.exports = {
             statements: 80,
         },
     },
-    roots: ['<rootDir>packages/'],
+    roots: ['<rootDir>/packages'],
     testEnvironment: 'node',
-    testMatch: ['**/+(*.)+(spec|test).+(ts)?(x)'],
+    testMatch: ['**/__tests__/**/*.test.ts'],
 };
