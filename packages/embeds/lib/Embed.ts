@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { APIEmbed } from '@guildedjs/guilded-api-typings';
 
+import { resolveColor } from './util';
+
 export class Embed {
     public title: string | null;
     public description: string | null;
@@ -134,7 +136,7 @@ export class Embed {
     }
 
     public setColor(color: number | null): this {
-        this.color = color;
+        this.color = color ? resolveColor(color) : null;
         return this;
     }
 
