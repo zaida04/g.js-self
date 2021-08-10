@@ -3,7 +3,6 @@
     "strict": true,
     "alwaysStrict": true,
     "moduleResolution": "node",
-    "removeComments": true,
     "declaration": true,
     "declarationMap": true,
     "pretty": true,

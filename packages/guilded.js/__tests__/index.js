@@ -2,10 +2,10 @@
 const { config } = require('dotenv');
 const { join } = require('path');
 const { COLORS, testText, errorText, successText } = require('./colors.js');
-const guilded = require('..');
+const Guilded = require('..');
 
 config({
-    path: join(__dirname, '..', '..', '..', 'testing.env'),
+    path: join(__dirname, '..', '..', '..', '.env'),
 });
 
 if (!process.env.EMAIL) throw new Error('Must supply email for testing');
@@ -16,7 +16,7 @@ if (!process.env.GUINEAPIG_ID) throw new Error('Must provide a testing user ID')
 if (!process.env.GROUP_ID) throw new Error('Must provide a testing group ID');
 if (!process.env.CHANNEL_ID) throw new Error('Must provide a testing channel ID');
 
-const client = new guilded.Client({
+const client = new Guilded.Client({
     ws: {
         heartbeatInterval: 15000,
     },
@@ -26,13 +26,13 @@ const prefix = 'gg!';
 // client.on('raw', console.log);
 // client.on('debug', console.log);
 
-client.on(guilded.events.MESSAGE_REACTION_ADD, a => console.log(`REACTION ADDED: ${a.id}`));
-client.on(guilded.events.MESSAGE_REACTION_DELETE, a => console.log(`REACTION REMOVED: ${a.id}`));
+client.on(Guilded.events.MESSAGE_REACTION_ADD, a => console.log(`REACTION ADDED: ${a.id}`));
+client.on(Guilded.events.MESSAGE_REACTION_DELETE, a => console.log(`REACTION REMOVED: ${a.id}`));
 
 /**
  * Testing login
  */
-client.once(guilded.events.READY, async () => {
+client.once(Guilded.events.READY, async () => {
     let passed = 0;
     let failed = 0;
 
@@ -79,7 +79,7 @@ client.once(guilded.events.READY, async () => {
     console.log(`\n\n${COLORS.GREEN} ${passed} tests passed.${COLORS.RED} ${failed} tests failed. ${COLORS.RESET}`);
 });
 
-client.on(guilded.events.MESSAGE_CREATE, message => {
+client.on(Guilded.events.MESSAGE_CREATE, message => {
     if (message.teamID !== process.env.TEAM_ID) return;
     if (!message.content.startsWith(prefix)) return;
     const args = message.content.split(/ /g);

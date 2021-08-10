@@ -13,6 +13,7 @@ import { TeamChannel } from './Channel';
 import type { Client } from './Client';
 import { TeamGroupManager } from './managers/TeamGroupManager';
 import { TeamMemberManager } from './managers/TeamMemberManager';
+import { TeamRoleManager } from './managers/TeamRoleManager';
 
 /**
  * A team is the basis of Guilded, it is where TeamChannels, TeamMembers, and TeamRoles reside.
@@ -73,6 +74,12 @@ export class Team extends Base<APITeam | APIPartialTeam> {
      * The members residing in this team. Will most likely have an incomplete cache, so you should ensure you use the fetch methods
      */
     public members: TeamMemberManager;
+
+
+    /**
+     * The roles in this team.
+     */
+    public roles: TeamRoleManager;
 
     /**
      * The name of this team
@@ -161,6 +168,7 @@ export class Team extends Base<APITeam | APIPartialTeam> {
         this.createdAt = new Date(data.createdAt);
         this.members = new TeamMemberManager(this.client, this);
         this.groups = new TeamGroupManager(this.client, this);
+        this.roles = new TeamRoleManager(this.client, this);
         this.discord = { guildID: null, name: null };
         this.banners = { large: null, medium: null, small: null };
         this.games = [];

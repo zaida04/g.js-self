@@ -1,15 +1,16 @@
 module.exports = {
+    comments: true,
     parserOpts: { strictMode: true },
-    sourceMaps: 'inline',
+    plugins: ['babel-plugin-replace-ts-export-assignment', 'babel-plugin-const-enum'],
     presets: [
-      [
-        '@babel/preset-env',
-        {
-          targets: { node: 'current' },
-          modules: 'commonjs'
-        }
-      ],
-      '@babel/preset-typescript'
+        [
+            '@babel/preset-env',
+            {
+                modules: 'commonjs',
+                targets: { node: 'current' },
+            },
+        ],
+        '@babel/preset-typescript',
     ],
-    plugins: ['babel-plugin-replace-ts-export-assignment', 'babel-plugin-const-enum']
-  };
+    sourceMaps: 'inline',
+};

@@ -6,7 +6,6 @@
 export const COLORS: { [key: string]: number } = {
     AQUA: 0x1abc9c,
     BLUE: 0x3498db,
-    BLURPLE: 0x7289da,
     DARKER_GREY: 0x7f8c8d,
     DARK_AQUA: 0x11806a,
     DARK_BLUE: 0x206694,
@@ -24,6 +23,7 @@ export const COLORS: { [key: string]: number } = {
     GREEN: 0x2ecc71,
     GREY: 0x95a5a6,
     GREYPLE: 0x99aab5,
+    GUILDED: 0xf5c400,
     LIGHT_GREY: 0xbcc0c0,
     LUMINOUS_VIVID_PINK: 0xe91e63,
     NAVY: 0x34495e,

@@ -1,4 +1,5 @@
+/* istanbul ignore file */
 export * from './MessageUtil';
-export * from './Consts';
+export * from './util';
 export * from './CacheCollection';
 export * from './UUID';
