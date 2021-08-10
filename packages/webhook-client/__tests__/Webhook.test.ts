@@ -41,9 +41,3 @@ test('Pass only partial constructable info', () => {
         ),
     );
 });
-
-test('Send message through webhook', async () => {
-    const webhook = new WebhookClient(process.env.WEBHOOK_URL);
-    const msg = await webhook.send('Testing Webhook sending from JEST!');
-    expect(msg.id).not.toBeUndefined();
-});

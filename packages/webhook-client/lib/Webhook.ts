@@ -33,6 +33,7 @@ export class WebhookClient {
         this.URL = `https://${ROUTES.MEDIA_DOMAIN}/webhooks/${this.id}/${this.token}`;
     }
 
+    /* istanbul ignore next */
     public send(content: string, embeds?: Embed[]): Promise<WebhookExecuteResponse> {
         return this.api
             .post<APIPostWebhookResult>(`/webhooks/${this.id}/${this.token}`, {
