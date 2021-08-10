@@ -1,4 +1,4 @@
-import { CONSTANTS } from '@guildedjs/common';
+import { ROUTES } from '@guildedjs/common';
 import type { APIClientUser, APIDevice, APIGetCurrentUser, APIUser } from '@guildedjs/guilded-api-typings';
 import { RestManager } from '@guildedjs/rest';
 import { EventEmitter } from 'events';
@@ -32,7 +32,7 @@ export class Client extends EventEmitter implements clientEvents {
      * @private
      */
     public readonly rest: RestManager = new RestManager({
-        apiURL: this.options?.rest?.apiURL ?? CONSTANTS.BASE_DOMAIN,
+        apiURL: this.options?.rest?.apiURL ?? ROUTES.BASE_DOMAIN,
     });
 
     /**
@@ -40,7 +40,7 @@ export class Client extends EventEmitter implements clientEvents {
      * @private
      */
     public readonly cdn: RestManager = new RestManager({
-        apiURL: this.options?.rest?.cdnURL ?? CONSTANTS.MEDIA_DOMAIN,
+        apiURL: this.options?.rest?.cdnURL ?? ROUTES.MEDIA_DOMAIN,
     });
 
     /**

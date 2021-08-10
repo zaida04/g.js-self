@@ -89,42 +89,91 @@ test('Check plain Embed properties', () => {
 
 describe('Test complex properties', () => {
     const embed = new Embed();
-    describe('Pass nothing into setTimestamp', () => {
+    test('Pass nothing into setTimestamp', () => {
         embed.setTimestamp();
         expect(embed.timestamp).not.toBeNull();
         expect(embed.timestampString).not.toBeNull();
     });
-    describe('Pass Date object into setTimestamp', () => {
+    test('Pass Date object into setTimestamp', () => {
         const d = new Date();
         embed.setTimestamp(d);
         expect(embed.timestamp).toStrictEqual(d.getTime());
         expect(embed.timestampString).toStrictEqual(d.toISOString());
     });
-    describe('Pass number timestamp into setTimestamp', () => {
+    test('Pass number timestamp into setTimestamp', () => {
         const d2 = new Date();
         embed.setTimestamp(d2.getTime());
         expect(embed.timestamp).toStrictEqual(d2.getTime());
         expect(embed.timestampString).toStrictEqual(d2.toISOString());
     });
-    describe('Pass string into setTimestamp', () => {
+    test('Pass string into setTimestamp', () => {
         const d3 = new Date();
         embed.setTimestamp(d3.toISOString());
         expect(embed.timestamp).toStrictEqual(d3.getTime());
         expect(embed.timestampString).toStrictEqual(d3.toISOString());
     });
-    describe('Pass null into setTimestamp', () => {
+    test('Pass null into setTimestamp', () => {
         embed.setTimestamp(null);
         expect(embed.timestamp).toBeNull();
         expect(embed.timestampString).toBeNull();
     });
+    test('Error on invalid DateResolveable', () => {
+        expect(() => embed.setTimestamp('SDIHFISUDHF')).toThrow(
+            new TypeError('Invalid DateResolvable passed into setTimestamp.'),
+        );
+    });
+});
+
+test('Set properties to null', () => {
+    const embed = new Embed(BASE_EMBED_DATA);
+    embed.setColor(null);
+    embed.setFooter(null, null, null);
+    embed.setImage(null, null, null);
+    embed.setThumbnail(null, null, null);
+    embed.setVideo(null, null, null);
+    embed.setProvider(null, null);
+    embed.setURL(null);
+    embed.setAuthor(null, null, null, null);
+    embed.setTimestamp(null);
+    embed.setDescription(null);
+    embed.setTitle(null);
+    expect(embed.title).toStrictEqual(null);
+    expect(embed.description).toStrictEqual(null);
+    expect(embed.url).toStrictEqual(null);
+    expect(embed.timestampString).toStrictEqual(null);
+    expect(embed.timestamp).toStrictEqual(null);
+    expect(embed.color).toStrictEqual(null);
+    expect(embed.footer).toStrictEqual(null);
+    expect(embed.image).toStrictEqual(null);
+    expect(embed.thumbnail).toStrictEqual(null);
+    expect(embed.video).toStrictEqual(null);
+    expect(embed.provider).toStrictEqual(null);
+    expect(embed.author).toStrictEqual(null);
+    const embedJSON = embed.toJSON();
+    expect(embedJSON.title).toStrictEqual(undefined);
+    expect(embedJSON.description).toStrictEqual(undefined);
+    expect(embedJSON.url).toStrictEqual(undefined);
+    expect(embedJSON.timestamp).toStrictEqual(undefined);
+    expect(embedJSON.color).toStrictEqual(undefined);
+    expect(embedJSON.footer).toStrictEqual(undefined);
+    expect(embedJSON.image).toStrictEqual(undefined);
+    expect(embedJSON.thumbnail).toStrictEqual(undefined);
+    expect(embedJSON.video).toStrictEqual(undefined);
+    expect(embedJSON.provider).toStrictEqual(undefined);
+    expect(embedJSON.author).toStrictEqual(undefined);
 });
 
 describe('Test field methods', () => {
     const embed = new Embed();
-    embed.addField(BASE_EMBED_DATA.fields[0].name, BASE_EMBED_DATA.fields[0].value);
-    expect(embed.fields[0].name).toStrictEqual(BASE_EMBED_DATA.fields[0].name);
-    expect(embed.fields[0].value).toStrictEqual(BASE_EMBED_DATA.fields[0].value);
 
-    embed.clearFields();
-    expect(embed.fields).toStrictEqual([]);
+    test('Add fields to Embed', () => {
+        embed.addField(BASE_EMBED_DATA.fields[0].name, BASE_EMBED_DATA.fields[0].value);
+        expect(embed.fields[0].name).toStrictEqual(BASE_EMBED_DATA.fields[0].name);
+        expect(embed.fields[0].value).toStrictEqual(BASE_EMBED_DATA.fields[0].value);
+    });
+
+    test('Clear all fields on Embed', () => {
+        embed.clearFields();
+        expect(embed.fields).toStrictEqual([]);
+    });
 });

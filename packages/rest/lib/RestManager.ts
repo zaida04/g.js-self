@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import fetch, { Response } from 'node-fetch';
 
 import { GuildedAPIError } from './GuildedAPIError';

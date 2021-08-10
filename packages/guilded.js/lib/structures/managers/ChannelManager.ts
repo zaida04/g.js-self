@@ -1,4 +1,4 @@
-import { convertToMessageFormat, parseToMessage } from '@guildedjs/common';
+import { generateMessage, parseToMessage } from '@guildedjs/common';
 import Embed from '@guildedjs/embeds';
 import type {
     APIGetChannelMessageResult,
@@ -32,10 +32,9 @@ export class ChannelManager extends BaseManager<APITeamChannel, TeamChannel | DM
         embed?: Embed,
     ): Promise<Message | string> {
         const channelID = ChannelManager.resolve(channel);
-        const [id, formattedContent] = convertToMessageFormat(content, embed);
-
+        const [messageID, formattedContent] = generateMessage(content, embed);
         return this.client.rest
-            .post<APIPostChannelMessagesResult | never>(`/channels/${channelID}/messages`, formattedContent)
+            .post<APIPostChannelMessagesResult | never>(`/channels/${channelID}/messages`, { ...formattedContent, messageId: messageID })
             .then(x =>
                 'id' in x
                     ? new Message(
@@ -43,7 +42,7 @@ export class ChannelManager extends BaseManager<APITeamChannel, TeamChannel | DM
                           x,
                           channel instanceof PartialChannel ? channel : this.client.channels.add({ id: channel })!,
                       )
-                    : id,
+                    : messageID,
             );
     }
 

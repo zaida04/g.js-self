@@ -1,16 +1,20 @@
-import { CONSTANTS, parsedMessage, parseMessage } from '@guildedjs/common';
+import { parsedMessage, parseMessage, ROUTES } from '@guildedjs/common';
 import Embed from '@guildedjs/embeds';
 import { APIContent, APIPostWebhookResult } from '@guildedjs/guilded-api-typings';
 import { RestManager } from '@guildedjs/rest';
 
 export class WebhookClient {
-    private api = new RestManager({ apiURL: CONSTANTS.MEDIA_DOMAIN });
+    private api = new RestManager({ apiURL: ROUTES.MEDIA_DOMAIN });
     public URL: string;
     public id: string;
     public token: string;
 
     public constructor(webhookConnection: string | { id: string; token: string }) {
-        if (!webhookConnection) throw new TypeError('Must provide Webhook connection info.');
+        if (!webhookConnection) {
+            throw new TypeError(
+                `Must provide Webhook connection info in either string or object. Received ${webhookConnection}.`,
+            );
+        }
         if (typeof webhookConnection === 'string') {
             const destructuredWebhookURL = webhookConnection.match(/guilded.gg\/webhooks\/([^/]+)\/([^/]+)/);
             if (!destructuredWebhookURL?.length) {
@@ -23,11 +27,10 @@ export class WebhookClient {
             this.token = webhookConnection.token;
         } else {
             throw new TypeError(
-                'You must provide either a webhook URL or a webhook ID/token in an object when constructing the Webhook Client',
+                'You must provide either a webhook URL or a webhook ID & token in an object when constructing the Webhook Client',
             );
         }
-
-        this.URL = `${CONSTANTS.MEDIA_DOMAIN}/webhooks/${this.id}/${this.token}`;
+        this.URL = `https://${ROUTES.MEDIA_DOMAIN}/webhooks/${this.id}/${this.token}`;
     }
 
     public send(content: string, embeds?: Embed[]): Promise<WebhookExecuteResponse> {

@@ -52,6 +52,7 @@ export class Embed {
         if (data) this.update(data);
     }
 
+    /* istanbul ignore next */
     public update(data: Partial<APIEmbed>): void {
         if ('color' in data && data.color !== undefined) {
             this.setColor(data.color);
@@ -128,50 +129,54 @@ export class Embed {
                 : Number.isInteger(timestamp) || typeof timestamp === 'string'
                 ? new Date(timestamp)
                 : null;
-        if (!parsedTimestamp) throw new TypeError('Invalid DateResolvable passed into setTimestamp.');
+        if (!parsedTimestamp || (parsedTimestamp instanceof Date && isNaN(parsedTimestamp.getTime()))) {
+            throw new TypeError('Invalid DateResolvable passed into setTimestamp.');
+        }
 
         this.timestamp = parsedTimestamp.getTime();
         this.timestampString = parsedTimestamp.toISOString();
         return this;
     }
 
-    public setColor(color: number | null): this {
+    public setColor(color: string | number | [number, number, number] | null): this {
         this.color = color ? resolveColor(color) : null;
         return this;
     }
 
     public setFooter(text: string, iconURL?: string | null, proxyIconURL?: string | null): this {
-        this.footer = { iconURL: iconURL ?? null, proxyIconURL: proxyIconURL ?? null, text };
+        this.footer = text ? { iconURL: iconURL ?? null, proxyIconURL: proxyIconURL ?? null, text } : null;
         return this;
     }
 
     public setImage(url: string, height?: string | null, width?: string | null, proxyURL?: string | null): this {
-        this.image = { height: height ?? null, proxyURL: proxyURL ?? null, url, width: width ?? null };
+        this.image = url ? { height: height ?? null, proxyURL: proxyURL ?? null, url, width: width ?? null } : null;
         return this;
     }
 
     public setThumbnail(url: string, height?: string | null, width?: string | null, proxyURL?: string | null): this {
-        this.thumbnail = { height: height ?? null, proxyURL: proxyURL ?? null, url, width: width ?? null };
+        this.thumbnail = url ? { height: height ?? null, proxyURL: proxyURL ?? null, url, width: width ?? null } : null;
         return this;
     }
 
     public setVideo(url: string, height?: string | null, width?: string | null, proxyURL?: string | null): this {
-        this.video = { height: height ?? null, proxyURL: proxyURL ?? null, url, width: width ?? null };
+        this.video = url ? { height: height ?? null, proxyURL: proxyURL ?? null, url, width: width ?? null } : null;
         return this;
     }
 
     public setProvider(name?: string | null, url?: string | null): this {
-        this.provider = { name: name ?? null, url: url ?? null };
+        this.provider = name && url ? { name: name ?? null, url: url ?? null } : null;
         return this;
     }
 
     public setAuthor(name: string, iconURL?: string | null, url?: string | null, proxyIconURL?: string | null): this {
-        this.author = {
-            iconURL: iconURL ?? null,
-            name: name ?? null,
-            proxyIconURL: proxyIconURL ?? null,
-            url: url ?? null,
-        };
+        this.author = name
+            ? {
+                  iconURL: iconURL ?? null,
+                  name: name ?? null,
+                  proxyIconURL: proxyIconURL ?? null,
+                  url: url ?? null,
+              }
+            : null;
         return this;
     }
 

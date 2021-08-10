@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { CONSTANTS } from '@guildedjs/common';
+import { ROUTES } from '@guildedjs/common';
 import type {
     WSChatMessageCreated,
     WSChatMessageReactionAdded,
@@ -34,7 +34,7 @@ export class ClientGatewayHandler extends GatewayHandler {
     public init(): this | null {
         if (this.ws) return this;
         // eslint-disable-next-line max-len
-        const socketURL = `wss://${CONSTANTS.BASE_DOMAIN}/socket.io/?jwt=undefined&guildedClientId=${this.client.rest.guildedMID}&EIO=3&transport=websocket`;
+        const socketURL = `wss://${ROUTES.BASE_DOMAIN}/socket.io/?jwt=undefined&guildedClientId=${this.client.rest.guildedMID}&EIO=3&transport=websocket`;
         this.ws = new WebSocket(socketURL, {
             headers: {
                 cookie: `hmac_signed_session=${this.client.rest.token};`,

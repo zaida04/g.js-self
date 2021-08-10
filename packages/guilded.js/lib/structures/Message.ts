@@ -119,6 +119,14 @@ export class Message extends Base<APIMessage> {
                 if (!channel) continue;
                 this.mentions.channels.set(channel.id, channel);
             }
+            if(this.team) {
+            for(const roleMention of this.parsedContent.mentions.roles) {
+                this.mentions.raw.roles.add(roleMention);
+                const role = this.team.roles.cache.get(roleMention);
+                if(!role) continue;
+                this.mentions.roles.set(role.id, role);
+            }
+        }
         }
 
         if ('reactions' in data && data.reactions !== undefined) {
