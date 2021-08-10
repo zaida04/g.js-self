@@ -5,6 +5,8 @@ import data from './MessageUtil.test.data.json';
 const testingMessage1 = 'TESTING MESSAGE' as const;
 const testingMessage2 = 'TESTING MESSAGE 2' as const;
 const testingMessage3 = 'TESTING MESSAGE 3' as const;
+const avatarURL =
+    'https://s3-us-west-2.amazonaws.com/www.guilded.gg/UserAvatar/ad69d66812244bf783f388d8d0b258c9-Large.png' as const;
 
 // taken from https://stackoverflow.com/a/13653180, show them some love.
 const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -98,7 +100,7 @@ test('parse message with user mentions', () => {
             {
                 content: '@nico',
                 mention: {
-                    avatar: 'https://s3-us-west-2.amazonaws.com/www.guilded.gg/UserAvatar/ad69d66812244bf783f388d8d0b258c9-Large.png?w=450&h=450',
+                    avatar: avatarURL,
                     color: '#ececee',
                     id: 'user-id',
                     matcher: '@nico',
