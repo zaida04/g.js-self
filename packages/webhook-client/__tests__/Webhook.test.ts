@@ -1,4 +1,3 @@
-if (!process.env.WEBHOOK_URL) throw new Error('Missing webhook url in .env!');
 import { WebhookClient } from '..';
 const id = 'THISISARANDOMID';
 const token = 'THISISARANDOMTOKEN';
