@@ -3,6 +3,7 @@ const { join } = require('path');
 const ENV_PATH = join(__dirname, '..', '.env');
 
 (async () => {
+    if (process.env.CI) return;
     try {
         await access(ENV_PATH);
     } catch (e) {
