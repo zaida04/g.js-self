@@ -69,11 +69,6 @@ jobs:
         with:
           node-version: 14
 
-      - name: Load in ENV variables
-        uses: secrethub/actions/env-export@v0.2.1
-        env:
-          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
-
       - name: Use node_modules cache
         uses: actions/cache@v2
         with:
