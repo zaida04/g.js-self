@@ -1,6 +1,6 @@
 {
   "name": "@guildedjs/webhook-client",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Library-agnostic webhook client for the guilded.gg API",
   "author": "Zaid \"Nico\" <me@zaid-arshad.tech>",
   "homepage": "https://github.com/zaida04/guilded.js/tree/main/packages/webhook-client#readme",
@@ -13,13 +13,13 @@
     "prepublishOnly": "npx rimraf dist/ && npx rimraf types/ && npm run build"
   },
   "devDependencies": {
-    "@guildedjs/guilded-api-typings": "^1.2.1",
+    "@guildedjs/guilded-api-typings": "^1.3.0",
     "@types/node-fetch": "^2.5.10"
   },
   "dependencies": {
-    "@guildedjs/common": "^1.0.1",
-    "@guildedjs/embeds": "^1.0.1",
-    "@guildedjs/rest": "^1.0.1",
+    "@guildedjs/common": "^1.0.2",
+    "@guildedjs/embeds": "^1.0.2",
+    "@guildedjs/rest": "^1.0.2",
     "node-fetch": "^2.6.1"
   },
   "keywords": [
