@@ -45,44 +45,44 @@ export type clientPartial = 'MEMBER' | 'MESSAGE' | 'USER' | 'CHANNEL';
  * Options you can instantiate the client with.
  */
 export interface ClientOptions {
-    partials: clientPartial[];
-    cache: {
-        startupRestrictions: {
-            dropDMs: boolean;
-            dropTeams: boolean;
-            dropChannels: boolean;
+    partials?: clientPartial[];
+    cache?: {
+        startupRestrictions?: {
+            dropDMs?: boolean;
+            dropTeams?: boolean;
+            dropChannels?: boolean;
         };
-        cacheMaxSize: {
-            teamsCache: number;
-            channelsCache: number;
-            usersCache: number;
-            membersCache: number;
-            memberRolesCache: number;
-            teamRolesCache: number;
-            teamWebhooksCache: number;
-            groupsCache: number;
-            messagesCache: number;
+        cacheMaxSize?: {
+            teamsCache?: number;
+            channelsCache?: number;
+            usersCache?: number;
+            membersCache?: number;
+            memberRolesCache?: number;
+            teamRolesCache?: number;
+            teamWebhooksCache?: number;
+            groupsCache?: number;
+            messagesCache?: number;
         };
-        disableTeam: boolean;
-        disableChannels: boolean;
-        disableUsers: boolean;
-        disableMembers: boolean;
-        disableMembersRoles: boolean;
-        disableTeamRoles: boolean;
-        disableWebhooks: boolean;
-        disableGroups: boolean;
-        disableMessages: boolean;
+        disableTeam?: boolean;
+        disableChannels?: boolean;
+        disableUsers?: boolean;
+        disableMembers?: boolean;
+        disableMembersRoles?: boolean;
+        disableTeamRoles?: boolean;
+        disableWebhooks?: boolean;
+        disableGroups?: boolean;
+        disableMessages?: boolean;
     };
-    ws: {
-        heartbeatInterval: number;
-        disabledEvents: events[];
-        disallowReconnect: boolean;
-        reconnectLimit: number;
-        blockTeamWSConnection: boolean;
+    ws?: {
+        heartbeatInterval?: number;
+        disabledEvents?: events[];
+        disallowReconnect?: boolean;
+        reconnectLimit?: number;
+        blockTeamWSConnection?: boolean;
     };
-    rest: {
-        apiURL: string;
-        cdnURL: string;
+    rest?: {
+        apiURL?: string;
+        cdnURL?: string;
     };
 }
 

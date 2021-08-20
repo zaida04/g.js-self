@@ -108,11 +108,11 @@ export class Client extends EventEmitter implements clientEvents {
         this.debug('Initial ME data recieved');
         this.user = new ClientUser(this, FETCH_ME.user);
 
-        if (!this.options?.cache?.startupRestrictions.dropTeams) {
+        if (!this.options?.cache?.startupRestrictions?.dropTeams) {
             const teamChannelDataRequests = [];
             for (const TEAM_DATA of FETCH_ME.teams) {
                 const team = new Team(this, TEAM_DATA);
-                if (!this.options?.cache?.startupRestrictions.dropChannels) {
+                if (!this.options?.cache?.startupRestrictions?.dropChannels) {
                     teamChannelDataRequests.push(team.fetchChannels());
                 }
                 this.teams.add(team);
@@ -121,7 +121,7 @@ export class Client extends EventEmitter implements clientEvents {
             this.debug('Initial Team data recieved.');
         }
 
-        if (!this.options?.cache?.startupRestrictions.dropDMs) {
+        if (!this.options?.cache?.startupRestrictions?.dropDMs) {
             const FETCH_DMS = await this.rest.get(`/users/${this.user.id}/channels`);
             for (const DM_DATA of FETCH_DMS.channels) {
                 const dm = new DMChannel(this, DM_DATA);
