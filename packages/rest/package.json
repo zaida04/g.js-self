@@ -1,6 +1,6 @@
 {
   "name": "@guildedjs/rest",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Rest structure for @guildedjs/guilded.js",
   "author": "Zaid \"Nico\" <me@zaid-arshad.tech>",
   "license": "MIT",
