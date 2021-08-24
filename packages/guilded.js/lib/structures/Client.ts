@@ -32,7 +32,7 @@ export class Client extends EventEmitter implements clientEvents {
      * @private
      */
     public readonly rest: RestManager = new RestManager({
-        apiURL: this.options?.rest?.apiURL ?? ROUTES.BASE_DOMAIN,
+        apiURL: this.options?.rest?.apiURL ?? "www.guilded.gg/api",
     });
 
     /**

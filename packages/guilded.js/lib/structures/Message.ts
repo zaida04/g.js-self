@@ -41,7 +41,7 @@ export class Message extends Base<APIMessage> {
     /**
      * Author of the message
      */
-    public readonly authorID!: string;
+    public readonly authorID: string;
 
     /**
      * The ID of the team this message was sent in
