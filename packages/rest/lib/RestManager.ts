@@ -11,7 +11,7 @@ export class RestManager {
     public guildedMID?: string;
 
     public constructor(public config?: RestManagerOptions) {
-        this.apiURL = `https://${config?.apiURL ?? 'api.guilded.gg'}`;
+        this.apiURL = `https://${config?.apiURL ?? 'www.guilded.gg/api'}`;
     }
 
     public async make<T extends JSONB>(
