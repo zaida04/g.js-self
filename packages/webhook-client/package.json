@@ -1,6 +1,6 @@
 {
   "name": "@guildedjs/webhook-client",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Library-agnostic webhook client for the guilded.gg API",
   "author": "Zaid \"Nico\" <me@zaid-arshad.tech>",
   "homepage": "https://github.com/zaida04/guilded.js/tree/main/packages/webhook-client#readme",
