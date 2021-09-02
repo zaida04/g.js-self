@@ -1,6 +1,6 @@
 # `@guildedjs/common`  
 
-[![GitHub](https://img.shields.io/github/license/guildedjs/guilded.js)](https://github.com/zaida04/guilded.js/blob/main/LICENSE)
+[![GitHub](https://img.shields.io/github/license/zaida04/guilded.js)](https://github.com/zaida04/guilded.js/blob/main/LICENSE)
 [![npm](https://img.shields.io/npm/v/@guildedjs/common?color=crimson&logo=npm)](https://www.npmjs.com/package/@guildedjs/common)
 [![CI workflows](https://github.com/zaida04/guilded.js/actions/workflows/ci.yml/badge.svg)](https://github.com/zaida04/guilded.js/actions/workflows/ci.yml)
 
