@@ -51,7 +51,6 @@ Documentation is located [here](https://guilded.js.org)
 - [`@guildedjs/webhook-client`](https://github.com/zaida04/guilded.js/tree/main/packages/webhook-client): Webhook Client
 - `@discordjs/collection`: Map utility
 - `ws`: WebSocket interaction
-- `uuid` - Generate IDs for structures such as Messages
 
 ## ✋ Contributing
 Please see the main [README.md](https://github.com/zaida04/guilded.js) for info on how to contribute to this package or the other `@guildedjs` packages.
