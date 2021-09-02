@@ -32,7 +32,7 @@ export class BaseManager<K extends BaseData, T extends Base<K>> {
         } else {
             const existing = data.id ? this.cache.get(data.id.toString()) : null;
             if (existing) {
-                existing.patch(data);
+                existing.patch(data as K | Partial<K>);
             }
             return existing ?? null;
         }

@@ -33,8 +33,8 @@ export class RestManager {
         let request;
         try {
             request = await fetch(this.apiURL + data.path, requestOptions);
-        } catch (e) {
-            throw new Error(`Error while making API call, ${e.message}`);
+        } catch (e: any) {
+            throw new Error(`Error while making API call, ${e.message.toString()}`);
         }
 
         if (!request.ok) {
