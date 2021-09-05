@@ -61,7 +61,7 @@ export interface APIPostLoginResponse {
 }
 
 /**
- * Create DM Channel
+ * Get all of a user's DM Channel
  * @destination /users/:id/channels
  */
 export interface APIGetUserDMChannels {
