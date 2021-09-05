@@ -210,7 +210,6 @@ export class User extends Base<APIUser> {
 
     public fetchDMChannel() {
         return this.client.rest.post<{ channel: APIDMChannel}>(`/users/${this.client.user!.id}/channels`, { users: [{ id: this.id}] }).then(x => {
-            console.log(x);
             const channel = new DMChannel(this.client, x.channel);
             this.client.channels.add(channel);
             this.dmChannel = channel;
