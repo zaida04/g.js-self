@@ -1,7 +1,9 @@
-import type { APIAlias, APIUser, APIUserStatus } from '@guildedjs/guilded-api-typings';
-
+import type { APIAlias, APIDMChannel, APIUser, APIUserStatus } from '@guildedjs/guilded-api-typings';
+import type { Embed } from "@guildedjs/embeds";
 import { Base } from './Base';
 import { Client } from './Client';
+import type { Message } from './Message';
+import { DMChannel } from './Channel';
 
 /**
  * Object representing a user on the guilded.gg platform.
@@ -84,6 +86,11 @@ export class User extends Base<APIUser> {
      */
     public userStatus!: APIUserStatus;
 
+    /**
+     * DMChannel associated with this user, if cached.
+     */
+    public dmChannel: DMChannel | null;
+
     public constructor(client: Client, data: APIUser) {
         super(client, data);
 
@@ -109,6 +116,7 @@ export class User extends Base<APIUser> {
         this.steamID = null;
         this.subdomain = data.subdomain;
         this.joinDate = new Date(data.joinDate);
+        this.dmChannel = null;
 
         this.patch(data);
     }
@@ -198,5 +206,25 @@ export class User extends Base<APIUser> {
             }
         }
         return url ?? null;
+    }
+
+    public fetchDMChannel() {
+        return this.client.rest.post<{ channel: APIDMChannel}>(`/users/${this.client.user!.id}/channels`, { users: [{ id: this.id}] }).then(x => {
+            console.log(x);
+            const channel = new DMChannel(this.client, x.channel);
+            this.client.channels.add(channel);
+            this.dmChannel = channel;
+            return void 0;
+        })
+    }
+
+    /**
+     * Send a DM to this user.
+     * @param content Either a string content or RichEmbed to send to this channel.
+     * @param embed A RichEmbed to send to this channel.
+     */
+     public async send(content: string | Embed, embed?: Embed): Promise<Message | string> {
+        if(!this.dmChannel) await this.fetchDMChannel();
+        return this.client.channels.sendMessage(this.dmChannel!.id, content, embed);
     }
 }
