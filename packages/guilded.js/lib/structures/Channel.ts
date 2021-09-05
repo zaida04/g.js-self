@@ -460,7 +460,7 @@ export class TeamChannel extends PartialChannel {
         if ('tournamentRolesById' in data && data.tournamentRolesById !== undefined) {
             for (const role in data.tournamentRolesById) {
                 const ROLE_DATA = data.tournamentRolesById[role];
-                this.tournamentRoles.set(role, new RolePermissionOverwrite(this.client, ROLE_DATA, this));
+                // this.tournamentRoles.set(role, new RolePermissionOverwrite(this.client, ROLE_DATA, this));
             }
         }
         return this;
