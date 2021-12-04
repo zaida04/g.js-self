@@ -1,7 +1,7 @@
 module.exports = {
     env: {
         node: true,
-    },
+    },s   
     extends: ['plugin:@typescript-eslint/recommended', 'prettier/@typescript-eslint', 'plugin:prettier/recommended'],
     overrides: [
         {
