@@ -20,7 +20,7 @@
     "@guildedjs/common": "^1.0.3",
     "@guildedjs/embeds": "^1.0.3",
     "@guildedjs/rest": "^1.0.4",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^3.1.1"
   },
   "keywords": [
     "guilded-gg",
