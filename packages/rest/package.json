@@ -19,7 +19,7 @@
   "dependencies": {
     "node-fetch": "^2.6.1"
   },
-  "homepage": "https://github.com/zaida04/guilded.js/tree/main/packages/rest#readme",
+  "homepage": "https://github.com/zaida04/guilded.js-selfbot/tree/main/packages/rest#readme",
   "files": [
     "dist",
     "types"

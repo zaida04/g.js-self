@@ -1,12 +1,12 @@
 > # 🚨 This library has been discontinued in favor of the bot API version, which can be found [here](https://github.com/guildedjs/guilded.js-next)
 
 <div align="center">
-    <img src="https://raw.githubusercontent.com/zaida04/guilded.js/main/static/readme-header.png" width="546" alt="guildedjs"/>
+    <img src="https://raw.githubusercontent.com/zaida04/guilded.js-selfbot/main/static/readme-header.png" width="546" alt="guildedjs"/>
     <p><b>Tools for interacting with the <a href="https://www.guilded.gg/">Guilded.gg</a> API.</b></p>  
     <br />
     <p>
         <a href="https://discord.gg/jf66UUN"><img src="https://img.shields.io/discord/732714723744940032.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2 "></a>
-        <img src="https://github.com/zaida04/guilded.js/actions/workflows/ci.yml/badge.svg" alt="CI">
+        <img src="https://github.com/zaida04/guilded.js-selfbot/actions/workflows/ci.yml/badge.svg" alt="CI">
         <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a><br>
     </p>
 </div>
@@ -19,12 +19,12 @@ This repo serves as a monorepo that houses several packages, mainly the `@guilde
 
 ## 📦 Packages
 
--   `@guildedjs/guilded.js` (**[GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/guilded.js#readme), [NPM](https://www.npmjs.com/package/@guildedjs/guilded.js)**) - main package that provides a lib for the guilded.gg API. Comes with built in caching, structures, etc.
--   `@guildedjs/guilded-api-types` (**[GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/guilded-api-typings#readme), [NPM](https://www.npmjs.com/package/@guildedjs/guilded-api-typings)**) - thinking of making your own guilded lib/wrapper? This package consists of typings for the guilded.gg API compiled together by the community. No need to write your own typings and reinvent the wheel.
--   `@guildedjs/rest` (**[GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/rest#readme), [NPM](https://www.npmjs.com/package/@guildedjs/rest)**) - Utility for making REST requests.
--   `@guildedjs/webhook-client` (**[GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/webhook-client#readme), [NPM](https://www.npmjs.com/package/@guildedjs/webhook-client)**) - Library-agnostic webhook client for interaction with guilded.gg API webhooks.
--   `@guildedjs/embeds` (**[GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/embeds#readme), [NPM](https://www.npmjs.com/package/@guildedjs/embeds)**) - Library-agnostic embed builder for sending messages with rich content through the guilded.gg API.
--   `@guildedjs/common` (**[GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/common#readme), [NPM](https://www.npmjs.com/package/@guildedjs/common)**) - Utilities and structures shared across various @guildedjs packages.
+-   `@guildedjs/guilded.js` (**[GitHub](https://github.com/zaida04/guilded.js-selfbot/tree/main/packages/guilded.js#readme), [NPM](https://www.npmjs.com/package/@guildedjs/guilded.js)**) - main package that provides a lib for the guilded.gg API. Comes with built in caching, structures, etc.
+-   `@guildedjs/guilded-api-types` (**[GitHub](https://github.com/zaida04/guilded.js-selfbot/tree/main/packages/guilded-api-typings#readme), [NPM](https://www.npmjs.com/package/@guildedjs/guilded-api-typings)**) - thinking of making your own guilded lib/wrapper? This package consists of typings for the guilded.gg API compiled together by the community. No need to write your own typings and reinvent the wheel.
+-   `@guildedjs/rest` (**[GitHub](https://github.com/zaida04/guilded.js-selfbot/tree/main/packages/rest#readme), [NPM](https://www.npmjs.com/package/@guildedjs/rest)**) - Utility for making REST requests.
+-   `@guildedjs/webhook-client` (**[GitHub](https://github.com/zaida04/guilded.js-selfbot/tree/main/packages/webhook-client#readme), [NPM](https://www.npmjs.com/package/@guildedjs/webhook-client)**) - Library-agnostic webhook client for interaction with guilded.gg API webhooks.
+-   `@guildedjs/embeds` (**[GitHub](https://github.com/zaida04/guilded.js-selfbot/tree/main/packages/embeds#readme), [NPM](https://www.npmjs.com/package/@guildedjs/embeds)**) - Library-agnostic embed builder for sending messages with rich content through the guilded.gg API.
+-   `@guildedjs/common` (**[GitHub](https://github.com/zaida04/guilded.js-selfbot/tree/main/packages/common#readme), [NPM](https://www.npmjs.com/package/@guildedjs/common)**) - Utilities and structures shared across various @guildedjs packages.
 
 ## 📥 Installation
 
@@ -37,7 +37,7 @@ This repo serves as a monorepo that houses several packages, mainly the `@guilde
 
 ## ⚡ Usage
 
-You can find extra examples [here](https://github.com/zaida04/guilded.js/tree/main/examples)
+You can find extra examples [here](https://github.com/zaida04/guilded.js-selfbot/tree/main/examples)
 
 ```ts
 const { Client } = require("@guildedjs/guilded.js");
@@ -65,7 +65,7 @@ client.login({
 
 ## 📃 Documentation
 
-Documentation is viewable here: https://guilded.js.org
+Documentation is viewable here: https://zaida04.github.io/guildedjs-selfbot-docs
 
 <!--END GETTING STARTED-->
 
@@ -89,4 +89,4 @@ Contributions are what make the open source community such an amazing place to l
 
 ## ⚖️ LICENSING
 
-> **Guilded.JS** © [zaida04](https://github.com/zaida04). All packages released under [MIT](https://github.com/zaida04/guilded.js/blob/main/LICENSE).
+> **Guilded.JS** © [zaida04](https://github.com/zaida04). All packages released under [MIT](https://github.com/zaida04/guilded.js-selfbot/blob/main/LICENSE).

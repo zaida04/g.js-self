@@ -51,10 +51,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zaida04/guilded.js.git"
+    "url": "git+https://github.com/zaida04/guilded.js-selfbot.git"
   },
   "bugs": {
-    "url": "https://github.com/zaida04/guilded.js/issues"
+    "url": "https://github.com/zaida04/guilded.js-selfbot/issues"
   },
-  "homepage": "https://github.com/zaida04/guilded.js#readme"
+  "homepage": "https://github.com/zaida04/guilded.js-selfbot#readme"
 }

@@ -3,7 +3,7 @@
   "version": "1.0.4-selfbot",
   "description": "Library-agnostic guilded embed builder utility for the guilded.gg API",
   "author": "Zaid \"Nico\" <nico.03727+github@gmail.com>",
-  "homepage": "https://github.com/zaida04/guilded.js/tree/main/packages/embeds#readme",
+  "homepage": "https://github.com/zaida04/guilded.js-selfbot/tree/main/packages/embeds#readme",
   "license": "MIT",
   "types": "types/index.d.ts",
   "main": "dist/index.js",
@@ -35,10 +35,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zaida04/guilded.js.git"
+    "url": "git+https://github.com/zaida04/guilded.js-selfbot.git"
   },
   "bugs": {
-    "url": "https://github.com/zaida04/guilded.js/issues"
+    "url": "https://github.com/zaida04/guilded.js-selfbot/issues"
   },
   "gitHead": "0719b880becce0aa4bccaf5eb5b210ecb08b0547"
 }

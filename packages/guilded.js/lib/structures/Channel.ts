@@ -36,14 +36,14 @@ export class PartialChannel extends Base<BaseData> {
 
     /**
      * The type of this channel ("Team", "DM").
-     * @see {@link https://guilded.js.org/modules/guilded_js.html#channel_types}
+     * @see {@link https://zaida04.github.io/guildedjs-selfbot-docs/modules/guilded_js.html#channel_types}
      * @readonly
      */
     public readonly type: CHANNEL_TYPES;
 
     /**
      * The content type of this channel ("chat", "voice", "forum", "doc").
-     * @see {@link https://guilded.js.org/modules/guilded_js.html#channel_content_types}
+     * @see {@link https://zaida04.github.io/guildedjs-selfbot-docs/modules/guilded_js.html#channel_content_types}
      * @readonly
      */
     public readonly contentType: CHANNEL_CONTENT_TYPES;

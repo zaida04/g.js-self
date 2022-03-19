@@ -13,7 +13,7 @@ export class TeamMemberRoleManager extends BaseManager<APITeamRole, Role> {
     /**
      * Shortcut for adding a role to a member.
      * @param role The ID or Role object of the role to add to the member.
-     * @see {@link https://guilded.js.org/classes/guilded_js.teammanager.html#addroletomember}
+     * @see {@link https://zaida04.github.io/guildedjs-selfbot-docs/classes/guilded_js.teammanager.html#addroletomember}
      */
     public append(role: string | Role): Promise<void> {
         return this.client.teams.addRoleToMember(this.member.team!.id, this.member, role);
@@ -22,7 +22,7 @@ export class TeamMemberRoleManager extends BaseManager<APITeamRole, Role> {
     /**
      * Shortcut for removing a role from a member.
      * @param role The ID or Role object of the role to add to the member.
-     * @see {@link https://guilded.js.org/classes/guilded_js.teammanager.html#removerolefrommember}
+     * @see {@link https://zaida04.github.io/guildedjs-selfbot-docs/classes/guilded_js.teammanager.html#removerolefrommember}
      */
     public remove(role: string | Role): Promise<void> {
         return this.client.teams.removeRoleFromMember(this.member.team!.id, this.member, role);
