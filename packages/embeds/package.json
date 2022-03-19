@@ -1,6 +1,6 @@
 {
   "name": "@guildedjs/embeds",
-  "version": "1.0.4-selfbot",
+  "version": "1.0.5-selfbot",
   "description": "Library-agnostic guilded embed builder utility for the guilded.gg API",
   "author": "Zaid \"Nico\" <nico.03727+github@gmail.com>",
   "homepage": "https://github.com/zaida04/guilded.js-selfbot/tree/main/packages/embeds#readme",
@@ -13,7 +13,7 @@
     "prepublishOnly": "npx rimraf dist/ && npx rimraf types/ && npm run build"
   },
   "devDependencies": {
-    "@guildedjs/guilded-api-typings": "^1.4.0-selfbot",
+    "@guildedjs/guilded-api-typings": "^1.4.1-selfbot",
     "typescript": "^4.4.2"
   },
   "keywords": [

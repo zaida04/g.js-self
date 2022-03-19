@@ -1,6 +1,6 @@
 {
   "name": "@guildedjs/guilded-api-typings",
-  "version": "1.4.0-selfbot",
+  "version": "1.4.1-selfbot",
   "description": "Typings for the guilded API",
   "author": "zaid450 <nico.03727+github@gmail.com>",
   "homepage": "https://github.com/zaida04/guilded.js-selfbot/tree/main/packages/guilded-api-typings#readme",

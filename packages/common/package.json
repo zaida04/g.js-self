@@ -1,6 +1,6 @@
 {
   "name": "@guildedjs/common",
-  "version": "1.0.4-selfbot",
+  "version": "1.0.5-selfbot",
   "description": "Common structures and utilities used in various @guildedjs packages",
   "author": "Zaid \"Nico\" <me@zaid-arshad.tech>",
   "homepage": "https://github.com/zaida04/guilded.js-selfbot/tree/main/packages/common#readme",
@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@discordjs/collection": "^0.1.6",
-    "@guildedjs/embeds": "^1.0.4-selfbot",
+    "@guildedjs/embeds": "^1.0.5-selfbot",
     "uuid": "^8.3.2"
   },
   "keywords": [
