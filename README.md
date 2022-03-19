@@ -1,3 +1,5 @@
+> # 🚨 This library has been discontinued in favor of the bot API version, which can be found [here](https://github.com/guildedjs/guilded.js-next)
+
 <div align="center">
     <img src="https://raw.githubusercontent.com/zaida04/guilded.js/main/static/readme-header.png" width="546" alt="guildedjs"/>
     <p><b>Tools for interacting with the <a href="https://www.guilded.gg/">Guilded.gg</a> API.</b></p>  
@@ -10,27 +12,31 @@
 </div>
 
 ## 📝 About
+
 > ### ⚠️ This library only works with selfbots, which are a gray zone in Guilded. Use at your own risk.
 
 This repo serves as a monorepo that houses several packages, mainly the `@guildedjs/guilded.js` package, which is a library for the Guilded API. Inspired heavily by [discord.js](https://github.com/discordjs/discord.js)
 
 ## 📦 Packages
-* `@guildedjs/guilded.js` (**[GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/guilded.js#readme), [NPM](https://www.npmjs.com/package/@guildedjs/guilded.js)**) - main package that provides a lib for the guilded.gg API. Comes with built in caching, structures, etc.
-* `@guildedjs/guilded-api-types` (**[GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/guilded-api-typings#readme), [NPM](https://www.npmjs.com/package/@guildedjs/guilded-api-typings)**) - thinking of making your own guilded lib/wrapper? This package consists of typings for the guilded.gg API compiled together by the community. No need to write your own typings and reinvent the wheel.
-* `@guildedjs/rest` (**[GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/rest#readme), [NPM](https://www.npmjs.com/package/@guildedjs/rest)**) - Utility for making REST requests.
-* `@guildedjs/webhook-client` (**[GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/webhook-client#readme), [NPM](https://www.npmjs.com/package/@guildedjs/webhook-client)**) - Library-agnostic webhook client for interaction with guilded.gg API webhooks.
-* `@guildedjs/embeds` (**[GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/embeds#readme), [NPM](https://www.npmjs.com/package/@guildedjs/embeds)**) - Library-agnostic embed builder for sending messages with rich content through the guilded.gg API.
-* `@guildedjs/common` (**[GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/common#readme), [NPM](https://www.npmjs.com/package/@guildedjs/common)**) - Utilities and structures shared across various @guildedjs packages.
+
+-   `@guildedjs/guilded.js` (**[GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/guilded.js#readme), [NPM](https://www.npmjs.com/package/@guildedjs/guilded.js)**) - main package that provides a lib for the guilded.gg API. Comes with built in caching, structures, etc.
+-   `@guildedjs/guilded-api-types` (**[GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/guilded-api-typings#readme), [NPM](https://www.npmjs.com/package/@guildedjs/guilded-api-typings)**) - thinking of making your own guilded lib/wrapper? This package consists of typings for the guilded.gg API compiled together by the community. No need to write your own typings and reinvent the wheel.
+-   `@guildedjs/rest` (**[GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/rest#readme), [NPM](https://www.npmjs.com/package/@guildedjs/rest)**) - Utility for making REST requests.
+-   `@guildedjs/webhook-client` (**[GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/webhook-client#readme), [NPM](https://www.npmjs.com/package/@guildedjs/webhook-client)**) - Library-agnostic webhook client for interaction with guilded.gg API webhooks.
+-   `@guildedjs/embeds` (**[GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/embeds#readme), [NPM](https://www.npmjs.com/package/@guildedjs/embeds)**) - Library-agnostic embed builder for sending messages with rich content through the guilded.gg API.
+-   `@guildedjs/common` (**[GitHub](https://github.com/zaida04/guilded.js/tree/main/packages/common#readme), [NPM](https://www.npmjs.com/package/@guildedjs/common)**) - Utilities and structures shared across various @guildedjs packages.
 
 ## 📥 Installation
 
 <a href="https://npmjs.org/package/@guildedjs/guilded.js"><img src="https://nodei.co/npm/@guildedjs/guilded.js.png" alt="NPM"></a>
 
 **Recommended that you use node v12+**
-- `npm install @guildedjs/guilded.js`  
-- `yarn add @guildedjs/guilded.js`
+
+-   `npm install @guildedjs/guilded.js`
+-   `yarn add @guildedjs/guilded.js`
 
 ## ⚡ Usage
+
 You can find extra examples [here](https://github.com/zaida04/guilded.js/tree/main/examples)
 
 ```ts
@@ -43,21 +49,22 @@ const { Client } = require("@guildedjs/guilded.js");
 
 const client = new Client();
 
-client.on('ready', () => console.log(`Bot is successfully logged in`));
+client.on("ready", () => console.log(`Bot is successfully logged in`));
 
-client.on("messageCreate", message => {
-    if(message.content === "poggers") {
+client.on("messageCreate", (message) => {
+    if (message.content === "poggers") {
         return message.channel.send("poggers indeed");
     }
-})
+});
 
 client.login({
     email: "email",
-    password: "password"
+    password: "password",
 });
 ```
 
 ## 📃 Documentation
+
 Documentation is viewable here: https://guilded.js.org
 
 <!--END GETTING STARTED-->
@@ -70,13 +77,16 @@ Contributions are what make the open source community such an amazing place to l
 **Please ensure your commits pass the test, lint, and build scripts.**
 
 **We make use of [lerna](https://lerna.js.org/) to manage our monorepo. The main commands used are below**
-* `lerna add <module> [--scope=package-name]` - add npm module dependency to all/specific package(s)
-* `lerna create <package>` - create a new package
-* `npm run bootstrap` = `lerna bootstrap` - recursively install dependencies in all packages and symlink local packages
-* `lerna run <npm-script>` - recursively execute command in all packages (must exist in each packages package.json)
+
+-   `lerna add <module> [--scope=package-name]` - add npm module dependency to all/specific package(s)
+-   `lerna create <package>` - create a new package
+-   `npm run bootstrap` = `lerna bootstrap` - recursively install dependencies in all packages and symlink local packages
+-   `lerna run <npm-script>` - recursively execute command in all packages (must exist in each packages package.json)
 
 ## 🤝 Acknowledgements
+
 [Discord.js](https://github.com/discordjs/discord.js) - Main inspiration & lots of derived work.
 
-## ⚖️ LICENSING  
-> **Guilded.JS** © [zaida04](https://github.com/zaida04). All packages released under [MIT](https://github.com/zaida04/guilded.js/blob/main/LICENSE). 
+## ⚖️ LICENSING
+
+> **Guilded.JS** © [zaida04](https://github.com/zaida04). All packages released under [MIT](https://github.com/zaida04/guilded.js/blob/main/LICENSE).
